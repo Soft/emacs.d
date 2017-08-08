@@ -45,5 +45,7 @@
 
 (bind-key "<f11>" 'toggle-fullscreen)
 
+(setq ring-bell-function 'ignore)
+
 (provide 'init-interface)
 

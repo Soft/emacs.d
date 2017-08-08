@@ -20,6 +20,9 @@
      ("C-h a"   . helm-apropos)
      ("C-h i"   . helm-info-emacs)))
 
+(use-package helm-ag
+  :ensure t)
+
 (use-package helm-projectile
   :ensure t
   :config (helm-projectile-on)
@@ -31,5 +34,8 @@
   :ensure t
   :bind
     (("C-h b" . helm-descbinds)))
+
+(use-package helm-emoji
+  :bind (("C-x c E" . helm-emoji)))
 
 (provide 'init-helm)

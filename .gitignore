@@ -2,4 +2,4 @@
 *.elc
 local/*
 !local/.empty
-.\#*
+\#*

@@ -12,4 +12,6 @@
 (use-package f
   :ensure t)
 
+(use-package cl-lib)
+
 (provide 'init-libraries)

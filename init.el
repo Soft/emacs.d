@@ -17,8 +17,13 @@
 (dolist (subdir '("init" "languages" "modules" "local"))
   (add-to-list 'load-path (expand-file-name subdir init-directory)))
 
-(defvar package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
-                           ("gnu" . "http://elpa.gnu.org/packages/")))
+(defun with-archive-protocol (url)
+  (let ((proto (if (getenv "EMACS_NO_TLS") "http" "https")))
+    (format "%s://%s" proto url)))
+
+(defvar package-archives
+  `(("melpa" . ,(with-archive-protocol "melpa.milkbox.net/packages/"))
+    ("gnu" . ,(with-archive-protocol "elpa.gnu.org/packages/"))))
 
 (require 'package)
 (package-initialize)
@@ -34,32 +39,39 @@
 (require 'diminish)
 (require 'bind-key)
 
-(when (getenv "EMACS-DEBUG")
+(when (getenv "EMACS_DEBUG")
   (setq use-package-verbose t))
 
 (defconst module-load-order
   '((init . (customize
-	     libraries
-	     editor
-	     backups
-	     interface
-	     fonts
-	     theme
-	     projectile
-	     helm
-	     terminal
-	     packages
-	     neotree
-	     evil
-	     nyan))
-    (lang . (elisp
-	     python
-	     rust
-	     markdown))))
+             libraries
+             prelude
+             editor
+             backups
+             interface
+             fonts
+             theme
+             projectile
+             helm
+             terminal
+             packages
+             windows
+             magit             
+             completion
+             guide-key
+             nyan
+             neotree
+             modeline
+             evil
+             space))
+    (lang . (lisp
+             python
+             rust
+             markdown))))
 
 (dolist (module-class module-load-order)
   (let ((class (symbol-name (car module-class)))
-	(modules (cdr module-class)))
+        (modules (cdr module-class)))
     (dolist (module modules)
       (require (intern (concat class "-" (symbol-name module)))))))
 
