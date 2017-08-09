@@ -1,4 +1,4 @@
 # Adequate emacs.d
 
-This is my attempt at configuring emacs the way I like it.
+This is my attempt at configuring emacs the way I like it. Eternally work in progress.
 
