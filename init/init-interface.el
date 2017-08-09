@@ -1,3 +1,4 @@
+;;; Interface related settings
 
 (setq inhibit-splash-screen t
       inhibit-startup-message t
@@ -7,6 +8,7 @@
        "\n\n"))
 
 (setq use-dialog-box nil
+      use-file-dialog nil
       echo-keystrokes 0.1
       xterm-mouse-mode 1)
 
@@ -46,6 +48,19 @@
 (bind-key "<f11>" 'toggle-fullscreen)
 
 (setq ring-bell-function 'ignore)
+
+(use-package writeroom-mode
+  :defer t
+  :ensure t
+  :config (setq writeroom-width 120))
+
+(use-package centered-window-mode
+  :defer t
+  :ensure t)
+
+(use-package highlight-indent-guides
+  :defer t
+  :ensure t)
 
 (provide 'init-interface)
 

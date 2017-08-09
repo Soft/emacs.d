@@ -19,6 +19,15 @@
   :ensure t
   :bind (("C-c C-l" . nlinum-mode)))
 
+(use-package pcre2el
+  :ensure t)
+
+(use-package origami
+  :ensure t)
+
+(use-package wc-mode
+  :ensure t)
+
 (setq vc-follow-symlinks t)
 
 (setq-default sentence-end-double-space nil

@@ -29,4 +29,10 @@
   (interactive "P")
   (quit-window (and x t)))
 
+(use-package zoom-window
+  :ensure t)
+
+(use-package transpose-frame
+  :ensure t)
+
 (provide 'init-windows)

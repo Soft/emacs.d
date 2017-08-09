@@ -4,4 +4,7 @@
   :bind
   (("C-c g" . magit-status)))
 
-(provide 'init-magit)
+(use-package git-timemachine
+  :ensure t)
+
+(provide 'init-git)

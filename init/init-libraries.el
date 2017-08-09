@@ -1,3 +1,4 @@
+;;; General purpose libraries that are used all over the config
 
 ;; A modern list library for Emacs
 (use-package dash
@@ -13,5 +14,8 @@
   :ensure t)
 
 (use-package cl-lib)
+
+(use-package hydra
+  :ensure t)
 
 (provide 'init-libraries)

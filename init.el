@@ -34,6 +34,8 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(setq load-prefer-newer t)
+
 (eval-when-compile
   (require 'use-package))
 (require 'diminish)
@@ -48,6 +50,7 @@
              prelude
              editor
              backups
+             check
              interface
              fonts
              theme
@@ -56,18 +59,25 @@
              terminal
              packages
              windows
-             magit             
+             git
              completion
-             guide-key
-             nyan
+             help
+             movement
              neotree
              modeline
+             misc
              evil
              space))
     (lang . (lisp
              python
              rust
-             markdown))))
+             haskell
+             latex
+             css
+             sass
+             javascript
+             markdown
+             shell))))
 
 (dolist (module-class module-load-order)
   (let ((class (symbol-name (car module-class)))

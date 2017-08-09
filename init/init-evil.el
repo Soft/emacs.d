@@ -1,3 +1,4 @@
+;;; Vim emulation configuration
 
 (use-package evil
   :ensure t
@@ -6,7 +7,8 @@
   (progn
     (setq
      evil-cross-lines t
-     evil-default-cursor t)
+     evil-default-cursor t
+     evil-mode-beyond-eol t)
 
     (dolist (mode '(inferior-emacs-lisp-mode
                     inferior-haskell-mode
@@ -37,5 +39,14 @@
                ("k" . evil-previous-visual-line)
                ("J" . evil-scroll-down)
                ("K" . evil-scroll-up))))
+
+(use-package evil-surround
+  :ensure t)
+
+(use-package evil-numbers
+  :ensure t)
+
+(use-package evil-nerd-commenter
+  :ensure t)
 
 (provide 'init-evil)

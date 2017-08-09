@@ -1,3 +1,4 @@
+;;; Package management
 
 (use-package paradox
   :ensure t

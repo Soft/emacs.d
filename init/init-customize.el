@@ -1,3 +1,4 @@
+;;; Control customize
 
 (let ((path (expand-file-name "customize.el" user-emacs-directory)))
   (unless (file-readable-p path)

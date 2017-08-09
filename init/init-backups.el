@@ -1,3 +1,4 @@
+;;; Backups
 
 (let ((backup-path (f-join user-emacs-directory "backups"))
       (auto-save-path (f-join user-emacs-directory "saves")))

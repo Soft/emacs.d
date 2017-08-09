@@ -13,4 +13,7 @@
           guide-key/popup-window-position 'bottom)
     (guide-key-mode)))
 
-(provide 'init-guide-key)
+(use-package help-fns+
+  :ensure t)
+
+(provide 'init-help)
