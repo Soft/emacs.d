@@ -1,6 +1,12 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Samuel Laurén 💗 2014-2017
 
+(let ((default-threshold gc-cons-threshold))
+  (setq gc-cons-threshold 64000000)
+  (add-hook 'after-init-hook
+            #'(lambda ()
+                (setq gc-cons-threshold default-threshold))))
+
 (require 'subr-x) ;; string-remove-suffix
 
 (defun get-init-directory ()
@@ -69,18 +75,21 @@
              movement
              xwidget
              neotree
+             chat
              modeline
              misc
              evil
              space))
-    (lang . (lisp
+    (lang . (c
+             lisp
              python
              rust
              haskell
              latex
              web
              markdown
-             shell)))
+             shell
+             misc)))
   "Adequate emacs.d modules to load.")
 
 (dolist (module-class module-load-order)

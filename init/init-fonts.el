@@ -30,6 +30,10 @@
                                (select-font monospace-font-family "Fira Mono")
                                font-size)))
 
+;; Fix missing glyphs
+(set-fontset-font "fontset-default" nil
+                  (font-spec :size font-size :name "Symbola"))
+
 (add-hook 'text-mode-hook
           (lambda ()
             (setq-local buffer-face-mode-face

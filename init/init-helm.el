@@ -3,7 +3,9 @@
 (use-package helm 
   :ensure t
   :diminish helm-mode
-  :init (require 'helm-config)
+  :init
+  (require 'helm-config)
+  (helm-mode)
   :config
   (setq helm-buffer-fuzzy-matching  t
         helm-recent-fuzzy-matching  t

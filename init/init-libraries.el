@@ -1,4 +1,5 @@
-;;; General purpose libraries that are used all over the config
+;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; General purpose libraries that are used all over the config
 
 ;; A modern list library for Emacs
 (use-package dash

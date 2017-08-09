@@ -71,17 +71,15 @@
 
 (defun switch-to-buffer-dwim (buffer)
   "Display BUFFER in the selected window or, if the buffer is already visible in some window, switch focus to the window containing it."
-  (let ((window (get-buffer-window buffer)))
-    (if window
-        (select-window window)
-      (switch-to-buffer buffer))))
+  (-if-let (window (get-buffer-window buffer))
+      (select-window window)
+    (switch-to-buffer buffer)))
 
 (defun switch-or-call (buffer-fn fn &rest args)
   "Use BUFFER-FN to retrieve a buffer and switch to it, or call FN with ARGS."
-  (let ((buffer (funcall buffer-fn)))
-    (if buffer
-        (switch-to-buffer-other-window buffer)
-      (apply fn args))))
+  (-if-let (buffer (funcall buffer-fn))
+      (switch-to-buffer-other-window buffer)
+    (apply fn args)))
 
 (defun buffers-with-major-mode (mode)
   "Get a list of buffer with MODE."
@@ -96,6 +94,11 @@
 (defun programs-p (&rest xs)
   "Returns t if any of the executables specified in XS are present."
   (-any? 'executable-find xs))
+
+(defun install-packages-if-missing (packages)
+  "Install PACKAGES if they are not already installed."
+  (--each (-remove 'package-installed-p packages)
+    (package-install it)))
 
 (provide 'init-prelude)
 

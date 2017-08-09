@@ -91,7 +91,11 @@
   (setq dashboard-items '((recents . 5)
                           (projects . 5)
                           (bookmarks . 5))
-        dashboard-startup-banner (dashboard-select-banner))
+        dashboard-startup-banner (dashboard-select-banner)
+        dashboard-banner-logo-title
+        (format "Welcome to Emacs, %s %s"
+                (car (s-split " " (user-full-name)))
+                (list-random-item '("🌈" "💖" "🌻" "🌸" "🐬"))))
   (dashboard-setup-startup-hook))
 
 (provide 'init-interface)
