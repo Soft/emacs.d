@@ -1,21 +1,25 @@
 ;;; Interface related settings
 
-(setq inhibit-splash-screen t
-      inhibit-startup-message t
-      initial-scratch-message
-      (concat
-       (replace-regexp-in-string "^" ";; " (emacs-version))
-       "\n\n"))
+(setq
+ inhibit-splash-screen t
+ inhibit-startup-message t
+ initial-scratch-message
+ (concat
+  (replace-regexp-in-string "^" ";; " (emacs-version))
+  "\n\n"))
 
-(setq use-dialog-box nil
-      use-file-dialog nil
-      echo-keystrokes 0.1
-      xterm-mouse-mode 1)
+(setq
+ use-dialog-box nil
+ use-file-dialog nil
+ echo-keystrokes 0.1
+ xterm-mouse-mode 1)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(setq x-select-enable-clipboard t
-      x-select-enable-primary t)
+(setq
+ x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)
+ x-select-enable-clipboard t
+ x-select-enable-primary t)
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -31,8 +35,10 @@
 
 (fringe-mode '(4 . 0))
 
-(setq display-time-24hr-format t)
-(display-time-mode)
+(use-package time
+  :init
+  (setq display-time-24hr-format t)
+  (display-time-mode))
 
 (defun set-frame-alpha (number)
   (interactive "nAlpha: ")
@@ -45,7 +51,9 @@
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
                          '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
 
-(bind-key "<f11>" 'toggle-fullscreen)
+(bind-keys
+ ("<f11>" . toggle-fullscreen)
+ ("C-x t" . toggle-menu-bar-mode-from-frame))
 
 (setq ring-bell-function 'ignore)
 

@@ -1,3 +1,4 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 
 (use-package helm 
   :ensure t
@@ -21,6 +22,7 @@
    ("C-h i"   . helm-info-emacs)))
 
 (use-package helm-ag
+  :if (programs-p "ag")
   :ensure t)
 
 (use-package helm-projectile

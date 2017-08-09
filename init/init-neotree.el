@@ -1,3 +1,4 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 
 (use-package neotree
   :ensure t

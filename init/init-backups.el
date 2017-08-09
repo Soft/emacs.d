@@ -1,3 +1,4 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;;; Backups
 
 (let ((backup-path (f-join user-emacs-directory "backups"))

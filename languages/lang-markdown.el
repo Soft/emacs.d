@@ -1,5 +1,7 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 
 (defun make-compiler (command name-transformer args-maker)
+  "Create a new interactive command that receives the content of the current buffer when executed."
   (let* ((command-base (file-name-base command))
          (process-name (concat command-base "-process"))
          (buffer-name (format "*%s-Log*" (capitalize command-base)))
@@ -20,9 +22,11 @@
       (make-compiler "pandoc"
                      (partial concat _ ".pdf")
                      (lambda (output) `("-o" ,output "-f" "markdown"))))
+
 (use-package markdown-mode
   :ensure t
-  :mode "\\.md\\'"
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
   :config
   (progn
     (setq markdown-bold-underscore t

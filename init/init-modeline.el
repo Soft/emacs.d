@@ -1,3 +1,4 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 
 (use-package telephone-line-config
   :ensure telephone-line

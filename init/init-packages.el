@@ -1,10 +1,15 @@
-;;; Package management
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Package management
 
 (use-package paradox
   :ensure t
-  :config (paradox-enable))
+  :defer t
+  :commands (paradox-enable))
 
 (use-package package-utils
+  :defer t
   :ensure t)
+
+(run-with-idle-timer 1 nil (lambda () (paradox-enable)))
 
 (provide 'init-packages)

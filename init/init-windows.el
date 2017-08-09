@@ -1,13 +1,13 @@
 
 (defun other-windows-p ()
-  "Are there more than one window"
+  "Are there more than one window."
   (> (length (window-list)) 1))
 
 (use-package winner
   :config (winner-mode))
 
 (defun switch-window-or-buffer ()
-  "Switch window or buffer depending on the number of windows"
+  "Switch window or buffer depending on the number of windows."
   (interactive)
   (if (other-windows-p)
       (other-window 1)
@@ -30,9 +30,11 @@
   (quit-window (and x t)))
 
 (use-package zoom-window
+  :defer t
   :ensure t)
 
 (use-package transpose-frame
+  :defer t
   :ensure t)
 
 (provide 'init-windows)

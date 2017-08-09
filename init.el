@@ -34,12 +34,17 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
-(setq load-prefer-newer t)
-
 (eval-when-compile
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
+
+(setq load-prefer-newer t)
+(use-package auto-compile
+  :ensure t
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
 
 (when (getenv "EMACS_DEBUG")
   (setq use-package-verbose t))
@@ -61,8 +66,10 @@
              windows
              git
              completion
+             session
              help
              movement
+             xwidget
              neotree
              modeline
              misc
@@ -73,9 +80,7 @@
              rust
              haskell
              latex
-             css
-             sass
-             javascript
+             web
              markdown
              shell))))
 

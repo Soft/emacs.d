@@ -9,6 +9,10 @@
   (disable-theme (car custom-enabled-themes))
   (load-theme theme t))
 
+(use-package color-theme-approximate
+  :if (eq system-type 'gnu/linux)
+  :ensure t)
+
 (use-package subatomic-theme
   :ensure t
   :config (switch-theme 'subatomic))

@@ -1,4 +1,7 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Emoji picker for Helm
+
+(require 'cl-lib)
 
 (defconst helm-emoji-ranges
   '((#x1F300 . #x1F5FF) ; Miscellaneous Symbols and Pictograms
@@ -6,18 +9,18 @@
     (#x1F680 . #x1F6F3) ; Transport and Map Symbols
     (#x2600  . #x26FF)  ; Miscellaneous Symbols
     (#x2700  . #x27BF)) ; Dingbats
-  "Code point ranges that contain emoji characters")
+  "Code point ranges that contain emoji characters.")
 
 (defvar helm-emoji-cache nil)
 
 (defface helm-emoji-emoji-face
   '((t . (:foreground "steel blue")))
-  "Face used for displaying emoji"
+  "Face used for displaying emoji."
   :group 'helm)
 
 (defface helm-emoji-name-face
   '((t . ()))
-  "Face used for displaying names of emoji"
+  "Face used for displaying names of emoji."
   :group 'helm)
 
 (defun helm-emoji-range (start stop)
@@ -41,6 +44,7 @@
     (action . insert)))
 
 (defun helm-emoji ()
+  "Select emoji using Helm."
   (interactive)
   (helm-other-buffer 'helm-source-emoji nil))
 

@@ -1,3 +1,4 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;;; Basic utilities 
 
 (defun compose (fn &rest others)
@@ -20,7 +21,7 @@
 
 
 (defmacro dlet* (varlist &rest body)
-  "Destructuring let*"
+  "Destructuring let*."
   (declare (debug let)
            (indent 1))
   (cl-reduce (lambda (a b)
@@ -40,6 +41,16 @@
   `(eval-after-load ,feature
      '(progn ,@body)))
 
+(defmacro numeric-argument-switch (form &rest others)
+  "Makes a function that executes a FORM based on a numeric argument."
+  (let* ((forms (cons form others))
+         (conds (cl-loop for (i . f) in forms
+                         collect `((equal d ,i) ,f))))
+    `(lambda (d)
+       (interactive "p")
+       (cond ,@conds
+             (t (error "No action bound to %d" d))))))
+
 (defun repeating (key fn &rest args)
   "Makes a function that can be repeated with additional key presses."
   (let ((map (make-sparse-keymap)))
@@ -51,6 +62,7 @@
       #'action)))
 
 (defmacro switch-command (form &rest others)
+  "Make a multi-purpose command that executes a FORM based on a numeric argument."
   (let* ((forms (cons form others))
          (nums (cl-loop for i from 1 to (1-  (length forms))
                         collect (expt 4 i)))
@@ -64,4 +76,21 @@
         (select-window window)
       (switch-to-buffer buffer))))
 
+(defun switch-or-call (buffer-fn fn &rest args)
+  "Use BUFFER-FN to retrieve a buffer and switch to it, or call FN with ARGS."
+  (let ((buffer (funcall buffer-fn)))
+    (if buffer
+        (switch-to-buffer-other-window buffer)
+      (apply fn args))))
+
+(defun buffers-with-major-mode (mode)
+  "Get a list of buffer with MODE."
+  (-filter
+   (lambda (buffer) (with-current-buffer buffer (eq mode major-mode)))
+   (buffer-list)))
+
+(defun programs-p (&rest xs)
+  (-any? 'executable-find xs))
+
 (provide 'init-prelude)
+

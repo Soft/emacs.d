@@ -1,6 +1,8 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;;; Miscellaneous packages
 
 (use-package xkcd
+  :commands (xkcd-rand)
   :defer t
   :ensure t)
 
