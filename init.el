@@ -50,7 +50,10 @@
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
 
-(when (getenv "EMACS_DEBUG")
+(defconst emacs-debug
+  (and (getenv "EMACS_DEBUG") t))
+
+(when emacs-debug
   (setq use-package-verbose t))
 
 (defconst module-load-order
@@ -79,7 +82,8 @@
              modeline
              misc
              evil
-             space))
+             space
+             local))
     (lang . (c
              lisp
              python
