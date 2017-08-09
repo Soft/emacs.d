@@ -1,4 +1,5 @@
-;;; Interface related settings
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Interface related settings
 
 (setq
  inhibit-splash-screen t
@@ -18,8 +19,8 @@
 
 (setq
  x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)
- x-select-enable-clipboard t
- x-select-enable-primary t)
+ select-enable-clipboard t
+ select-enable-primary t)
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -33,7 +34,7 @@
                                      "%b")
                                    " - emacs"))))
 
-(fringe-mode '(4 . 0))
+(fringe-mode '(8 . 0))
 
 (use-package time
   :init

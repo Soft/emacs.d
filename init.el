@@ -1,9 +1,6 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Samuel Laurén 💗 2014-2017
 
-(setq gc-cons-threshold (* 1024 1024 512)
-      gc-cons-percentage 0.5)
-
 (require 'subr-x) ;; string-remove-suffix
 
 (defun get-init-directory ()
@@ -12,7 +9,8 @@
      (file-name-directory
       (file-chase-links (string-remove-suffix ".elc" load-file-name))))))
 
-(defconst init-directory (get-init-directory))
+(defconst init-directory (get-init-directory)
+  "Location of adequate emacs.d files")
 
 (dolist (subdir '("init" "languages" "modules" "local"))
   (add-to-list 'load-path (expand-file-name subdir init-directory)))
@@ -82,7 +80,8 @@
              latex
              web
              markdown
-             shell))))
+             shell)))
+  "Modules to load")
 
 (dolist (module-class module-load-order)
   (let ((class (symbol-name (car module-class)))

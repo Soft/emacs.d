@@ -1,3 +1,5 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Window management
 
 (defun other-windows-p ()
   "Are there more than one window."
@@ -24,6 +26,15 @@
     (set-window-buffer current-win largest-buf)
     (select-window largest-win)))
 
+(bind-keys
+ ("C-x 4 s" . swap-with-largest)
+ ("C-<tab>" . switch-window-or-buffer))
+
+(global-set-key (kbd "C-x 4 R")
+                (repeating "R" #'rotate-frame-clockwise))
+(global-set-key (kbd "C-x o")
+                (repeating "o" #'switch-window-or-buffer))
+
 (defun kill-window-and-maybe-buffer (x)
   "Kill window and optionally its buffer if the universal argument is supplied"
   (interactive "P")
@@ -31,7 +42,8 @@
 
 (use-package zoom-window
   :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-x 4 z" . zoom-window-zoom)))
 
 (use-package transpose-frame
   :defer t
