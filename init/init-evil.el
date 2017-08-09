@@ -18,6 +18,7 @@
                     artist-mode
                     eshell-mode
                     haskell-interactive-mode
+                    dashboard-mode
                     dired-mode
                     term-mode
                     neotree-mode

@@ -10,7 +10,7 @@
       (file-chase-links (string-remove-suffix ".elc" load-file-name))))))
 
 (defconst init-directory (get-init-directory)
-  "Location of adequate emacs.d files")
+  "Location of adequate emacs.d files.")
 
 (dolist (subdir '("init" "languages" "modules" "local"))
   (add-to-list 'load-path (expand-file-name subdir init-directory)))
@@ -81,7 +81,7 @@
              web
              markdown
              shell)))
-  "Modules to load")
+  "Adequate emacs.d modules to load.")
 
 (dolist (module-class module-load-order)
   (let ((class (symbol-name (car module-class)))

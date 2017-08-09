@@ -71,9 +71,27 @@
   :defer t
   :ensure t)
 
+;; Dashboard setup
+
+(defvar dashboard-user-banner-directory
+  (f-join user-emacs-directory "banners")
+  "Location for user's dashboard banners.")
+
+(defun dashboard-select-banner ()
+  "Return random file from user's banner directory of 'official."
+  (-if-let (files
+            (and (f-directory? dashboard-user-banner-directory)
+                 (f-files dashboard-user-banner-directory)))
+      (list-random-item files)
+    'official))
+
 (use-package dashboard
   :ensure t
   :config
+  (setq dashboard-items '((recents . 5)
+                          (projects . 5)
+                          (bookmarks . 5))
+        dashboard-startup-banner (dashboard-select-banner))
   (dashboard-setup-startup-hook))
 
 (provide 'init-interface)

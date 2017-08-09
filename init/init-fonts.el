@@ -20,22 +20,20 @@
           (daemonp))
       11 8))
 
-(defun select-font (&rest fonts)
-  (if (daemonp) ; For some reason find-font doesn't seem to like daemon mode
-      (car fonts)
-    (or
-     (--first (find-font (font-spec :name it)) fonts)
-     (find-font (font-spec :name "monospace")))))
+(defun select-font (fonts fallback)
+  (or
+   (--first (find-font (font-spec :name it)) fonts)
+   fallback))
 
 (add-to-list 'default-frame-alist
              `(font . ,(format "%s-%d"
-                               (apply #'select-font monospace-font-family)
+                               (select-font monospace-font-family "Fira Mono")
                                font-size)))
 
 (add-hook 'text-mode-hook
           (lambda ()
             (setq-local buffer-face-mode-face
-                        `(:family ,(apply #'select-font variable-font-family)))
+                        `(:family ,(select-font variable-font-family "Fira Sans")))
             (buffer-face-mode)))
 
 (bind-keys ("<C-mouse-4>" . text-scale-increase)

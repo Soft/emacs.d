@@ -89,7 +89,12 @@
    (lambda (buffer) (with-current-buffer buffer (eq mode major-mode)))
    (buffer-list)))
 
+(defun list-random-item (list)
+  "Return random item from LIST."
+  (nth (random (length list)) list))
+
 (defun programs-p (&rest xs)
+  "Returns t if any of the executables specified in XS are present."
   (-any? 'executable-find xs))
 
 (provide 'init-prelude)
