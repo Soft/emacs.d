@@ -1,4 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Markdown
 
 (defun make-compiler (command name-transformer args-maker)
   "Create a new interactive command that receives the content of the current buffer when executed."

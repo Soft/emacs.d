@@ -1,4 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; Lisp-like languages
 
 (defun find-user-init-file ()
   "Open user's emacs init file."

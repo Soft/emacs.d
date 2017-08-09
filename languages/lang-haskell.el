@@ -1,3 +1,5 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; Haskell
 
 (use-package haskell-mode
   :ensure t
