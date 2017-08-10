@@ -38,7 +38,8 @@
 
 (use-package time
   :init
-  (setq display-time-24hr-format t)
+  (setq display-time-24hr-format t
+        display-time-default-load-average nil)
   (display-time-mode))
 
 (defun set-frame-alpha (number)
@@ -70,6 +71,17 @@
 (use-package highlight-indent-guides
   :defer t
   :ensure t)
+
+;; Disabled for now
+(use-package volatile-highlights
+  :disabled
+  :ensure t
+  :init
+  (volatile-highlights-mode)
+  :config
+  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
+                        'evil-paste-pop 'evil-move)
+  (vhl/install-extension 'evil))
 
 ;; Dashboard setup
 

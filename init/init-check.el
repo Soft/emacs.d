@@ -3,7 +3,13 @@
 
 (use-package flycheck
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (setq flycheck-mode-line
+        '(:eval
+          (if (eq flycheck-last-status-change 'no-checker)
+              ""
+            (flycheck-mode-line-status-text)))))
 
 (use-package flyspell-lazy
   :defer t

@@ -1,6 +1,10 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Load elisp from adequate emacs.d's "local"
 
+(defvar load-local-ignored
+  '("customize.el")
+  "Files that will not be loaded by load-local-files.")
+
 (defvar loaded-local-files
   '())
 
@@ -19,6 +23,7 @@
           (f--files (f-join init-directory "local")
                     (and
                      (equal (f-ext it) "el")
+                     (not (member (f-filename it) load-local-ignored))
                      (or force
                          (not (member it loaded-local-files))))))))
 

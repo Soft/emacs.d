@@ -21,7 +21,9 @@
   :bind (("C-c C-l" . nlinum-mode)))
 
 (use-package pcre2el
-  :ensure t)
+  :ensure t
+  :diminish pcre-mode
+  :init (pcre-mode))
 
 (use-package origami
   :defer t

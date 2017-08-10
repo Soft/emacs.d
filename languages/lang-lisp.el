@@ -10,9 +10,20 @@
  ("<f4>" . find-user-init-file)
  ("C-c i" . ielm))
 
+(use-package eshell
+  :defer t
+  :config
+  (add-hook
+   'eshell-mode-hook
+   (lambda ()
+     (bind-keys
+      :map eshell-mode-map
+      ("C-d" . kill-this-buffer)))))
+
 (use-package macrostep
   :defer t
-  :ensure t)
+  :ensure t
+  :diminish macrostep-mode)
 
 (use-package hl-sexp
   :defer t
@@ -54,6 +65,10 @@
 (use-package elisp-mode
   :defer t
   :init
-  (add-hook 'emacs-lisp-mode-hook #'lisp-setup))
+  (add-hook 'emacs-lisp-mode-hook #'lisp-setup)
+  :config
+  (bind-keys
+   :map emacs-lisp-mode-map
+   ("C-c e" . macrostep-expand)))
 
 (provide 'lang-lisp)
