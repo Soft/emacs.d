@@ -12,6 +12,10 @@
   (setq-default neo-smart-open t
                 neo-vc-integration '(face char)
                 neo-force-change-root t)
+  (bind-keys
+   :map neotree-mode-map
+   ("j" . neotree-next-line)
+   ("k" . neotree-previous-line))
   (after-load 'projectile
     (setq projectile-switch-project-action #'neotree-projectile-action)))
 
