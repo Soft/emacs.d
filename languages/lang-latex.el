@@ -2,7 +2,7 @@
 ;; LaTeX and related technologies
 
 (defun latex-setup ()
-  (add-to-list 'LaTeX-verbatim-environment "minted")
+  (add-to-list 'LaTeX-verbatim-environments "minted")
   (TeX-fold-mode)
   (TeX-fold-buffer))
 
@@ -11,11 +11,11 @@
   :defer t
   :ensure t)
 
-(use-package tex
+(use-package tex-mode
   :mode (("\\.tex\\'" . LaTeX-mode))
   :ensure auctex
-  :init
-  (add-hook 'tex-mode-hook #'latex-setup))
+  :config
+  (add-hook 'LaTeX-mode-hook #'latex-setup))
 
 (use-package bibtex
   :mode (("\\.bibtex\\'" . bibtex-mode)

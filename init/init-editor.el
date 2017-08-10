@@ -69,16 +69,13 @@
   :ensure t
   :defer t)
 
+(use-package face-remap
+  :defer t
+  :diminish buffer-face-mode)
+
 (use-package unfill
   :ensure t
   :bind (("M-Q". unfill-toggle)))
-
-(use-package guess-language
-  :ensure t
-  :defer t
-  :init
-  (setq guess-language-langueages '(en fi)
-        guess-language-min-paragraph-length 35))
 
 (use-package ag
   :if (programs-p "ag")
@@ -87,7 +84,8 @@
 
 (use-package writegood-mode
   :ensure t
-  :defer t)
+  :defer t
+  :diminish writegood-mode)
 
 (defun prog-mode-setup ()
   "Defaults for programming modes."
@@ -96,6 +94,7 @@
   (rainbow-identifiers-mode)
   (fic-mode)
   (origami-mode)
+  (flycheck-mode)
   (company-mode)
   (company-quickhelp-mode)
   (company-statistics-mode))
@@ -107,8 +106,8 @@
 
 (defun text-mode-setup ()
   "Defaults for text modes."
-  (guess-language-mode)
-  (writegood-mode)
+  (gll/guess-language-lite-mode)
+  ;; (writegood-mode) ;; FIXME: Only in English
   (wc-mode))
 
 (use-package text-mode

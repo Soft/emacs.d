@@ -54,7 +54,8 @@
   (and (getenv "EMACS_DEBUG") t))
 
 (when emacs-debug
-  (setq use-package-verbose t))
+  (setq use-package-verbose t
+        debug-on-error t))
 
 (defconst module-load-order
   '((init . (customize
