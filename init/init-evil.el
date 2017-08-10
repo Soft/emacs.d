@@ -22,6 +22,7 @@
                     paradox-mode
                     dired-mode
                     weechat-mode
+                    xkcd-mode
                     term-mode
                     neotree-mode
                     doctor-mode

@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;;; Miscellaneous packages
+;; Miscellaneous packages
 
 (use-package xkcd
   :commands (xkcd-rand)
@@ -22,17 +22,22 @@
 (use-package google-translate
   :defer t
   :ensure t
-  :config
+  :init
   (setq google-translate-default-source-language "fi"
         google-translate-default-target-language "en"
-        google-translate-output-destination 'echo-area)
-  (defun google-translate-with-defaults (d)
-    "Query Google Translate with default languages.
-    Reverses the direction if universal argument is supplied."
-    (interactive "P")
-    (if d
-        (google-translate-query-translate-reverse)
-      (google-translate-query-translate)))
-  (bind-key "C-c t" 'google-translate-with-defaults))
+        google-translate-output-destination 'echo-area))
+
+(defun google-translate-with-defaults (d)
+  "Query Google Translate with default languages. Reverses the direction if universal argument is supplied."
+  (interactive "P")
+  (if d
+      (google-translate-query-translate-reverse)
+    (google-translate-query-translate)))
+
+(bind-key "C-c t" 'google-translate-with-defaults)
+
+(use-package define-word
+  :defer t
+  :ensure t)
 
 (provide 'init-misc)
