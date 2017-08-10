@@ -59,6 +59,8 @@
 (delq 'process-kill-buffer-query-function
       kill-buffer-query-functions)
 
+(put 'upcase-region 'disabled nil)
+
 (use-package rainbow-delimiters
   :ensure t
   :defer t)

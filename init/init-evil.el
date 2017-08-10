@@ -36,7 +36,8 @@
                ("j" . evil-next-visual-line)
                ("k" . evil-previous-visual-line)
                ("J" . evil-scroll-down)
-               ("K" . evil-scroll-up))
+               ("K" . evil-scroll-up)
+               ("<return>" . er/expand-region))
 
     (bind-keys :map evil-visual-state-map
                ("j" . evil-next-visual-line)

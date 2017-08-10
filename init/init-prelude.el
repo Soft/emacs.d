@@ -91,6 +91,11 @@
   "Return random item from LIST."
   (nth (random (length list)) list))
 
+(defun add-to-list-many (list to-add)
+  "Add items from TO-ADD to LIST using add-to-list."
+  (dolist (item to-add)
+    (add-to-list list item)))
+
 (defun programs-p (&rest xs)
   "Returns t if any of the executables specified in XS are present."
   (-any? 'executable-find xs))

@@ -62,6 +62,7 @@
   (setq indent-tabs-mode nil
         tab-width 2))
 
+;; FIXME: Make macrostep play nice with Evil
 (use-package elisp-mode
   :defer t
   :init

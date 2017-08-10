@@ -1,4 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Helm configuration
 
 (use-package helm 
   :ensure t
