@@ -5,6 +5,9 @@
   :commands (xkcd-rand)
   :defer t
   :ensure t
+  :preface
+  (add-to-list 'recentf-exclude
+               "\\.emacs\\.d/xkcd/")
   :config
   (bind-keys
    :map xkcd-mode-map
@@ -15,6 +18,7 @@
 
 ;; FIXME: Telephone-line compatability
 (use-package nyan-mode
+  :disabled
   :ensure t
   :init
   ;; It's Friday!

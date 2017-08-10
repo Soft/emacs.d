@@ -19,4 +19,9 @@
      file-name-history
      regexp-search-ring)))
 
+(use-package recentf
+  :init (recentf-mode)
+  :config
+  (setq recentf-max-saved-items 50))
+
 (provide 'init-session)
