@@ -1,4 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Editor settings
 
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
@@ -45,16 +46,18 @@
 
 (setq vc-follow-symlinks t)
 
-(setq-default sentence-end-double-space nil
-              indent-tabs-mode nil
-              tab-stop-list ()
-              tab-width 2
-              fill-column 80
-              scroll-margin 3
-              scroll-preserve-screen-position t
-              save-interprogram-paste-before-kill t)
+(setq-default
+ sentence-end-double-space nil
+ indent-tabs-mode nil
+ tab-stop-list ()
+ tab-width 2
+ fill-column 80
+ scroll-margin 3
+ scroll-preserve-screen-position t
+ save-interprogram-paste-before-kill t)
 
-(delq 'process-kill-buffer-query-function kill-buffer-query-functions)
+(delq 'process-kill-buffer-query-function
+      kill-buffer-query-functions)
 
 (use-package rainbow-delimiters
   :ensure t
