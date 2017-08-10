@@ -4,8 +4,16 @@
 (use-package xkcd
   :commands (xkcd-rand)
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (bind-keys
+   :map xkcd-mode-map
+   ("h" . xkcd-prev)
+   ("l" . xkcd-next)
+   ("q" . xkcd-kill-buffer)
+   ("<escape>" . xkcd-kill-buffer)))
 
+;; FIXME: Telephone-line compatability
 (use-package nyan-mode
   :ensure t
   :init
