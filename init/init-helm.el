@@ -14,6 +14,9 @@
         helm-split-window-in-side-p t
         helm-ff-skip-boring-files   t
         helm-quick-update           t)
+  (bind-keys
+   :map helm-map
+   ("<escape>" . helm-keyboard-quit))
   :bind
   (("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-mini)

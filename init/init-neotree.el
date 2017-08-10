@@ -19,7 +19,8 @@
   (bind-keys
    :map neotree-mode-map
    ("j" . neotree-next-line)
-   ("k" . neotree-previous-line))
+   ("k" . neotree-previous-line)
+   ("<escape>" . neotree-hide))
   (after-load 'projectile
     (setq projectile-switch-project-action #'neotree-projectile-action)))
 
