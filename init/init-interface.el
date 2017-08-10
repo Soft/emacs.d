@@ -28,11 +28,12 @@
 (menu-bar-mode -1)
 (tooltip-mode -1)
 
-(setq frame-title-format '((:eval (concat
-                                   (if (buffer-file-name)
-                                       (abbreviate-file-name (buffer-file-name))
-                                     "%b")
-                                   " - emacs"))))
+(setq frame-title-format
+      '((:eval (concat
+                (if (buffer-file-name)
+                    (abbreviate-file-name (buffer-file-name))
+                  "%b")
+                " - emacs"))))
 
 (fringe-mode '(8 . 0))
 

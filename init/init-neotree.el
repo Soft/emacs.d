@@ -1,4 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Neotree setup
 
 (defun neotree-setup ()
   "Defaults for neotree buffers."

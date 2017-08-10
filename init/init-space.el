@@ -20,14 +20,31 @@
    ;; Folding
    ("SPC o c" . origami-show-only-node)
 
+   ;; Buffer Operations
+   ("SPC b f" . helm-find-files)
+   ("SPC b b" . helm-mini)
+   ("SPC b B" . helm-buffer-list)
+   ("SPC b p" . helm-projectile-find-file)
+   ("SPC b r" . helm-recentf)
+
    ;; File Operations   
    ("SPC f s" . save-buffer)
    ("SPC f h" . undo-tree-visualize)
    ("SPC f r" . revert-buffer)
    ("SPC f c" . cd)
 
+   ;; Jump Commands
+   ("SPC j i" . helm-imenu)
+   ("SPC j I" . helm-imenu-in-all-buffers)
+   ("SPC j j" . avy-goto-char)
+   ("SPC j J" . avy-goto-char-2)
+   ("SPC j l" . avy-goto-line)
+   ("SPC j w" . avy-goto-word-1)
+   ("SPC j u" . browse-url-at-point)
+
    ;; Window Operations
    ("SPC w k" . kill-window-and-maybe-buffer)
+   ("SPC w t" . neotree-toggle)
 
    ;; Misc
    ("SPC x t" . google-translate-with-defaults)

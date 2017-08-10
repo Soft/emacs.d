@@ -37,21 +37,25 @@
                ("k" . evil-previous-visual-line)
                ("J" . evil-scroll-down)
                ("K" . evil-scroll-up)
+               ("\\" . evilnc-comment-or-uncomment-lines)
                ("<return>" . er/expand-region))
 
     (bind-keys :map evil-visual-state-map
                ("j" . evil-next-visual-line)
                ("k" . evil-previous-visual-line)
                ("J" . evil-scroll-down)
-               ("K" . evil-scroll-up))))
+               ("K" . evil-scroll-up)
+               ("\\" . comment-or-uncomment-region))))
 
 (use-package evil-surround
   :ensure t)
 
 (use-package evil-numbers
+  :defer t
   :ensure t)
 
 (use-package evil-nerd-commenter
+  :defer t
   :ensure t)
 
 (provide 'init-evil)

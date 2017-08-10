@@ -12,6 +12,10 @@
   :defer t
   :ensure t)
 
+(use-package smart-forward
+  :defer t
+  :ensure t)
+
 (use-package goto-last-change
   :defer t
   :ensure t)
