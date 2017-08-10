@@ -1,7 +1,9 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 
 (defun neotree-setup ()
-  (setq-local mode-line-format nil))
+  "Defaults for neotree buffers."
+  (setq-local mode-line-format nil)
+  (hl-line-mode))
 
 (use-package neotree
   :ensure t
@@ -11,7 +13,8 @@
   :config
   (setq-default neo-smart-open t
                 neo-vc-integration '(face char)
-                neo-force-change-root t)
+                neo-force-change-root t
+                neo-theme 'arrow)
   (bind-keys
    :map neotree-mode-map
    ("j" . neotree-next-line)

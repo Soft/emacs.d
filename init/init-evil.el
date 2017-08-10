@@ -19,7 +19,9 @@
                     eshell-mode
                     haskell-interactive-mode
                     dashboard-mode
+                    paradox-mode
                     dired-mode
+                    weechat-mode
                     term-mode
                     neotree-mode
                     doctor-mode

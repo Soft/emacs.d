@@ -3,7 +3,8 @@
 
 (use-package company
   :ensure t
-  :defer t)
+  :defer t
+  :diminish company-mode)
 
 (use-package company-quickhelp
   :ensure t

@@ -18,7 +18,7 @@
 (defconst init-directory (get-init-directory)
   "Location of adequate emacs.d files.")
 
-(dolist (subdir '("init" "languages" "modules" "local"))
+(dolist (subdir '("init" "languages" "modules"))
   (add-to-list 'load-path (expand-file-name subdir init-directory)))
 
 (defun with-archive-protocol (url)

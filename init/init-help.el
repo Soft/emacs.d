@@ -1,3 +1,5 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; Help related functions
 
 (use-package guide-key
   :ensure t

@@ -29,7 +29,8 @@
 
 (use-package aggressive-indent
   :defer t
-  :ensure t)
+  :ensure t
+  :diminish aggressive-indent-mode)
 
 (use-package geiser
   :if (programs-p "guile" "racket")

@@ -36,6 +36,7 @@
   :ensure t)
 
 (use-package subword
+  :diminish superword-mode
   :init
   (global-subword-mode)
   (global-superword-mode))
