@@ -9,11 +9,13 @@
   (replace-regexp-in-string "^" ";; " (emacs-version))
   "\n\n"))
 
-(setq
+(setq-default
  use-dialog-box nil
  use-file-dialog nil
  echo-keystrokes 0.1
- xterm-mouse-mode 1)
+ xterm-mouse-mode 1
+ cursor-in-non-selected-windows nil
+ mouse-yank-at-point t)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -56,7 +58,7 @@
 
 (bind-keys
  ("<f11>" . toggle-fullscreen)
- ("C-x t" . toggle-menu-bar-mode-from-frame))
+ ("C-c m" . toggle-menu-bar-mode-from-frame))
 
 (setq ring-bell-function 'ignore)
 
@@ -83,33 +85,6 @@
   (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
                         'evil-paste-pop 'evil-move)
   (vhl/install-extension 'evil))
-
-;; Dashboard setup
-
-(defvar dashboard-user-banner-directory
-  (f-join user-emacs-directory "banners")
-  "Location for user's dashboard banners.")
-
-(defun dashboard-select-banner ()
-  "Return random file from user's banner directory of 'official."
-  (-if-let (files
-            (and (f-directory? dashboard-user-banner-directory)
-                 (f-files dashboard-user-banner-directory)))
-      (list-random-item files)
-    'official))
-
-(use-package dashboard
-  :ensure t
-  :config
-  (setq dashboard-items '((recents . 5)
-                          (projects . 5)
-                          (bookmarks . 5))
-        dashboard-startup-banner (dashboard-select-banner)
-        dashboard-banner-logo-title
-        (format "Welcome to Emacs, %s %s"
-                (car (s-split " " (user-full-name)))
-                (list-random-item '("🌈" "💖" "🌻" "🌸" "🐬"))))
-  (dashboard-setup-startup-hook))
 
 (provide 'init-interface)
 

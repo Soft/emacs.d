@@ -31,6 +31,7 @@
   :if (programs-p "ag")
   :ensure t)
 
+;; TODO: This doesn't seem to be necessary anymore
 (use-package helm-projectile
   :ensure t
   :config (helm-projectile-on)

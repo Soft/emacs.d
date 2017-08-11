@@ -16,9 +16,11 @@
   :ensure t
   :init (projectile-global-mode)
   :config
-  (setq projectile-mode-line
-        '(:eval (if (projectile-project-p)
-                    (format " <%s>" (projectile-project-name))
-                  ""))))
+  (setq
+   projectile-completion-system 'helm
+   projectile-mode-line
+   '(:eval (if (projectile-project-p)
+               (format " <%s>" (projectile-project-name))
+             ""))))
 
 (provide 'init-projectile)

@@ -65,6 +65,7 @@
              backups
              check
              interface
+             dashboard
              fonts
              theme
              projectile

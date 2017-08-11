@@ -15,7 +15,8 @@
   (setq-default neo-smart-open t
                 neo-vc-integration '(face char)
                 neo-force-change-root t
-                neo-theme 'arrow)
+                neo-show-updir-line nil
+                neo-theme 'nerd)
   (bind-keys
    :map neotree-mode-map
    ("j" . neotree-next-line)

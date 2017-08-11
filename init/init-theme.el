@@ -55,6 +55,6 @@
   :if (eq system-type 'gnu/linux)
   :ensure t)
 
-(switch-theme 'subatomic)
+(switch-theme 'doom-vibrant)
 
 (provide 'init-theme)

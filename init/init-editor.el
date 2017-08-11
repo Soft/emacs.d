@@ -19,7 +19,7 @@
 
 (use-package nlinum
   :ensure t
-  :bind (("C-c C-l" . nlinum-mode)))
+  :bind (("C-c l" . nlinum-mode)))
 
 (use-package pcre2el
   :ensure t
