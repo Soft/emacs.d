@@ -9,6 +9,40 @@
 (set-selection-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+(setq-default
+ sentence-end-double-space nil
+ indent-tabs-mode nil
+ tab-stop-list ()
+ tab-width 2
+ fill-column 80
+ scroll-margin 3
+ scroll-preserve-screen-position t
+ save-interprogram-paste-before-kill t
+ tramp-default-method "ssh"
+ vc-follow-symlinks t)
+
+(delq 'process-kill-buffer-query-function
+      kill-buffer-query-functions)
+
+(put 'upcase-region 'disabled nil)
+
+(bind-keys
+ ("C-w" . backward-kill-word)
+ ("<escape>" . keyboard-quit))
+
+(defun prog-mode-setup ()
+  "Defaults for programming modes."
+  (nlinum-mode)
+  (global-prettify-symbols-mode)
+  (rainbow-delimiters-mode)
+  (rainbow-identifiers-mode)
+  (fic-mode)
+  (origami-mode)
+  (flycheck-mode)
+  (company-mode)
+  (company-quickhelp-mode)
+  (company-statistics-mode))
+
 (use-package undo-tree
   :ensure t
   :diminish undo-tree-mode)
@@ -28,7 +62,21 @@
 
 (use-package origami
   :defer t
-  :ensure t)
+  :ensure t
+  :bind
+  (("C-c o o" . origami-open-node)
+   ("C-c o O" . origami-open-all-nodes)
+   ("C-c o c" . origami-close-node)
+   ("C-c o C" . origami-close-all-nodes)
+   ("C-c o n" . origami-next-fold)
+   ("C-c o p" . origami-previous-fold)
+   ("C-c o 1" . origami-show-only-node)
+   ("C-c o u" . origami-undo)
+   ("C-c o r" . origami-redo)))
+
+;; FIXME: This doesn't work
+(global-set-key (kbd "C-c o <tab>")
+                (repeating "<tab>" #'origami-recursively-toggle-node))
 
 (use-package wc-mode
   :defer t
@@ -43,23 +91,6 @@
   :init
   (global-subword-mode)
   (global-superword-mode))
-
-(setq vc-follow-symlinks t)
-
-(setq-default
- sentence-end-double-space nil
- indent-tabs-mode nil
- tab-stop-list ()
- tab-width 2
- fill-column 80
- scroll-margin 3
- scroll-preserve-screen-position t
- save-interprogram-paste-before-kill t)
-
-(delq 'process-kill-buffer-query-function
-      kill-buffer-query-functions)
-
-(put 'upcase-region 'disabled nil)
 
 (use-package rainbow-delimiters
   :ensure t
@@ -87,19 +118,6 @@
   :defer t
   :diminish writegood-mode)
 
-(defun prog-mode-setup ()
-  "Defaults for programming modes."
-  (nlinum-mode)
-  (global-prettify-symbols-mode)
-  (rainbow-delimiters-mode)
-  (rainbow-identifiers-mode)
-  (fic-mode)
-  (origami-mode)
-  (flycheck-mode)
-  (company-mode)
-  (company-quickhelp-mode)
-  (company-statistics-mode))
-
 (use-package prog-mode
   :defer t
   :init
@@ -115,9 +133,5 @@
   :defer t
   :init
   (add-hook 'text-mode-hook #'text-mode-setup))
-
-(bind-keys
- ("C-w" . backward-kill-word)
- ("<escape>" . keyboard-quit))
 
 (provide 'init-editor)

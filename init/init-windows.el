@@ -8,6 +8,7 @@
 (use-package winner
   :config (winner-mode))
 
+;; TODO: Skip buffers with certain modes without C-u (eg. neotree)
 (defun switch-window-or-buffer ()
   "Switch window or buffer depending on the number of windows."
   (interactive)

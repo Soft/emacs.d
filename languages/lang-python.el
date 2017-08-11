@@ -16,6 +16,7 @@
 
 (use-package python
   :mode (("\\.py\\'" . python-mode))
+  :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'python-setup))
 
 (provide 'lang-python)
