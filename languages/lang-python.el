@@ -11,6 +11,7 @@
 
 (defun python-setup ()
   "Defaults for Python."
+  (highlight-indent-guides-mode)
   (pyvenv-mode))
 
 (use-package python

@@ -39,6 +39,9 @@
 
 (fringe-mode '(8 . 0))
 
+(use-package all-the-icons
+  :ensure t)
+
 (use-package time
   :init
   (setq display-time-24hr-format t

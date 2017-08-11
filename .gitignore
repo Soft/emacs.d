@@ -2,4 +2,6 @@
 *.elc
 local/*
 !local/.empty
+resources/banners/*
+!resources/banners/.empty
 \#*

@@ -89,6 +89,7 @@
 
 (defun prog-mode-setup ()
   "Defaults for programming modes."
+  (nlinum-mode)
   (global-prettify-symbols-mode)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode)

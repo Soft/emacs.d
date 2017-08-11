@@ -2,14 +2,15 @@
 ;; Dashboard setup
 
 (defvar dashboard-user-banner-directory
-  (f-join user-emacs-directory "banners")
+  (f-join init-directory "resources/banners")
   "Location for user's dashboard banners.")
 
 (defun dashboard-select-banner ()
   "Return random file from user's banner directory of 'official."
   (-if-let (files
             (and (f-directory? dashboard-user-banner-directory)
-                 (f-files dashboard-user-banner-directory)))
+                 (f--files dashboard-user-banner-directory
+                           (equal (f-ext it) "png"))))
       (list-random-item files)
     'official))
 
