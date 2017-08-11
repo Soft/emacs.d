@@ -15,7 +15,8 @@
  echo-keystrokes 0.1
  xterm-mouse-mode 1
  cursor-in-non-selected-windows nil
- mouse-yank-at-point t)
+ mouse-yank-at-point t
+ ring-bell-function 'ignore)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -35,7 +36,8 @@
                 (if (buffer-file-name)
                     (abbreviate-file-name (buffer-file-name))
                   "%b")
-                " - emacs"))))
+                " - emacs@"
+                system-name))))
 
 (fringe-mode '(8 . 0))
 
@@ -61,14 +63,14 @@
 
 (bind-keys
  ("<f11>" . toggle-fullscreen)
- ("C-c m" . toggle-menu-bar-mode-from-frame))
-
-(setq ring-bell-function 'ignore)
+ ("C-c w f" . toggle-fullscreen)
+ ("C-c w m" . toggle-menu-bar-mode-from-frame))
 
 (use-package writeroom-mode
   :defer t
   :ensure t
-  :config (setq writeroom-width 120))
+  :config
+  (setq writeroom-width 120))
 
 (use-package centered-window-mode
   :defer t
@@ -85,8 +87,11 @@
   :init
   (volatile-highlights-mode)
   :config
-  (vhl/define-extension 'evil 'evil-paste-after 'evil-paste-before
-                        'evil-paste-pop 'evil-move)
+  (vhl/define-extension 'evil
+                        'evil-paste-after
+                        'evil-paste-before
+                        'evil-paste-pop
+                        'evil-move)
   (vhl/install-extension 'evil))
 
 (provide 'init-interface)

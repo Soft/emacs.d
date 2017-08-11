@@ -28,6 +28,6 @@
 (use-package smerge-mode
   :defer t
   :init
-  (setq smerge-command-prefix "\C-cv"))
+  (setq smerge-command-prefix "\C-cgv"))
 
 (provide 'init-git)
