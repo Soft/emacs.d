@@ -16,7 +16,7 @@
                 neo-vc-integration '(face char)
                 neo-force-change-root t
                 neo-show-updir-line nil
-                neo-theme 'nerd)
+                neo-theme 'icons)
   (bind-keys
    :map neotree-mode-map
    ("j" . neotree-next-line)
