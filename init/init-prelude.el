@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;;; Basic utilities 
+;; Basic utilities 
 
 (defun compose (fn &rest others)
   "Compose a set of functions."
@@ -51,6 +51,7 @@
        (cond ,@conds
              (t (error "No action bound to %d" d))))))
 
+;; FIXME: This doesn't really work with interactive functions that take arguments
 (defun repeating (key fn &rest args)
   "Makes a function that can be repeated with additional key presses."
   (let ((map (make-sparse-keymap)))

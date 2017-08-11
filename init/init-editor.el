@@ -68,15 +68,15 @@
    ("C-c o O" . origami-open-all-nodes)
    ("C-c o c" . origami-close-node)
    ("C-c o C" . origami-close-all-nodes)
-   ("C-c o n" . origami-next-fold)
-   ("C-c o p" . origami-previous-fold)
-   ("C-c o 1" . origami-show-only-node)
-   ("C-c o u" . origami-undo)
-   ("C-c o r" . origami-redo)))
+   ("C-c o 1" . origami-show-only-node)))
 
-;; FIXME: This doesn't work
-(global-set-key (kbd "C-c o <tab>")
-                (repeating "<tab>" #'origami-recursively-toggle-node))
+(defhydra hydra-origami-toggle (global-map "C-c o")
+  "Recursively toggle nodes."
+  ("<tab>" #'origami-recursively-toggle-node)
+  ("n" #'origami-next-fold)
+  ("p" #'origami-previous-fold)
+  ("u" #'origami-undo)
+  ("r" #'origami-redo))
 
 (use-package wc-mode
   :defer t
