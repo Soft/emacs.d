@@ -36,8 +36,8 @@
   :ensure t
   :config (helm-projectile-on)
   :bind
-  (("C-x f" . helm-projectile-find-file)
-   ("C-x g" . helm-projectile-ag)))
+  (("C-c b" . helm-projectile-find-file)
+   ("C-c g" . helm-projectile-ag)))
 
 (use-package helm-descbinds
   :ensure t
