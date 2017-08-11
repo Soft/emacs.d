@@ -1,5 +1,10 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
-;; Rust
+;; Rust configuration
+
+(defun rust-setup ()
+  "Defaults for Rust."
+  (racer-mode)
+  (cargo-minor-mode))
 
 (use-package toml-mode
   :mode (("\\.toml\\'" . toml-mode))
@@ -18,8 +23,7 @@
   :mode (("\\.rs\\'" . rust-mode)
          ("\\.lalrpop\\'" . rust-mode))
   :init
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'rust-mode-hook #'cargo-minor-mode))
+  (add-hook 'rust-mode-hook #'rust-setup))
 
 (provide 'lang-rust)
 

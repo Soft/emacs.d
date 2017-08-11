@@ -6,6 +6,7 @@
   :defer t)
 
 (use-package yapfify
+  :if (programs-p "yapf")
   :ensure t
   :defer t)
 
