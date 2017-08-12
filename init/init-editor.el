@@ -55,22 +55,17 @@
   :ensure t
   :bind (("C-c l" . nlinum-mode)))
 
-(use-package pcre2el
-  :ensure t
-  :diminish pcre-mode
-  :init (pcre-mode))
-
 (use-package origami
   :defer t
   :ensure t
   :bind
-  (("C-c o o" . origami-open-node)
-   ("C-c o O" . origami-open-all-nodes)
-   ("C-c o c" . origami-close-node)
-   ("C-c o C" . origami-close-all-nodes)
-   ("C-c o 1" . origami-show-only-node)))
+  (("C-c f o" . origami-open-node)
+   ("C-c f O" . origami-open-all-nodes)
+   ("C-c f c" . origami-close-node)
+   ("C-c f C" . origami-close-all-nodes)
+   ("C-c f 1" . origami-show-only-node)))
 
-(defhydra hydra-origami-toggle (global-map "C-c o")
+(defhydra hydra-origami-toggle (global-map "C-c f")
   "Recursively toggle nodes."
   ("<tab>" #'origami-recursively-toggle-node)
   ("n" #'origami-next-fold)

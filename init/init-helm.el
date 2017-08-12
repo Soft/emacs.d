@@ -21,7 +21,7 @@
   (("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-mini)
    ("C-x C-b" . helm-buffers-list)
-   ("C-x /"   . helm-occur)
+   ("C-c o"   . helm-occur)
    ("C-c SPC" . helm-imenu)
    ("M-x"     . helm-M-x)
    ("C-h a"   . helm-apropos)
@@ -37,7 +37,7 @@
   :config (helm-projectile-on)
   :bind
   (("C-c b" . helm-projectile-find-file)
-   ("C-c g" . helm-projectile-ag)))
+   ("C-c s" . helm-projectile-ag)))
 
 (use-package helm-descbinds
   :ensure t

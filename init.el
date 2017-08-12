@@ -62,6 +62,7 @@
              libraries
              prelude
              editor
+             search
              backups
              check
              interface

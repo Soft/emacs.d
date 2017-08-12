@@ -1,5 +1,8 @@
 *~
 *.elc
+GPATH
+GRTAGS
+GTAGS
 local/*
 !local/.empty
 resources/banners/*

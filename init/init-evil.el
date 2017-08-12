@@ -41,6 +41,8 @@
      ("k" . evil-previous-visual-line)
      ("J" . evil-scroll-down)
      ("K" . evil-scroll-up)
+     ("H" . smart-backward)
+     ("L" . smart-forward)
      ("\\" . evilnc-comment-or-uncomment-lines)
      ("<return>" . er/expand-region))
 
