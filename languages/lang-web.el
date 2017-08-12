@@ -3,6 +3,7 @@
 
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))
+  :interpreter ("node" . js2-mode)
   :ensure t)
 
 (use-package css-eldoc

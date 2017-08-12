@@ -96,6 +96,7 @@
              web
              markdown
              shell
+             org
              misc)))
   "Adequate emacs.d modules to load.")
 

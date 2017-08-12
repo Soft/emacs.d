@@ -29,6 +29,7 @@
 
 (use-package php-mode
   :mode (("\\.php\\'" . php-mode))
+  :interpreter ("php" . php-mode)
   :ensure t)
 
 (use-package clojure-mode
@@ -40,5 +41,8 @@
          ("\\.sc\\'" . scala-mode))
   :interpreter ("scala" . scala-mode)
   :ensure t)
+
+(use-package ebuild-mode
+  :mode (("\\.ebuild\\'" . ebuild-mode)))
 
 (provide 'lang-misc)
