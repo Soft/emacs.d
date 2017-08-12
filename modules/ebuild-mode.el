@@ -1,6 +1,9 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; ebuild-mode
 
+;; TODO: Add font lock keywords
+
+(require 'cl-lib)
 (require 'autoinsert)
 
 (defvar ebuild-mode-portage-path
@@ -10,16 +13,17 @@
 (defun ebuild-mode-licenses ()
   (let ((license-path (expand-file-name "licenses" ebuild-mode-portage-path)))
     (if (file-exists-p license-path)
-        (mapcar 'file-name-nondirectory
-                (filter 'file-regular-p (directory-files license-path t)))
+        (cl-loop for path in (directory-files license-path t)
+                 when (file-regular-p path)
+                 collect (file-name-nondirectory path))
       '())))
 
 (defun ebuild-mode-eclasses ()
   (let ((eclass-path (expand-file-name "eclass" ebuild-mode-portage-path)))
     (if (file-exists-p eclass-path)
-        (mapcar (lambda (path) (file-name-sans-extension
-                           (file-name-nondirectory path)))
-                (filter 'file-regular-p (directory-files eclass-path t)))
+        (cl-loop for path in (directory-files eclass-path t)
+                 when (file-regular-p path)
+                 collect (file-name-sans-extension (file-name-nondirectory path)))
       '())))
 
 ;;;###autoload
@@ -33,7 +37,7 @@
   "DESCRIPTION=\"" (skeleton-read "Description: ") "\"\n"
   "HOMEPAGE=\"" (skeleton-read "Homepage: ") "\"\n"
   "SRC_URI=\"" (skeleton-read "URI: ") "\"\n"
-  "LICENSE=\"" (completing-read "License: " (portage-known-licenses)) "\"\n"
+  "LICENSE=\"" (completing-read "License: " (ebuild-mode-licenses)) "\"\n"
   "SLOT=\"0\"\n"
   "KEYWORDS=\"~x86 ~amd64\"\n"
   "IUSE=\"\"\n\n"
