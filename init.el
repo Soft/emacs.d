@@ -32,6 +32,14 @@
 (require 'package)
 (package-initialize)
 
+(defvar package-last-refresh-time nil
+  "Time when the package archive was last refreshed.")
+
+(defun package-update-last-refresh-time ()
+  (setq package-last-refresh-time (current-time)))
+
+(advice-add #'package-refresh-contents :before #'package-update-last-refresh-time)
+
 (unless package-archive-contents
   (package-refresh-contents))
 

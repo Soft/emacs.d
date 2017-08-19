@@ -21,7 +21,7 @@
     twilight-bright-theme)
   "Themes that will be automatically installed if they are missing.")
 
-(install-packages-if-missing wanted-themes)
+(install-packages-if-missing wanted-themes t)
 
 (defun switch-theme (theme)
   "Unload existing theme and change to a new one."
