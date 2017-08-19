@@ -69,6 +69,7 @@
   '((init . (customize
              libraries
              prelude
+             packages
              editor
              search
              backups
@@ -80,7 +81,6 @@
              projectile
              helm
              terminal
-             packages
              windows
              git
              completion

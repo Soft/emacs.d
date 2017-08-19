@@ -101,13 +101,5 @@
   "Returns t if any of the executables specified in XS are present."
   (-any? 'executable-find xs))
 
-(defun install-packages-if-missing (packages &optional refresh)
-  "Install PACKAGES if they are not already installed. If REFRESH is non-nil, refresh packages before installing if this hasn't been done during this session."
-  (let ((to-install (-remove #'package-installed-p packages)))
-    (when to-install
-      (when (and refresh (not package-last-refresh-time))
-        (package-refresh-contents))
-      (--each (package-install it) to-install))))
-
 (provide 'init-prelude)
 
