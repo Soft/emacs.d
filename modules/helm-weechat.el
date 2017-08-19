@@ -1,5 +1,5 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Weehchat integration for Helm
+;; Weechat integration for Helm
 
 (defface helm-weechat-channel
   '((t . (:foreground "dark green" :weight bold)))
