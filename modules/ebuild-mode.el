@@ -1,7 +1,9 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; ebuild-mode
 
-;; TODO: Add font lock keywords
+;; TODO:
+;; - add highlighting for common constructs
+;; - eclass completion
 
 (require 'cl-lib)
 (require 'autoinsert)
@@ -26,7 +28,6 @@
                  collect (file-name-sans-extension (file-name-nondirectory path)))
       '())))
 
-;;;###autoload
 (define-skeleton ebuild-mode-skeleton
   "Template for ebuilds"
   ""
@@ -46,7 +47,9 @@
 
 ;;;###autoload
 (define-derived-mode ebuild-mode sh-mode "ebuild"
-  "Major mode for editing ebuild files.")
+  "Major mode for editing ebuild files."
+  (when (eq (buffer-size) 0)
+    (auto-insert)))
 
 (add-to-list 'auto-mode-alist '("\\.ebuild\\'" . ebuild-mode))
 (define-auto-insert "\\.ebuild\\'" 'ebuild-mode-skeleton)

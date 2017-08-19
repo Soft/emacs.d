@@ -53,7 +53,8 @@
 
 (use-package color-theme-approximate
   :if (eq system-type 'gnu/linux)
-  :ensure t)
+  :ensure t
+  :init (color-theme-approximate-on))
 
 (switch-theme 'doom-vibrant)
 

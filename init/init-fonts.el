@@ -22,13 +22,14 @@
       11 8))
 
 (defun select-font (fonts fallback)
+  "Selects the first available font from FONTS. If none of the fonts are available, returns FALLBACK."
   (or
    (--first (find-font (font-spec :name it)) fonts)
    fallback))
 
 (add-to-list 'default-frame-alist
              `(font . ,(format "%s-%d"
-                               (select-font monospace-font-family "Fira Mono")
+                               (select-font monospace-font-family "Iosevka")
                                font-size)))
 
 ;; Fix missing glyphs
