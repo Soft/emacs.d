@@ -31,23 +31,24 @@
 (define-skeleton ebuild-mode-skeleton
   "Template for ebuilds"
   ""
-  "# Copyright 1999-" (format-time-string "%Y") " Gentoo Foundation\n"
-  "# Distributed under the terms of the GNU General Public License v2\n"
-  "# $Id$\n\n"
-  "EAPI=5\n\n"
-  "DESCRIPTION=\"" (skeleton-read "Description: ") "\"\n"
-  "HOMEPAGE=\"" (skeleton-read "Homepage: ") "\"\n"
-  "SRC_URI=\"" (skeleton-read "URI: ") "\"\n"
-  "LICENSE=\"" (completing-read "License: " (ebuild-mode-licenses)) "\"\n"
-  "SLOT=\"0\"\n"
-  "KEYWORDS=\"~x86 ~amd64\"\n"
-  "IUSE=\"\"\n\n"
-  "DEPEND=\"""\"\n"
-  "RDEPEND=\"${DEPEND}\"\n\n" _)
+  "# Copyright 1999-" (format-time-string "%Y") " Gentoo Foundation" \n
+  "# Distributed under the terms of the GNU General Public License v2" \n \n
+  "EAPI=6" \n \n
+  "DESCRIPTION=\"" (skeleton-read "Description: ") "\"" \n
+  "HOMEPAGE=\"" (skeleton-read "Homepage: ") "\"" \n
+  "SRC_URI=\"" (skeleton-read "URI: ") "\"" \n
+  "LICENSE=\"" (completing-read "License: " (ebuild-mode-licenses)) "\"" \n
+  "SLOT=\"0\"" \n
+  "KEYWORDS=\"~x86 ~amd64\"" \n
+  "IUSE=\"\"" \n \n
+  "DEPEND=\"""\"" \n
+  "RDEPEND=\"${DEPEND}\"" \n \n _)
 
 ;;;###autoload
 (define-derived-mode ebuild-mode sh-mode "ebuild"
   "Major mode for editing ebuild files."
+  (setq-local indent-tabs-mode t) ;; devmanual recommends these.
+  (setq-local tab-width 4)
   (when (eq (buffer-size) 0)
     (auto-insert)))
 
