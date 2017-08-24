@@ -56,6 +56,12 @@
   :ensure t
   :init (color-theme-approximate-on))
 
+(use-package gtk-style-ext
+  :if (and (featurep 'gtk) (locate-library "gtk-style-ext-sys"))
+  :init
+  (gtk-style-ext-dark-theme-mode 1)
+  (gtk-style-ext-adapt-to-theme-mode 1))
+
 (switch-theme 'doom-vibrant)
 
 (provide 'init-theme)
