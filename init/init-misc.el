@@ -31,6 +31,10 @@
   :defer t
   :ensure t)
 
+(use-package sunshine
+  :defer t
+  :ensure t)
+
 (use-package google-translate
   :defer t
   :ensure t

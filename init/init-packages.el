@@ -30,6 +30,6 @@
     (when to-install
       (when (and refresh (package-should-refresh-p))
         (package-refresh-contents))
-      (--each (package-install it) to-install))))
+      (-each #'package-install to-install))))
 
 (provide 'init-packages)
