@@ -64,7 +64,9 @@
 (bind-keys
  ("<f11>" . toggle-fullscreen)
  ("C-c w f" . toggle-fullscreen)
- ("C-c w m" . toggle-menu-bar-mode-from-frame))
+ ("C-c w m" . toggle-menu-bar-mode-from-frame)
+ ("C-c w s" . toggle-scroll-bar)
+ ("C-c w t" . toggle-tool-bar-mode-from-frame))
 
 (use-package writeroom-mode
   :defer t
