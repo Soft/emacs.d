@@ -17,7 +17,8 @@
   :ensure t)
 
 (use-package goto-last-change
-  :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c ." . goto-last-change)
+         ("C-c C-." . goto-last-change-reverse)))
 
 (provide 'init-movement)
