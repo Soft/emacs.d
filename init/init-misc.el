@@ -8,6 +8,7 @@
   :preface
   (add-to-list 'recentf-exclude
                "\\.emacs\\.d/xkcd/")
+  :bind (("C-c x X" . xkcd-rand))
   :config
   (bind-keys
    :map xkcd-mode-map
@@ -35,6 +36,7 @@
 (use-package sunshine
   :defer t
   :ensure t
+  :bind (("C-c x w" . sunshine-forecast))
   :config
   (setq sunshine-units 'metric
         sunshine-show-icons t))
