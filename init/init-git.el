@@ -1,3 +1,5 @@
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; Git Settings
 
 (use-package magit
   :ensure t
