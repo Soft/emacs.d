@@ -25,6 +25,8 @@
 (use-package keyfreq
   :ensure t
   :init
+  (setq keyfreq-file (f-join user-emacs-directory "keyfreq")
+        keyfreq-file-lock (f-join user-emacs-directory "keyfreq.lock"))
   (keyfreq-mode)
   (keyfreq-autosave-mode))
 

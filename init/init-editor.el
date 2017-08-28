@@ -30,6 +30,8 @@
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit))
 
+;; FIXME: This can be called before the use-package has installed all the
+;; required packages. This can break first setup.
 (defun prog-mode-setup ()
   "Defaults for programming modes."
   (nlinum-mode)
