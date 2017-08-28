@@ -17,5 +17,12 @@
   :defer t
   :diminish ggtags-mode)
 
+(use-package dumb-jump
+  :ensure t
+  :config (setq dumb-jump-selector 'helm)
+  :bind (("C-c d d" . dumb-jump-go)
+         ("C-c d b" . dumb-jump-back)
+         ("C-c d q" . dumb-jump-quick-look)))
+
 (provide 'init-search)
 
