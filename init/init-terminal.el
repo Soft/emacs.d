@@ -37,10 +37,25 @@
      (switch-command (multi-term) (eshell)))
    d))
 
-(bind-key
- "C-c <return>" #'get-shell-like)
-(bind-key
- "C-c <C-return>" #'new-shell-like)
+(bind-keys
+ ("C-c <return>" . get-shell-like)
+ ("C-c <C-return>" . new-shell-like))
+
+(defun comint-clear-buffer ()
+  "Clear current comint buffer."
+  (interactive)
+  (delete-region (point-min) (point-max))
+  (comint-send-input))
+
+(use-package comint
+  :config
+  (add-hook
+   'comint-exec-hook
+   (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
+  (bind-keys
+   :map comint-mode-map
+   ("C-l" . comint-clear-buffer)
+   ("C-d" . kill-this-buffer)))
 
 (use-package em-term
   :config

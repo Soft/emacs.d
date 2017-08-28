@@ -58,8 +58,9 @@
   :ensure t)
 
 (use-package evil-numbers
-  :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c +" . evil-numbers/inc-at-pt)
+         ("C-c -" . evil-numbers/dev-at-pt)))
 
 (use-package evil-nerd-commenter
   :defer t
