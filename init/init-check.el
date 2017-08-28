@@ -2,7 +2,7 @@
 ;; Syntax checking
 
 (use-package flycheck
-  :defer t
+  :commands (flycheck-mode)
   :ensure t
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
