@@ -31,9 +31,13 @@
   :defer t
   :ensure t)
 
+;; Remember to set sunshine-appid & sunshine-location
 (use-package sunshine
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (setq sunshine-units 'metric
+        sunshine-show-icons t))
 
 (use-package google-translate
   :defer t
@@ -50,10 +54,11 @@
       (google-translate-query-translate-reverse)
     (google-translate-query-translate)))
 
-(bind-key "C-c t" 'google-translate-with-defaults)
+(bind-key "C-c x t" 'google-translate-with-defaults)
 
 (use-package define-word
   :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c x d" . define-word-at-point)))
 
 (provide 'init-misc)

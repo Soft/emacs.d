@@ -29,6 +29,7 @@
            term-mode
            neotree-mode
            doctor-mode
+           sunshine-mode
            tetris-mode
            epa-list-keys
            xwidget-webkit-mode
