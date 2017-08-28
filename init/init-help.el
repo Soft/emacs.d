@@ -1,19 +1,11 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Help related functions
 
-(use-package guide-key
+(use-package which-key
   :ensure t
-  :diminish guide-key-mode
   :init
-  (progn
-    (setq guide-key/guide-key-sequence
-          '("C-c p" "C-x 4" "C-x 5" "C-x c" "C-c !"
-            "C-x r" "C-x a" "C-c n" "C-c w" "C-c o"
-            "C-x x" "C-x 8")
-          guide-key/recursive-key-sequence-flag t
-          guide-key/idle-delay 0.1
-          guide-key/popup-window-position 'bottom)
-    (guide-key-mode)))
+  (setq which-key-idle-delay 0.5)
+  (which-key-mode))
 
 (use-package help-fns+
   :ensure t)
@@ -29,6 +21,12 @@
   [adequate-website]
   '("About Adequate emacs.d" . about-adequate-emacs-d)
   'about-gnu-project)
+
+(use-package keyfreq
+  :ensure t
+  :init
+  (keyfreq-mode)
+  (keyfreq-autosave-mode))
 
 (provide 'init-help)
 
