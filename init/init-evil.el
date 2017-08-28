@@ -56,7 +56,9 @@
      ("\\" . comment-or-uncomment-region))))
 
 (use-package evil-surround
-  :ensure t)
+  :ensure t
+  :init
+  (global-evil-surround-mode 1))
 
 (use-package evil-numbers
   :ensure t
