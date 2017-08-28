@@ -29,7 +29,7 @@
         dashboard-banner-logo-title
         (format "Welcome to Emacs, %s %s"
                 (car (s-split " " (user-full-name)))
-                (list-random-item '("🌈" "💖" "🌻" "🌸" "🐬"))))
+                (list-random-item '("🌈" "💖" "🌻" "🌸"))))
   (dashboard-setup-startup-hook))
 
 

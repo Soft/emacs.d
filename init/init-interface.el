@@ -68,19 +68,13 @@
  ("C-c w s" . toggle-scroll-bar)
  ("C-c w t" . toggle-tool-bar-mode-from-frame))
 
-(use-package writeroom-mode
-  :defer t
-  :ensure t
-  :config
-  (setq writeroom-width 120))
-
 (use-package centered-window-mode
-  :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c w c" . centered-window-mode)))
 
 (use-package highlight-indent-guides
-  :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c x g" . highlight-indent-guides-mode)))
 
 ;; Disabled for now
 (use-package volatile-highlights
