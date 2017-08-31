@@ -19,6 +19,10 @@
   :ensure t
   :defer t)
 
+(use-package kurecolor
+  :ensure t
+  :defer t)
+
 (defun css-setup ()
   (rainbow-mode)
   (css-eldoc-enable))
