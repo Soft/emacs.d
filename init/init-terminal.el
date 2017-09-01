@@ -63,6 +63,8 @@
   (add-to-list-many 'eshell-visual-commands '("most"))
   (add-to-list-many 'eshell-visual-subcommands '(("git" ("log" "diff" "show")))))
 
+;; Eshell prompt
+
 (defvar eshell-path-palette
   '("#9400d3" "#4b0082" "#0000ff" "#00ff00" "#ffff00" "#ff7f00" "#ff0000")
   "Colors used for coloring path components in eshell.")
