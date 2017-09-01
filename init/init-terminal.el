@@ -111,10 +111,32 @@
           (propertize system-name 'font-lock-face
                       `(:foreground ,eshell-machine-color))))
 
+(defun eshell-format-git-component (stat table)
+  (let ((value (length (gethash stat table)))
+        (icon (pcase stat
+                ('modified "🅼")
+                ('added "🅰")
+                ('deleted "🅳")
+                ('renamed "🆁")
+                ('copied "🅲")
+                ('untracked "🆄"))))
+    (when (> value 0)
+      (list (format "%s%d" icon value)))))
+
+(defun eshell-format-git ()
+  (let* ((status (git-repository-status))
+         (stats '(modified added deleted renamed copied untracked))
+         (components (--mapcat (eshell-format-git-component it status) stats))
+         (result (s-join " " components)))
+    (if (s-blank? result)
+        ""
+      (format "[%s]:" result))))
+
 (defun eshell-format-prompt ()
   (let ((string
          (concat (eshell-format-user-and-machine)
                  ":"
+                 (eshell-format-git)
                  (eshell-format-path (eshell/pwd))
                  (propertize  " »" 'font-lock-face
                               `(:foreground ,eshell-suffix-color))

@@ -30,4 +30,26 @@
   :init
   (setq smerge-command-prefix "\C-cgv"))
 
+(defvar git-binary "git"
+  "Git binary path.")
+
+(defun git-repository-status (&optional root)
+  "Return hash table describing git respository status."
+  (let ((repository (or root
+                        (f-full (locate-dominating-file ".git" "."))))
+        (results (make-hash-table)))
+    (cl-loop for line in (ignore-errors
+                           (process-lines git-binary "-C" repository "status" "--porcelain"))
+             for (status file) = (s-split-up-to " " (s-trim line) 2)
+             for key = (pcase status
+                         ("M" 'modified)
+                         ("A" 'added)
+                         ("D" 'deleted)
+                         ("R" 'renamed)
+                         ("C" 'copied)
+                         ("??" 'untracked))
+             do (let ((value (gethash key results)))
+                  (puthash key (cons file value) results)) 
+             finally (return results))))
+
 (provide 'init-git)
