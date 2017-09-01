@@ -65,28 +65,29 @@
 
 ;; Eshell prompt
 
-(defvar eshell-path-palette
-  '("#9400d3" "#4b0082" "#0000ff" "#00ff00" "#ffff00" "#ff7f00" "#ff0000")
+(defvar eshell-path-faces
+  (-map (lambda (c) `(:foreground ,c)) 
+        '("#9400d3" "#4b0082" "#0000ff" "#00ff00" "#ffff00" "#ff7f00" "#ff0000"))
   "Colors used for coloring path components in eshell.")
 
-(defvar eshell-path-separator-color
-  "#cccccc"
+(defvar eshell-path-separator-face
+  '(:foreground "#cccccc")
   "Color for path separators in eshell.")
 
-(defvar eshell-user-color
-  "#ffffff"
+(defvar eshell-user-face
+  '(:foreground "#ffffff")
   "Color for user names in eshell.")
 
-(defvar eshell-machine-color
-  "#f442d4"
+(defvar eshell-machine-face
+  '(:foreground "#f442d4")
   "Color for user names in eshell.")
 
-(defvar eshell-at-color
-  "#42f4df"
+(defvar eshell-at-face
+  '(:foreground "#42f4df")
   "Color for at sign in eshell.")
 
-(defvar eshell-suffix-color
-  "#f442d4"
+(defvar eshell-suffix-face
+  '(:foreground "#f442d4")
   "Color for suffix in eshell.")
 
 ;; This is most likely broken on Windows
@@ -95,23 +96,19 @@
          (separator (f-path-separator))
          (components (-remove 's-blank? (s-split separator full-path)))
          (colors (-take (length components)
-                        (-cycle eshell-path-palette)))
-         (colored-sep (propertize separator 'font-lock-face
-                                  `(:foreground ,eshell-path-separator-color))))
+                        (-cycle eshell-path-faces)))
+         (colored-sep (propertize separator 'font-lock-face eshell-path-separator-face)))
     (s-prepend
      colored-sep
      (s-join colored-sep
-             (-zip-with (lambda (p c) (propertize p 'font-lock-face `(:foreground ,c)))
+             (-zip-with (lambda (p c) (propertize p 'font-lock-face c))
                         components
                         colors)))))
 
 (defun eshell-format-user-and-machine ()
-  (concat (propertize (user-login-name) 'font-lock-face
-                      `(:foreground ,eshell-user-color))
-          (propertize "@" 'font-lock-face
-                      `(:foreground ,eshell-at-color))
-          (propertize system-name 'font-lock-face
-                      `(:foreground ,eshell-machine-color))))
+  (concat (propertize (user-login-name) 'font-lock-face eshell-user-face)
+          (propertize "@" 'font-lock-face eshell-at-face)
+          (propertize system-name 'font-lock-face eshell-machine-face)))
 
 (defun eshell-format-git-component (stat table)
   (let ((value (length (gethash stat table)))
@@ -140,8 +137,7 @@
                  ":"
                  (eshell-format-git)
                  (eshell-format-path (eshell/pwd))
-                 (propertize  " »" 'font-lock-face
-                              `(:foreground ,eshell-suffix-color))
+                 (propertize  " »" 'font-lock-face eshell-suffix-face)
                  " ")))
     (add-text-properties 0 (length string)
                          '(read-only t rear-nonsticky (face read-only))
@@ -153,7 +149,14 @@
   :init
   (setq eshell-prompt-function 'eshell-format-prompt
         eshell-prompt-regexp "^[^»]* » "
-        eshell-highlight-prompt nil))
+        eshell-highlight-prompt nil)
+  :config
+  (add-hook
+   'eshell-mode-hook
+   (lambda ()
+     (bind-keys
+      :map eshell-mode-map
+      ("C-d" . kill-this-buffer)))))
 
 (provide 'init-terminal)
 

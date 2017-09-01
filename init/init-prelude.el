@@ -101,5 +101,11 @@
   "Returns t if any of the executables specified in XS are present."
   (-any? 'executable-find xs))
 
+(defun adjust-hash (fn key table)
+  "Look up KEY in TABLE and apply FN to the value and place the transformed value back into TABLE. If KEY is not in TABLE, FN is called without an argument to create the initial value."
+  (let ((value (gethash key table)))
+    (puthash key (funcall fn value) table))
+  table)
+
 (provide 'init-prelude)
 

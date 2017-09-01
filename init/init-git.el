@@ -34,7 +34,7 @@
   "Git binary path.")
 
 (defun git-find-repository-root ()
-  "Try to find fit repository root starting from current working directory."
+  "Try to find git repository root starting from current working directory."
   (f--traverse-upwards (f-exists? (f-expand ".git" it)) (pwd)))
 
 (defun git-repository-status (&optional root)

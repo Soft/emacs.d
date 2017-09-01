@@ -6,19 +6,18 @@
   (interactive)
   (find-file user-init-file))
 
-(bind-keys
- ("<f4>" . find-user-init-file)
- ("C-c i" . ielm))
+(bind-key "<f4>" #'find-user-init-file)
 
-(use-package eshell
-  :defer t
+(defun ielm-setup ()
+  (hl-sexp-mode)
+  (rainbow-delimiters-mode))
+
+(use-package ielm 
+  :bind (("C-c i" . ielm))
+  :init
+  (setq ielm-prompt "λ> ")
   :config
-  (add-hook
-   'eshell-mode-hook
-   (lambda ()
-     (bind-keys
-      :map eshell-mode-map
-      ("C-d" . kill-this-buffer)))))
+  (add-hook 'ielm-mode-hook #'ielm-setup))
 
 (use-package macrostep
   :defer t
