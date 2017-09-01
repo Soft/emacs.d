@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Rust configuration
 
 (defun rust-setup ()

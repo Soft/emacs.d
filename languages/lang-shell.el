@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Shell
 
 (add-hook 'after-save-hook

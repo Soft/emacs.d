@@ -97,6 +97,10 @@
   :ensure t
   :defer t)
 
+(use-package with-editor
+  :commands (with-editor-export-editor)
+  :ensure t)
+
 (use-package face-remap
   :defer t
   :diminish buffer-face-mode)

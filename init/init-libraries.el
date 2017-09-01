@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; coding: utf-8 -*-
+;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; General purpose libraries that are used all over the config
 
 ;; A modern list library for Emacs
@@ -14,9 +14,10 @@
 (use-package f
   :ensure t)
 
-(use-package cl-lib)
-
 (use-package hydra
   :ensure t)
 
+(use-package cl-lib)
+
 (provide 'init-libraries)
+

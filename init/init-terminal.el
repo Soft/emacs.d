@@ -144,6 +144,12 @@
                          string)
     string))
 
+(defun eshell-setup ()
+  (with-editor-export-editor)
+  (bind-keys
+   :map eshell-mode-map
+   ("C-d" . kill-this-buffer)))
+
 (use-package eshell
   :defer t
   :init
@@ -151,12 +157,7 @@
         eshell-prompt-regexp "^[^»]* » "
         eshell-highlight-prompt nil)
   :config
-  (add-hook
-   'eshell-mode-hook
-   (lambda ()
-     (bind-keys
-      :map eshell-mode-map
-      ("C-d" . kill-this-buffer)))))
+  (add-hook 'eshell-mode-hook #'eshell-setup))
 
 (provide 'init-terminal)
 
