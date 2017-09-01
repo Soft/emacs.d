@@ -81,7 +81,11 @@
 
 (defvar eshell-at-color
   "#42f4df"
-  "Color for user names in eshell.")
+  "Color for at sign in eshell.")
+
+(defvar eshell-suffix-color
+  "#f442d4"
+  "Color for suffix in eshell.")
 
 ;; This is most likely broken on Windows
 (defun eshell-format-path (path)
@@ -99,18 +103,26 @@
                         components
                         colors)))))
 
-(defun eshell-format-user-machine ()
+(defun eshell-format-user-and-machine ()
   (concat (propertize (user-login-name) 'font-lock-face
                       `(:foreground ,eshell-user-color))
-          (propertize "@" 'font-lock-face `(:foreground ,eshell-at-color))
+          (propertize "@" 'font-lock-face
+                      `(:foreground ,eshell-at-color))
           (propertize system-name 'font-lock-face
                       `(:foreground ,eshell-machine-color))))
 
 (defun eshell-format-prompt ()
-  (concat (eshell-format-user-machine)
-          ":"
-          (eshell-format-path (eshell/pwd))
-          " » "))
+  (let ((string
+         (concat (eshell-format-user-and-machine)
+                 ":"
+                 (eshell-format-path (eshell/pwd))
+                 (propertize  " »" 'font-lock-face
+                              `(:foreground ,eshell-suffix-color))
+                 " ")))
+    (add-text-properties 0 (length string)
+                         '(read-only t rear-nonsticky (face read-only))
+                         string)
+    string))
 
 (use-package eshell
   :defer t

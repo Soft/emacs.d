@@ -17,7 +17,7 @@
 
 (define-skeleton python-doc-comment
   "Insert Python doc comment" nil
-  > "\"\"\"" _ "\"\"\"")
+  > "\"\"\"" _ "\"\"\"" \n)
 
 (use-package python
   :mode (("\\.py\\'" . python-mode))
