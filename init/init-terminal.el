@@ -124,13 +124,13 @@
       (list (format "%s%d" icon value)))))
 
 (defun eshell-format-git ()
-  (let* ((status (git-repository-status))
+  (let* ((status (git-repository-status (eshell/pwd)))
          (stats '(modified added deleted renamed copied untracked))
          (components (--mapcat (eshell-format-git-component it status) stats))
          (result (s-join " " components)))
-    (if (s-blank? result)
-        ""
-      (format "[%s]:" result))))
+    (if (not (s-blank? result)) 
+        (format "[%s]:" result)
+      "")))
 
 (defun eshell-format-prompt ()
   (let ((string
