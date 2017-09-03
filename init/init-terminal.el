@@ -68,27 +68,36 @@
 (defvar eshell-path-faces
   (-map (lambda (c) `(:foreground ,c)) 
         '("#9400d3" "#4b0082" "#0000ff" "#00ff00" "#ffff00" "#ff7f00" "#ff0000"))
-  "Colors used for coloring path components in eshell.")
+  "Faces used for path components in eshell.")
 
 (defvar eshell-path-separator-face
   '(:foreground "#cccccc")
-  "Color for path separators in eshell.")
+  "Face for path separators in eshell.")
 
 (defvar eshell-user-face
   '(:foreground "#ffffff")
-  "Color for user names in eshell.")
+  "Face for user names in eshell.")
 
 (defvar eshell-machine-face
   '(:foreground "#f442d4")
-  "Color for user names in eshell.")
+  "Face for user names in eshell.")
 
 (defvar eshell-at-face
   '(:foreground "#42f4df")
-  "Color for at sign in eshell.")
+  "Face for at sign in eshell.")
 
 (defvar eshell-suffix-face
   '(:foreground "#f442d4")
-  "Color for suffix in eshell.")
+  "Face for suffix in eshell.")
+
+(defvar eshell-git-face-alist
+  '((modified . (:foreground "#b342ff"))
+    (added . (:foreground "#00ff00"))
+    (deleted . (:foreground "#ff004c"))
+    (renamed . (:foreground "#ffe500"))
+    (copied . (:foreground "#ff8142"))
+    (untracked . (:foreground "#00c3ff")))
+  "Faces for git indicators in eshell.")
 
 ;; This is most likely broken on Windows
 (defun eshell-format-path (path)
@@ -118,9 +127,10 @@
                 ('deleted "🅳")
                 ('renamed "🆁")
                 ('copied "🅲")
-                ('untracked "🆄"))))
+                ('untracked "🆄")))
+        (face (cdr (assoc stat eshell-git-face-alist))))
     (when (> value 0)
-      (list (format "%s%d" icon value)))))
+      (list (propertize (format "%s%d" icon value) 'font-lock-face face)))))
 
 (defun eshell-format-git ()
   (let* ((status (git-repository-status (eshell/pwd)))
