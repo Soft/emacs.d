@@ -144,7 +144,12 @@
                          string)
     string))
 
+(use-package eshell-fringe-status
+  :defer t
+  :ensure t)
+
 (defun eshell-setup ()
+  (eshell-fringe-status-mode)
   (with-editor-export-editor)
   (bind-keys
    :map eshell-mode-map
