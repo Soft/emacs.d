@@ -24,6 +24,10 @@
   :ensure t
   :diminish macrostep-mode)
 
+(use-package elisp-refs
+  :defer t
+  :ensure t)
+
 (use-package hl-sexp
   :defer t
   :ensure t)
