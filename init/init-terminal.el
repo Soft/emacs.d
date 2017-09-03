@@ -136,7 +136,7 @@
   (let* ((status (git-repository-status (eshell/pwd)))
          (stats '(modified added deleted renamed copied untracked))
          (components (--mapcat (eshell-format-git-component it status) stats))
-         (result (s-join " " components)))
+         (result (s-join "" components)))
     (if (not (s-blank? result)) 
         (format "[%s]:" result)
       "")))
