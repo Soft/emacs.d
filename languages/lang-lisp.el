@@ -25,8 +25,8 @@
   :diminish macrostep-mode)
 
 (use-package elisp-refs
-  :defer t
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package hl-sexp
   :defer t
@@ -73,6 +73,12 @@
   :config
   (bind-keys
    :map emacs-lisp-mode-map
-   ("C-c e" . macrostep-expand)))
+   ("C-c e" . macrostep-expand)
+
+   ("C-c r f" . elisp-refs-function)
+   ("C-c r m" . elisp-refs-macro)
+   ("C-c r v" . elisp-refs-variable)
+   ("C-c r s" . elisp-refs-symbol)
+   ("C-c r S" . elisp-refs-special)))
 
 (provide 'lang-lisp)
