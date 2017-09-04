@@ -24,7 +24,7 @@
 (install-packages-if-missing wanted-themes t)
 
 (defun switch-theme (theme)
-  "Unload existing theme and change to a new one."
+  "Unload existing theme and switch to a new one."
   (interactive
    (list (intern
           (completing-read "Switch to theme: "

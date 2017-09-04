@@ -62,6 +62,12 @@
   (save-excursion
     (pp (eval (read (delete-and-extract-region from to))) (current-buffer))))
 
+(defun sort-symbol-list-region (from to)
+  "Sort list in region."
+  (interactive "r")
+  (save-excursion
+    (pp (-sort #'string< (read (delete-and-extract-region from to))) (current-buffer))))
+
 (use-package elisp-mode
   :defer t
   :init
