@@ -32,10 +32,6 @@
   :interpreter ("php" . php-mode)
   :ensure t)
 
-(use-package clojure-mode
-  :mode (("\\.clj\\'" . clojure-mode))
-  :ensure t)
-
 (use-package scala-mode
   :mode (("\\.scala\\'" . scala-mode)
          ("\\.sc\\'" . scala-mode))

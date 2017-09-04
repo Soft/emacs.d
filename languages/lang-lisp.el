@@ -19,6 +19,7 @@
   :config
   (add-hook 'ielm-mode-hook #'ielm-setup))
 
+;; FIXME: Make macrostep play nice with Evil
 (use-package macrostep
   :defer t
   :ensure t
@@ -46,16 +47,6 @@
   :ensure t
   :diminish aggressive-indent-mode)
 
-(use-package geiser
-  :if (programs-p "guile" "racket")
-  :ensure t
-  :defer t)
-
-(use-package slime
-  :if (programs-p "sbcl")
-  :ensure t
-  :defer t)
-
 (defun lisp-setup ()
   "Defaults for lisp-like modes"
   (hl-sexp-mode)
@@ -71,7 +62,6 @@
   (save-excursion
     (pp (eval (read (delete-and-extract-region from to))) (current-buffer))))
 
-;; FIXME: Make macrostep play nice with Evil
 (use-package elisp-mode
   :defer t
   :init
@@ -86,5 +76,21 @@
    ("C-c r v" . elisp-refs-variable)
    ("C-c r s" . elisp-refs-symbol)
    ("C-c r S" . elisp-refs-special)))
+
+(use-package geiser
+  :if (programs-p "guile" "racket")
+  :ensure t
+  :defer t)
+
+(use-package slime
+  :if (programs-p "sbcl")
+  :ensure t
+  :defer t)
+
+(use-package clojure-mode
+  :mode (("\\.clj\\'" . clojure-mode))
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook #'lisp-setup))
 
 (provide 'lang-lisp)
