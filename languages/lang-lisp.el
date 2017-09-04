@@ -60,13 +60,17 @@
   "Replace region with its evaluated form."
   (interactive "r")
   (save-excursion
-    (pp (eval (read (delete-and-extract-region from to))) (current-buffer))))
+    (let ((print-quoted t))
+      (pp (eval (read (delete-and-extract-region from to)))
+          (current-buffer)))))
 
 (defun sort-symbol-list-region (from to)
   "Sort list in region."
   (interactive "r")
   (save-excursion
-    (pp (-sort #'string< (read (delete-and-extract-region from to))) (current-buffer))))
+    (let ((print-quoted t))
+      (pp (-sort #'string< (read (delete-and-extract-region from to)))
+          (current-buffer)))))
 
 (use-package elisp-mode
   :defer t
@@ -76,6 +80,11 @@
   (bind-keys
    :map emacs-lisp-mode-map
    ("C-c e" . macrostep-expand)
+
+   ("C-c a r" . eval-region)
+   ("C-c a b" . eval-buffer)
+   ("C-c a f" . eval-defun)
+   ("C-c a e" . eval-and-replace-region)
 
    ("C-c r f" . elisp-refs-function)
    ("C-c r m" . elisp-refs-macro)
