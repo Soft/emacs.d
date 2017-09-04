@@ -65,6 +65,12 @@
   (setq indent-tabs-mode nil
         tab-width 2))
 
+(defun eval-and-replace-region (from to)
+  "Replace region with its evaluated form."
+  (interactive "r")
+  (save-excursion
+    (pp (eval (read (delete-and-extract-region from to))) (current-buffer))))
+
 ;; FIXME: Make macrostep play nice with Evil
 (use-package elisp-mode
   :defer t
