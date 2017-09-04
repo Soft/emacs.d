@@ -42,7 +42,7 @@
   '(subatomic gotham material-light atom-one-dark spacemacs-light)
   "List of favorite themes for use with rand-theme.")
 
-(defun rand-theme ()
+(defun random-theme ()
   "Switch to a random theme from favorite-themes."
   (interactive)
   (let* ((current (car custom-enabled-themes))
