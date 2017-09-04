@@ -49,7 +49,8 @@
          (themes (--remove (eq it current) favorite-themes))
          (selected (list-random-item themes)))
     (when selected
-      (switch-theme selected))))
+      (switch-theme selected)
+      (current-theme))))
 
 (use-package color-theme-approximate
   :if (eq system-type 'gnu/linux)
