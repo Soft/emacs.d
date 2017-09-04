@@ -88,8 +88,8 @@
   :defer t)
 
 (use-package clojure-mode
-  :mode (("\\.clj\\'" . clojure-mode))
   :ensure t
+  :mode (("\\.clj\\'" . clojure-mode))
   :init
   (add-hook 'clojure-mode-hook #'lisp-setup))
 

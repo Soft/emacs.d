@@ -41,4 +41,9 @@
 (use-package ebuild-mode
   :mode (("\\.ebuild\\'" . ebuild-mode)))
 
+(use-package qml-mode
+  :mode (("\\.qml\\'" . qml-mode))
+  :interpreter ("qml" . qml-mode)
+  :ensure t)
+
 (provide 'lang-misc)
