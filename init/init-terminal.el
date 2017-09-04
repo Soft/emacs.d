@@ -66,8 +66,13 @@
 ;; Eshell prompt
 
 (defvar eshell-path-faces
-  (-map (lambda (c) `(:foreground ,c)) 
-        '("#9400d3" "#4b0082" "#0000ff" "#00ff00" "#ffff00" "#ff7f00" "#ff0000"))
+  '((:foreground "#9400d3")
+    (:foreground "#4b0082")
+    (:foreground "#0000ff")
+    (:foreground "#00ff00")
+    (:foreground "#ffff00")
+    (:foreground "#ff7f00")
+    (:foreground "#ff0000"))
   "Faces used for path components in eshell.")
 
 (defvar eshell-path-separator-face
