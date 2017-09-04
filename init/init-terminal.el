@@ -159,6 +159,11 @@
                          string)
     string))
 
+(use-package xterm-color
+  :ensure t
+  :defer t
+  :commands (xterm-color-filter))
+
 (use-package eshell-fringe-status
   :defer t
   :ensure t)
@@ -166,6 +171,11 @@
 (defun eshell-setup ()
   (eshell-fringe-status-mode)
   (with-editor-export-editor)
+  (setenv "TERM" "xterm-256color")
+  (add-to-list 'eshell-preoutput-filter-functions #'xterm-color-filter)
+  (setq xterm-color-preserve-properties t
+        eshell-output-filter-functions (remove 'eshell-handle-ansi-color
+                                               eshell-output-filter-functions))
   (bind-keys
    :map eshell-mode-map
    ("C-d" . kill-this-buffer)))
