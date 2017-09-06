@@ -185,6 +185,7 @@
   :init
   (setq eshell-prompt-function 'eshell-format-prompt
         eshell-prompt-regexp "^[^»]* » "
+        eshell-banner-message ""
         eshell-highlight-prompt nil)
   :config
   (add-hook 'eshell-mode-hook #'eshell-setup))
