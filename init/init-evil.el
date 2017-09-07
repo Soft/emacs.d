@@ -33,6 +33,7 @@
            tetris-mode
            epa-list-keys
            xwidget-webkit-mode
+           nov-mode
            snake-mode))
       (evil-set-initial-state mode 'emacs))
 

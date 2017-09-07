@@ -63,4 +63,18 @@
   :ensure t
   :bind (("C-c x d" . define-word-at-point)))
 
+(use-package nov
+  :ensure nov
+  :defer t
+  :mode (("\\.epub\\'" . nov-mode))
+  :config
+  (bind-keys
+   :map nov-mode-map
+   ("j" . next-line)
+   ("k" . previous-line)
+   ("h" . left-char)
+   ("l" . right-char)
+   ("J" . nov-scroll-down)
+   ("K" . nov-scroll-up)))
+
 (provide 'init-misc)
