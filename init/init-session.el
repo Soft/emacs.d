@@ -22,6 +22,6 @@
 (use-package recentf
   :init (recentf-mode)
   :config
-  (setq recentf-max-saved-items 50))
+  (setq recentf-max-saved-items 200))
 
 (provide 'init-session)

@@ -46,4 +46,23 @@
   :interpreter ("qml" . qml-mode)
   :ensure t)
 
+(use-package systemd
+  :defer t
+  :ensure t
+  :mode ((rx "."
+             (or "automount"
+                 "busname"
+                 "mount"
+                 "service"
+                 "slice"
+                 "socket"
+                 "swap"
+                 "target"
+                 "timer"
+                 "link"
+                 "netdev"
+                 "network")
+             string-end)
+         . systemd-mode))
+
 (provide 'lang-misc)
