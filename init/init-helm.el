@@ -5,6 +5,7 @@
   :ensure t
   :diminish helm-mode
   :init
+  (require 'dired) ;; This seems to fix a strange problem with dired-buffers
   (require 'helm-config)
   (helm-mode)
   :config
