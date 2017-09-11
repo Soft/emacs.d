@@ -6,12 +6,17 @@
   (TeX-fold-mode)
   (TeX-fold-buffer))
 
+(defun pdf-view-setup ()
+  (pdf-tools-enable-minor-modes)
+  (pdf-view-fit-page-to-window)
+  (auto-revert-mode 1))
+
 (use-package pdf-tools
   :if (eq system-type 'gnu/linux)
   :ensure t
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
-  (add-hook 'pdf-mode-hook #'pdf-tools-enable-minor-modes)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-setup)
   (bind-keys
    :map pdf-view-mode-map
    ("j" . pdf-view-next-line-or-next-page)
