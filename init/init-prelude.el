@@ -19,7 +19,6 @@
                                  else collect (eval arg))))
        (apply (quote ,fn) merged-args))))
 
-
 (defmacro dlet* (varlist &rest body)
   "Destructuring let*."
   (declare (debug let)
@@ -106,6 +105,24 @@
   (let ((value (gethash key table)))
     (puthash key (funcall fn value) table))
   table)
+
+(defun make-compiler (command name-transformer args-maker)
+  "Create a new interactive command that receives the content of the current buffer when executed."
+  (let* ((command-base (file-name-base command))
+         (process-name (concat command-base "-process"))
+         (buffer-name (format "*%s-Log*" (capitalize command-base)))
+         (args (list process-name buffer-name command)))
+    (lambda ()
+      (interactive)
+      (let* ((name (file-name-base buffer-file-name))
+             (dir (file-name-directory buffer-file-name))
+             (output (funcall name-transformer
+                              (concat (file-name-as-directory dir) name)))
+             (proc (apply #'start-process
+                          (cl-concatenate 'list args (funcall args-maker output)))))
+        (message "%s: %s" (capitalize command-base) output)
+        (process-send-string proc (buffer-string))
+        (process-send-eof proc)))))
 
 (provide 'init-prelude)
 

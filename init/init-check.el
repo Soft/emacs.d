@@ -36,6 +36,10 @@
              (action-args "-a" "-d" "en_US")
              (action-parser . wcheck-parser-ispell-suggestions))))))
 
+(use-package guess-language
+  :defer t
+  :ensure t)
+
 (use-package guess-language-lite
   :commands (gll/guess-language-lite-mode)
   :config
