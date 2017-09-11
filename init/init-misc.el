@@ -63,10 +63,16 @@
   :ensure t
   :bind (("C-c x d" . define-word-at-point)))
 
+(defun nov-mode-setup ()
+  (setq-local shr-width 80)
+  (setq-local shr-use-fonts nil))
+
 (use-package nov
   :ensure nov
   :defer t
   :mode (("\\.epub\\'" . nov-mode))
+  :init
+  (add-hook 'nov-mode-hook #'nov-mode-setup)
   :config
   (bind-keys
    :map nov-mode-map
