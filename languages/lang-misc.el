@@ -46,6 +46,10 @@
   :interpreter ("qml" . qml-mode)
   :ensure t)
 
+(use-package vimrc-mode
+  :ensure t
+  :mode (("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
+
 (use-package systemd
   :ensure t
   :mode ((rx "."

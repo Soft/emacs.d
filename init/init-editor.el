@@ -139,4 +139,8 @@
   :init
   (add-hook 'text-mode-hook #'text-mode-setup))
 
+(use-package recompile-on-save
+  :ensure t
+  :defer t)
+
 (provide 'init-editor)
