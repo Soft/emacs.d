@@ -109,6 +109,10 @@
   :ensure t
   :bind (("M-Q". unfill-toggle)))
 
+(use-package visual-fill-column
+  :ensure t
+  :defer t)
+
 (use-package ag
   :if (programs-p "ag")
   :defer t
