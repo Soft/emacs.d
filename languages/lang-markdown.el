@@ -1,28 +1,35 @@
 ;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
 ;; Markdown
 
-(defun make-compiler (command name-transformer args-maker)
-  "Create a new interactive command that receives the content of the current buffer when executed."
-  (let* ((command-base (file-name-base command))
-         (process-name (concat command-base "-process"))
-         (buffer-name (format "*%s-Log*" (capitalize command-base)))
-         (args (list process-name buffer-name command)))
-    (lambda ()
-      (interactive)
-      (let* ((name (file-name-base buffer-file-name))
-             (dir (file-name-directory buffer-file-name))
-             (output (funcall name-transformer
-                              (concat (file-name-as-directory dir) name)))
-             (proc (apply #'start-process
-                          (cl-concatenate 'list args (funcall args-maker output)))))
-        (message "%s: %s" (capitalize command-base) output)
-        (process-send-string proc (buffer-string))
-        (process-send-eof proc)))))
-
 (fset 'pandoc-pdf-from-buffer
       (make-compiler "pandoc"
                      (partial concat _ ".pdf")
                      (lambda (output) `("-o" ,output "-f" "markdown"))))
+
+;; Patch markdown-mode link jumping to work with links internal to document
+
+(defun markdown-jump-to-top-level-header (title)
+  (if-let ((location
+            (save-excursion
+              (goto-char (point-min))
+              (re-search-forward (concat "^#[[:space:]]*" title "$")))))
+      (goto-char location)
+    (error "Target not found")))
+
+(defun markdown-follow-link-at-point-wrap (fn)
+  (interactive)
+  (if (markdown-link-p)
+      (let ((link (markdown-link-link)))
+        (if (string-prefix-p "#" link)
+            (progn
+              (markdown-jump-to-top-level-header (substring link 1))
+              (message "%s" link))
+          (call-interactively fn)))
+    (error "No link at point")))
+
+(defun markdown-setup ()
+  (when (locate-library "pandoc-mode")
+    (pandoc-mode 1)))
 
 (use-package markdown-mode
   :ensure t
@@ -30,14 +37,21 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
+  :init
+  (add-hook 'markdown-mode-hook #'markdown-setup)
   :config
-  (progn
-    (setq markdown-bold-underscore t
-          markdown-enable-math t
-          markdown-command "pandoc")
-    (cl-loop for i from 1 to 6
-             do (set-face-attribute
-                 (intern (format "markdown-header-face-%d" i)) nil :height (+ 1.0 (/ 1.0 i))))
-    (set-face-attribute 'markdown-blockquote-face nil :slant 'italic)))
+  (setq markdown-bold-underscore t
+        markdown-enable-math t
+        markdown-command "pandoc")
+  (cl-loop for i from 1 to 6
+           do (set-face-attribute
+               (intern (format "markdown-header-face-%d" i)) nil :height (+ 1.0 (/ 1.0 i))))
+  (set-face-attribute 'markdown-blockquote-face nil :slant 'italic)
+  (advice-add 'markdown-follow-link-at-point :around #'markdown-follow-link-at-point-wrap))
+
+(use-package pandoc-mode
+  :if (programs-p "pandoc")
+  :ensure t
+  :defer t)
 
 (provide 'lang-markdown)

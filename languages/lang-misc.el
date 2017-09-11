@@ -46,8 +46,11 @@
   :interpreter ("qml" . qml-mode)
   :ensure t)
 
+(use-package vimrc-mode
+  :ensure t
+  :mode (("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
+
 (use-package systemd
-  :defer t
   :ensure t
   :mode ((rx "."
              (or "automount"
@@ -64,5 +67,14 @@
                  "network")
              string-end)
          . systemd-mode))
+
+(use-package ssh-config-mode
+  :ensure t
+  :mode (("/\\.ssh/config\\'" . ssh-config-mode)
+         ("/sshd?_config\\'" . ssh-config-mode)
+         ("/known_hosts\\'" . ssh-known-hosts-mode)
+         ("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
+  :config
+  (add-hook 'ssh-config-mode-hook #'turn-on-font-lock))
 
 (provide 'lang-misc)

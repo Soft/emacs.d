@@ -109,6 +109,10 @@
   :ensure t
   :bind (("M-Q". unfill-toggle)))
 
+(use-package visual-fill-column
+  :ensure t
+  :defer t)
+
 (use-package ag
   :if (programs-p "ag")
   :defer t
@@ -134,5 +138,9 @@
   :defer t
   :init
   (add-hook 'text-mode-hook #'text-mode-setup))
+
+(use-package recompile-on-save
+  :ensure t
+  :defer t)
 
 (provide 'init-editor)
