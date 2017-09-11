@@ -6,6 +6,10 @@
   :interpreter ("node" . js2-mode)
   :ensure t)
 
+(use-package typescript-mode
+  :mode (("\\.ts\\'" . typescript-mode))
+  :ensure t)
+
 (use-package css-eldoc
   :defer t
   :ensure t)
