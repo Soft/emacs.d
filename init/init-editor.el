@@ -135,7 +135,7 @@
 
 (defun text-mode-setup ()
   "Defaults for text modes."
-  (gll/guess-language-lite-mode)
+  (gll-guess-language-lite-mode)
   ;; (writegood-mode) ;; FIXME: Only in English
   (wc-mode))
 
