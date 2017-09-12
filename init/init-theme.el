@@ -64,6 +64,7 @@
   (gtk-style-ext-dark-theme-mode 1)
   (gtk-style-ext-adapt-to-theme-mode 1))
 
-(switch-theme 'doom-vibrant)
+(add-hook 'after-init-hook
+          (lambda () (switch-theme 'doom-vibrant)))
 
 (provide 'init-theme)

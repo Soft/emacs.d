@@ -65,6 +65,11 @@
   (setq use-package-verbose t
         debug-on-error t))
 
+(use-package benchmark-init
+  :if emacs-debug
+  :init (benchmark-init/activate)
+  :config (add-hook 'after-init-hook #'benchmark-init/deactivate))
+
 (defconst module-load-order
   '((init . (customize
              libraries
