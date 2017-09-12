@@ -9,6 +9,7 @@
 ;;; Code:
 
 (require 'cl-lib)
+(require 'helm)
 
 (defconst helm-emoji-ranges
   '((#x1F300 . #x1F5FF) ; Miscellaneous Symbols and Pictograms
