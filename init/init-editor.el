@@ -31,7 +31,7 @@
  ("<escape>" . keyboard-quit))
 
 ;; FIXME: This can be called before the use-package has installed all the
-;; required packages. This can break first setup.
+;; required packages. This can break the first setup.
 (defun prog-mode-setup ()
   "Defaults for programming modes."
   (nlinum-mode)
@@ -40,7 +40,8 @@
   (rainbow-identifiers-mode)
   (fic-mode)
   (origami-mode)
-  (flycheck-mode)
+  (dtrt-indent-mode)
+  (flycheck-mode) 
   (company-mode)
   (company-quickhelp-mode)
   (company-statistics-mode))
@@ -117,6 +118,10 @@
   :if (programs-p "ag")
   :defer t
   :ensure t)
+
+(use-package dtrt-indent
+  :ensure t
+  :defer t)
 
 (use-package writegood-mode
   :ensure t
