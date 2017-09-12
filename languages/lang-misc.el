@@ -47,8 +47,8 @@
   :ensure t)
 
 (use-package vimrc-mode
-  :ensure t
-  :mode (("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
+  :mode (("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+  :ensure t)
 
 (use-package systemd
   :ensure t

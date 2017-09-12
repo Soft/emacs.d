@@ -90,5 +90,9 @@
                         'evil-move)
   (vhl/install-extension 'evil))
 
+(use-package fill-column-indicator
+  :ensure t
+  :defer t)
+
 (provide 'init-interface)
 
