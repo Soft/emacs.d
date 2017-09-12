@@ -1,6 +1,6 @@
 ;;; helm-weechat.el --- WeeChat integration for Helm -*- lexical-binding: t -*-
 
-;; Package-Requires: ((helm) (emacs "24.3"))
+;; Package-Requires: ((helm) (weechat) (emacs "24.3"))
 
 ;;; Commentary:
 
@@ -9,6 +9,7 @@
 ;;; Code:
 
 (require 'helm)
+(require 'weechat)
 
 (defface helm-weechat-channel
   '((t . (:foreground "dark green" :weight bold)))
