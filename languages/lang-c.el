@@ -1,5 +1,3 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; C and related languages
-
+;;; lang-c-el --- C/C++ -*- lexical-binding: t -*-
 
 (provide 'lang-c)

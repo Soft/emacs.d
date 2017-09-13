@@ -29,6 +29,10 @@
         (format "Welcome to Emacs, %s %s"
                 (car (s-split " " (user-full-name)))
                 (list-random-item '("🌈" "💖" "🌻" "🌸"))))
+  (bind-keys
+   :map dashboard-mode-map
+   ("j" . next-line)
+   ("k" . previous-line))
   (dashboard-setup-startup-hook))
 
 
