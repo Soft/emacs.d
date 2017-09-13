@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;; -*- lexical-binding: t -*-
 ;; Miscellaneous packages
 
 (use-package xkcd

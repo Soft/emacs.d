@@ -11,7 +11,6 @@
 
 ;; Alter garbage collection policy for the duration of startup
 
-(require 'subr-x) ; string-remove-suffix
 (let ((default-threshold gc-cons-threshold))
   (setq gc-cons-threshold 64000000)
   (add-hook 'after-init-hook
@@ -124,6 +123,7 @@
              xwidget
              neotree
              chat
+             pdf
              modeline
              misc
              evil
@@ -139,6 +139,7 @@
              markdown
              shell
              org
+             docker
              misc)))
   "Adequate emacs.d modules to load.")
 
