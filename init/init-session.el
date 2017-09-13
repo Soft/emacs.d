@@ -24,4 +24,12 @@
   :config
   (setq recentf-max-saved-items 200))
 
+;; Maybe I should reconsider this since it is so slow
+(use-package desktop
+  :init
+  (setq desktop-path (list user-emacs-directory)
+        desktop-base-file-name "desktop"
+        desktop-auto-save-timeout 60)
+  (desktop-save-mode 1))
+
 (provide 'init-session)

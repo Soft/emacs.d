@@ -4,7 +4,8 @@
 (defun rust-setup ()
   "Defaults for Rust."
   (racer-mode)
-  (cargo-minor-mode))
+  (cargo-minor-mode)
+  (eldoc-mode))
 
 (use-package toml-mode
   :mode (("\\.toml\\'" . toml-mode))

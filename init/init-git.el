@@ -30,6 +30,10 @@
   :init
   (setq smerge-command-prefix "\C-cgv"))
 
+(use-package browse-at-remote
+  :ensure t
+  :bind (("C-c g b" . browse-at-remote)))
+
 (defvar git-binary "git"
   "Git binary path.")
 
