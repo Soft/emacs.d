@@ -72,6 +72,10 @@
       (pp (-sort #'string< (read (delete-and-extract-region from to)))
           (current-buffer)))))
 
+(use-package package-lint
+  :ensure t
+  :defer t)
+
 (use-package elisp-mode
   :defer t
   :init

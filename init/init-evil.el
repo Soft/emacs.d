@@ -32,6 +32,7 @@
            sunshine-mode
            tetris-mode
            epa-list-keys
+           paradox-menu-mode
            xwidget-webkit-mode
            nov-mode
            snake-mode))

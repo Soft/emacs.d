@@ -1,9 +1,16 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; ebuild-mode
+;;; ebuild-mode.el --- More for editing Ebuild files -*- lexical-binding: t -*-
+
+;; Package-Requires: ((emacs "24.3"))
+
+;;; Commentary:
+
+;; More for editing Ebuild files.
 
 ;; TODO:
 ;; - add highlighting for common constructs
 ;; - eclass completion
+
+;;; Code:
 
 (require 'cl-lib)
 (require 'autoinsert)
@@ -52,7 +59,10 @@
   (when (eq (buffer-size) 0)
     (auto-insert)))
 
+;; Maybe these should be removed
 (add-to-list 'auto-mode-alist '("\\.ebuild\\'" . ebuild-mode))
 (define-auto-insert "\\.ebuild\\'" 'ebuild-mode-skeleton)
 
 (provide 'ebuild-mode)
+
+;;; ebuild-mode.el ends here

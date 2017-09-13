@@ -1,7 +1,15 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Emoji picker for Helm
+;;; helm-emoji.el --- Emoji picker for Helm -*- lexical-binding: t -*-
+
+;; Package-Requires: ((helm) (emacs "24.3"))
+
+;;; Commentary:
+
+;; Emoji picker for Helm.
+
+;;; Code:
 
 (require 'cl-lib)
+(require 'helm)
 
 (defconst helm-emoji-ranges
   '((#x1F300 . #x1F5FF) ; Miscellaneous Symbols and Pictograms
@@ -43,9 +51,12 @@
                     helm-emoji-cache))
     (action . insert)))
 
+;;;###autoload
 (defun helm-emoji ()
   "Select emoji using Helm."
   (interactive)
   (helm-other-buffer 'helm-source-emoji nil))
 
 (provide 'helm-emoji)
+
+;;; helm-emoji.el ends here

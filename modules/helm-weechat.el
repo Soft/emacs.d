@@ -1,5 +1,15 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Weechat integration for Helm
+;;; helm-weechat.el --- WeeChat integration for Helm -*- lexical-binding: t -*-
+
+;; Package-Requires: ((helm) (weechat) (emacs "24.3"))
+
+;;; Commentary:
+
+;; Select WeeChat buffers with Helm.
+
+;;; Code:
+
+(require 'helm)
+(require 'weechat)
 
 (defface helm-weechat-channel
   '((t . (:foreground "dark green" :weight bold)))
@@ -27,6 +37,11 @@
                     (mapcar #'helm-weechat-format-buffer (weechat-buffer-list))))
     (action . switch-to-buffer-dwim)))
 
+;;;###autoload
 (defun helm-weechat-buffers ()
   (interactive)
   (helm-other-buffer 'helm-source-weechat nil))
+
+(provide 'helm-weechat)
+
+;;; helm-weechat.el ends here
