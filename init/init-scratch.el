@@ -13,7 +13,7 @@
   :ensure t
   :init
   (setq persistent-scratch-save-file
-        (f-join user-emacs-directory "scratch.org"))
+        (f-join user-emacs-directory "scratch"))
   (persistent-scratch-setup-default))
 
 ;; Patch save-buffer to save scratch using persistent-scratch
