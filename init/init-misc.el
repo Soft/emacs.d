@@ -14,6 +14,8 @@
    :map xkcd-mode-map
    ("h" . xkcd-prev)
    ("l" . xkcd-next)
+   ("k" . xkcd-prev)
+   ("j" . xkcd-next)
    ("q" . xkcd-kill-buffer)
    ("<escape>" . xkcd-kill-buffer)))
 
