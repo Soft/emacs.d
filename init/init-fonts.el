@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Font configuration
+;;; init-fonts.el --- Font configuration -*- lexical-binding: t -*-
 
 (defvar monospace-font-family
   '("Iosevka"

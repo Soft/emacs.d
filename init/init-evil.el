@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Vim emulation configuration
+;;; init-evil.el --- Vim emulation -*- lexical-binding: t -*-
 
 (use-package evil
   :ensure t

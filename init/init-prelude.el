@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Basic utilities 
+;;; init-prelude.el --- Basic utilities -*- lexical-binding: t -*-
 
 (defun compose (fn &rest others)
   "Compose a set of functions."

@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Syntax checking
+;;; init-check.el --- Syntax Checking -*- lexical-binding: t -*-
 
 (use-package flycheck
   :commands (flycheck-mode)

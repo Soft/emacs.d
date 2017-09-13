@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Search configuration
+;;; init-search.el --- Search configuration -*- lexical-binding: t -*-
 
 (use-package pcre2el
   :ensure t

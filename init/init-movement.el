@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Movement and selection related configuration
+;;; init-movement.el --- Movement and selection -*- lexical-binding: t -*-
 
 (use-package avy
   :defer t

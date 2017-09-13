@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t -*-
-;; Miscellaneous packages
+;;; init-misc.el --- Miscellaneous packages -*- lexical-binding: t -*-
 
 (use-package xkcd
   :commands (xkcd-rand)

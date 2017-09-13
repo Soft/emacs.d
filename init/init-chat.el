@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Chat configuration
+;;; init-chat.el --- Chat configuration -*- lexical-binding: t -*-
 
 (use-package weechat
   :defer t

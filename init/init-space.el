@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Spacemacs inspired keymaps
+;;; init-space.el --- Spacemacs inspired keymaps -*- lexical-binding: t -*-
 
 (after-load 'evil
   (bind-keys

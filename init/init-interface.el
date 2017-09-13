@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Interface related settings
+;;; init-interface.el --- Interface related settings -*- lexical-binding: t -*-
 
 (setq
  inhibit-splash-screen t

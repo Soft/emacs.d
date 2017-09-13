@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;;; init-projectile.el --- Projectile configuration -*- lexical-binding: t -*-
 
 (defun projectile-define-root ()
   "Create .projectile file to current buffer's directory."

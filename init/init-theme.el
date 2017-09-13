@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Theme related settings
+;;; init-theme.el --- Theme configuration -*- lexical-binding: t -*-
 
 ;; I like themes
 (defvar wanted-themes

@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Shells and terminals
+;;; init-terminal.el --- Shells and terminals -*- lexical-binding: t -*-
 
 (use-package multi-term
   :ensure t

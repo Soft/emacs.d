@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Editor settings
+;;; init-editor.el --- Editor settings -*- lexical-binding: t -*-
 
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)

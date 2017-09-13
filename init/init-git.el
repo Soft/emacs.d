@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Git Settings
+;;; init-git.el --- Git settings -*- lexical-binding: t -*-
 
 (use-package magit
   :ensure t

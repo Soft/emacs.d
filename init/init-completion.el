@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;;; Code completion
+;;; init-completion.el --- Code completion -*- lexical-binding: t -*-
 
 (use-package company
   :ensure t

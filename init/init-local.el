@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Load elisp from adequate emacs.d's "local"
+;;; init-local.el --- Load emacs lisp from adequate emacs.d's "local" -*- lexical-binding: t -*-
 
 (defvar load-local-ignored
   '("customize.el")

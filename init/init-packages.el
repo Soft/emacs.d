@@ -1,6 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Package management
-
+;;; init-packages.el --- Package management -*- lexical-binding: t -*-
 
 (use-package paradox
   :ensure t

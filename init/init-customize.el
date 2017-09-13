@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Control customize
+;;; init-customize.el --- Customize -*- lexical-binding: t -*-
 
 (let ((path (expand-file-name "local/customize.el" init-directory)))
   (unless (file-readable-p path)

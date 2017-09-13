@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Help related functions
+;;; init-help.el --- Help related functions -*- lexical-binding: t -*-
 
 (use-package which-key
   :ensure t

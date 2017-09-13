@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Window management
+;;; init-windows.el --- Window management -*- lexical-binding: t -*-
 
 (defun other-windows-p ()
   "Are there more than one window."

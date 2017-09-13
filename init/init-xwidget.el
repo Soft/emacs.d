@@ -1,4 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;;; init-xwidget.el --- Xwidgets -*- lexical-binding: t -*-
 
 (defun xwidget-webkit-setup ()
   "Defaults for Webkit"

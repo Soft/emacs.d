@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t -*-
-;; Viewing PDF files
+;;; init-pdf.el --- Viewing PDF files -*- lexical-binding: t -*-
 
 (defun pdf-view-setup ()
   (pdf-tools-enable-minor-modes)

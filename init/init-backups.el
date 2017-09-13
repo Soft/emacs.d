@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Backups
+;;; init-backups.el --- Backups -*- lexical-binding: t -*-
 
 (let ((backup-path (f-join user-emacs-directory "backups"))
       (auto-save-path (f-join user-emacs-directory "saves")))

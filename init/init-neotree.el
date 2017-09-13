@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Neotree setup
+;;; init-neotree.el --- Neotree setup -*- lexical-binding: t -*-
 
 (defun neotree-setup ()
   "Defaults for neotree buffers."

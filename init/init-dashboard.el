@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Dashboard setup
+;;; init-dashboard.el --- Dashboard setup -*- lexical-binding: t -*-
 
 (defvar dashboard-user-banner-directory
   (f-join init-directory "resources/banners")

@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; General purpose libraries that are used all over the config
+;;; init-libraries.el --- General purpose libraries -*- lexical-binding: t -*-
 
 ;; A modern list library for Emacs
 (use-package dash
