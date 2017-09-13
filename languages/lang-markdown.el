@@ -1,9 +1,10 @@
 ;;; lang-markdown.el --- Markdown -*- lexical-binding: t -*-
 
 (fset 'pandoc-pdf-from-buffer
-      (make-compiler "pandoc"
-                     (partial concat _ ".pdf")
-                     (lambda (output) `("-o" ,output "-f" "markdown"))))
+      (make-compiler
+       "pandoc"
+       (partial concat _ ".pdf")
+       (lambda (output) `("-o" ,output "-f" "markdown"))))
 
 ;; Patch markdown-mode link jumping to work with links internal to document
 

@@ -11,7 +11,8 @@
 
 (run-with-idle-timer 1 nil (lambda () (paradox-enable)))
 
-(defvar package-archive-old-seconds (* 120 60))
+(defvar package-archive-old-seconds (* 120 60)
+  "When should package archive data be considered old.")
 
 (defun package-should-refresh-p ()
   "Should package archive be refreshed."

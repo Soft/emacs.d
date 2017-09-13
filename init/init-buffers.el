@@ -1,5 +1,8 @@
 ;;; init-buffers.el --- Buffer management -*- lexical-binding: t -*-
 
+;; Maybe it would after all be better to advice the functions instead of just
+;; remaping the bindings since it would make it harder to ignore these.
+
 (defvar save-buffer-special-alist '()
   "List of handlers for saving special buffers.")
 
