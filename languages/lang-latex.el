@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t -*-
-;; LaTeX and related technologies
+;;; lang-latex.el --- LaTeX -*- lexical-binding: t -*-
 
 (defun latex-setup ()
   (add-to-list 'LaTeX-verbatim-environments "minted")

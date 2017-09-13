@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Rust configuration
+;;; lang-rust.el --- Rust configuration -*- lexical-binding: t -*-
 
 (defun rust-setup ()
   "Defaults for Rust."

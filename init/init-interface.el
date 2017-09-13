@@ -2,11 +2,7 @@
 
 (setq
  inhibit-splash-screen t
- inhibit-startup-message t
- initial-scratch-message
- (concat
-  (replace-regexp-in-string "^" ";; " (emacs-version))
-  "\n\n"))
+ inhibit-startup-message t)
 
 (setq-default
  use-dialog-box nil

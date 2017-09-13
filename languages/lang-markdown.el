@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Markdown
+;;; lang-markdown.el --- Markdown -*- lexical-binding: t -*-
 
 (fset 'pandoc-pdf-from-buffer
       (make-compiler "pandoc"

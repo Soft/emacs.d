@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Haskell
+;;; lang-haskell.el --- Haskell -*- lexical-binding: t -*-
 
 (use-package haskell-mode
   :ensure t

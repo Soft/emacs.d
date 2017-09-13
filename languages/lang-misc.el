@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t -*-
-;; Miscellaneous languages
+;;; lang-misc.el --- Miscellaneous languages -*- lexical-binding: t -*-
 
 (use-package yaml-mode
   :mode (("\\.yaml\\'" . yaml-mode)

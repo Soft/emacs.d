@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Python
+;;; lang-python.el --- Python -*- lexical-binding: t -*-
 
 (use-package pyvenv
   :ensure t

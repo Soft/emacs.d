@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Shell
+;;; lang-shell.el --- Shells -*- lexical-binding: t -*-
 
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)

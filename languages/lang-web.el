@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Configuration for various web related languages
+;;; lang-web.el --- Web related languages -*- lexical-binding: t -*-
 
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))

@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Org mode things
+;;; lang-org.el --- Org mode -*- lexical-binding: t -*-
 
 (defun org-setup ()
   "Setup org-mode"

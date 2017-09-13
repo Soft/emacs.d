@@ -92,6 +92,7 @@
 
 (use-package benchmark-init
   :if emacs-debug
+  :ensure t
   :init (benchmark-init/activate)
   :config (add-hook 'after-init-hook #'benchmark-init/deactivate))
 
@@ -119,6 +120,7 @@
              completion
              session
              help
+             scratch
              movement
              xwidget
              neotree

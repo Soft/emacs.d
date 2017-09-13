@@ -1,5 +1,4 @@
-;; -*- lexical-binding: t -*-
-;; Docker
+;;; lang-docker.el --- Docker -*- lexical-binding: t -*-
 
 (use-package docker
   :ensure t

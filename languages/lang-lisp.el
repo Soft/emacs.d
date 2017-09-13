@@ -1,5 +1,4 @@
-;; -*- mode: Emacs-Lisp; lexical-binding: t; -*-
-;; Lisp-like languages
+;;; lang-lisp.el --- Lisp-like languages -*- lexical-binding: t -*-
 
 (defun find-user-init-file ()
   "Open user's emacs init file."

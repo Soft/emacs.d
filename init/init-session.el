@@ -4,13 +4,6 @@
   :ensure t
   :defer t)
 
-(use-package persistent-scratch
-  :ensure t
-  :init
-  (setq persistent-scratch-save-file
-        (f-join user-emacs-directory "scratch"))
-  (persistent-scratch-setup-default))
-
 (use-package saveplace
   :init (save-place-mode))
 
