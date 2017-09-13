@@ -32,21 +32,4 @@
         desktop-auto-save-timeout 60)
   (desktop-save-mode 1))
 
-;; Protect certain buffers from being killed
-(defvar immortal-buffers
-  '("*scratch*" "*Messages*" "*dashboard*")
-  "Buffers that cannot be killed.")
-
-(defun kill-buffer-keep-immortal (buffer)
-  "Protect immortal buffers from being killed."
-  (interactive (list (current-buffer)))
-  (let ((name (buffer-name buffer)))
-    (if (member name immortal-buffers)
-        (progn
-          (message "%s is immortal and cannot be killed." name)
-          (call-interactively #'bury-buffer buffer))
-      (kill-buffer buffer))))
-
-(global-set-key [remap kill-buffer] #'kill-buffer-keep-immortal)
-
 (provide 'init-session)

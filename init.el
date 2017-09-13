@@ -105,6 +105,7 @@
              prelude
              packages
              editor
+             buffers
              search
              backups
              check
