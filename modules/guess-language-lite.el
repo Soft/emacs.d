@@ -30,15 +30,16 @@
   "Identification interval.")
 
 (defun gll-identify (buffer)
-  (with-current-buffer buffer
-    (when (<= gll-buffer-minimum-size (buffer-size))
-      (let* ((lang (guess-language-region (point-min) (point-max))))
-        (message "guess-language-lite: identified buffer as %s" lang)
-        (setq-local gll-buffer-language lang)
-        (run-hook-with-args 'gll-language-identified-functions lang)
-        (when gll-buffer-timer
-          (cancel-timer gll-buffer-timer)))
-      t)))
+  (when (buffer-live-p buffer) ; This is kind of bad, we should cancel the timer if buffer has been killed
+    (with-current-buffer buffer
+      (when (<= gll-buffer-minimum-size (buffer-size))
+        (let* ((lang (guess-language-region (point-min) (point-max))))
+          (message "guess-language-lite: identified buffer as %s" lang)
+          (setq-local gll-buffer-language lang)
+          (run-hook-with-args 'gll-language-identified-functions lang)
+          (when gll-buffer-timer
+            (cancel-timer gll-buffer-timer)))
+        t))))
 
 ;;;###autoload
 (define-minor-mode gll-guess-language-lite-mode
