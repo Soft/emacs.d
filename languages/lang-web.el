@@ -5,6 +5,11 @@
   :interpreter ("node" . js2-mode)
   :ensure t)
 
+(use-package js-comint
+  :if (programs-p "node")
+  :ensure t
+  :defer t)
+
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode))
   :ensure t)

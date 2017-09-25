@@ -29,6 +29,8 @@
   :init
   (setq desktop-path (list user-emacs-directory)
         desktop-base-file-name "desktop"
+        desktop-restore-frames nil
+        desktop-restore-eager 3
         desktop-auto-save-timeout 60)
   (desktop-save-mode 1))
 
