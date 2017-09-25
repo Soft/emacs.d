@@ -53,4 +53,9 @@
 (use-package helm-emoji
   :bind (("C-x c E" . helm-emoji)))
 
+(use-package helm-make
+  :ensure t
+  :defer t
+  :bind (("C-c p M" . helm-make-projectile)))
+
 (provide 'init-helm)

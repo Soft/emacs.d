@@ -29,7 +29,8 @@
 
 (defun markdown-setup ()
   (when (locate-library "pandoc-mode")
-    (pandoc-mode 1)))
+    (pandoc-mode 1))
+  (typo-mode))
 
 (use-package markdown-mode
   :ensure t

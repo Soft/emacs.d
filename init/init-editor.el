@@ -127,6 +127,11 @@
   :defer t
   :diminish writegood-mode)
 
+(use-package typo
+  :ensure t
+  :defer t
+  :diminish typo-mode)
+
 (use-package prog-mode
   :defer t
   :init
