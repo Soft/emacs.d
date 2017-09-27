@@ -64,6 +64,10 @@
   :ensure t
   :bind (("C-c x d" . define-word-at-point)))
 
+(use-package google-this
+  :ensure t
+  :bind-keymap (("C-c x s" . google-this-mode-submap)))
+
 (defun nov-mode-setup ()
   (setq-local shr-width 80)
   (setq-local shr-use-fonts nil))
