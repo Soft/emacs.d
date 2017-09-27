@@ -43,6 +43,8 @@
   :init
   (setq display-time-24hr-format t
         display-time-default-load-average nil)
+  ;; Make display-time-mode play nice with other modes that modify
+  ;; global-mode-string
   (add-hook
    'display-time-hook
    (lambda()

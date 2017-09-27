@@ -5,11 +5,13 @@
   :ensure t
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-  (setq flycheck-mode-line
-        '(:eval
-          (if (eq flycheck-last-status-change 'no-checker)
-              ""
-            (flycheck-mode-line-status-text)))))
+  (setq
+   flycheck-mode-line-prefix "✔"
+   flycheck-mode-line
+   '(:eval
+     (if (eq flycheck-last-status-change 'no-checker)
+         ""
+       (flycheck-mode-line-status-text)))))
 
 (use-package wcheck-mode
   :if (programs-p "enchant")

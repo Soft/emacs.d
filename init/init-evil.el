@@ -25,6 +25,7 @@
            dired-mode
            weechat-mode
            xkcd-mode
+           plasma-mode
            term-mode
            neotree-mode
            doctor-mode
