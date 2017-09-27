@@ -82,7 +82,9 @@
 
 (use-package wc-mode
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (setq wc-modeline-format "#%tw"))
 
 (use-package fic-mode
   :defer t

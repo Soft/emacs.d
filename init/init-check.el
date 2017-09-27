@@ -45,8 +45,15 @@
   :commands (gll-guess-language-lite-mode)
   :config
   (setq guess-language-languages '(en fi))
+  (add-hook 'gll-language-identified-functions #'guess-language-identified-hook)
   (when (programs-p "enchant")
     (add-hook 'gll-language-identified-functions #'guess-language-wcheck-hook)))
+
+(defun guess-language-identified-hook (lang)
+  (pcase lang
+    ('en (progn
+           (writegood-mode)))
+    ('fi (progn))))
 
 (defvar guess-language-code-to-wcheck-name-map
   '((fi . "Finnish")
