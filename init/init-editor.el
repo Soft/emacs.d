@@ -120,7 +120,9 @@
 
 (use-package dtrt-indent
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq dtrt-indent-active-mode-line-info "↹ "))
 
 (use-package writegood-mode
   :ensure t

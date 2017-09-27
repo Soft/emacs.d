@@ -43,6 +43,10 @@
   :init
   (setq display-time-24hr-format t
         display-time-default-load-average nil)
+  (add-hook
+   'display-time-hook
+   (lambda()
+     (setq display-time-string (concat display-time-string " "))))
   (display-time-mode))
 
 (defun set-frame-alpha (number)

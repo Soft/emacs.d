@@ -26,9 +26,12 @@
 
 (defun mpris-control-format-artist-and-track (metadata)
   (-when-let ((&alist "xesam:artist" (((artist)))
-                      "xesam:title" ((title)))
+                      "xesam:title" ((title))
+                      "xesam:album" ((album)))
               metadata)
-    (format "%s - %s" artist title)))
+    (propertize (format "♪ %s: %s " artist title)
+                'help-echo
+                (format "artist: %s; album: %s; track: %s" artist album title))))
 
 (defvar mpris-control-mode-line-formatter
   #'mpris-control-format-artist-and-track

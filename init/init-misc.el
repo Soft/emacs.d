@@ -88,4 +88,7 @@
    ("J" . nov-scroll-down)
    ("K" . nov-scroll-up)))
 
+(use-package mpris-control
+  :commands (mpris-control-info-mode))
+
 (provide 'init-misc)
