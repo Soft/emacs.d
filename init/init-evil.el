@@ -28,6 +28,7 @@
            plasma-mode
            term-mode
            neotree-mode
+           helpful-mode
            doctor-mode
            sunshine-mode
            tetris-mode

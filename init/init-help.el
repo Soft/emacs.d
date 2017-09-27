@@ -7,8 +7,21 @@
   (setq which-key-idle-delay 0.5)
   (which-key-mode))
 
-(use-package help-fns+
-  :ensure t)
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-h f" . helpful-function)
+   ("C-h v" . helpful-variable)
+   ("C-h c" . helpful-command))
+  :config
+  (bind-keys
+   :map helpful-mode-map
+   ("j" . next-line)
+   ("k" . previous-line)
+   ("h" . left-char)
+   ("l" . right-char)
+   ("J" . scroll-down)
+   ("K" . scroll-up)))
 
 (defconst adequate-url "https://bitbucket.org/Soft/emacs.d/src")
 
