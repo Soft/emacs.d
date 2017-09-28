@@ -23,5 +23,15 @@
          ("C-c d b" . dumb-jump-back)
          ("C-c d q" . dumb-jump-quick-look)))
 
+(use-package ag
+  :if (programs-p "ag")
+  :defer t
+  :ensure t)
+
+(use-package ripgrep
+  :if (programs-p "rg")
+  :defer t
+  :ensure t)
+
 (provide 'init-search)
 

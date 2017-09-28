@@ -120,11 +120,6 @@
   :ensure t
   :defer t)
 
-(use-package ag
-  :if (programs-p "ag")
-  :defer t
-  :ensure t)
-
 (use-package dtrt-indent
   :ensure t
   :defer t
@@ -139,7 +134,9 @@
 (use-package typo
   :ensure t
   :defer t
-  :diminish typo-mode)
+  :diminish typo-mode
+  :init
+  (setq-default typo-language "English"))
 
 (use-package prog-mode
   :defer t
@@ -149,7 +146,6 @@
 (defun text-mode-setup ()
   "Defaults for text modes."
   (gll-guess-language-lite-mode)
-  ;; (writegood-mode) ;; FIXME: Only in English
   (wc-mode))
 
 (use-package text-mode
@@ -160,5 +156,31 @@
 (use-package recompile-on-save
   :ensure t
   :defer t)
+
+;; TODO: Fringe bitmaps
+(use-package bm
+  :ensure t
+  :demand t
+  :init
+  (setq bm-restore-repository-on-load t)
+  :config
+  (setq bm-cycle-all-buffers t
+        bm-repository-file (f-join user-emacs-directory "bm-data"))
+  (setq-default bm-buffer-persistence t)
+  (add-hook 'after-init-hook #'bm-repository-load)
+  (add-hook 'find-file-hooks #'bm-buffer-restore)
+  (add-hook 'after-rever-hook #'bm-buffer-restore)
+  (add-hook 'kill-buffer-hook #'bm-buffer-save)
+  (add-hook 'after-save-hook #'bm-buffer-save)
+  (add-hook 'kill-emacs-hook
+            (lambda ()
+              (bm-buffer-save-all)
+              (bm-repository-save)))
+  (defhydra bm-hydra (global-map "C-c m")
+    "bookmark"
+    ("m" bm-toggle "toggle")
+    ("n" bm-next "next")
+    ("p" bm-previous "previous")
+    ("l" bm-show-all "list" :exit t)))
 
 (provide 'init-editor)
