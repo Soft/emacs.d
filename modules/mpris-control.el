@@ -7,10 +7,9 @@
 ;; Control MPRIS compatible media players.
 
 ;; TODO:
-;; - Fetch metadata on activation
+;; - Fetch metadata on activation, not only when song changes
 ;; - Select mediaplayer
 ;; - Control commands
-;; - Reset mode-line when disabled
 
 ;;; Code:
 
@@ -69,11 +68,16 @@
 ;; This is separate so users can disable it and use the metadata change
 ;; notifications for other purposes.
 (defun mpris-control-setup-mode-line ()
-  (unless global-mode-string
-    (setq global-mode-string '("")))
-  (unless (memq 'mpris-control-mode-line-info global-mode-string)
-    (setq global-mode-string
-          (append global-mode-string '(mpris-control-mode-line-info)))))
+  (if mpris-control-info-mode
+      (progn
+        (unless global-mode-string
+          (setq global-mode-string '("")))
+        (unless (memq 'mpris-control-mode-line-info global-mode-string)
+          (setq global-mode-string
+                (append global-mode-string '(mpris-control-mode-line-info)))))
+    (progn
+      (setq mpris-control-mode-line-info "")
+      (force-mode-line-update t))))
 
 (add-hook 'mpris-control-info-mode-hook #'mpris-control-setup-mode-line)
 
