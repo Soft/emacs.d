@@ -17,6 +17,7 @@
            inferior-python-mode
            geiser-repl-mode
            comint-mode
+           bm-show-mode
            artist-mode
            eshell-mode
            haskell-interactive-mode

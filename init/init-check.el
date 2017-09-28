@@ -37,6 +37,9 @@
              (action-args "-a" "-d" "en_US")
              (action-parser . wcheck-parser-ispell-suggestions))))))
 
+;; We only need this because of guess-language-lite It would be nice if we
+;; "installed" the packages from 'modules' in some sane way so that the
+;; dependencies and autoloads would be properly handled
 (use-package guess-language
   :defer t
   :ensure t)
@@ -52,8 +55,10 @@
 (defun guess-language-identified-hook (lang)
   (pcase lang
     ('en (progn
+           (setq-local typo-language "English") ; Maybe we should load typo before
            (writegood-mode)))
-    ('fi (progn))))
+    ('fi (progn
+           (setq-local typo-language "Finnish")))))
 
 (defvar guess-language-code-to-wcheck-name-map
   '((fi . "Finnish")

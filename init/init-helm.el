@@ -59,4 +59,8 @@
   :defer t
   :bind (("C-c p M" . helm-make-projectile)))
 
+(use-package helm-bm
+  :ensure t
+  :bind  (("C-x c M" . helm-bm)))
+
 (provide 'init-helm)

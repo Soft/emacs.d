@@ -12,7 +12,8 @@
   :bind
   (("C-h f" . helpful-function)
    ("C-h v" . helpful-variable)
-   ("C-h c" . helpful-command))
+   ("C-h c" . helpful-command)
+   ("C-h SPC" . helpful-at-point))
   :config
   (bind-keys
    :map helpful-mode-map
@@ -22,6 +23,8 @@
    ("l" . right-char)
    ("J" . scroll-down)
    ("K" . scroll-up)))
+
+(bind-key "C-h K" #'describe-personal-keybindings)
 
 (defconst adequate-url "https://bitbucket.org/Soft/emacs.d/src")
 
