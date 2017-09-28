@@ -29,11 +29,6 @@
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit))
 
-;; This doesn't seem to work
-;; (bind-keys
-;;  :map minibuffer-local-map
-;;  ("C-w" . backward-kill-word))
-
 ;; FIXME: This can be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
 (defun prog-mode-setup ()
