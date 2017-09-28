@@ -29,11 +29,6 @@
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit))
 
-;; This doesn't seem to work
-;; (bind-keys
-;;  :map minibuffer-local-map
-;;  ("C-w" . backward-kill-word))
-
 ;; FIXME: This can be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
 (defun prog-mode-setup ()
@@ -63,8 +58,8 @@
   :bind (("C-c l" . nlinum-mode)))
 
 (use-package origami
-  :defer t
   :ensure t
+  :defer t
   :bind
   (("C-c f o" . origami-open-node)
    ("C-c f O" . origami-open-all-nodes)

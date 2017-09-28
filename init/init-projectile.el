@@ -23,4 +23,9 @@
                (format " <%s>" (projectile-project-name))
              ""))))
 
+(use-package projectile-ripgrep
+  :if (programs-p "rg")
+  :defer t
+  :ensure t)
+
 (provide 'init-projectile)
