@@ -1,5 +1,16 @@
 ;;; init-help.el --- Help related functions -*- lexical-binding: t -*-
 
+;; helpful is really nice but sometimes it fails with an error. This macro adds
+;; an advice to try an alternative (in this case likely from the describe-*
+;; family of functions) if the first function fails.
+(defmacro add-alternative-interactive (fn alternative)
+  `(advice-add
+    (quote ,fn) :around
+    (lambda (fn &rest args)
+      (condition-case nil
+          (funcall-interactively fn (car args))
+        (error (funcall-interactively (quote ,alternative) (car args)))))))
+
 (use-package which-key
   :ensure t
   :diminish which-key-mode
@@ -15,6 +26,9 @@
    ("C-h c" . helpful-command)
    ("C-h SPC" . helpful-at-point))
   :config
+  (add-alternative-interactive helpful-function describe-function)
+  (add-alternative-interactive helpful-variable describe-variable)
+  (add-alternative-interactive helpful-command describe-command)
   (bind-keys
    :map helpful-mode-map
    ("j" . next-line)
