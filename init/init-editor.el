@@ -134,4 +134,9 @@
   :ensure t
   :defer t)
 
+(use-package autorevert
+  :defer t
+  :config
+  (setq auto-revert-mode-text " 🅡"))
+
 (provide 'init-editor)

@@ -7,7 +7,9 @@
 (use-package winner
   :config (winner-mode))
 
-;; TODO: Skip buffers with certain modes without C-u (eg. neotree)
+;; TODO:
+;; Skip buffers with certain modes without C-u (eg. neotree)
+;; Also it would be nice if we switched between frames as well.
 (defun switch-window-or-buffer ()
   "Switch window or buffer depending on the number of windows."
   (interactive)

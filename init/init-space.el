@@ -55,25 +55,25 @@
    ("SPC x X" . xkcd-rand)))
 
 (defhydra hydra-roate-frame (evil-normal-state-map "SPC w")
-  "Rotate frame."
-  ("r" #'rotate-frame-clockwise)
-  ("R" #'rotate-frame-anticlockwise))
+  "Rotate frame"
+  ("r" #'rotate-frame-clockwise "clockwise")
+  ("R" #'rotate-frame-anticlockwise "counterclockwise"))
 
 (defhydra hydra-windmove (evil-normal-state-map "SPC w m")
-  "Move between windows."
-  ("h" #'windmove-left)
-  ("j" #'windmove-down)
-  ("k" #'windmove-up)
-  ("l" #'windmove-right))
+  "Move between windows"
+  ("h" windmove-left "left")
+  ("j" windmove-down "down")
+  ("k" windmove-up "up")
+  ("l" windmove-right "right"))
 
 (defhydra hydra-zoom (evil-normal-state-map "SPC w")
-  "Text size."
-  ("+" #'text-scale-increase)
-  ("-" #'text-scale-decrease))
+  "Text size"
+  ("+" text-scale-increase "increase")
+  ("-" text-scale-decrease "decrease"))
 
 (defhydra hydra-winner (evil-normal-state-map "SPC w")
-  "Window history."
-  ("n" #'winner-redo)
-  ("p" #'winner-undo))
+  "Window history"
+  ("n" winner-redo "redo")
+  ("p" winner-undo "undo"))
 
 (provide 'init-space)

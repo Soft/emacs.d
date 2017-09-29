@@ -39,7 +39,7 @@
               (bm-buffer-save-all)
               (bm-repository-save)))
   (defhydra bm-hydra (global-map "C-c m")
-    "bookmark"
+    "Bookmarks"
     ("m" bm-toggle "toggle")
     ("n" bm-next "next")
     ("p" bm-previous "previous")
