@@ -16,7 +16,8 @@
         helm-quick-update           t)
   (bind-keys
    :map helm-map
-   ("<escape>" . helm-keyboard-quit))
+   ("<escape>" . helm-keyboard-quit)
+   ("C-w" . backward-kill-word))
   :bind
   (("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-mini)
