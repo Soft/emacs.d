@@ -8,18 +8,26 @@
         bm-repository-file (f-join user-emacs-directory "bm-data"))
   :config
   (fringe-helper-define
-    'bm-marker-left 'center
+    'bm-marker-left nil
+    "......."
     ".XX.XX."
-    "X..X..X"
-    "X.....X"
-    ".X...X."
-    "..X.X.."
-    "...X...")
+    "XXXXXXX"
+    "XXXXXXX"
+    ".XXXXX."
+    "..XXX.."
+    "...X..."
+    ".......")
+  (set-face-attribute
+   'bm-fringe-face nil
+   :foreground "#ff14cc"
+   :background nil)
+  (set-face-attribute
+   'bm-fringe-persistent-face nil
+   :foreground "#ff1452"
+   :background nil)
   (setq bm-cycle-all-buffers t
         bm-highlight-style 'bm-highlight-only-fringe
-        bm-repository-size 1000
-        bm-fringe-face '(:foreground "#ff14cc") ;; FIXME: These do not seem to work
-        bm-fringe-persistent-face '(:foreground "#ff1452"))
+        bm-repository-size 1000)
   (setq-default bm-buffer-persistence t)
   (add-hook 'after-init-hook #'bm-repository-load)
   (add-hook 'find-file-hooks #'bm-buffer-restore)
