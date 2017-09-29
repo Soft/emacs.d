@@ -18,5 +18,9 @@
 
 (use-package cl-lib)
 
+(use-package fringe-helper
+  :ensure t
+  :functions (fringe-helper-define))
+
 (provide 'init-libraries)
 

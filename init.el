@@ -105,6 +105,8 @@
              prelude
              packages
              editor
+             folding
+             bookmarks
              buffers
              search
              backups

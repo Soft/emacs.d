@@ -1,5 +1,7 @@
 ;;; init-session.el --- Session management -*- mode: lexical-binding: t -*-
 
+;; TODO: Add session mode
+
 (use-package restart-emacs
   :ensure t
   :defer t)
@@ -7,6 +9,7 @@
 (use-package saveplace
   :init (save-place-mode))
 
+;; savehist mode
 (use-package savehist
   :init (savehist-mode)
   :config
@@ -22,7 +25,10 @@
 (use-package recentf
   :init (recentf-mode)
   :config
-  (setq recentf-max-saved-items 200))
+  (setq recentf-max-saved-items 1000)
+  (add-to-list-many
+   'recentf-exclude
+   '("/tmp/" "/ssh:" "/usr/share/emacs/" "\\.emacs\\.d/elpa/")))
 
 ;; Maybe I should reconsider this since it is so slow
 (use-package desktop
