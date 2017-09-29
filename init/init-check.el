@@ -1,5 +1,14 @@
 ;;; init-check.el --- Syntax Checking -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; This is kind of a mess right now since I haven't had time to truly dig into
+;; flycheck configuration. Additionally, this has some specific customizations
+;; for supporting Finnish spell checking. Maybe someday I'll move Finnish
+;; language support into a more separate component.
+
+;;; Code:
+
 (use-package flycheck
   :commands (flycheck-mode)
   :ensure t

@@ -42,6 +42,7 @@
   (setq sunshine-units 'metric
         sunshine-show-icons t))
 
+;; It would be nice to separate Finnish specific things
 (use-package google-translate
   :defer t
   :ensure t
