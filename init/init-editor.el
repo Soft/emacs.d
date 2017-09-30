@@ -9,6 +9,7 @@
 (set-keyboard-coding-system 'utf-8)
 
 (setq-default
+ ad-redefinition-action 'accept
  sentence-end-double-space nil
  indent-tabs-mode nil
  tab-stop-list ()

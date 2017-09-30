@@ -3,13 +3,19 @@
 (use-package paradox
   :ensure t
   :defer t
-  :commands (paradox-enable))
+  :commands (paradox-enable)
+  :config
+  (advice-add ;; Enable Paradox silently
+   'paradox--override-definition :around
+   (lambda (fn &rest args)
+     (cl-letf (((symbol-function 'message) (lambda (&rest args))))
+       (apply fn args)))))
 
 (use-package package-utils
   :defer t
   :ensure t)
 
-(run-with-idle-timer 1 nil (lambda () (paradox-enable)))
+(add-hook 'after-init-hook #'paradox-enable)
 
 (defvar package-archive-old-seconds (* 120 60)
   "When should package archive data be considered old.")
