@@ -5,7 +5,11 @@
   (> (length (window-list)) 1))
 
 (use-package winner
-  :config (winner-mode))
+  :init (winner-mode))
+
+(use-package windmove
+  :config
+  (setq windmove-wrap-around t))
 
 ;; TODO:
 ;; Skip buffers with certain modes without C-u (eg. neotree)
@@ -42,6 +46,7 @@
   (interactive "P")
   (quit-window (and x t)))
 
+;; FIXME: Nicer modeline
 (use-package zoom-window
   :defer t
   :ensure t
