@@ -4,17 +4,28 @@
   :ensure t
   :defer t)
 
-(defhydra hydra-origami (global-map "C-c f")
-  "Folding"
-  ("<tab>" origami-recursively-toggle-node "toggle")
-  ("n" origami-next-fold "next")
-  ("p" origami-previous-fold "previous")
-  ("u" origami-undo "undo")
-  ("r" origami-redo "redo")
-  ("o" origami-open-node "open node")
-  ("O" origami-open-all-nodes "open all nodes")
-  ("c" origami-close-node "close node")
-  ("C" origami-close-all-nodes "close all nodes")
-  ("1" origami-show-only-node "show only node"))
+(defhydra hydra-origami nil
+  "
+^Fold^               ^Control^    ^Move
+^^^^^^-------------------------------------------
+_<tab>_: Toggle      _u_: Undo    _n_: Next
+    _o_: Open        _r_: Redo    _p_: Previous
+    _O_: Open all
+    _c_: Close
+    _C_: Close all
+    _1_: Show only
+"
+  ("<tab>" origami-recursively-toggle-node)
+  ("n" origami-next-fold)
+  ("p" origami-previous-fold)
+  ("u" origami-undo)
+  ("r" origami-redo)
+  ("o" origami-open-node)
+  ("O" origami-open-all-nodes)
+  ("c" origami-close-node)
+  ("C" origami-close-all-nodes)
+  ("1" origami-show-only-node))
+
+(bind-key "C-c f" #'hydra-origami/body)
 
 (provide 'init-folding)

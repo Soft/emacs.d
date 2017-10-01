@@ -46,9 +46,9 @@ was supplied, with project root directory."
     "
 ^Filter by^       ^Compose^           ^Control
 ^^^^^^----------------------------------------------------
-_n_: Name         _|_: Or             _p_: Pop
-_r_: Regexp       _!_: Negate         _/_: Pop all
-_._: Extension    _*_: Decompose      _S_: Save
+_n_: Name             _|_: Or         _p_: Pop
+_r_: Regexp           _!_: Negate     _/_: Pop all
+_._: Extension        _*_: Decompose  _S_: Save
 _h_: Hidden       _<tab>_: Transpose  _D_: Delete saved
 _o_: Omit         ^     ^             _A_: Add saved
 _g_: Garbage      ^     ^             _L_: Load saved
