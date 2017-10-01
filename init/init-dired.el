@@ -52,7 +52,7 @@ _._: Extension        _*_: Decompose  _S_: Save
 _h_: Hidden       _<tab>_: Transpose  _D_: Delete saved
 _o_: Omit         ^     ^             _A_: Add saved
 _g_: Garbage      ^     ^             _L_: Load saved
-_p_: Predicate
+_e_: Predicate
 _f_: File
 _d_: Directory
 _m_: Mode
