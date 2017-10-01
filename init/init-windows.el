@@ -51,4 +51,33 @@
   :defer t
   :ensure t)
 
+(defhydra hydra-manage-windows nil
+  "
+^Move^          ^Rotate^    ^^Layout^          ^Control^
+^^^^^^^^--------------------------------------------------------
+    ^_k_         _r_: ↻      _p_: Previous     _z_: Zoom
+^^    ↑         ^_R_: ↺      _n_: Next         _f_: Fullscreen
+_h_ ← · → _l_                               ^^^_m_: Menu bar
+^^    ↓                                   ^^^^^_s_: Scroll bar
+    ^_j_                                   ^^^^_t_: Tool bar
+"
+  ("h" windmove-left)
+  ("j" windmove-down)
+  ("k" windmove-up)
+  ("l" windmove-right)
+
+  ("r" rotate-frame-clockwise)
+  ("R" rotate-frame-anticlockwise)
+
+  ("n" winner-redo)
+  ("p" winner-undo)
+
+  ("z" zoom-window-zoom)
+  ("f" toggle-fullscreen)
+  ("m" toggle-menu-bar-mode-from-frame)
+  ("s" toggle-scroll-bar)
+  ("t" toggle-tool-bar-mode-from-frame))
+
+(bind-key "C-c w" #'hydra-manage-windows/body)
+
 (provide 'init-windows)

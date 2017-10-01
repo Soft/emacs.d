@@ -63,12 +63,7 @@
    nil 0 nil "_NET_WM_STATE" 32
    '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
 
-(bind-keys
- ("<f11>" . toggle-fullscreen)
- ("C-c w f" . toggle-fullscreen)
- ("C-c w m" . toggle-menu-bar-mode-from-frame)
- ("C-c w s" . toggle-scroll-bar)
- ("C-c w t" . toggle-tool-bar-mode-from-frame))
+(bind-key "<f11>" #'toggle-fullscreen)
 
 (use-package centered-window-mode
   :ensure t
