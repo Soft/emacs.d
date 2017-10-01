@@ -38,11 +38,18 @@
             (lambda ()
               (bm-buffer-save-all)
               (bm-repository-save)))
-  (defhydra bm-hydra (global-map "C-c m")
-    "Bookmarks"
-    ("m" bm-toggle "toggle")
-    ("n" bm-next "next")
-    ("p" bm-previous "previous")
-    ("l" bm-show-all "list" :exit t)))
+  (defhydra hydra-bm nil
+    "
+Bookmark
+^^^^-------------------------
+_m_: Toggle      _l_: List
+_n_: Next
+_p_: Previous
+"
+    ("m" bm-toggle)
+    ("n" bm-next)
+    ("p" bm-previous)
+    ("l" bm-show-all :exit t))
+  (bind-key "C-c m" #'hydra-bm/body))
 
 (provide 'init-bookmarks)
