@@ -1,7 +1,5 @@
 ;;; init-session.el --- Session management -*- mode: lexical-binding: t -*-
 
-;; TODO: Add session mode
-
 (use-package restart-emacs
   :ensure t
   :defer t)
@@ -9,18 +7,28 @@
 (use-package saveplace
   :init (save-place-mode))
 
-;; savehist mode
+;; FIXME: I don't think this saves additional variables properly.
+;; I should consider looking into session mode.
 (use-package savehist
-  :init (savehist-mode)
+  :init
+  (savehist-mode)
   :config
   (add-to-list-many
    'savehist-additional-variables
-   '(search-ring
-     kill-ring
-     set-variable-value-history
-     shell-command-history
+   '(comint-input-ring
+     compile-history
      file-name-history
-     regexp-search-ring)))
+     grep-find-history
+     grep-history
+     kill-ring
+     query-replace-history
+     read-expression-history
+     regexp-history
+     regexp-search-ring
+     register-alist
+     search-ring
+     set-variable-value-history
+     shell-command-history)))
 
 (use-package recentf
   :init (recentf-mode)

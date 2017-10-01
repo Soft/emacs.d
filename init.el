@@ -124,6 +124,7 @@
              session
              help
              scratch
+             dired
              movement
              xwidget
              neotree

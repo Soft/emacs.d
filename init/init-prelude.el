@@ -69,7 +69,9 @@
     `(numeric-argument-switch ,@args)))
 
 (defun switch-to-buffer-dwim (buffer)
-  "Display BUFFER in the selected window or, if the buffer is already visible in some window, switch focus to the window containing it."
+  "Display BUFFER in the selected window or, if the buffer is
+already visible in some window, switch focus to the window
+containing it."
   (-if-let (window (get-buffer-window buffer))
       (select-window window)
     (switch-to-buffer buffer)))
@@ -100,13 +102,22 @@
   (-any? 'executable-find xs))
 
 (defun adjust-hash (fn key table)
-  "Look up KEY in TABLE and apply FN to the value and place the transformed value back into TABLE. If KEY is not in TABLE, FN is called without an argument to create the initial value."
+  "Look up KEY in TABLE and apply FN to the value and place the
+transformed value back into TABLE. If KEY is not in TABLE, FN is
+called without an argument to create the initial value."
   (let ((value (gethash key table)))
     (puthash key (funcall fn value) table))
   table)
 
+(defmacro debug-message (message &rest args)
+  "Similar to message but only produces output when emacs-debug
+is non-nil."
+  (when emacs-debug
+    `(message ,message ,@args)))
+
 (defun make-compiler (command name-transformer args-maker)
-  "Create a new interactive command that receives the content of the current buffer when executed."
+  "Create a new interactive command that receives the content of
+the current buffer when executed."
   (let* ((command-base (file-name-base command))
          (process-name (concat command-base "-process"))
          (buffer-name (format "*%s-Log*" (capitalize command-base)))

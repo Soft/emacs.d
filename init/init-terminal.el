@@ -64,6 +64,8 @@
 
 ;; Eshell prompt
 
+;; TODO: Use defface
+
 (defvar eshell-path-faces
   '((:foreground "#9400d3")
     (:foreground "#4b0082")
