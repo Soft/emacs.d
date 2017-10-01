@@ -2,7 +2,13 @@
 
 (use-package origami
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq origami-show-fold-header t)
+  (set-face-attribute
+   'origami-fold-header-face nil
+   :box nil
+   :background 'unspecified))
 
 (defhydra hydra-origami nil
   "
