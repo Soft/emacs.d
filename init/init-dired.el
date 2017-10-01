@@ -88,6 +88,8 @@ _x_: Executable
    ("S" . hydra-dired-quick-sort/body)
    ("j" . dired-next-line)
    ("k" . dired-previous-line)
+   ("<tab>" . dired-next-line)
+   ("<backtab>" . dired-previous-line)
    ("f" . hydra-dired-filter/body)))
 
 (provide 'init-dired)
