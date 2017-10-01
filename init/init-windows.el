@@ -58,12 +58,12 @@
 
 (defhydra hydra-manage-windows nil
   "
-^Move^          ^Rotate^    ^^Layout^          ^Control^         ^Text Size
-^^^^^^^^-------------------------------------------------------------------------
-    ^_k_         _r_: ↻      _p_: Previous     _z_: Zoom         _-_: Decrease
-^^    ↑         ^_R_: ↺      _n_: Next         _f_: Fullscreen   _+_: Increase
-_h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar
-^^    ↓                                   ^^^^^_s_: Scroll bar
+^Move^          ^Rotate^    ^^Layout^          ^Control^         ^Text Size^    ^Windows
+^^^^^^^^^^----------------------------------------------------------------------------------------------
+    ^_k_         _r_: ↻      _p_: Previous     _z_: Zoom         _-_: Decrease  _2_: Split Horizontaly
+^^    ↑         ^_R_: ↺      _n_: Next         _f_: Fullscreen   _+_: Increase  _3_: Split Verticaly
+_h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar                  ^^_0_: Delete This
+^^    ↓                                   ^^^^^_s_: Scroll bar                ^^_1_: Delete Others
     ^_j_                                   ^^^^_t_: Tool bar
 "
   ("h" windmove-left)
@@ -85,7 +85,12 @@ _h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar
   ("t" toggle-tool-bar-mode-from-frame)
 
   ("-" text-scale-decrease)
-  ("+" text-scale-increase))
+  ("+" text-scale-increase)
+
+  ("2" split-window-below)
+  ("3" split-window-right)
+  ("0" delete-window)
+  ("1" delete-other-windows))
 
 (bind-key "C-c w" #'hydra-manage-windows/body)
 
