@@ -35,11 +35,11 @@
 (set-fontset-font "fontset-default" nil
                   (font-spec :size font-size :name "Symbola"))
 
-(add-hook 'text-mode-hook
-          (lambda ()
-            (setq-local buffer-face-mode-face
-                        `(:family ,(select-font variable-font-family "Fira Sans")))
-            (buffer-face-mode)))
+;; (add-hook 'text-mode-hook
+;;           (lambda ()
+;;             (setq-local buffer-face-mode-face
+;;                         `(:family ,(select-font variable-font-family "Fira Sans")))
+;;             (buffer-face-mode)))
 
 (bind-keys ("<C-mouse-4>" . text-scale-increase)
            ("<C-mouse-5>" . text-scale-decrease))
