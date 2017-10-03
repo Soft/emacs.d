@@ -26,7 +26,6 @@
                      (or force
                          (not (member it loaded-local-files))))))))
 
-
-(run-with-idle-timer 1 nil #'load-local-files)
+(add-hook 'after-init-hook #'load-local-files)
 
 (provide 'init-local)
