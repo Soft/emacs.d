@@ -24,6 +24,17 @@
   :mode ((".gitignore" . gitignore-mode))
   :ensure t)
 
+(use-package git-gutter-fringe
+  :ensure t
+  :defer t)
+
+(use-package git-gutter
+  :ensure t
+  :defer t
+  :config
+  (require 'git-gutter-fringe)
+  :bind (("C-c g f" . git-gutter-mode)))
+
 (use-package smerge-mode
   :defer t
   :init

@@ -1,4 +1,4 @@
-;;; init-session.el --- Session management -*- mode: lexical-binding: t -*-
+;;; init-session.el --- Session management -*- lexical-binding: t -*-
 
 (use-package restart-emacs
   :ensure t
