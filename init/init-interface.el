@@ -5,6 +5,7 @@
  inhibit-startup-message t)
 
 (setq-default
+ inhibit-x-resources t
  use-dialog-box nil
  use-file-dialog nil
  echo-keystrokes 0.1

@@ -22,6 +22,9 @@
 
 (install-packages-if-missing wanted-themes t)
 
+(defvar default-theme 'doom-vibrant
+  "Default theme for Emacs.")
+
 (defun switch-theme (theme)
   "Unload existing theme and switch to a new one."
   (interactive
@@ -63,7 +66,13 @@
   (gtk-style-ext-dark-theme-mode 1)
   (gtk-style-ext-adapt-to-theme-mode 1))
 
-(add-hook 'after-init-hook
-          (lambda () (switch-theme 'doom-vibrant)))
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (select-frame frame)
+                (switch-theme default-theme)))
+  (add-hook 'after-init-hook
+            (lambda () (switch-theme 'doom-vibrant))))
+
 
 (provide 'init-theme)
