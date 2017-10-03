@@ -18,6 +18,9 @@
   (setq which-key-idle-delay 0.5)
   (which-key-mode))
 
+(defvar helpful-reuse-buffers t
+  "Should helpful reuse existing buffers.")
+
 (use-package helpful
   :ensure t
   :bind
@@ -29,6 +32,22 @@
   (add-alternative-interactive helpful-function describe-function)
   (add-alternative-interactive helpful-variable describe-variable)
   (add-alternative-interactive helpful-command describe-command)
+  ;; I like helpful to reuse existing helpful-mode buffers.
+  (advice-add
+   'helpful--buffer :around
+   (lambda (fn &rest args)
+     (let ((original-get-buffer-create (symbol-function 'get-buffer-create)))
+       (flet
+           ((get-buffer-create
+             (name)
+             (if-let ((_ helpful-reuse-buffers)
+                      (buffer (car (buffers-with-major-mode 'helpful-mode))))
+                 (progn
+                   (with-current-buffer buffer
+                     (rename-buffer name))
+                   buffer)
+               (funcall original-get-buffer-create name))))
+         (apply fn args)))))
   (bind-keys
    :map helpful-mode-map
    ("j" . next-line)
