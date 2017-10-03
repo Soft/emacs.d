@@ -34,7 +34,10 @@
     (with-current-buffer buffer
       (when (<= gll-buffer-minimum-size (buffer-size))
         (let* ((lang (guess-language-region (point-min) (point-max))))
-          (message "guess-language-lite: identified buffer as %s" lang)
+          (message "Identified %s as %s"
+                   (or (buffer-file-name)
+                       (buffer-name))
+                   lang)
           (setq-local gll-buffer-language lang)
           (run-hook-with-args 'gll-language-identified-functions lang)
           (when gll-buffer-timer
