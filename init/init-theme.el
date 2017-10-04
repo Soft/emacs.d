@@ -74,7 +74,7 @@
                 (select-frame frame)
                 (switch-theme default-theme)))
   (add-hook 'after-init-hook
-            (lambda () (switch-theme 'doom-vibrant))))
+            (lambda () (switch-theme default-theme))))
 
 
 (provide 'init-theme)
