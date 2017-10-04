@@ -109,7 +109,10 @@
                      (color-distance background "#000000"))
                   (color-lighten-name background beacon-recalibration-percent)
                 (color-darken-name background beacon-recalibration-percent))))))
-  (advice-add #'load-theme :after (lambda (&rest args) (beacon-recalibrate-color))))
+  (advice-add
+   #'switch-theme :after
+   (lambda (&rest args)
+     (run-at-time 1 nil #'beacon-recalibrate-color))))
 
 (use-package fill-column-indicator
   :ensure t
