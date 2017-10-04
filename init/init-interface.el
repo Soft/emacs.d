@@ -90,6 +90,24 @@
                         'evil-move)
   (vhl/install-extension 'evil))
 
+(defvar beacon-recalibration-percent 10
+  "How many percents should beacon color differ from background color.")
+
+(use-package beacon
+  :ensure t
+  :init
+  (beacon-mode)
+  :config
+  (require 'color)
+  (defun beacon-recalibrate-color ()
+    (if-let ((background (face-attribute 'default :background)))
+        (setq beacon-color
+              (if (> (color-distance background "#ffffff")
+                     (color-distance background "#000000"))
+                  (color-lighten-name background beacon-recalibration-percent)
+                (color-darken-name background beacon-recalibration-percent)))))
+  (advice-add #'load-theme :after (lambda (&rest args) (beacon-recalibrate-color))))
+
 (use-package fill-column-indicator
   :ensure t
   :defer t)

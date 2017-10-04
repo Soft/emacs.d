@@ -30,7 +30,7 @@
 
 (defmacro if-supported (fn &rest args)
   "Call FN with ARGS if it is available."
-  `(when (fboundp (quote ,fn)) (apply (quote ,fn) ,args)))
+  `(when (fboundp (quote ,fn)) (apply (quote ,fn) (quote ,args))))
 
 ;; Borrowed from https://github.com/jcf/emacs.d
 (defmacro after-load (feature &rest body)
