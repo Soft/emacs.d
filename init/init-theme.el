@@ -4,8 +4,10 @@
 (defvar wanted-themes
   '(atom-one-dark-theme
     challenger-deep-theme
+    darkokai-theme
     django-theme
     doom-themes
+    kaolin-theme
     dracula-theme
     espresso-theme
     gotham-theme
@@ -22,7 +24,7 @@
 
 (install-packages-if-missing wanted-themes t)
 
-(defvar default-theme 'doom-vibrant
+(defvar default-theme 'kaolin
   "Default theme for Emacs.")
 
 (defun switch-theme (theme)

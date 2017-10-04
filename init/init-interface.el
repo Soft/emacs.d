@@ -99,6 +99,8 @@
   (beacon-mode)
   :config
   (require 'color)
+  ;; It would be nice if this took into account the background color of the
+  ;; location where point is.
   (defun beacon-recalibrate-color ()
     (if-let ((background (face-attribute 'default :background)))
         (setq beacon-color

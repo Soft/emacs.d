@@ -56,6 +56,7 @@
   :defer t
   :ensure t)
 
+;; TODO: Tweak positioning
 (defhydra hydra-manage-windows nil
   "
 ^Move^          ^Rotate^    ^^Layout^          ^Control^         ^Text Size^    ^Windows
