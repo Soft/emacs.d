@@ -21,7 +21,7 @@
  select-enable-clipboard t
  select-enable-primary t)
 
-(tool-bar-mode -1)
+(if-supported tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode -1)
 (menu-bar-mode -1)
@@ -60,9 +60,11 @@
 
 (defun toggle-fullscreen ()
   (interactive)
-  (x-send-client-message
-   nil 0 nil "_NET_WM_STATE" 32
-   '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
+  (if (eq window-system 'x)
+      (x-send-client-message
+       nil 0 nil "_NET_WM_STATE" 32
+       '(2 "_NET_WM_STATE_FULLSCREEN" 0))
+    (error "toggle-fulscreen is only available on X windows systems.")))
 
 (bind-key "<f11>" #'toggle-fullscreen)
 

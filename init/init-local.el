@@ -9,7 +9,9 @@
 
 ;; TODO: Implement natural sorting
 (defun load-local-files (&optional force)
-  "Load files from adequate emacs.d's \"local\" directory. If FORCE is non-nil, load files even if they have already been loaded. Returns a list of files that were loaded."
+  "Load files from adequate emacs.d's \"local\" directory. If
+FORCE is non-nil, load files even if they have already been
+loaded. Returns a list of files that were loaded."
   (-map 
    (lambda (path)
      (when emacs-debug
