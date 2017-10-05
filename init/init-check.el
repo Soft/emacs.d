@@ -7,6 +7,8 @@
 ;; for supporting Finnish spell checking. Maybe someday I'll move Finnish
 ;; language support into a more separate component.
 
+;; TODO: Only use wcheck for Finnish
+
 ;;; Code:
 
 (use-package flycheck
@@ -46,9 +48,20 @@
              (action-args "-a" "-d" "en_US")
              (action-parser . wcheck-parser-ispell-suggestions))))))
 
-;; We only need this because of guess-language-lite It would be nice if we
+(use-package flyspell
+  :defer t
+  :config
+  (setq flyspell-mode-line-string " 🅕")
+  (after-load 'helm
+    (use-package flyspell-correct-helm
+      :init
+      (require 'flyspell-correct-helm)
+      (bind-key
+       "C-c =" #'flyspell-correct-previous-word-generic flyspell-mode-map))))
+
+;; We only need this because of guess-language-lite. It would be nice if we
 ;; "installed" the packages from 'modules' in some sane way so that the
-;; dependencies and autoloads would be properly handled
+;; dependencies and autoloads would be properly handled.
 (use-package guess-language
   :defer t
   :ensure t)
