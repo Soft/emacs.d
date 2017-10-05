@@ -1,10 +1,19 @@
 ;;; init-git.el --- Git settings -*- lexical-binding: t -*-
 
+(defun magit-diff-unstaged-or-staged (d)
+  "Display unstaged changes or, if universal argument is suplied,
+staged changes."
+  (interactive "P")
+  (if d
+      (magit-diff-staged)
+    (magit-diff-unstaged)))
+
 (use-package magit
   :ensure t
   :bind
   (("C-c g g" . magit-status)
-   ("C-c g d" . magit-diff)))
+   ("C-c g d" . magit-diff-unstaged-or-staged)
+   ("C-c g l" . magit-log-current)))
 
 (use-package git-timemachine
   :ensure t
