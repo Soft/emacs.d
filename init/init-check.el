@@ -17,14 +17,14 @@
   :config
   (fringe-helper-define
     'flycheck-fringe-bitmap-double-arrow nil
+    "...XX..."
     "..XXXX.."
-    ".X....X."
-    "X..XX..X"
-    "X.X..X.X"
-    "X.X..X.X"
-    "X..XX..X"
-    ".X....X."
-    "..XXXX..")
+    "..XXXX.."
+    "...XX..."
+    "...XX..."
+    "........"
+    "...XX..."
+    "...XX...") 
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (setq
    flycheck-mode-line-prefix "✔"
