@@ -122,4 +122,13 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :commands (dbus-control-mode)
   :init (dbus-control-mode))
 
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :ensure t
+  :demand t
+  :config
+  (add-to-list-many 'exec-path-from-shell-variables
+                    '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "PATH"))
+  (exec-path-from-shell-initialize))
+
 (provide 'init-misc)
