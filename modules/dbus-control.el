@@ -12,6 +12,7 @@
 
 (defvar dbus-control--open-file-handle nil)
 (defvar dbus-control--focus-handle nil)
+(defvar dbus-control--exit-handle nil)
 
 (defun dbus-control-open-file (path)
   (if (find-file path)
@@ -20,6 +21,10 @@
 
 (defun dbus-control-focus ()
   (x-focus-frame nil)
+  '(:boolean t))
+
+(defun dbus-control-exit ()
+  (run-at-time 1 nil #'kill-emacs)
   '(:boolean t))
 
 ;;;###autoload
@@ -38,10 +43,16 @@
               (dbus-register-method
                :session
                dbus-service-emacs dbus-path-emacs dbus-interface-emacs "Focus"
-               #'dbus-control-focus t)))
+               #'dbus-control-focus t))
+        (setq dbus-control--exit-handle
+              (dbus-register-method
+               :session
+               dbus-service-emacs dbus-path-emacs dbus-interface-emacs "Exit"
+               #'dbus-control-exit t)))
     (progn
       (dbus-unregister-object dbus-control--open-file-handle)
       (dbus-unregister-object dbus-control--focus-handle)
+      (dbus-unregister-object dbus-control--exit-handle)
       (dbus-unregister-service :session dbus-service-emacs))))
 
 ;;; dbus-control.el ends here
