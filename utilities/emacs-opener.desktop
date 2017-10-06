@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=GNU Emacs (D-Bus open)
+GenericName=Emacs
+Icon=emacs
+TryExec=emacs-opener.el
+Exec=emacs-opener.el %F
+Terminal=false
+MimeType=text/css;text/english;text/html;text/plain;text/x-c;text/x-chdr;text/x-csrc;text/x-c++;text/x-c++hdr;text/x-c++src;text/x-java;text/x-makefile;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;
+Categories=Development;TextEditor;
+StartupWMClass=Emacs
