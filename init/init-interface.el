@@ -38,7 +38,10 @@
 (fringe-mode '(8 . 0))
 
 (use-package all-the-icons
-  :ensure t)
+  :ensure t
+  :init
+  (unless (find-font (font-spec :name "all-the-icons"))
+    (warn "Required fonts are missing. Remember to run `all-the-icons-install-fonts'")))
 
 (use-package time
   :init
