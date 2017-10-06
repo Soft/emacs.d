@@ -52,7 +52,8 @@
 
 (use-package uniquify
   :config
-  (setq uniquify-buffer-name-style 'forward))
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-separator " • "))
 
 (use-package nlinum
   :ensure t
