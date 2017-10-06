@@ -12,6 +12,7 @@ staged changes."
   :ensure t
   :bind
   (("C-c g g" . magit-status)
+   ("C-c g p" . magit-dispatch-popup)
    ("C-c g d" . magit-diff-unstaged-or-staged)
    ("C-c g l" . magit-log-current)))
 
