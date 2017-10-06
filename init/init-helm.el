@@ -32,7 +32,6 @@
   :if (programs-p "ag")
   :ensure t)
 
-;; TODO: This doesn't seem to be necessary anymore
 (use-package helm-projectile
   :ensure t
   :config (helm-projectile-on)
@@ -48,7 +47,8 @@
 (use-package helm-swoop
   :ensure t
   :config
-  (setq helm-swoop-speed-or-color t)
+  (setq helm-swoop-speed-or-color t
+        helm-swoop-use-line-number-face t)
   :bind
   (("C-c S" . helm-multi-swoop-projectile)))
 
