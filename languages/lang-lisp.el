@@ -107,7 +107,9 @@
 
 (use-package clojure-mode
   :ensure t
-  :mode (("\\.clj\\'" . clojure-mode))
+  :mode (("\\.clj\\'" . clojure-mode)
+         ("\\.cljc\\'" . clojure-mode)
+         ("\\.cljs\\'" . clojurescript-mode))
   :init
   (add-hook 'clojure-mode-hook #'lisp-setup))
 
