@@ -12,11 +12,16 @@
 (defun python-setup ()
   "Defaults for Python."
   (highlight-indent-guides-mode)
-  (pyvenv-mode))
+  (pyvenv-mode)
+  (anaconda-eldoc-mode))
 
 (define-skeleton python-doc-comment
   "Insert Python doc comment" nil
   > "\"\"\"" _ "\"\"\"" \n)
+
+(use-package anaconda-mode
+  :ensure t
+  :defer t)
 
 (use-package python
   :mode (("\\.py\\'" . python-mode))
