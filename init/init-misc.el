@@ -92,4 +92,29 @@
 (use-package mpris-control
   :commands (mpris-control-info-mode))
 
+(use-package zenity-color-picker
+  :if (programs-p "zenity")
+  :ensure t
+  :defer t)
+
+(use-package kurecolor
+  :ensure t
+  :defer t)
+
+(defhydra hydra-kurecolor nil
+  "
+^Hue^          ^Saturation^   ^Brightness
+^^^^^^-------------------------------------------
+_h_: Decrease  _s_: Decrease  _b_: Decrease
+_H_: Increase  _S_: Increase  _B_: Increase
+"
+  ("h" kurecolor-decrease-hue-by-step)
+  ("H" kurecolor-increase-hue-by-step)
+  ("s" kurecolor-decrease-saturation-by-step)
+  ("S" kurecolor-increase-saturation-by-step)
+  ("b" kurecolor-decrease-brightness-by-step)
+  ("B" kurecolor-increase-brightness-by-step))
+
+(bind-key "C-c x c" #'hydra-kurecolor/body)
+
 (provide 'init-misc)
