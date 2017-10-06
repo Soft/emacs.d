@@ -22,7 +22,10 @@
   (interactive)
   (let* ((name (projectile-project-name))
          (project-buffers (projectile-project-buffers))
-         (unrelated (--remove (memq it project-buffers) (buffer-list))))
+         (unrelated (--remove
+                     (or (memq it project-buffers)
+                         (not (buffer-file-name it)))
+                     (buffer-list))))
     (if (yes-or-no-p
          (format "Are you sure you want to kill %d buffer(s) leaving only buffers belonging to '%s'? "
                  (length unrelated) name))
