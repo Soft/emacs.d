@@ -46,10 +46,16 @@
   (("C-h b" . helm-descbinds)))
 
 (use-package helm-swoop
-  :ensure t)
+  :ensure t
+  :config
+  (setq helm-swoop-speed-or-color t)
+  :bind
+  (("C-c S" . helm-multi-swoop-projectile)))
 
 (use-package helm-themes
-  :ensure t)
+  :ensure t
+  :bind
+  (("C-x c T" . helm-themes)))
 
 (use-package helm-emoji
   :bind (("C-x c E" . helm-emoji)))
