@@ -64,6 +64,7 @@
   (setq flyspell-mode-line-string " 🅕")
   (after-load 'helm
     (use-package flyspell-correct-helm
+      :ensure t
       :init
       (require 'flyspell-correct-helm)
       (bind-key
