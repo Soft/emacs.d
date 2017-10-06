@@ -15,6 +15,16 @@
   :commands (flycheck-mode)
   :ensure t
   :config
+  (fringe-helper-define
+    'flycheck-fringe-bitmap-double-arrow nil
+    "..XXXX.."
+    ".X....X."
+    "X..XX..X"
+    "X.X..X.X"
+    "X.X..X.X"
+    "X..XX..X"
+    ".X....X."
+    "..XXXX..")
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (setq
    flycheck-mode-line-prefix "✔"
