@@ -59,6 +59,10 @@
 
 (bind-key "C-h K" #'describe-personal-keybindings)
 
+(use-package eldoc
+  :diminish eldoc-mode
+  :defer t)
+
 (defconst adequate-url "https://bitbucket.org/Soft/emacs.d/src")
 
 (defun about-adequate-emacs-d ()
