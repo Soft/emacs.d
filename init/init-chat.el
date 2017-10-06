@@ -34,6 +34,7 @@
   (weechat-connect weechat-host-default weechat-port-default weechat-password-default))
 
 (use-package helm-weechat
+  :commands (helm-weechat-buffers)
   :bind (("C-x c w" . helm-weechat-buffers)))
 
 (provide 'init-chat)
