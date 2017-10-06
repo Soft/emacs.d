@@ -95,6 +95,7 @@
 
 (use-package beacon
   :ensure t
+  :diminish beacon-mode
   :init
   (beacon-mode)
   :config
