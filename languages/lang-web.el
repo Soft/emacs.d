@@ -1,5 +1,13 @@
 ;;; lang-web.el --- Web related languages -*- lexical-binding: t -*-
 
+(use-package css-eldoc
+  :defer t
+  :ensure t)
+
+(use-package rainbow-mode
+  :defer t
+  :ensure t)
+
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))
   :interpreter ("node" . js2-mode)
@@ -13,23 +21,6 @@
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode))
   :ensure t)
-
-(use-package css-eldoc
-  :defer t
-  :ensure t)
-
-(use-package rainbow-mode
-  :defer t
-  :ensure t)
-
-(use-package zenity-color-picker
-  :if (programs-p "zenity")
-  :ensure t
-  :defer t)
-
-(use-package kurecolor
-  :ensure t
-  :defer t)
 
 (defun css-setup ()
   (rainbow-mode)
@@ -46,5 +37,16 @@
   :ensure t
   :init
   (add-hook 'css-mode-hook #'css-setup))
+
+(use-package haml-mode
+  :mode (("\\.haml\\'" . haml-mode))
+  :ensure t)
+
+(use-package web-mode
+  :mode (("\\.p?html?\\'" . web-mode)
+         ("\\.mustache\\'" . web-mode)
+         ("\\.erb\\'" . web-mode)
+         ("\\.tsx\\'" . web-mode))
+  :ensure t)
 
 (provide 'lang-web)
