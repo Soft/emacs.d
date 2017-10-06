@@ -57,9 +57,32 @@
 
 (defun set-frame-alpha (number)
   (interactive "nAlpha: ")
-  (if (<= 10 number 100)
+  (if (<= 5 number 100)
       (set-frame-parameter nil 'alpha number)
     (error "Invalid alpha")))
+
+(defvar frame-alpha-step 5
+  "Step for frame alpha changes.")
+
+(defun frame-alpha-alter (fn)
+  (set-frame-alpha
+   (clamp 5 100
+          (funcall fn (or (frame-parameter nil 'alpha) 100)))))
+
+(defun frame-alpha-inc ()
+  "Increase frame alpha by `frame-alpha-step'."
+  (interactive)
+  (frame-alpha-alter (lambda (value) (+ value frame-alpha-step))))
+
+(defun frame-alpha-dec ()
+  "Decrease frame alpha by `frame-alpha-step'."
+  (interactive)
+  (frame-alpha-alter (lambda (value) (- value frame-alpha-step))))
+
+(defhydra hydra-frame-alpha nil
+  "Set frame opacity"
+  ("+" frame-alpha-inc)
+  ("-" frame-alpha-dec))
 
 (defun toggle-fullscreen ()
   (interactive)

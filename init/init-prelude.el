@@ -109,6 +109,12 @@ called without an argument to create the initial value."
     (puthash key (funcall fn value) table))
   table)
 
+(defun clamp (min max value)
+  "Clamp VALUE between MIN and MAX."
+  (cond ((< value min) min)
+        ((< value max) value)
+        (t max)))
+
 (defmacro debug-message (message &rest args)
   "Similar to message but only produces output when emacs-debug
 is non-nil."
