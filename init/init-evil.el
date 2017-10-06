@@ -69,8 +69,12 @@
 
 (use-package evil-numbers
   :ensure t
-  :bind (("C-c +" . evil-numbers/inc-at-pt)
-         ("C-c -" . evil-numbers/dev-at-pt)))
+  :defer t)
+
+(defhydra hydra-evil-numbers (global-map "C-c")
+  "Operate on the number"
+  ("+" evil-numbers/inc-at-pt)
+  ("-" evil-numbers/dec-at-pt))
 
 (use-package evil-nerd-commenter
   :defer t
