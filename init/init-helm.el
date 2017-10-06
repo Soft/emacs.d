@@ -23,7 +23,7 @@
    ("C-x b"   . helm-mini)
    ("C-x C-b" . helm-buffers-list)
    ("C-c o"   . helm-occur)
-   ("C-c SPC" . helm-imenu)
+   ("C-c S" . helm-imenu)
    ("M-x"     . helm-M-x)
    ("C-h a"   . helm-apropos)
    ("C-h i"   . helm-info-emacs)))
@@ -44,13 +44,20 @@
   :bind
   (("C-h b" . helm-descbinds)))
 
+(defun helm-swoop-projectile-or-file ()
+  (interactive)
+  (if (projectile-project-p)
+      (helm-multi-swoop-projectile)
+    (helm-swoop)))
+
 (use-package helm-swoop
   :ensure t
+  :defer t
   :config
   (setq helm-swoop-speed-or-color t
-        helm-swoop-use-line-number-face t)
-  :bind
-  (("C-c S" . helm-multi-swoop-projectile)))
+        helm-swoop-use-line-number-face t))
+
+(bind-key "C-c SPC" #'helm-swoop-projectile-or-file)
 
 (use-package helm-themes
   :ensure t
