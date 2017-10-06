@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Simple minor mode for opening files using D-Bus method calls.
+;; Minor mode for controlling Emacs using D-Bus method calls.
 
 ;;; Code:
 
