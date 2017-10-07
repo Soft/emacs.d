@@ -117,6 +117,18 @@ _H_: Increase  _S_: Increase  _B_: Increase
 
 (bind-key "C-c x c" #'hydra-kurecolor/body)
 
+(use-package restclient
+  :ensure t
+  :defer t)
+
+(defun restclient ()
+  "Get a restclient buffer."
+  (interactive)
+  (let ((buffer (get-buffer-create "*restclient*")))
+    (with-current-buffer buffer
+      (restclient-mode))
+    (pop-to-buffer-same-window buffer)))
+
 (use-package dbus-control
   :if (and (not (daemonp)) (locate-library "dbus"))
   :commands (dbus-control-mode)
