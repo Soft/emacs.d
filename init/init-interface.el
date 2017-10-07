@@ -43,6 +43,14 @@
   (unless (find-font (font-spec :name "all-the-icons"))
     (warn "Required fonts are missing. Remember to run `all-the-icons-install-fonts'")))
 
+(use-package page-break-lines
+  :disabled
+  :ensure t
+  :diminish page-break-lines-mode
+  :init
+  (setq page-break-lines-char ?·)
+  (global-page-break-lines-mode))
+
 (use-package time
   :init
   (setq display-time-24hr-format t
@@ -117,7 +125,7 @@
   (vhl/install-extension 'evil))
 
 (defvar beacon-recalibration-percent 10
-  "How many percents should beacon color differ from background color.")
+  "How many percents should beacon color differ from the background color.")
 
 (use-package beacon
   :ensure t
