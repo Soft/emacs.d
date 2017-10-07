@@ -18,6 +18,11 @@
   :ensure t
   :defer t)
 
+(use-package web-beautify
+  :if (programs-p "js-beautify")
+  :ensure t
+  :defer t)
+
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode))
   :ensure t)
