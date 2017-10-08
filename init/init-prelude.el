@@ -1,5 +1,11 @@
 ;;; init-prelude.el --- Basic utilities -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Useful utility functions.
+
+;;; Code:
+
 (defun compose (fn &rest others)
   "Compose a set of functions."
   (let ((fns (cons fn others)))
@@ -142,3 +148,4 @@ the current buffer when executed."
 
 (provide 'init-prelude)
 
+;;; init-prelude.el ends here

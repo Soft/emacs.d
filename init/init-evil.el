@@ -1,5 +1,11 @@
 ;;; init-evil.el --- Vim emulation -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; I was a long time Vim user before and really like the modal editing paradigm.
+
+;;; Code:
+
 (defvar evil-disabled-modes
   '(inferior-emacs-lisp-mode
     inferior-haskell-mode
@@ -86,3 +92,5 @@
   :ensure t)
 
 (provide 'init-evil)
+
+;;; init-evil.el ends here

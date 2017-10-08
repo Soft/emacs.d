@@ -1,5 +1,12 @@
 ;;; init-packages.el --- Package management -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Use Paradox for pretty package menu. Additionally, we try to make sure we
+;; have a fresh copy package archive data before trying to install packages.
+
+;;; Code:
+
 (use-package paradox
   :ensure t
   :defer t
@@ -51,3 +58,5 @@
 
 
 (provide 'init-packages)
+
+;;; init-packages.el ends here

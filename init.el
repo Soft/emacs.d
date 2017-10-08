@@ -2,6 +2,9 @@
 
 ;; Samuel Laurén 💗 2014-2017
 
+;; Author: Samuel Laurén <samuel.lauren@iki.fi>
+;; Homepage: https://bitbucket.org/Soft/emacs.d
+
 ;;; Commentary:
 
 ;; This is my humble attempt at trying to configure Emacs the way I like it.

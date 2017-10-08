@@ -1,5 +1,11 @@
 ;;; init-interface.el --- Interface related settings -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Interface related settings.
+
+;;; Code:
+
 (setq
  inhibit-splash-screen t
  inhibit-startup-message t)
@@ -153,3 +159,4 @@
 
 (provide 'init-interface)
 
+;;; init-interface.el ends here

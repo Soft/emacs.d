@@ -1,5 +1,12 @@
 ;;; init-search.el --- Search configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Search configuration. Additionally, are some search related things in
+;; `init-helm.el'.
+
+;;; Code:
+
 (use-package pcre2el
   :ensure t
   :diminish pcre-mode
@@ -35,3 +42,4 @@
 
 (provide 'init-search)
 
+;;; init-search.el ends here

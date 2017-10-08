@@ -1,5 +1,18 @@
 ;;; init-fonts.el --- Font configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Font configuration.
+
+;; Adequate has a CSS-style font fallback system where upon start it
+;; successively tries a series of recommended fonts until it finds a one that is
+;; available.
+
+;; Currently, Adequate tries to first use Iosevka font
+;; <https://be5invis.github.io/Iosevka/>.
+
+;;; Code:
+
 (defvar monospace-font-family
   '("Iosevka"
     "Hack"
@@ -45,3 +58,5 @@
            ("<C-mouse-5>" . text-scale-decrease))
 
 (provide 'init-fonts)
+
+;;; init-fonts.el ends here.

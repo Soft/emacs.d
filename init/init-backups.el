@@ -1,5 +1,11 @@
 ;;; init-backups.el --- Backups -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Save backups under emacs.d directory.
+
+;;; Code:
+
 (let ((backup-path (f-join user-emacs-directory "backups"))
       (auto-save-path (f-join user-emacs-directory "saves")))
   (unless (f-directory? backup-path)
@@ -15,3 +21,5 @@
               vc-make-backup-files t)
 
 (provide 'init-backups)
+
+;;; init-backups.el ends here

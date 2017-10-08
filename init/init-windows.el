@@ -1,5 +1,11 @@
 ;;; init-windows.el --- Window management -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Tools for window management.
+
+;;; Code:
+
 (defun other-windows-p ()
   "Are there more than one window."
   (> (length (window-list)) 1))
@@ -96,3 +102,5 @@ _h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar               
 (bind-key "C-c w" #'hydra-manage-windows/body)
 
 (provide 'init-windows)
+
+;;; init-windows.el ends here

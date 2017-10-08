@@ -39,3 +39,5 @@
      (run-hooks 'org-mode-hook))))
 
 (provide 'init-scratch)
+
+;;; init-scratch.el ends here

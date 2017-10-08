@@ -1,5 +1,11 @@
 ;;; init-neotree.el --- Neotree setup -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Neotree offers a nice sidebar with directory listing
+
+;;; Code:
+
 (defun neotree-setup ()
   "Defaults for neotree buffers."
   (setq-local mode-line-format nil)
@@ -25,3 +31,5 @@
     (setq projectile-switch-project-action #'neotree-projectile-action)))
 
 (provide 'init-neotree)
+
+;;; init-neotree.el ends here

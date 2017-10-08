@@ -1,5 +1,11 @@
 ;;; init-misc.el --- Miscellaneous packages -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Miscellaneous packages.
+
+;;; Code:
+
 (use-package xkcd
   :commands (xkcd-rand)
   :defer t
@@ -144,3 +150,5 @@ _H_: Increase  _S_: Increase  _B_: Increase
   (exec-path-from-shell-initialize))
 
 (provide 'init-misc)
+
+;;; init-misc.el ends here

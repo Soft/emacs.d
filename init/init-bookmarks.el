@@ -1,5 +1,11 @@
 ;;; init-bookmarks.el --- Bookmarks -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Use bm for bookmarks.
+
+;;; Code:
+
 (use-package bm
   :ensure t
   :demand t
@@ -53,3 +59,5 @@ _p_: Previous
   (bind-key "C-c m" #'hydra-bm/body))
 
 (provide 'init-bookmarks)
+
+;;; init-bookmarks.el ends here

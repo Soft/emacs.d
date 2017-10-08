@@ -1,5 +1,12 @@
 ;;; init-helm.el --- Helm configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; I really like the smooth search-oriented approach to interfaces that Helm
+;; provides.
+
+;;; Code:
+
 (use-package helm 
   :ensure t
   :diminish helm-mode
@@ -77,3 +84,5 @@
   :bind  (("C-x c M" . helm-bm)))
 
 (provide 'init-helm)
+
+;;; init-helm.el ends here

@@ -1,5 +1,11 @@
 ;;; init-terminal.el --- Shells and terminals -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Terminals and shells.
+
+;;; Code:
+
 (use-package multi-term
   :ensure t
   :defer t)
@@ -193,3 +199,4 @@
 
 (provide 'init-terminal)
 
+;;; init-terminal.el ends here

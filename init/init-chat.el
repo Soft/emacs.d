@@ -1,5 +1,12 @@
 ;;; init-chat.el --- Chat configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Maybe I'll eventually investigate chat solutions internal to Emacs but for
+;; the time being I am quite happy with Weechat.
+
+;;; Code:
+
 (use-package weechat
   :defer t
   :ensure t
@@ -38,3 +45,5 @@
   :bind (("C-x c w" . helm-weechat-buffers)))
 
 (provide 'init-chat)
+
+;;; init-chat.el ends here

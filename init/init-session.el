@@ -1,5 +1,11 @@
 ;;; init-session.el --- Session management -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Try to keep as much state between Emacs restarts as possible.
+
+;;; Code:
+
 (use-package restart-emacs
   :ensure t
   :defer t)
@@ -50,3 +56,4 @@
 
 (provide 'init-session)
 
+;;; init-session.el ends here

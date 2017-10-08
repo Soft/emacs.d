@@ -1,5 +1,11 @@
 ;;; init-space.el --- Spacemacs inspired keymaps -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Some keybindings inspired by Spacemacs.
+
+;;; Code:
+
 (after-load 'evil
   (bind-keys
    :map evil-normal-state-map
@@ -77,3 +83,5 @@
   ("p" winner-undo "undo"))
 
 (provide 'init-space)
+
+;;; init-space.el ends here

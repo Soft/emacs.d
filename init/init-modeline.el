@@ -1,5 +1,11 @@
 ;;; init-modeline.el --- Modeline configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Use telephone-line for pretty modeline
+
+;;; Code:
+
 (use-package telephone-line-config
   :ensure telephone-line
   :config
@@ -12,3 +18,4 @@
 
 (provide 'init-modeline)
 
+;;; init-modeline.el ends here

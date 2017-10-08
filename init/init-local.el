@@ -1,5 +1,14 @@
 ;;; init-local.el --- Load emacs lisp from adequate emacs.d's "local" -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Adequate supports loading user's personal customizations from its `local'
+;; directory. The load order is based on the file names.
+
+;; The files are loaded after init completes.
+
+;;; Code:
+
 (defvar load-local-ignored
   '("customize.el")
   "Files that will not be loaded by load-local-files.")
@@ -31,3 +40,5 @@ loaded. Returns a list of files that were loaded."
 (add-hook 'after-init-hook #'load-local-files)
 
 (provide 'init-local)
+
+;;; init-local.el ends here

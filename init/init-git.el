@@ -1,5 +1,12 @@
 ;;; init-git.el --- Git settings -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Git configuration. Magit is the best interface to Git I have used on any
+;; platform.
+
+;;; Code:
+
 (defun magit-diff-unstaged-or-staged (d)
   "Display unstaged changes or, if universal argument is suplied,
 staged changes."
@@ -82,3 +89,5 @@ staged changes."
                finally (return results)))))
 
 (provide 'init-git)
+
+;;; init-git.el ends here

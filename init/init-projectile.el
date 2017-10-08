@@ -1,5 +1,11 @@
 ;;; init-projectile.el --- Projectile configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Projectile configuration.
+
+;;; Code:
+
 (defun cd-here ()
   "Change working directory to current file's location."
   (interactive)
@@ -52,3 +58,5 @@
   :ensure t)
 
 (provide 'init-projectile)
+
+;;; init-projectile.el ends here

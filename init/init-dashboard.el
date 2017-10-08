@@ -1,5 +1,12 @@
 ;;; init-dashboard.el --- Dashboard setup -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Fancy dashboard with random banner images. Place the images you want to use
+;; inside Adequate's `resources/banners' directory.
+
+;;; Code:
+
 (defvar dashboard-user-banner-directory
   (f-join init-directory "resources/banners")
   "Location for user's dashboard banners.")
@@ -37,3 +44,5 @@
 
 
 (provide 'init-dashboard)
+
+;; init-dashboard.el ends here

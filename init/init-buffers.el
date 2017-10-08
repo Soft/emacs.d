@@ -1,7 +1,11 @@
 ;;; init-buffers.el --- Buffer management -*- lexical-binding: t -*-
 
+;;; Commentary:
+
 ;; Maybe it would after all be better to advice the functions instead of just
 ;; remaping the bindings since it would make it harder to ignore these.
+
+;;; Code:
 
 (defvar save-buffer-special-alist '()
   "List of handlers for saving special buffers.")
@@ -33,3 +37,5 @@
 (global-set-key [remap kill-buffer] #'kill-buffer-keep-immortal)
 
 (provide 'init-buffers)
+
+;;; init-buffers.el ends here

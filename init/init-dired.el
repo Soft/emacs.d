@@ -1,5 +1,11 @@
 ;;; init-dired.el --- Dired configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Make dired nice.
+
+;;; Code:
+
 (defun dired-setup ()
   "Setup dired-mode."
   (diredfl-mode)
@@ -94,3 +100,4 @@ _x_: Executable
 
 (provide 'init-dired)
 
+;;; init-dired.el ends here

@@ -1,5 +1,11 @@
 ;;; init-editor.el --- Editor settings -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Basic editing configuration.
+
+;;; Code:
+
 (set-charset-priority 'unicode)
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
@@ -142,3 +148,5 @@
   (setq auto-revert-mode-text " 🅡"))
 
 (provide 'init-editor)
+
+;;; init-editor.el ends here

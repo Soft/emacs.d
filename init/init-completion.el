@@ -1,5 +1,11 @@
 ;;; init-completion.el --- Code completion -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Use Company for code completion. This needs more work.
+
+;;; Code:
+
 (use-package company
   :ensure t
   :diminish company-mode
@@ -19,3 +25,5 @@
   :defer t)
 
 (provide 'init-completion)
+
+;;; init-completion.el ends here

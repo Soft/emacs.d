@@ -1,5 +1,11 @@
 ;;; init-movement.el --- Movement and selection -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Moving and selecting text effectively is important.
+
+;;; Code:
+
 (use-package avy
   :defer t
   :ensure t)
@@ -21,3 +27,5 @@
          ("C-c C-." . goto-last-change-reverse)))
 
 (provide 'init-movement)
+
+;;; init-movement.el ends here

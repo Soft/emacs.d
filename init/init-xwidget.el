@@ -1,5 +1,11 @@
 ;;; init-xwidget.el --- Xwidgets -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Experimental configuration for xwidgets
+
+;;; Code:
+
 (defun xwidget-webkit-setup ()
   "Defaults for Webkit"
   (bind-keys
@@ -16,3 +22,5 @@
 (add-hook 'xwidget-webkit-mode-hook 'xwidget-webkit-mode-defaults)
 
 (provide 'init-xwidget)
+
+;;; init-xwidget.el ends here

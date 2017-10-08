@@ -1,5 +1,11 @@
 ;;; init-folding.el --- Folding -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Use Origami for folding.
+
+;;; Code:
+
 (use-package origami
   :ensure t
   :defer t
@@ -35,3 +41,5 @@ _<tab>_: Toggle      _u_: Undo    _n_: Next
 (bind-key "C-c f" #'hydra-origami/body)
 
 (provide 'init-folding)
+
+;;; init-folding.el ends here

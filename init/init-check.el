@@ -108,3 +108,5 @@
 
 
 (provide 'init-check)
+
+;;; init-check.el ends here

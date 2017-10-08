@@ -1,5 +1,11 @@
 ;;; init-help.el --- Help related functions -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Emacs is a complex editor. Let's make accessing help as easy as we can.
+
+;;; Code:
+
 ;; helpful is really nice but sometimes it fails with an error. This macro adds
 ;; an advice to try an alternative (in this case likely from the describe-*
 ;; family of functions) if the first function fails.
@@ -85,3 +91,4 @@
 
 (provide 'init-help)
 
+;;; init-help.el ends here

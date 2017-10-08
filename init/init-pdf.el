@@ -1,5 +1,11 @@
 ;;; init-pdf.el --- Viewing PDF files -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; PDF Viewer.
+
+;;; Code:
+
 (defun pdf-view-setup ()
   (pdf-tools-enable-minor-modes)
   (pdf-view-fit-page-to-window)
@@ -19,3 +25,5 @@
    ("K" . pdf-view-previous-page)))
 
 (provide 'init-pdf)
+
+;;; init-pdf.el ends here

@@ -1,5 +1,11 @@
 ;;; init-theme.el --- Theme configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Make Emacs look nice.
+
+;;; Code:
+
 ;; I like themes
 (defvar wanted-themes
   '(atom-one-dark-theme
@@ -78,3 +84,5 @@
 
 
 (provide 'init-theme)
+
+;;; init-theme.el ends here

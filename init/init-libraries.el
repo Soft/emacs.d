@@ -1,5 +1,12 @@
 ;;; init-libraries.el --- General purpose libraries -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Require libraries that are used by the rest of the configuration. This should
+;; happen as early as possible.
+
+;;; Code:
+
 ;; A modern list library for Emacs
 (use-package dash
   :ensure t
@@ -24,3 +31,4 @@
 
 (provide 'init-libraries)
 
+;;; init-libraries.el ends here
