@@ -27,6 +27,14 @@
  tramp-default-method "ssh"
  vc-follow-symlinks t)
 
+;; Enabled narrow
+(put 'narrow-to-defun 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
 (delq 'process-kill-buffer-query-function
       kill-buffer-query-functions)
 
