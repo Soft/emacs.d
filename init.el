@@ -14,6 +14,9 @@
 
 ;; Alter garbage collection policy for the duration of startup
 
+(if (version< emacs-version "25")
+    (error "Adequate emacs.d requires Emacs 25"))
+
 (let ((default-threshold gc-cons-threshold))
   (setq gc-cons-threshold 64000000)
   (add-hook 'after-init-hook
