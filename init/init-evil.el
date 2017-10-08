@@ -61,7 +61,11 @@
      ("k" . evil-previous-visual-line)
      ("J" . evil-scroll-down)
      ("K" . evil-scroll-up)
-     ("\\" . comment-or-uncomment-region))))
+     ("\\" . comment-or-uncomment-region))
+
+    (bind-keys
+     :map evil-insert-state-map
+     ("C-n" . company-complete))))
 
 (use-package evil-surround
   :ensure t

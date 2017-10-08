@@ -2,8 +2,13 @@
 
 (use-package company
   :ensure t
-  :defer t
-  :diminish company-mode)
+  :diminish company-mode
+  :init (global-company-mode)
+  :config
+  (bind-keys
+   :map company-active-map
+   ("C-n" . company-select-next)
+   ("C-p" . company-select-previous)))
 
 (use-package company-quickhelp
   :ensure t
