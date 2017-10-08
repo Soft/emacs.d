@@ -21,7 +21,9 @@ staged changes."
   (("C-c g g" . magit-status)
    ("C-c g p" . magit-dispatch-popup)
    ("C-c g d" . magit-diff-unstaged-or-staged)
-   ("C-c g l" . magit-log-current)))
+   ("C-c g l" . magit-log-current))
+  :config
+  (setq magit-commit-ask-to-stage nil))
 
 (use-package git-timemachine
   :ensure t
