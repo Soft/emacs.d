@@ -23,11 +23,16 @@
 (use-package hydra
   :ensure t)
 
-(use-package cl-lib)
-
 (use-package fringe-helper
   :ensure t
   :functions (fringe-helper-define))
+
+(use-package cl-lib)
+
+(use-package color
+  :functions (color-distance
+              color-lighten-name
+              color-darken-name))
 
 (provide 'init-libraries)
 

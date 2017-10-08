@@ -135,16 +135,12 @@
   :init
   (beacon-mode)
   :config
-  (require 'color)
   ;; It would be nice if this took into account the background color of the
   ;; location where point is.
   (defun beacon-recalibrate-color ()
-    (let ((background (frame-parameter nil 'background-color)))
-      (setq beacon-color
-            (if (> (color-distance background "#ffffff")
-                   (color-distance background "#000000"))
-                (color-lighten-name background beacon-recalibration-percent)
-              (color-darken-name background beacon-recalibration-percent)))))
+    (setq beacon-color
+          (color-derive beacon-recalibration-percent
+                        (frame-parameter nil 'background-color))))
   (advice-add
    #'switch-theme :after
    (lambda (&rest args) (beacon-recalibrate-color))))

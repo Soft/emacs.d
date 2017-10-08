@@ -146,6 +146,12 @@ the current buffer when executed."
         (process-send-string proc (buffer-string))
         (process-send-eof proc)))))
 
+(defun color-derive (change color)
+  (if (> (color-distance color "#ffffff")
+         (color-distance color "#000000"))
+      (color-lighten-name color change)
+    (color-darken-name color change)))
+
 (provide 'init-prelude)
 
 ;;; init-prelude.el ends here
