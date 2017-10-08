@@ -8,7 +8,8 @@
 
 ;; I like themes
 (defvar wanted-themes
-  '(challenger-deep-theme
+  '(atom-one-dark-theme
+    challenger-deep-theme
     darkokai-theme
     django-theme
     doom-themes
@@ -24,8 +25,7 @@
     subatomic-theme
     sublime-themes
     twilight-anti-bright-theme
-    twilight-bright-theme
-    atom-one-dark-theme)
+    twilight-bright-theme)
   "Themes that will be automatically installed if they are missing.")
 
 (install-packages-if-missing wanted-themes t)
