@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 
-;; Use Company for code completion
+;; Use Company for code completion.
 
 ;;; Code:
 
@@ -12,6 +12,10 @@
   :defer t)
 
 (use-package company-statistics
+  :ensure t
+  :defer t)
+
+(use-package helm-company
   :ensure t
   :defer t)
 
@@ -37,7 +41,8 @@
    :map company-active-map
    ("C-n" . company-select-next)
    ("C-p" . company-select-previous)
-   ("C-j" . company-complete-selection))
+   ("C-j" . company-complete-selection)
+   ("C-/" . helm-company))
   (after-load 'evil
     (evil-declare-change-repeat 'company-complete)
     (bind-key "C-n" #'company-complete evil-insert-state-map)))
