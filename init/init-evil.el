@@ -18,6 +18,7 @@
     geiser-repl-mode
     haskell-interactive-mode
     helpful-mode
+    inferior-emacs-lisp-mode
     inferior-haskell-mode
     inferior-python-mode
     life-mode
@@ -32,46 +33,40 @@
     tetris-mode
     weechat-mode
     xkcd-mode
-    xwidget-webkit-mode
-    inferior-emacs-lisp-mode)
+    xwidget-webkit-mode)
   "Modes where Evil mode should not be used.")
 
 (use-package evil
   :ensure t
-  :init (evil-mode)
+  :init
+  (evil-mode)
   :config
-  (progn
-    (setq
-     evil-cross-lines t
-     evil-default-cursor t
-     evil-mode-beyond-eol t)
+  (setq evil-cross-lines t
+        evil-default-cursor t
+        evil-mode-beyond-eol t)
 
-    (dolist
-        (mode evil-disabled-modes)
-      (evil-set-initial-state mode 'emacs))
+  (dolist
+      (mode evil-disabled-modes)
+    (evil-set-initial-state mode 'emacs))
 
-    (bind-keys
-     :map evil-normal-state-map
-     ("j" . evil-next-visual-line)
-     ("k" . evil-previous-visual-line)
-     ("J" . evil-scroll-down)
-     ("K" . evil-scroll-up)
-     ("H" . smart-backward)
-     ("L" . smart-forward)
-     ("\\" . evilnc-comment-or-uncomment-lines)
-     ("<return>" . er/expand-region))
+  (bind-keys
+   :map evil-normal-state-map
+   ("j" . evil-next-visual-line)
+   ("k" . evil-previous-visual-line)
+   ("J" . evil-scroll-down)
+   ("K" . evil-scroll-up)
+   ("H" . smart-backward)
+   ("L" . smart-forward)
+   ("\\" . evilnc-comment-or-uncomment-lines)
+   ("<return>" . er/expand-region))
 
-    (bind-keys
-     :map evil-visual-state-map
-     ("j" . evil-next-visual-line)
-     ("k" . evil-previous-visual-line)
-     ("J" . evil-scroll-down)
-     ("K" . evil-scroll-up)
-     ("\\" . comment-or-uncomment-region))
-
-    (bind-keys
-     :map evil-insert-state-map
-     ("C-n" . company-complete))))
+  (bind-keys
+   :map evil-visual-state-map
+   ("j" . evil-next-visual-line)
+   ("k" . evil-previous-visual-line)
+   ("J" . evil-scroll-down)
+   ("K" . evil-scroll-up)
+   ("\\" . comment-or-uncomment-region)))
 
 (use-package evil-surround
   :ensure t
