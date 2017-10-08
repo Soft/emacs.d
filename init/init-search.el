@@ -15,7 +15,12 @@
 (use-package anzu
   :ensure t
   :diminish anzu-mode
-  :init (global-anzu-mode))
+  :init
+  (global-anzu-mode)
+  (after-load 'evil
+    (use-package evil-anzu
+      :ensure t
+      :init (require 'evil-anzu))))
 
 ;; FIXME: This really needs more work
 (use-package ggtags
