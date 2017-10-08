@@ -121,6 +121,7 @@
              check
              interface
              dashboard
+             snippets
              fonts
              theme
              projectile
