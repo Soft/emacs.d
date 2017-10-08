@@ -159,15 +159,18 @@
 
 (defhydra hydra-buffer nil
   "
-^Buffer^                          ^Text Size
-^^^^-------------------------------------------------------
-_w_: Toggle visible whitespace    _-_: Decrease
-_i_: Toggle indent guides         _+_: Increase
-_n_: Toggle line numbers
+^Buffer^              ^Toggle^                   ^Text Size
+^^^^^^------------------------------------------------------------
+_d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
+                    ^^_i_: Indent guides         _+_: Increase
+                    ^^_n_: Line numbers
+                    ^^_t_: Truncate lines
 "
+  ("d" magit-diff-buffer-file)
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)
   ("n" nlinum-mode)
+  ("t" toggle-truncate-lines)
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
 
