@@ -7,33 +7,33 @@
 ;;; Code:
 
 (defvar evil-disabled-modes
-  '(inferior-emacs-lisp-mode
+  '(artist-mode
+    bm-show-mode
+    comint-mode
+    dashboard-mode
+    dired-mode
+    doctor-mode
+    epa-list-keys
+    eshell-mode
+    geiser-repl-mode
+    haskell-interactive-mode
+    helpful-mode
     inferior-haskell-mode
     inferior-python-mode
-    geiser-repl-mode
-    comint-mode
-    bm-show-mode
-    artist-mode
-    eshell-mode
-    haskell-interactive-mode
-    life
-    dashboard-mode
+    life-mode
+    neotree-mode
+    nov-mode
+    paradox-menu-mode
     paradox-mode
-    dired-mode
+    plasma-mode
+    snake-mode
+    sunshine-mode
+    term-mode
+    tetris-mode
     weechat-mode
     xkcd-mode
-    plasma-mode
-    term-mode
-    neotree-mode
-    helpful-mode
-    doctor-mode
-    sunshine-mode
-    tetris-mode
-    epa-list-keys
-    paradox-menu-mode
     xwidget-webkit-mode
-    nov-mode
-    snake-mode)
+    inferior-emacs-lisp-mode)
   "Modes where Evil mode should not be used.")
 
 (use-package evil
