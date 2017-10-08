@@ -146,7 +146,7 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :demand t
   :config
   (add-to-list-many 'exec-path-from-shell-variables
-                    '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "PATH"))
+                    '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "PATH" "BROWSER"))
   (exec-path-from-shell-initialize))
 
 (provide 'init-misc)
