@@ -38,7 +38,11 @@
 (use-package ag
   :if (programs-p "ag")
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (setq ag-highlight-search t
+        ag-reuse-window t
+        ag-reuse-buffers t))
 
 (use-package ripgrep
   :if (programs-p "rg")
