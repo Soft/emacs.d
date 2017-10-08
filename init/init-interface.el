@@ -116,10 +116,10 @@
   :ensure t
   :bind (("C-c x g" . highlight-indent-guides-mode)))
 
-;; Disabled for now
 (use-package volatile-highlights
   :disabled
   :ensure t
+  :diminish volatile-highlights-mode
   :init
   (volatile-highlights-mode)
   :config
