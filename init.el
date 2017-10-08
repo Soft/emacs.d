@@ -140,7 +140,7 @@
              modeline
              misc
              evil
-             space
+             ;; space ;; I don't really use these
              local))
     (lang . (c
              lisp
