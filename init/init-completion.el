@@ -6,6 +6,7 @@
 
 ;;; Code:
 
+;; TODO: Look into changing popup background color
 (use-package company-quickhelp
   :ensure t
   :defer t)
@@ -30,11 +31,13 @@
         company-selection-wrap-around t
         company-minimum-prefix-length 1
         company-tooltip-align-annotations t)
+  ;; Note: I think this might somehow interfere with Evil
   (add-hook 'company-mode-hook #'company-quickhelp-mode)
   (bind-keys
    :map company-active-map
    ("C-n" . company-select-next)
-   ("C-p" . company-select-previous))
+   ("C-p" . company-select-previous)
+   ("C-j" . company-complete-selection))
   (after-load 'evil
     (evil-declare-change-repeat 'company-complete)
     (bind-key "C-n" #'company-complete evil-insert-state-map)))
