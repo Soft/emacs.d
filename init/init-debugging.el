@@ -10,4 +10,6 @@
   :ensure t
   :defer t)
 
+(provide 'init-debugging)
+
 ;;; init-debugging.el ends here
