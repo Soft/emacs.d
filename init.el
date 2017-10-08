@@ -12,10 +12,12 @@
 
 ;;; Code:
 
-;; Alter garbage collection policy for the duration of startup
+;; Check version compatibility
 
 (if (version< emacs-version "25")
     (error "Adequate emacs.d requires Emacs 25"))
+
+;; Alter garbage collection policy for the duration of startup
 
 (let ((default-threshold gc-cons-threshold))
   (setq gc-cons-threshold 64000000)
