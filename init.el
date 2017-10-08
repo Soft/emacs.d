@@ -132,6 +132,7 @@
              scratch
              dired
              movement
+             debugging
              xwidget
              neotree
              chat
