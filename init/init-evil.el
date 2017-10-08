@@ -1,33 +1,34 @@
 ;;; init-evil.el --- Vim emulation -*- lexical-binding: t -*-
 
-(setq
- evil-disabled-modes
- '(inferior-emacs-lisp-mode
-   inferior-haskell-mode
-   inferior-python-mode
-   geiser-repl-mode
-   comint-mode
-   bm-show-mode
-   artist-mode
-   eshell-mode
-   haskell-interactive-mode
-   dashboard-mode
-   paradox-mode
-   dired-mode
-   weechat-mode
-   xkcd-mode
-   plasma-mode
-   term-mode
-   neotree-mode
-   helpful-mode
-   doctor-mode
-   sunshine-mode
-   tetris-mode
-   epa-list-keys
-   paradox-menu-mode
-   xwidget-webkit-mode
-   nov-mode
-   snake-mode))
+(defvar evil-disabled-modes
+  '(inferior-emacs-lisp-mode
+    inferior-haskell-mode
+    inferior-python-mode
+    geiser-repl-mode
+    comint-mode
+    bm-show-mode
+    artist-mode
+    eshell-mode
+    haskell-interactive-mode
+    life
+    dashboard-mode
+    paradox-mode
+    dired-mode
+    weechat-mode
+    xkcd-mode
+    plasma-mode
+    term-mode
+    neotree-mode
+    helpful-mode
+    doctor-mode
+    sunshine-mode
+    tetris-mode
+    epa-list-keys
+    paradox-menu-mode
+    xwidget-webkit-mode
+    nov-mode
+    snake-mode)
+  "Modes where Evil mode should not be used.")
 
 (use-package evil
   :ensure t
