@@ -1,4 +1,10 @@
-;;; lang-web.el --- Web related languages -*- lexical-binding: t -*-
+;;; lang-web.el --- Web-related languages -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;; Support for various Web programming languages.
+
+;;; Code:
 
 (use-package css-eldoc
   :defer t
@@ -55,3 +61,5 @@
   :ensure t)
 
 (provide 'lang-web)
+
+;;; lang-web.el ends here

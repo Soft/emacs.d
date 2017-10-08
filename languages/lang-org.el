@@ -1,5 +1,11 @@
 ;;; lang-org.el --- Org mode -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Org mode configuration
+
+;;; Code:
+
 (defun org-setup ()
   "Setup org-mode"
   (org-bullets-mode))
@@ -16,3 +22,4 @@
 
 (provide 'lang-org)
 
+;;; lang-org.el ends here

@@ -1,5 +1,11 @@
 ;;; lang-lisp.el --- Lisp-like languages -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Configuration for different Lisp varieties.
+
+;;; Code:
+
 (defun find-user-init-file ()
   "Open user's emacs init file."
   (interactive)
@@ -114,3 +120,5 @@
   (add-hook 'clojure-mode-hook #'lisp-setup))
 
 (provide 'lang-lisp)
+
+;;; lang-lisp.el ends here

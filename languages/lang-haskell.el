@@ -1,5 +1,11 @@
 ;;; lang-haskell.el --- Haskell -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Tools for Haskell programming.
+
+;;; Code:
+
 (use-package haskell-mode
   :ensure t
   :mode (("\\.hs\\'" . haskell-mode)
@@ -10,3 +16,5 @@
                 haskell-font-ock-symbols t))
 
 (provide 'lang-haskell)
+
+;;; lang-haskell.el ends here

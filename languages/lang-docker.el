@@ -1,5 +1,11 @@
 ;;; lang-docker.el --- Docker -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Packages for working with Docker's configuration files.
+
+;;; Code:
+
 (use-package docker
   :ensure t
   :defer t)
@@ -13,3 +19,5 @@
   :ensure t)
 
 (provide 'lang-docker)
+
+;;; lang-docker.el ends here

@@ -1,5 +1,11 @@
 ;;; lang-latex.el --- LaTeX -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Tools for wiriting LaTeX documents.
+
+;;; Code:
+
 (defun latex-setup ()
   (add-to-list 'LaTeX-verbatim-environments "minted")
   (TeX-fold-mode)
@@ -16,3 +22,5 @@
          ("\\.bib\\'" . bibtex-mode)))
 
 (provide 'lang-latex)
+
+;;; lang-latex.el ends here

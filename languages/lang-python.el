@@ -1,5 +1,11 @@
 ;;; lang-python.el --- Python -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Python programming environment
+
+;;; Code:
+
 (use-package pyvenv
   :ensure t
   :defer t)
@@ -33,3 +39,5 @@
    ("M-\"" . python-doc-comment)))
 
 (provide 'lang-python)
+
+;;; lang-python.el ends here

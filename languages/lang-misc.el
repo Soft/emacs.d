@@ -1,5 +1,11 @@
 ;;; lang-misc.el --- Miscellaneous languages -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Miscellaneous languages.
+
+;;; Code:
+
 (use-package yaml-mode
   :mode (("\\.yaml\\'" . yaml-mode)
          ("\\.yml\\'" . yaml-mode))
@@ -73,3 +79,5 @@
   (add-hook 'ssh-config-mode-hook #'turn-on-font-lock))
 
 (provide 'lang-misc)
+
+;;; lang-misc.el ends here

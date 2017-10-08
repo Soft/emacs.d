@@ -1,5 +1,11 @@
 ;;; lang-rust.el --- Rust configuration -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Rust programming environment
+
+;;; Code:
+
 (defun rust-setup ()
   "Defaults for Rust."
   (racer-mode)
@@ -27,3 +33,4 @@
 
 (provide 'lang-rust)
 
+;;; lang-rust.el ends here

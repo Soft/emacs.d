@@ -1,5 +1,11 @@
 ;;; lang-markdown.el --- Markdown -*- lexical-binding: t -*-
 
+;;; Commentary:
+
+;; Tools for working with Markdown files.
+
+;;; Code:
+
 (fset 'pandoc-pdf-from-buffer
       (make-compiler
        "pandoc"
@@ -56,3 +62,5 @@
   :defer t)
 
 (provide 'lang-markdown)
+
+;;; lang-markdown.el ends here
