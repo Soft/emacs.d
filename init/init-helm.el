@@ -15,12 +15,19 @@
   (require 'helm-config)
   (helm-mode)
   :config
-  (setq helm-buffer-fuzzy-matching  t
-        helm-recent-fuzzy-matching  t
-        helm-M-x-fuzzy-matching     t
-        helm-split-window-in-side-p t
-        helm-ff-skip-boring-files   t
-        helm-quick-update           t)
+  (setq helm-buffers-fuzzy-matching           t
+        helm-recentf-fuzzy-match              t
+        helm-M-x-fuzzy-match                  t
+        helm-split-window-in-side-p           t
+        helm-ff-skip-boring-files             t
+        helm-imenu-fuzzy-match                t
+        helm-semantic-fuzzy-match             t
+        helm-apropos-fuzzy-match              t
+        helm-locate-fuzzy-match               t
+        helm-ff-file-name-history-use-recentf t
+        helm-lisp-fuzzy-completion            t)
+  ;; (if (programs-p "curl")
+  ;;     (setq helm-net-prefer-curl t))
   (bind-keys
    :map helm-map
    ("<escape>" . helm-keyboard-quit)
@@ -61,8 +68,9 @@
   :ensure t
   :defer t
   :config
-  (setq helm-swoop-speed-or-color t
-        helm-swoop-use-line-number-face t))
+  (setq helm-swoop-speed-or-color       t
+        helm-swoop-use-line-number-face t
+        helm-swoop-use-fuzzy-match      t))
 
 (bind-key "C-c SPC" #'helm-swoop-projectile-or-file)
 
