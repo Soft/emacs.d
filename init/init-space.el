@@ -60,7 +60,7 @@
    ("SPC x b" . browse-url-at-point)
    ("SPC x X" . xkcd-rand)))
 
-(defhydra hydra-roate-frame (evil-normal-state-map "SPC w")
+(defhydra hydra-rotate-frame (evil-normal-state-map "SPC w")
   "Rotate frame"
   ("r" #'rotate-frame-clockwise "clockwise")
   ("R" #'rotate-frame-anticlockwise "counterclockwise"))

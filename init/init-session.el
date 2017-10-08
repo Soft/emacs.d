@@ -37,7 +37,8 @@
      shell-command-history)))
 
 (use-package recentf
-  :init (recentf-mode)
+  :init
+  (recentf-mode)
   :config
   (setq recentf-max-saved-items 1000)
   (add-to-list-many
