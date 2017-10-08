@@ -108,13 +108,10 @@
 
 (bind-key "<f11>" #'toggle-fullscreen)
 
+;; FIXME: Keybinding 
 (use-package centered-window-mode
   :ensure t
-  :bind (("C-c w c" . centered-window-mode)))
-
-(use-package highlight-indent-guides
-  :ensure t
-  :bind (("C-c x g" . highlight-indent-guides-mode)))
+  :defer t)
 
 (use-package volatile-highlights
   :disabled

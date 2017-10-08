@@ -44,7 +44,8 @@
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit))
 
-;; FIXME: This can be called before the use-package has installed all the
+;; FIXME:
+;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
 (defun prog-mode-setup ()
   "Defaults for programming modes."
@@ -55,10 +56,7 @@
   (fic-mode)
   (origami-mode)
   (dtrt-indent-mode)
-  (flycheck-mode) 
-  (company-mode)
-  (company-quickhelp-mode)
-  (company-statistics-mode))
+  (flycheck-mode))
 
 (use-package undo-tree
   :ensure t
@@ -71,7 +69,7 @@
 
 (use-package nlinum
   :ensure t
-  :bind (("C-c l" . nlinum-mode)))
+  :defer t)
 
 (use-package wc-mode
   :defer t
@@ -131,6 +129,10 @@
   :init
   (setq-default typo-language "English"))
 
+(use-package highlight-indent-guides
+  :ensure t
+  :defer t)
+
 (use-package prog-mode
   :defer t
   :init
@@ -154,6 +156,21 @@
   :defer t
   :config
   (setq auto-revert-mode-text " 🅡"))
+
+(defhydra hydra-buffer nil
+  "
+^Buffer Configuration^
+^^^^-------------------------------------------------------
+_w_: Toggle visible whitespace  _-_: Decrease text size
+_i_: Toggle indent guides       _+_: Increase text size
+"
+  ("w" whitespace-mode)
+  ("i" highlight-indent-guides-mode)
+  ("n" nlinum-mode)
+  ("-" text-scale-decrease)
+  ("+" text-scale-increase))
+
+(bind-key "C-c t" #'hydra-buffer/body)
 
 (provide 'init-editor)
 
