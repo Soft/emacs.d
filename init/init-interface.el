@@ -108,7 +108,6 @@
 
 (bind-key "<f11>" #'toggle-fullscreen)
 
-;; FIXME: Keybinding 
 (use-package centered-window-mode
   :ensure t
   :defer t)

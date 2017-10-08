@@ -159,10 +159,11 @@
 
 (defhydra hydra-buffer nil
   "
-^Buffer Configuration^
+^Buffer^                          ^Text Size
 ^^^^-------------------------------------------------------
-_w_: Toggle visible whitespace  _-_: Decrease text size
-_i_: Toggle indent guides       _+_: Increase text size
+_w_: Toggle visible whitespace    _-_: Decrease
+_i_: Toggle indent guides         _+_: Increase
+_n_: Toggle line numbers
 "
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)

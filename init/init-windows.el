@@ -62,16 +62,15 @@
   :defer t
   :ensure t)
 
-;; TODO: Tweak positioning
 (defhydra hydra-manage-windows nil
   "
-^Move^          ^Rotate^    ^^Layout^          ^Control^         ^Text Size^    ^Windows
+^Move^         ^^Window^                 ^Layout^            ^Control
 ^^^^^^^^^^----------------------------------------------------------------------------------------------
-    ^_k_         _r_: ↻      _p_: Previous     _z_: Zoom         _-_: Decrease  _2_: Split Horizontaly
-^^    ↑         ^_R_: ↺      _n_: Next         _f_: Fullscreen   _+_: Increase  _3_: Split Verticaly
-_h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar                  ^^_0_: Delete This
-^^    ↓                                   ^^^^^_s_: Scroll bar                ^^_1_: Delete Others
-    ^_j_                                   ^^^^_t_: Tool bar
+     ^_k_       ^_0_: Delete This         _p_: Previous       _m_: Menubar    _z_: Zoom
+ ^^    ↑       ^^_1_: Delete Others       _n_: Next           _s_: Scrollbar  _f_: Fullscreen
+ _h_ ← · → _l_   _2_: Split Horizontally  _b_: Balance        _t_: Toolbar    _c_: Center
+ ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      
+     ^_j_                              ^^^_R_: Anticlockwise  
 "
   ("h" windmove-left)
   ("j" windmove-down)
@@ -90,14 +89,12 @@ _h_ ← · → _l_               ^_b_: Balance      _m_: Menu bar               
   ("m" toggle-menu-bar-mode-from-frame)
   ("s" toggle-scroll-bar)
   ("t" toggle-tool-bar-mode-from-frame)
+  ("c" centered-window-mode)
 
-  ("-" text-scale-decrease)
-  ("+" text-scale-increase)
-
-  ("2" split-window-below)
-  ("3" split-window-right)
   ("0" delete-window)
-  ("1" delete-other-windows))
+  ("1" delete-other-windows)
+  ("2" split-window-below)
+  ("3" split-window-right))
 
 (bind-key "C-c w" #'hydra-manage-windows/body)
 
