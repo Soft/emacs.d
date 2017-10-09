@@ -33,6 +33,9 @@
 (defvar default-theme 'kaolin
   "Default theme for Emacs.")
 
+(defvar switch-theme-hook nil
+  "Hook to be run after switch theme.")
+
 (defun switch-theme (theme)
   "Unload existing theme and switch to a new one."
   (interactive
@@ -41,7 +44,8 @@
                            (mapcar #'symbol-name (custom-available-themes))
                            nil t))))
   (disable-theme (car custom-enabled-themes))
-  (load-theme theme t))
+  (load-theme theme t)
+  (run-hooks 'switch-theme-hook))
 
 (defun current-theme ()
   "Displays the current theme."

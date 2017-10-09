@@ -141,9 +141,7 @@
     (setq beacon-color
           (color-derive beacon-recalibration-percent
                         (frame-parameter nil 'background-color))))
-  (advice-add
-   #'switch-theme :after
-   (lambda (&rest args) (beacon-recalibrate-color))))
+  (add-hook 'switch-theme-hook #'beacon-recalibrate-color))
 
 (use-package fill-column-indicator
   :ensure t

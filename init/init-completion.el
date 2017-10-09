@@ -6,10 +6,18 @@
 
 ;;; Code:
 
-;; TODO: Look into changing popup background color
 (use-package company-quickhelp
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (add-hook
+   'switch-theme-hook
+   (lambda ()
+     ;; After theme change, derive popup colors from theme.
+     (setq company-quickhelp-color-background
+           (color-derive 5 (frame-parameter nil 'background-color))
+           company-quickhelp-color-foreground
+           (frame-parameter nil 'foreground-color)))))
 
 (use-package company-statistics
   :ensure t
