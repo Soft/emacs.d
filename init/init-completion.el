@@ -35,7 +35,6 @@
         company-selection-wrap-around t
         company-minimum-prefix-length 1
         company-tooltip-align-annotations t)
-  ;; Note: I think this might somehow interfere with Evil
   (add-hook 'company-mode-hook #'company-quickhelp-mode)
   (bind-keys
    :map company-active-map
