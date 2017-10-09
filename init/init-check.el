@@ -89,9 +89,12 @@
   (pcase lang
     ('en (progn
            (setq-local typo-language "English") ; Maybe we should load typo before
-           (writegood-mode)))
+           (writegood-mode)
+           (flyspell-mode)))
     ('fi (progn
-           (setq-local typo-language "Finnish")))))
+           (setq-local typo-language "Finnish")
+           (when (programs-p "enchant")
+             (wcheck-mode))))))
 
 (defvar guess-language-code-to-wcheck-name-map
   '((fi . "Finnish")

@@ -47,7 +47,7 @@
 ;;;###autoload
 (define-minor-mode gll-guess-language-lite-mode
   "Execute actions based on buffer's language."
-  :lighter " gll"
+  :lighter (:eval (format " %s" (or gll-buffer-language "ⓖ")))
   (if gll-guess-language-lite-mode
       (let ((buffer (current-buffer)))
         (unless (gll-identify buffer)
