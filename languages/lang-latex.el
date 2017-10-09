@@ -9,7 +9,8 @@
 (defun latex-setup ()
   (add-to-list 'LaTeX-verbatim-environments "minted")
   (TeX-fold-mode)
-  (TeX-fold-buffer))
+  (TeX-fold-buffer)
+  (yas-minor-mode))
 
 (use-package tex-mode
   :mode (("\\.tex\\'" . LaTeX-mode))

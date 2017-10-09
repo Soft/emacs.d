@@ -8,7 +8,8 @@
 
 (defun org-setup ()
   "Setup org-mode"
-  (org-bullets-mode))
+  (org-bullets-mode)
+  (yas-minor-mode))
 
 (use-package org
   :mode (("\\.org\\'" . org-mode))

@@ -8,15 +8,14 @@
 
 (use-package yasnippet
   :ensure t
-  :demand t
+  :defer  t
   :diminish yas-minor-mode
   :init
   (setq yas-verbosity 2)
   :config
   (add-to-list
    'yas-snippet-dirs
-   (f-join init-directory "resources" "snippets") t)
-  (yas-global-mode))
+   (f-join init-directory "resources" "snippets") t))
 
 (provide 'init-snippets)
 

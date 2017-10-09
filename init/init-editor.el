@@ -56,7 +56,8 @@
   (fic-mode)
   (origami-mode)
   (dtrt-indent-mode)
-  (flycheck-mode))
+  (flycheck-mode)
+  (yas-minor-mode))
 
 (use-package undo-tree
   :ensure t
