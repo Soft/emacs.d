@@ -187,6 +187,12 @@
    :map eshell-mode-map
    ("C-d" . kill-this-buffer)))
 
+(defun eshell/em (&rest args)
+  "Open files in Emacs."
+  (if (null args)
+      (bury-buffer)
+    (-each  (-map #'expand-file-name (eshell-flatten-list args)) #'find-file)))
+
 (use-package eshell
   :defer t
   :init
