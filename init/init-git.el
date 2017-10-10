@@ -23,7 +23,9 @@ staged changes."
    ("C-c g d" . magit-diff-unstaged-or-staged)
    ("C-c g l" . magit-log-current))
   :config
-  (setq magit-commit-ask-to-stage nil))
+  (bind-keys
+   :map magit-popup-mode-map
+   ("<escape>" . magit-popup-quit)))
 
 (use-package git-timemachine
   :ensure t
