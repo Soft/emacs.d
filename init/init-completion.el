@@ -43,7 +43,9 @@
         company-selection-wrap-around t
         company-minimum-prefix-length 1
         company-tooltip-align-annotations t)
-  (add-hook 'company-mode-hook #'company-quickhelp-mode)
+  ;; There is something wrong wit this where the popup seems to cause
+  ;; company-active-map disablind
+  ;; (add-hook 'company-mode-hook #'company-quickhelp-mode)
   (bind-keys
    :map company-active-map
    ("C-n" . company-select-next)
