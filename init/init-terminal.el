@@ -193,6 +193,24 @@
       (bury-buffer)
     (-each  (-map #'expand-file-name (eshell-flatten-list args)) #'find-file)))
 
+;; This is quite drastic but messing up eshell by running git diff isn't nice.
+(defun eshell/git (&rest args)
+  "Launch Magit based on git subcommand."
+  (if-let ((command (car (eshell-flatten-list args)))
+           (handler (pcase command
+                      ("diff" 'magit-diff-popup)
+                      ("log" 'magit-log-popup)
+                      ("commit" 'magit-commit-popup)
+                      ("branch" 'magit-branch-popup)
+                      ("push" 'magit-push-popup)
+                      ("pull" 'magit-fetch-popup)
+                      ("cherry-pick" 'magit-cherry-pick-popup)
+                      ("reset" 'magit-reset-popup)
+                      ("status" 'magit-status)
+                      (_ (error "Unknown command: %s" command)))))
+      (call-interactively handler)
+    (magit-status)))
+
 (use-package eshell
   :defer t
   :init
