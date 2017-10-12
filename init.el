@@ -123,7 +123,7 @@
 ;; Order of modules to load.
 ;; This is sensitive to changes as there might be dependencies between modules.
 
-(defconst adq/module-load-order
+(defvar adq/module-load-order
   '((init . (customize
              libraries
              prelude
@@ -174,6 +174,8 @@
              docker
              misc)))
   "Adequate emacs.d modules to load.")
+
+(load (expand-file-name "preload" adq/init-directory) nil nil nil t)
 
 ;; Load modules
 (dolist (module-class adq/module-load-order)
