@@ -21,7 +21,7 @@
   (pyvenv-mode)
   (anaconda-eldoc-mode))
 
-(define-skeleton python-doc-comment
+(define-skeleton adq/python-doc-comment
   "Insert Python doc comment" nil
   > "\"\"\"" _ "\"\"\"" \n)
 
@@ -36,7 +36,7 @@
   :config
   (bind-keys
    :map python-mode-map
-   ("M-\"" . python-doc-comment)))
+   ("M-\"" . adq/python-doc-comment)))
 
 (provide 'lang-python)
 
