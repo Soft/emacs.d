@@ -58,13 +58,14 @@
         google-translate-output-destination 'echo-area))
 
 (defun adq/google-translate-with-defaults (d)
-  "Query Google Translate with default languages. Reverses the direction if universal argument is supplied."
+  "Query Google Translate with default languages. Reverses the
+direction if universal argument is supplied."
   (interactive "P")
   (if d
       (google-translate-query-translate-reverse)
     (google-translate-query-translate)))
 
-(bind-key "C-c x t" 'adq/google-translate-with-defaults)
+(bind-key "C-c x t" #'adq/google-translate-with-defaults)
 
 (use-package define-word
   :defer t
@@ -128,7 +129,7 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :defer t)
 
 (defun adq/restclient ()
-  "Get a adq/restclient buffer."
+  "Get a restclient buffer."
   (interactive)
   (let ((buffer (get-buffer-create "*restclient*")))
     (with-current-buffer buffer

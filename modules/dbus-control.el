@@ -55,4 +55,6 @@
       (dbus-unregister-object dbus-control--exit-handle)
       (dbus-unregister-service :session dbus-service-emacs))))
 
+(provide 'dbus-control)
+
 ;;; dbus-control.el ends here

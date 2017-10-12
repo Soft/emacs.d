@@ -65,6 +65,4 @@
 
 (provide 'guess-language-lite)
 
-(provide 'guess-language-lite)
-
 ;;; guess-language-lite.el ends here

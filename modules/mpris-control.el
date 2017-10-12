@@ -14,6 +14,7 @@
 ;;; Code:
 
 (require 'dbus)
+(require 'dash)
 
 (defvar mpris-control-metadata nil
   "Media player metadata.")
