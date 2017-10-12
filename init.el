@@ -50,7 +50,7 @@
   (let ((proto (if (getenv "EMACS_NO_TLS") "http" "https")))
     (format "%s://%s" proto url)))
 
-(defvar adq/package-archives
+(defvar package-archives
   `(("melpa" . ,(adq/with-archive-protocol "melpa.milkbox.net/packages/"))
     ("gnu" . ,(adq/with-archive-protocol "elpa.gnu.org/packages/"))))
 
