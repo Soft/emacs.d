@@ -6,6 +6,6 @@ This is my attempt at configuring Emacs the way I like it. Eternally work in pro
 
 ```
 git clone https://bitbucket.org/Soft/emacs.d.git
-ln -s emacs.d/init.el ~/.emacs
+ln -s ./emacs.d/init.el ~/.emacs
 ```
 

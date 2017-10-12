@@ -1,6 +1,20 @@
 ;;; init.el --- Adequate emacs.d -*- lexical-binding: t -*-
 
-;; Samuel Laurén 💗 2014-2017
+;; Adequate emacs.d -- Opionated Emacs configuration
+;; Copyright (C) 2017 Samuel Laurén
+
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;; Author: Samuel Laurén <samuel.lauren@iki.fi>
 ;; Homepage: https://bitbucket.org/Soft/emacs.d
@@ -8,7 +22,9 @@
 ;;; Commentary:
 
 ;; This is my humble attempt at trying to configure Emacs the way I like it.
-;; Eternally work in progres.
+;; Eternally work in progress.
+
+;; Samuel Laurén 💗 2014-2017
 
 ;;; Code:
 
