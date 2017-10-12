@@ -6,12 +6,12 @@
 
 ;;; Code:
 
-(let ((path (expand-file-name "local/customize.el" init-directory)))
+(let ((path (expand-file-name "local/customize.el" adq/init-directory)))
   (unless (file-readable-p path)
     (write-region "" nil path))
   (setq custom-file path))
 
-;; FIXME: Maybe we should let load-local-files load this
+;; FIXME: Maybe we should let adq/load-local-files load this
 (load custom-file)
 
 (provide 'init-customize)

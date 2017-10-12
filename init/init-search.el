@@ -17,7 +17,7 @@
   :diminish anzu-mode
   :init
   (global-anzu-mode)
-  (after-load 'evil
+  (adq/after-load 'evil
     (use-package evil-anzu
       :ensure t
       :init (require 'evil-anzu))))
@@ -36,7 +36,7 @@
          ("C-c d q" . dumb-jump-quick-look)))
 
 (use-package ag
-  :if (programs-p "ag")
+  :if (adq/programs-p "ag")
   :defer t
   :ensure t
   :config
@@ -45,7 +45,7 @@
         ag-reuse-buffers t))
 
 (use-package ripgrep
-  :if (programs-p "rg")
+  :if (adq/programs-p "rg")
   :defer t
   :ensure t)
 

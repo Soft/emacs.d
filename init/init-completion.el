@@ -11,11 +11,11 @@
   :defer t
   :config
   (add-hook
-   'switch-theme-hook
+   'adq/switch-theme-hook
    (lambda ()
      ;; After theme change, derive popup colors from theme.
      (setq company-quickhelp-color-background
-           (color-derive 5 (frame-parameter nil 'background-color))
+           (adq/color-derive 5 (frame-parameter nil 'background-color))
            company-quickhelp-color-foreground
            (frame-parameter nil 'foreground-color)))))
 
@@ -52,7 +52,7 @@
    ("C-p" . company-select-previous)
    ("C-j" . company-complete-selection)
    ("C-/" . helm-company))
-  (after-load 'evil
+  (adq/after-load 'evil
     (evil-declare-change-repeat 'company-complete)
     (bind-key "C-n" #'company-complete evil-insert-state-map)))
 

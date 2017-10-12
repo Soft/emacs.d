@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; I like themes
-(defvar wanted-themes
+(defvar adq/wanted-themes
   '(atom-one-dark-theme
     challenger-deep-theme
     darkokai-theme
@@ -28,15 +28,15 @@
     twilight-bright-theme)
   "Themes that will be automatically installed if they are missing.")
 
-(install-packages-if-missing wanted-themes t)
+(adq/install-packages-if-missing adq/wanted-themes t)
 
-(defvar default-theme 'kaolin
+(defvar adq/default-theme 'kaolin
   "Default theme for Emacs.")
 
-(defvar switch-theme-hook nil
+(defvar adq/switch-theme-hook nil
   "Hook to be run after switch theme.")
 
-(defun switch-theme (theme)
+(defun adq/switch-theme (theme)
   "Unload existing theme and switch to a new one."
   (interactive
    (list (intern
@@ -45,26 +45,26 @@
                            nil t))))
   (disable-theme (car custom-enabled-themes))
   (load-theme theme t)
-  (run-hooks 'switch-theme-hook))
+  (run-hooks 'adq/switch-theme-hook))
 
-(defun current-theme ()
+(defun adq/current-theme ()
   "Displays the current theme."
   (interactive)
   (message "%s" (car custom-enabled-themes)))
 
-(defvar favorite-themes
+(defvar adq/favorite-themes
   '(subatomic gotham material-light atom-one-dark spacemacs-light)
   "List of favorite themes for use with rand-theme.")
 
-(defun random-theme ()
-  "Switch to a random theme from favorite-themes."
+(defun adq/random-theme ()
+  "Switch to a random theme from adq/favorite-themes."
   (interactive)
   (let* ((current (car custom-enabled-themes))
-         (themes (--remove (eq it current) favorite-themes))
-         (selected (list-random-item themes)))
+         (themes (--remove (eq it current) adq/favorite-themes))
+         (selected (adq/list-random-item themes)))
     (when selected
-      (switch-theme selected)
-      (current-theme))))
+      (adq/switch-theme selected)
+      (adq/current-theme))))
 
 (use-package color-theme-approximate
   :if (eq system-type 'gnu/linux)
@@ -82,9 +82,9 @@
     (add-hook 'after-make-frame-functions
               (lambda (frame)
                 (select-frame frame)
-                (switch-theme default-theme)))
+                (adq/switch-theme adq/default-theme)))
   (add-hook 'after-init-hook
-            (lambda () (switch-theme default-theme))))
+            (lambda () (adq/switch-theme adq/default-theme))))
 
 
 (provide 'init-theme)

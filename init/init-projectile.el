@@ -6,24 +6,24 @@
 
 ;;; Code:
 
-(defun cd-here ()
+(defun adq/cd-here ()
   "Change working directory to current file's location."
   (interactive)
   (cd (file-name-directory buffer-file-name)))
 
-(defun projectile-cd ()
+(defun adq/projectile-cd ()
   (interactive)
   (when (projectile-project-p)
     (cd (projectile-project-root))))
 
-(defun projectile-define-root ()
+(defun adq/projectile-define-root ()
   "Create .projectile file to current buffer's directory."
   (interactive)
   (let ((file (buffer-file-name (current-buffer))))
     (when file
       (write-region "" nil (concat (file-name-directory file) ".projectile")))))
 
-(defun projectile-kill-unrelated-buffers ()
+(defun adq/projectile-kill-unrelated-buffers ()
   "Kill buffer that do not belong the the current project."
   (interactive)
   (let* ((name (projectile-project-name))
@@ -49,11 +49,11 @@
              "")))
   (bind-keys
    :map projectile-command-map
-   ("C" . projectile-cd)
-   ("K" . projectile-kill-unrelated-buffers)))
+   ("C" . adq/projectile-cd)
+   ("K" . adq/projectile-kill-unrelated-buffers)))
 
 (use-package projectile-ripgrep
-  :if (programs-p "rg")
+  :if (adq/programs-p "rg")
   :defer t
   :ensure t)
 

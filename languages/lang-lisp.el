@@ -6,14 +6,14 @@
 
 ;;; Code:
 
-(defun find-user-init-file ()
+(defun adq/find-user-init-file ()
   "Open user's emacs init file."
   (interactive)
   (find-file user-init-file))
 
-(bind-key "<f4>" #'find-user-init-file)
+(bind-key "<f4>" #'adq/find-user-init-file)
 
-(defun ielm-setup ()
+(defun adq/ielm-setup ()
   (hl-sexp-mode)
   (rainbow-delimiters-mode))
 
@@ -22,7 +22,7 @@
   :init
   (setq ielm-prompt "λ> ")
   :config
-  (add-hook 'ielm-mode-hook #'ielm-setup))
+  (add-hook 'ielm-mode-hook #'adq/ielm-setup))
 
 ;; FIXME: Make macrostep play nice with Evil
 (use-package macrostep
@@ -52,7 +52,7 @@
   :ensure t
   :diminish aggressive-indent-mode)
 
-(defun lisp-setup ()
+(defun adq/lisp-setup ()
   "Defaults for lisp-like modes"
   (hl-sexp-mode)
   (aggressive-indent-mode)
@@ -61,7 +61,7 @@
   (setq indent-tabs-mode nil
         tab-width 2))
 
-(defun eval-and-replace-region (from to)
+(defun adq/eval-and-replace-region (from to)
   "Replace region with its evaluated form."
   (interactive "r")
   (save-excursion
@@ -69,7 +69,7 @@
       (pp (eval (read (delete-and-extract-region from to)))
           (current-buffer)))))
 
-(defun sort-symbol-list-region (from to)
+(defun adq/sort-symbol-list-region (from to)
   "Sort list in region."
   (interactive "r")
   (save-excursion
@@ -84,7 +84,7 @@
 (use-package elisp-mode
   :defer t
   :init
-  (add-hook 'emacs-lisp-mode-hook #'lisp-setup)
+  (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup)
   :config
   (bind-keys
    :map emacs-lisp-mode-map
@@ -93,7 +93,7 @@
    ("C-c a r" . eval-region)
    ("C-c a b" . eval-buffer)
    ("C-c a f" . eval-defun)
-   ("C-c a e" . eval-and-replace-region)
+   ("C-c a e" . adq/eval-and-replace-region)
 
    ("C-c r f" . elisp-refs-function)
    ("C-c r m" . elisp-refs-macro)
@@ -102,12 +102,12 @@
    ("C-c r S" . elisp-refs-special)))
 
 (use-package geiser
-  :if (programs-p "guile" "racket")
+  :if (adq/programs-p "guile" "racket")
   :ensure t
   :defer t)
 
 (use-package slime
-  :if (programs-p "sbcl")
+  :if (adq/programs-p "sbcl")
   :ensure t
   :defer t)
 
@@ -117,7 +117,7 @@
          ("\\.cljc\\'" . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode))
   :init
-  (add-hook 'clojure-mode-hook #'lisp-setup))
+  (add-hook 'clojure-mode-hook #'adq/lisp-setup))
 
 (provide 'lang-lisp)
 

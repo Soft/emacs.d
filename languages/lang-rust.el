@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun rust-setup ()
+(defun adq/rust-setup ()
   "Defaults for Rust."
   (racer-mode)
   (cargo-minor-mode)
@@ -29,7 +29,7 @@
   :mode (("\\.rs\\'" . rust-mode)
          ("\\.lalrpop\\'" . rust-mode))
   :init
-  (add-hook 'rust-mode-hook #'rust-setup))
+  (add-hook 'rust-mode-hook #'adq/rust-setup))
 
 (provide 'lang-rust)
 

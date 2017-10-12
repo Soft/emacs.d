@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(after-load 'evil
+(adq/after-load 'evil
   (bind-keys
    :map evil-normal-state-map
    ("SPC SPC" . helm-M-x)
@@ -48,11 +48,11 @@
    ("SPC j u" . browse-url-at-point)
 
    ;; Window Operations
-   ("SPC w k" . kill-window-and-maybe-buffer)
+   ("SPC w k" . adq/kill-window-and-maybe-buffer)
    ("SPC w t" . neotree-toggle)
 
    ;; Misc
-   ("SPC x t" . google-translate-with-defaults)
+   ("SPC x t" . adq/google-translate-with-defaults)
    ("SPC x l" . nlinum-mode)
    ("SPC x g" . highlight-indent-guides-mode)
    ("SPC x w" . whitespace-mode)
@@ -60,24 +60,24 @@
    ("SPC x b" . browse-url-at-point)
    ("SPC x X" . xkcd-rand)))
 
-(defhydra hydra-rotate-frame (evil-normal-state-map "SPC w")
+(defhydra adq/hydra-rotate-frame (evil-normal-state-map "SPC w")
   "Rotate frame"
   ("r" #'rotate-frame-clockwise "clockwise")
   ("R" #'rotate-frame-anticlockwise "counterclockwise"))
 
-(defhydra hydra-windmove (evil-normal-state-map "SPC w m")
+(defhydra adq/hydra-windmove (evil-normal-state-map "SPC w m")
   "Move between windows"
   ("h" windmove-left "left")
   ("j" windmove-down "down")
   ("k" windmove-up "up")
   ("l" windmove-right "right"))
 
-(defhydra hydra-zoom (evil-normal-state-map "SPC w")
+(defhydra adq/hydra-zoom (evil-normal-state-map "SPC w")
   "Text size"
   ("+" text-scale-increase "increase")
   ("-" text-scale-decrease "decrease"))
 
-(defhydra hydra-winner (evil-normal-state-map "SPC w")
+(defhydra adq/hydra-winner (evil-normal-state-map "SPC w")
   "Window history"
   ("n" winner-redo "redo")
   ("p" winner-undo "undo"))

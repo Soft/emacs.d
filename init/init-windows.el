@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun other-windows-p ()
+(defun adq/other-windows-p ()
   "Are there more than one window."
   (> (length (window-list)) 1))
 
@@ -20,14 +20,14 @@
 ;; TODO:
 ;; Skip buffers with certain modes without C-u (eg. neotree)
 ;; Also it would be nice if we switched between frames as well.
-(defun switch-window-or-buffer ()
+(defun adq/switch-window-or-buffer ()
   "Switch window or buffer depending on the number of windows."
   (interactive)
-  (if (other-windows-p)
+  (if (adq/other-windows-p)
       (other-window 1)
     (switch-to-buffer (other-buffer))))
 
-(defun swap-with-largest ()
+(defun adq/swap-with-largest ()
   "Swap the current window's buffer with the largest window. The largest window is then selected."
   (interactive)
   (let* ((current-win (selected-window))
@@ -39,15 +39,15 @@
     (select-window largest-win)))
 
 (bind-keys
- ("C-x 4 s" . swap-with-largest)
- ("C-<tab>" . switch-window-or-buffer))
+ ("C-x 4 s" . adq/swap-with-largest)
+ ("C-<tab>" . adq/switch-window-or-buffer))
 
 (global-set-key (kbd "C-x 4 R")
-                (repeating "R" #'rotate-frame-clockwise))
+                (adq/repeating "R" #'rotate-frame-clockwise))
 (global-set-key (kbd "C-x o")
-                (repeating "o" #'switch-window-or-buffer))
+                (adq/repeating "o" #'adq/switch-window-or-buffer))
 
-(defun kill-window-and-maybe-buffer (x)
+(defun adq/kill-window-and-maybe-buffer (x)
   "Kill window and optionally its buffer if the universal argument is supplied"
   (interactive "P")
   (quit-window (and x t)))
@@ -62,7 +62,7 @@
   :defer t
   :ensure t)
 
-(defhydra hydra-manage-windows nil
+(defhydra adq/hydra-manage-windows nil
   "
 ^Move^         ^^Window^                 ^Layout^            ^Control
 ^^^^^^^^^^----------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@
   ("b" balance-windows)
 
   ("z" zoom-window-zoom)
-  ("f" toggle-fullscreen)
+  ("f" adq/toggle-fullscreen)
   ("m" toggle-menu-bar-mode-from-frame)
   ("s" toggle-scroll-bar)
   ("t" toggle-tool-bar-mode-from-frame)
@@ -96,7 +96,7 @@
   ("2" split-window-below)
   ("3" split-window-right))
 
-(bind-key "C-c w" #'hydra-manage-windows/body)
+(bind-key "C-c w" #'adq/hydra-manage-windows/body)
 
 (provide 'init-windows)
 

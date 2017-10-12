@@ -57,14 +57,14 @@
         google-translate-default-target-language "en"
         google-translate-output-destination 'echo-area))
 
-(defun google-translate-with-defaults (d)
+(defun adq/google-translate-with-defaults (d)
   "Query Google Translate with default languages. Reverses the direction if universal argument is supplied."
   (interactive "P")
   (if d
       (google-translate-query-translate-reverse)
     (google-translate-query-translate)))
 
-(bind-key "C-c x t" 'google-translate-with-defaults)
+(bind-key "C-c x t" 'adq/google-translate-with-defaults)
 
 (use-package define-word
   :defer t
@@ -75,7 +75,7 @@
   :ensure t
   :bind-keymap (("C-c x s" . google-this-mode-submap)))
 
-(defun nov-mode-setup ()
+(defun adq/nov-mode-setup ()
   (setq-local shr-width 80)
   (setq-local shr-use-fonts nil))
 
@@ -84,7 +84,7 @@
   :defer t
   :mode (("\\.epub\\'" . nov-mode))
   :init
-  (add-hook 'nov-mode-hook #'nov-mode-setup)
+  (add-hook 'nov-mode-hook #'adq/nov-mode-setup)
   :config
   (bind-keys
    :map nov-mode-map
@@ -99,7 +99,7 @@
   :commands (mpris-control-info-mode))
 
 (use-package zenity-color-picker
-  :if (programs-p "zenity")
+  :if (adq/programs-p "zenity")
   :ensure t
   :defer t)
 
@@ -107,7 +107,7 @@
   :ensure t
   :defer t)
 
-(defhydra hydra-kurecolor nil
+(defhydra adq/hydra-kurecolor nil
   "
 ^Hue^          ^Saturation^   ^Brightness
 ^^^^^^-------------------------------------------
@@ -121,14 +121,14 @@ _H_: Increase  _S_: Increase  _B_: Increase
   ("b" kurecolor-decrease-brightness-by-step)
   ("B" kurecolor-increase-brightness-by-step))
 
-(bind-key "C-c x c" #'hydra-kurecolor/body)
+(bind-key "C-c x c" #'adq/hydra-kurecolor/body)
 
 (use-package restclient
   :ensure t
   :defer t)
 
-(defun restclient ()
-  "Get a restclient buffer."
+(defun adq/restclient ()
+  "Get a adq/restclient buffer."
   (interactive)
   (let ((buffer (get-buffer-create "*restclient*")))
     (with-current-buffer buffer
@@ -145,7 +145,7 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :ensure t
   :demand t
   :config
-  (add-to-list-many 'exec-path-from-shell-variables
+  (adq/add-to-list-many 'exec-path-from-shell-variables
                     '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "PATH" "BROWSER"))
   (exec-path-from-shell-initialize))
 

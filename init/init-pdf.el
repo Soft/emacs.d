@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun pdf-view-setup ()
+(defun adq/pdf-view-setup ()
   (pdf-tools-enable-minor-modes)
   (pdf-view-fit-page-to-window)
   (auto-revert-mode 1))
@@ -16,7 +16,7 @@
   :ensure t
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
-  (add-hook 'pdf-view-mode-hook #'pdf-view-setup)
+  (add-hook 'pdf-view-mode-hook #'adq/pdf-view-setup)
   (bind-keys
    :map pdf-view-mode-map
    ("j" . pdf-view-next-line-or-next-page)

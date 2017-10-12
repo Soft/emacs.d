@@ -47,7 +47,7 @@
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
-(defun prog-mode-setup ()
+(defun adq/prog-mode-setup ()
   "Defaults for programming modes."
   (nlinum-mode)
   (global-prettify-symbols-mode)
@@ -137,9 +137,9 @@
 (use-package prog-mode
   :defer t
   :init
-  (add-hook 'prog-mode-hook #'prog-mode-setup))
+  (add-hook 'prog-mode-hook #'adq/prog-mode-setup))
 
-(defun text-mode-setup ()
+(defun adq/text-mode-setup ()
   "Defaults for text modes."
   (gll-guess-language-lite-mode)
   (wc-mode))
@@ -147,7 +147,7 @@
 (use-package text-mode
   :defer t
   :init
-  (add-hook 'text-mode-hook #'text-mode-setup))
+  (add-hook 'text-mode-hook #'adq/text-mode-setup))
 
 (use-package recompile-on-save
   :ensure t
@@ -158,7 +158,7 @@
   :config
   (setq auto-revert-mode-text " 🅡"))
 
-(defhydra hydra-buffer nil
+(defhydra adq/hydra-buffer nil
   "
 ^Buffer^              ^Toggle^                   ^Text Size
 ^^^^^^------------------------------------------------------------
@@ -175,7 +175,7 @@ _d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
 
-(bind-key "C-c t" #'hydra-buffer/body)
+(bind-key "C-c t" #'adq/hydra-buffer/body)
 
 (provide 'init-editor)
 

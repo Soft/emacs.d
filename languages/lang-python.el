@@ -11,11 +11,11 @@
   :defer t)
 
 (use-package yapfify
-  :if (programs-p "yapf")
+  :if (adq/programs-p "yapf")
   :ensure t
   :defer t)
 
-(defun python-setup ()
+(defun adq/python-setup ()
   "Defaults for Python."
   (highlight-indent-guides-mode)
   (pyvenv-mode)
@@ -32,7 +32,7 @@
 (use-package python
   :mode (("\\.py\\'" . python-mode))
   :interpreter (("python" . python-mode))
-  :init (add-hook 'python-mode-hook #'python-setup)
+  :init (add-hook 'python-mode-hook #'adq/python-setup)
   :config
   (bind-keys
    :map python-mode-map

@@ -20,12 +20,12 @@
   :ensure t)
 
 (use-package js-comint
-  :if (programs-p "node")
+  :if (adq/programs-p "node")
   :ensure t
   :defer t)
 
 (use-package web-beautify
-  :if (programs-p "js-beautify")
+  :if (adq/programs-p "js-beautify")
   :ensure t
   :defer t)
 
@@ -33,7 +33,7 @@
   :mode (("\\.ts\\'" . typescript-mode))
   :ensure t)
 
-(defun css-setup ()
+(defun adq/css-setup ()
   (rainbow-mode)
   (css-eldoc-enable))
 
@@ -41,13 +41,13 @@
   :ensure t
   :mode (("\\.css\\'" . css-mode))
   :init
-  (add-hook 'css-mode-hook #'css-setup))
+  (add-hook 'css-mode-hook #'adq/css-setup))
 
 (use-package scss-mode
   :mode (("\\.scss\''" . scss-mode))
   :ensure t
   :init
-  (add-hook 'css-mode-hook #'css-setup))
+  (add-hook 'css-mode-hook #'adq/css-setup))
 
 (use-package haml-mode
   :mode (("\\.haml\\'" . haml-mode))

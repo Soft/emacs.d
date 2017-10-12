@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun org-setup ()
+(defun adq/org-setup ()
   "Setup org-mode"
   (org-bullets-mode)
   (yas-minor-mode))
@@ -15,7 +15,7 @@
   :mode (("\\.org\\'" . org-mode))
   :defer t
   :init
-  (add-hook 'org-mode-hook #'org-setup))
+  (add-hook 'org-mode-hook #'adq/org-setup))
 
 (use-package org-bullets
   :ensure t

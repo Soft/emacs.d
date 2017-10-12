@@ -27,7 +27,7 @@
  select-enable-clipboard t
  select-enable-primary t)
 
-(if-supported tool-bar-mode -1)
+(adq/if-supported tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode -1)
 (menu-bar-mode -1)
@@ -69,36 +69,36 @@
      (setq display-time-string (concat display-time-string " "))))
   (display-time-mode))
 
-(defun set-frame-alpha (number)
+(defun adq/set-frame-alpha (number)
   (interactive "nAlpha: ")
   (if (<= 5 number 100)
       (set-frame-parameter nil 'alpha number)
     (error "Invalid alpha")))
 
-(defvar frame-alpha-step 5
+(defvar adq/frame-alpha-step 5
   "Step for frame alpha changes.")
 
-(defun frame-alpha-alter (fn)
-  (set-frame-alpha
-   (clamp 5 100
+(defun adq/frame-alpha-alter (fn)
+  (adq/set-frame-alpha
+   (adq/clamp 5 100
           (funcall fn (or (frame-parameter nil 'alpha) 100)))))
 
-(defun frame-alpha-inc ()
-  "Increase frame alpha by `frame-alpha-step'."
+(defun adq/frame-alpha-inc ()
+  "Increase frame alpha by `adq/frame-alpha-step'."
   (interactive)
-  (frame-alpha-alter (lambda (value) (+ value frame-alpha-step))))
+  (adq/frame-alpha-alter (lambda (value) (+ value adq/frame-alpha-step))))
 
-(defun frame-alpha-dec ()
-  "Decrease frame alpha by `frame-alpha-step'."
+(defun adq/frame-alpha-dec ()
+  "Decrease frame alpha by `adq/frame-alpha-step'."
   (interactive)
-  (frame-alpha-alter (lambda (value) (- value frame-alpha-step))))
+  (adq/frame-alpha-alter (lambda (value) (- value adq/frame-alpha-step))))
 
-(defhydra hydra-frame-alpha nil
+(defhydra adq/hydra-frame-alpha nil
   "Set frame opacity"
-  ("+" frame-alpha-inc)
-  ("-" frame-alpha-dec))
+  ("+" adq/frame-alpha-inc)
+  ("-" adq/frame-alpha-dec))
 
-(defun toggle-fullscreen ()
+(defun adq/toggle-fullscreen ()
   (interactive)
   (if (eq window-system 'x)
       (x-send-client-message
@@ -106,7 +106,7 @@
        '(2 "_NET_WM_STATE_FULLSCREEN" 0))
     (error "toggle-fulscreen is only available on X windows systems.")))
 
-(bind-key "<f11>" #'toggle-fullscreen)
+(bind-key "<f11>" #'adq/toggle-fullscreen)
 
 (use-package centered-window-mode
   :ensure t
@@ -126,7 +126,7 @@
                         'evil-move)
   (vhl/install-extension 'evil))
 
-(defvar beacon-recalibration-percent 10
+(defvar adq/beacon-recalibration-percent 10
   "How many percents should beacon color differ from the background color.")
 
 (use-package beacon
@@ -137,11 +137,11 @@
   :config
   ;; It would be nice if this took into account the background color of the
   ;; location where point is.
-  (defun beacon-recalibrate-color ()
+  (defun adq/beacon-recalibrate-color ()
     (setq beacon-color
-          (color-derive beacon-recalibration-percent
+          (adq/color-derive adq/beacon-recalibration-percent
                         (frame-parameter nil 'background-color))))
-  (add-hook 'switch-theme-hook #'beacon-recalibrate-color))
+  (add-hook 'adq/switch-theme-hook #'adq/beacon-recalibrate-color))
 
 (use-package fill-column-indicator
   :ensure t

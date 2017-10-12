@@ -35,19 +35,19 @@
        (flycheck-mode-line-status-text)))))
 
 (use-package wcheck-mode
-  :if (programs-p "enchant")
+  :if (adq/programs-p "enchant")
   :defer t
   :ensure t
   :config
-  (defvar finnish-syntax-table
+  (defvar adq/finnish-syntax-table
     (copy-syntax-table text-mode-syntax-table))
-  (modify-syntax-entry ?- "w" finnish-syntax-table)
+  (modify-syntax-entry ?- "w" adq/finnish-syntax-table)
   (let ((enchant (executable-find "enchant")))
     (setq wcheck-language-data
           `(("Finnish"
              (program . ,enchant)
              (args "-l" "-d" "fi")
-             (syntax . finnish-syntax-table)
+             (syntax . adq/finnish-syntax-table)
              (action-program . ,enchant)
              (action-args "-a" "-d" "fi")
              (action-parser . wcheck-parser-ispell-suggestions))
@@ -62,7 +62,7 @@
   :defer t
   :config
   (setq flyspell-mode-line-string " 🅕")
-  (after-load 'helm
+  (adq/after-load 'helm
     (use-package flyspell-correct-helm
       :ensure t
       :init
@@ -81,11 +81,11 @@
   :commands (gll-guess-language-lite-mode)
   :config
   (setq guess-language-languages '(en fi))
-  (add-hook 'gll-language-identified-functions #'guess-language-identified-hook)
-  (when (programs-p "enchant")
-    (add-hook 'gll-language-identified-functions #'guess-language-wcheck-hook)))
+  (add-hook 'gll-language-identified-functions #'adq/guess-language-identified-hook)
+  (when (adq/programs-p "enchant")
+    (add-hook 'gll-language-identified-functions #'adq/guess-language-wcheck-hook)))
 
-(defun guess-language-identified-hook (lang)
+(defun adq/guess-language-identified-hook (lang)
   (pcase lang
     ('en (progn
            (setq-local typo-language "English") ; Maybe we should load typo before
@@ -93,20 +93,20 @@
            (flyspell-mode)))
     ('fi (progn
            (setq-local typo-language "Finnish")
-           (when (programs-p "enchant")
+           (when (adq/programs-p "enchant")
              (wcheck-mode))))))
 
-(defvar guess-language-code-to-wcheck-name-map
+(defvar adq/guess-language-code-to-wcheck-name-map
   '((fi . "Finnish")
     (en . "American English")))
 
 ;; Rename to wcheck hook and only add if available
-(defun guess-language-wcheck-hook (lang)
+(defun adq/guess-language-wcheck-hook (lang)
   (let ((current-code (car (rassoc 'wcheck-language
-                                   guess-language-code-to-wcheck-name-map))))
+                                   adq/guess-language-code-to-wcheck-name-map))))
     (unless (eq current-code lang)
       (let ((lang-name (cdr (assoc lang
-                                   guess-language-code-to-wcheck-name-map))))
+                                   adq/guess-language-code-to-wcheck-name-map))))
         (wcheck-change-language lang-name)))))
 
 

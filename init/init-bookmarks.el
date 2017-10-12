@@ -44,7 +44,7 @@
             (lambda ()
               (bm-buffer-save-all)
               (bm-repository-save)))
-  (defhydra hydra-bm nil
+  (defhydra adq/hydra-bm nil
     "
 Bookmark
 ^^^^-------------------------
@@ -56,7 +56,7 @@ _p_: Previous
     ("n" bm-next)
     ("p" bm-previous)
     ("l" bm-show-all :exit t))
-  (bind-key "C-c m" #'hydra-bm/body))
+  (bind-key "C-c m" #'adq/hydra-bm/body))
 
 (provide 'init-bookmarks)
 

@@ -6,13 +6,13 @@
 
 ;;; Code:
 
-(defun dired-setup ()
+(defun adq/dired-setup ()
   "Setup dired-mode."
   (diredfl-mode)
-  (if-supported all-the-icons-dired-mode))
+  (adq/if-supported all-the-icons-dired-mode))
 
 ;; TODO: Show prompt when universal argument is supplied.
-(defun dired-get-buffer (d)
+(defun adq/dired-get-buffer (d)
   "Open dired with default directory or, if universal argument
 was supplied, with project root directory."
   (interactive "P")
@@ -45,10 +45,10 @@ was supplied, with project root directory."
   :defer t)
 
 (use-package dired
-  :bind (("C-x d" . dired-get-buffer))
+  :bind (("C-x d" . adq/dired-get-buffer))
   :config
-  (add-hook 'dired-mode-hook #'dired-setup)
-  (defhydra hydra-dired-filter nil
+  (add-hook 'dired-mode-hook #'adq/dired-setup)
+  (defhydra adq/hydra-dired-filter nil
     "
 ^Filter by^       ^Compose^           ^Control
 ^^^^^^----------------------------------------------------
@@ -96,7 +96,7 @@ _x_: Executable
    ("k" . dired-previous-line)
    ("<tab>" . dired-next-line)
    ("<backtab>" . dired-previous-line)
-   ("f" . hydra-dired-filter/body)))
+   ("f" . adq/hydra-dired-filter/body)))
 
 (provide 'init-dired)
 

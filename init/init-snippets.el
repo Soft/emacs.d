@@ -15,7 +15,7 @@
   :config
   (add-to-list
    'yas-snippet-dirs
-   (f-join init-directory "resources" "snippets") t))
+   (f-join adq/init-directory "resources" "snippets") t))
 
 (provide 'init-snippets)
 

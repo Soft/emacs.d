@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun latex-setup ()
+(defun adq/latex-setup ()
   (add-to-list 'LaTeX-verbatim-environments "minted")
   (TeX-fold-mode)
   (TeX-fold-buffer)
@@ -16,7 +16,7 @@
   :mode (("\\.tex\\'" . LaTeX-mode))
   :ensure auctex
   :config
-  (add-hook 'LaTeX-mode-hook #'latex-setup))
+  (add-hook 'LaTeX-mode-hook #'adq/latex-setup))
 
 (use-package bibtex
   :mode (("\\.bibtex\\'" . bibtex-mode)

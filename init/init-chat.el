@@ -28,17 +28,17 @@
                              "VioletRed2" "OliveDrab4" "maroon1"
                              "turquoise" "orchid" "lawn green")))
 
-(defun weechat-read-relay-password ()
+(defun adq/weechat-read-relay-password ()
   "Prompt for relay password."
   (read-passwd "Relay password: "))
 
-(defvar weechat-password-default #'weechat-read-relay-password
-  "Default relay password for weechat-connect-default.")
+(defvar adq/weechat-password-default #'adq/weechat-read-relay-password
+  "Default relay password for adq/weechat-connect-default.")
 
-(defun weechat-connect-default ()
+(defun adq/weechat-connect-default ()
   "Connect to weechat with defautl settings."
   (interactive)
-  (weechat-connect weechat-host-default weechat-port-default weechat-password-default))
+  (weechat-connect weechat-host-default weechat-port-default adq/weechat-password-default))
 
 (use-package helm-weechat
   :commands (helm-weechat-buffers)

@@ -9,7 +9,7 @@
 ;; helpful is really nice but sometimes it fails with an error. This macro adds
 ;; an advice to try an alternative (in this case likely from the describe-*
 ;; family of functions) if the first function fails.
-(defmacro add-alternative-interactive (fn alternative)
+(defmacro adq/add-alternative-interactive (fn alternative)
   `(advice-add
     (quote ,fn) :around
     (lambda (fn &rest args)
@@ -24,7 +24,7 @@
   (setq which-key-idle-delay 0.5)
   (which-key-mode))
 
-(defvar helpful-reuse-buffers t
+(defvar adq/helpful-reuse-buffers t
   "Should helpful reuse existing buffers.")
 
 (use-package helpful
@@ -35,9 +35,9 @@
    ("C-h c" . helpful-command)
    ("C-h SPC" . helpful-at-point))
   :config
-  (add-alternative-interactive helpful-function describe-function)
-  (add-alternative-interactive helpful-variable describe-variable)
-  (add-alternative-interactive helpful-command describe-command)
+  (adq/add-alternative-interactive helpful-function describe-function)
+  (adq/add-alternative-interactive helpful-variable describe-variable)
+  (adq/add-alternative-interactive helpful-command describe-command)
   ;; I like helpful to reuse existing helpful-mode buffers.
   (advice-add
    'helpful--buffer :around
@@ -46,8 +46,8 @@
        (flet
            ((get-buffer-create
              (name)
-             (if-let ((_ helpful-reuse-buffers)
-                      (buffer (car (buffers-with-major-mode 'helpful-mode))))
+             (if-let ((_ adq/helpful-reuse-buffers)
+                      (buffer (car (adq/buffers-with-major-mode 'helpful-mode))))
                  (progn
                    (with-current-buffer buffer
                      (rename-buffer name))
@@ -69,16 +69,16 @@
   :diminish eldoc-mode
   :defer t)
 
-(defconst adequate-url "https://bitbucket.org/Soft/emacs.d/src")
+(defconst adq/adequate-url "https://bitbucket.org/Soft/emacs.d/src")
 
-(defun about-adequate-emacs-d ()
+(defun adq/about-adequate-emacs-d ()
   (interactive)
-  (browse-url adequate-url))
+  (browse-url adq/adequate-url))
 
 (define-key-after
   (lookup-key global-map [menu-bar help-menu])
   [adequate-website]
-  '("About Adequate emacs.d" . about-adequate-emacs-d)
+  '("About Adequate emacs.d" . adq/about-adequate-emacs-d)
   'about-gnu-project)
 
 (use-package keyfreq

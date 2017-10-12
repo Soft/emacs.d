@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defvar evil-disabled-modes
+(defvar adq/evil-disabled-modes
   '(artist-mode
     bm-show-mode
     comint-mode
@@ -46,7 +46,7 @@
         evil-mode-beyond-eol t)
 
   (dolist
-      (mode evil-disabled-modes)
+      (mode adq/evil-disabled-modes)
     (evil-set-initial-state mode 'emacs))
 
   (bind-keys
@@ -77,7 +77,7 @@
   :ensure t
   :defer t)
 
-(defhydra hydra-evil-numbers (global-map "C-c")
+(defhydra adq/hydra-evil-numbers (global-map "C-c")
   "Operate on the number"
   ("+" evil-numbers/inc-at-pt)
   ("-" evil-numbers/dec-at-pt))

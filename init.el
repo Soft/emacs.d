@@ -29,43 +29,43 @@
 
 ;; Find the actual location of Adequate emacs.d
 
-(defun get-init-directory ()
+(defun adq/get-init-directory ()
   (when load-file-name
     (expand-file-name
      (file-name-directory
       (file-chase-links (string-remove-suffix ".elc" load-file-name))))))
 
-(defconst init-directory (get-init-directory)
+(defconst adq/init-directory (adq/get-init-directory)
   "Location of adequate emacs.d files.")
 
 ;; Add core directories into load-path
 
 (dolist (subdir '("init" "languages" "modules"))
-  (add-to-list 'load-path (expand-file-name subdir init-directory)))
+  (add-to-list 'load-path (expand-file-name subdir adq/init-directory)))
 
 ;; Setup package archives
 ;; EMACS_NO_TLS environment variable can be used to control if TLS should be used.
 
-(defun with-archive-protocol (url)
+(defun adq/with-archive-protocol (url)
   (let ((proto (if (getenv "EMACS_NO_TLS") "http" "https")))
     (format "%s://%s" proto url)))
 
-(defvar package-archives
-  `(("melpa" . ,(with-archive-protocol "melpa.milkbox.net/packages/"))
-    ("gnu" . ,(with-archive-protocol "elpa.gnu.org/packages/"))))
+(defvar adq/package-archives
+  `(("melpa" . ,(adq/with-archive-protocol "melpa.milkbox.net/packages/"))
+    ("gnu" . ,(adq/with-archive-protocol "elpa.gnu.org/packages/"))))
 
 (require 'package)
 (package-initialize)
 
 ;; Record package archive refresh times.
 
-(defvar package-last-refresh-time nil
+(defvar adq/package-last-refresh-time nil
   "Time when the package archive was last refreshed.")
 
-(defun package-update-last-refresh-time (&rest args)
-  (setq package-last-refresh-time (current-time)))
+(defun adq/package-update-last-refresh-time (&rest args)
+  (setq adq/package-last-refresh-time (current-time)))
 
-(advice-add #'package-refresh-contents :before #'package-update-last-refresh-time)
+(advice-add #'package-refresh-contents :before #'adq/package-update-last-refresh-time)
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -89,17 +89,17 @@
 
 ;; Debug control
 
-(defconst emacs-debug
+(defconst adq/emacs-debug
   (and (getenv "EMACS_DEBUG") t))
 
-(when emacs-debug
+(when adq/emacs-debug
   (setq use-package-verbose t
         debug-on-error t))
 
 ;; Benchmark init if we are running with debugging enabled.
 
 (use-package benchmark-init
-  :if emacs-debug
+  :if adq/emacs-debug
   :ensure t
   :init (benchmark-init/activate)
   :config (add-hook 'after-init-hook #'benchmark-init/deactivate))
@@ -107,7 +107,7 @@
 ;; Order of modules to load.
 ;; This is sensitive to changes as there might be dependencies between modules.
 
-(defconst module-load-order
+(defconst adq/module-load-order
   '((init . (customize
              libraries
              prelude
@@ -160,7 +160,7 @@
   "Adequate emacs.d modules to load.")
 
 ;; Load modules
-(dolist (module-class module-load-order)
+(dolist (module-class adq/module-load-order)
   (let ((class (symbol-name (car module-class)))
         (modules (cdr module-class)))
     (dolist (module modules)

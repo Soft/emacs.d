@@ -19,7 +19,7 @@
   :init
   (savehist-mode)
   :config
-  (add-to-list-many
+  (adq/add-to-list-many
    'savehist-additional-variables
    '(comint-input-ring
      compile-history
@@ -36,12 +36,24 @@
      set-variable-value-history
      shell-command-history)))
 
+;; (use-package session
+;;   :ensure t
+;;   :demand t
+;;   :config
+;;   (setq session-save-file (f-join adq/init-directory "session")
+;;         desktop-globals-to-save
+;;         (append '((comint-input-ring  . 100)
+;;                   (compile-history    . 50)
+;;                   (minibuffer-history . 100))
+;;                 desktop-globals-to-save))
+;;   (add-hook 'after-init-hook #'session-initialize))
+
 (use-package recentf
   :init
   (recentf-mode)
   :config
   (setq recentf-max-saved-items 1000)
-  (add-to-list-many
+  (adq/add-to-list-many
    'recentf-exclude
    '("/tmp/" "/ssh:" "/usr/share/emacs/" "\\.emacs\\.d/elpa/")))
 

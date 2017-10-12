@@ -25,7 +25,7 @@
 
 ;; Patch save-buffer to save scratch using persistent-scratch
 (add-to-list
- 'save-buffer-special-alist
+ 'adq/save-buffer-special-alist
  '("*scratch*" .  (lambda (&optional arg)
                     (interactive "p")
                     (message "Saving scratch...")

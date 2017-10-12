@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun neotree-setup ()
+(defun adq/neotree-setup ()
   "Defaults for neotree buffers."
   (setq-local mode-line-format nil)
   (hl-line-mode))
@@ -15,7 +15,7 @@
   :ensure t
   :bind (("<f12>" . neotree-toggle))
   :init
-  (add-hook 'neotree-mode-hook #'neotree-setup)
+  (add-hook 'neotree-mode-hook #'adq/neotree-setup)
   :config
   (setq-default neo-smart-open t
                 neo-vc-integration '(face char)
@@ -27,7 +27,7 @@
    ("j" . neotree-next-line)
    ("k" . neotree-previous-line)
    ("<escape>" . neotree-hide))
-  (after-load 'projectile
+  (adq/after-load 'projectile
     (setq projectile-switch-project-action #'neotree-projectile-action)))
 
 (provide 'init-neotree)

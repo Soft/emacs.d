@@ -7,14 +7,14 @@
 ;;; Code:
 
 (fset 'pandoc-pdf-from-buffer
-      (make-compiler
+      (adq/make-compiler
        "pandoc"
-       (partial concat _ ".pdf")
+       (adq/partial concat _ ".pdf")
        (lambda (output) `("-o" ,output "-f" "markdown"))))
 
 ;; Patch markdown-mode link jumping to work with links internal to document
 
-(defun markdown-jump-to-top-level-header (title)
+(defun adq/markdown-jump-to-top-level-header (title)
   (if-let ((location
             (save-excursion
               (goto-char (point-min))
@@ -22,18 +22,18 @@
       (goto-char location)
     (error "Target not found")))
 
-(defun markdown-follow-link-at-point-wrap (fn)
+(defun adq/markdown-follow-link-at-point-wrap (fn)
   (interactive)
   (if (markdown-link-p)
       (let ((link (markdown-link-link)))
         (if (string-prefix-p "#" link)
             (progn
-              (markdown-jump-to-top-level-header (substring link 1))
+              (adq/markdown-jump-to-top-level-header (substring link 1))
               (message "%s" link))
           (call-interactively fn)))
     (error "No link at point")))
 
-(defun markdown-setup ()
+(defun adq/markdown-setup ()
   (when (locate-library "pandoc-mode")
     (pandoc-mode 1))
   (typo-mode)
@@ -46,7 +46,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init
-  (add-hook 'markdown-mode-hook #'markdown-setup)
+  (add-hook 'markdown-mode-hook #'adq/markdown-setup)
   :config
   (setq markdown-bold-underscore t
         markdown-enable-math t
@@ -55,10 +55,13 @@
            do (set-face-attribute
                (intern (format "markdown-header-face-%d" i)) nil :height (+ 1.0 (/ 1.0 i))))
   (set-face-attribute 'markdown-blockquote-face nil :slant 'italic)
-  (advice-add 'markdown-follow-link-at-point :around #'markdown-follow-link-at-point-wrap))
+  (advice-add 'markdown-follow-link-at-point :around #'adq/markdown-follow-link-at-point-wrap)
+  (bind-keys
+   :map markdown-mode-map
+   ("C-c c c" . pandoc-convert-to-pdf)))
 
 (use-package pandoc-mode
-  :if (programs-p "pandoc")
+  :if (adq/programs-p "pandoc")
   :ensure t
   :defer t)
 

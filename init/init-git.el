@@ -7,7 +7,7 @@
 
 ;;; Code:
 
-(defun magit-diff-unstaged-or-staged (d)
+(defun adq/magit-diff-unstaged-or-staged (d)
   "Display unstaged changes or, if universal argument is suplied,
 staged changes."
   (interactive "P")
@@ -20,7 +20,7 @@ staged changes."
   :bind
   (("C-c g g" . magit-status)
    ("C-c g p" . magit-dispatch-popup)
-   ("C-c g d" . magit-diff-unstaged-or-staged)
+   ("C-c g d" . adq/magit-diff-unstaged-or-staged)
    ("C-c g l" . magit-log-current))
   :config
   (bind-keys
@@ -65,21 +65,21 @@ staged changes."
   :ensure t
   :bind (("C-c g b" . browse-at-remote)))
 
-(defvar git-binary "git"
+(defvar adq/git-binary "git"
   "Git binary path.")
 
-(defun git-find-repository-root ()
+(defun adq/git-find-repository-root ()
   "Try to find git repository root starting from current working directory."
   (f--traverse-upwards (f-exists? (f-expand ".git" it)) (pwd)))
 
-(defun git-repository-status (&optional root)
+(defun adq/git-repository-status (&optional root)
   "Return hash table describing git respository status."
   (let ((repository (or root
-                        (git-find-repository-root)))
+                        (adq/git-find-repository-root)))
         (results (make-hash-table)))
     (when repository
       (cl-loop for line in (ignore-errors
-                             (process-lines git-binary "-C" repository "status" "--porcelain"))
+                             (process-lines adq/git-binary "-C" repository "status" "--porcelain"))
                for (status file) = (s-split-up-to " " (s-trim line) 2)
                for key = (pcase status
                            ("M" 'modified)

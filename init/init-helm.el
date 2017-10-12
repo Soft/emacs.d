@@ -26,7 +26,7 @@
         helm-locate-fuzzy-match               t
         helm-ff-file-name-history-use-recentf t
         helm-lisp-fuzzy-completion            t)
-  ;; (if (programs-p "curl")
+  ;; (if (adq/programs-p "curl")
   ;;     (setq helm-net-prefer-curl t))
   (bind-keys
    :map helm-map
@@ -43,7 +43,7 @@
    ("C-h i"   . helm-info-emacs)))
 
 (use-package helm-ag
-  :if (programs-p "ag")
+  :if (adq/programs-p "ag")
   :ensure t)
 
 (use-package helm-projectile
@@ -58,7 +58,7 @@
   :bind
   (("C-h b" . helm-descbinds)))
 
-(defun helm-swoop-projectile-or-file ()
+(defun adq/helm-swoop-projectile-or-file ()
   (interactive)
   (if (projectile-project-p)
       (helm-multi-swoop-projectile)
@@ -72,7 +72,7 @@
         helm-swoop-use-line-number-face t
         helm-swoop-use-fuzzy-match      t))
 
-(bind-key "C-c SPC" #'helm-swoop-projectile-or-file)
+(bind-key "C-c SPC" #'adq/helm-swoop-projectile-or-file)
 
 (use-package helm-themes
   :ensure t

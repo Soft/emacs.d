@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(defun xwidget-webkit-setup ()
+(defun adq/xwidget-webkit-setup ()
   "Defaults for Webkit"
   (bind-keys
    :map xwidget-webkit-mode-map

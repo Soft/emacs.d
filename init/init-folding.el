@@ -16,7 +16,7 @@
    :box nil
    :background 'unspecified))
 
-(defhydra hydra-origami nil
+(defhydra adq/hydra-origami nil
   "
 ^Fold^               ^Control^    ^Move
 ^^^^^^-------------------------------------------
@@ -38,7 +38,7 @@ _<tab>_: Toggle      _u_: Undo    _n_: Next
   ("C" origami-close-all-nodes)
   ("1" origami-show-only-node))
 
-(bind-key "C-c f" #'hydra-origami/body)
+(bind-key "C-c f" #'adq/hydra-origami/body)
 
 (provide 'init-folding)
 
