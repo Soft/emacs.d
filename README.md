@@ -1,5 +1,7 @@
 # Adequate emacs.d 🐘
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+
 This is my attempt at configuring Emacs the way I like it. Eternally work in progress.
 
 # Install
