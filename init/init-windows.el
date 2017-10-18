@@ -46,6 +46,10 @@
                 (adq/repeating "R" #'rotate-frame-clockwise))
 (global-set-key (kbd "C-x o")
                 (adq/repeating "o" #'adq/switch-window-or-buffer))
+(global-set-key (kbd "C-x 5 o")
+                (adq/repeating "o" (lambda ()
+                                     (interactive)
+                                     (other-frame 1))))
 
 (defun adq/kill-window-and-maybe-buffer (x)
   "Kill window and optionally its buffer if the universal argument is supplied"
@@ -61,6 +65,11 @@
 (use-package transpose-frame
   :defer t
   :ensure t)
+
+(use-package all-monitors
+  :defer t
+  :functions (all-monitors-frames-on-all-monitors)
+  :commands (all-monitors-fill-all-monitors))
 
 (defhydra adq/hydra-manage-windows nil
   "

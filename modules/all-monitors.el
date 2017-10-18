@@ -34,6 +34,7 @@
          (--remove (cdr (assoc 'frames it))
                    (display-monitor-attributes-list))))
 
+;;;###autoload
 (defun all-monitors-frames-on-all-monitors (&optional state)
   "Create frame on all monitors where there currently isn't a
 frame. The STATE can be ommited or it can be 'fullscreen or
@@ -49,6 +50,7 @@ their default appearance."
         ('fullscreen (set-frame-parameter frame 'fullscreen 'fullboth))
         ('maximize (set-frame-parameter frame 'fullscreen 'maximied))))))
 
+;;;###autoload
 (defun all-monitors-fill-all-monitors (d)
   "Fill all monitors with frames. By default, the frames are set
 to be in fullscreen mode but if universal argument is supplied,
