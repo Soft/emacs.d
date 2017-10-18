@@ -2,8 +2,11 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
-This is my attempt at configuring Emacs the way I like it. Eternally work in
-progress.
+> This is my attempt at configuring Emacs the way I like it. Eternally work in
+> progress.
+
+Practical Emacs setup with Vim-ish influences and affection for
+[Hydras](https://github.com/abo-abo/hydra).
 
 # Install
 
@@ -23,6 +26,8 @@ having to craft a detailed `.gitignore` for all the files Emacs might create
 inside its init directory. Additionally, having Adequate be in a separate
 location helps us keep the project files clean and reduces the possibility of
 mistakenly committing unnecessary files.
+
+# Major Bindings
 
 # Structure
 
