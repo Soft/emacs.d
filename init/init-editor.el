@@ -163,15 +163,18 @@
 ^Buffer^              ^Toggle^                   ^Text Size
 ^^^^^^------------------------------------------------------------
 _d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
-                    ^^_i_: Indent guides         _+_: Increase
+_r_: Revert buffer    _i_: Indent guides         _+_: Increase
                     ^^_n_: Line numbers
                     ^^_t_: Truncate lines
 "
   ("d" magit-diff-buffer-file)
+  ("r" revert-buffer)
+  
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)
   ("n" nlinum-mode)
   ("t" toggle-truncate-lines)
+  
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
 
