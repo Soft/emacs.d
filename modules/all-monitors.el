@@ -37,7 +37,10 @@
 (defun all-monitors-frames-on-all-monitors (&optional state)
   "Create frame on all monitors where there currently isn't a
 frame. The STATE can be ommited or it can be 'fullscreen or
-'maximized."
+'maximized. With 'fullscreen the new frames are set to be in the
+fullscreen mode and with 'maximized the new frames are simply
+maximized. If the STATE is ommited, the new frames are left with
+their default appearance."
   (-each
       (-map #'all-monitors-make-frame-on-monitor
             (all-monitors-monitors-without-frames))
@@ -49,7 +52,7 @@ frame. The STATE can be ommited or it can be 'fullscreen or
 (defun all-monitors-fill-all-monitors (d)
   "Fill all monitors with frames. By default, the frames are set
 to be in fullscreen mode but if universal argument is supplied,
-the frames are simply maximied."
+the frames are simply maximized."
   (interactive "P")
   (all-monitors-frames-on-all-monitors (if d 'maximized 'fullscreen)))
 
