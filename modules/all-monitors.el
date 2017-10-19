@@ -48,7 +48,7 @@ their default appearance."
     (lambda (frame)
       (pcase state
         ('fullscreen (set-frame-parameter frame 'fullscreen 'fullboth))
-        ('maximize (set-frame-parameter frame 'fullscreen 'maximied))))))
+        ('maximize (set-frame-parameter frame 'fullscreen 'maximized))))))
 
 ;;;###autoload
 (defun all-monitors-fill-all-monitors (d)
