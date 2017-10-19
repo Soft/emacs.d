@@ -42,14 +42,28 @@
  ("C-x 4 s" . adq/swap-with-largest)
  ("C-<tab>" . adq/switch-window-or-buffer))
 
+(defun adq/next-frame ()
+  "Switch to the next frame."
+  (interactive)
+  (other-frame 1))
+
+(defun adq/switch-frame-or-window-or-buffer (d)
+  "Switches frames if universal argument is supplied. If the
+argument is not supplied switches windows if the frame has more
+than one window. If the frame only has a single window, switches
+buffers."
+  (interactive "P")
+  (funcall-interactively
+   (if d
+       (adq/repeating "o" #'adq/next-frame)
+     (adq/repeating "o" #'adq/switch-window-or-buffer))))
+
 (global-set-key (kbd "C-x 4 R")
                 (adq/repeating "R" #'rotate-frame-clockwise))
-(global-set-key (kbd "C-x o")
-                (adq/repeating "o" #'adq/switch-window-or-buffer))
+;; Maybe this is a little too much functionality for a single key
+(global-set-key (kbd "C-x o") #'adq/switch-frame-or-window-or-buffer)
 (global-set-key (kbd "C-x 5 o")
-                (adq/repeating "o" (lambda ()
-                                     (interactive)
-                                     (other-frame 1))))
+                (adq/repeating "o" #'adq/next-frame))
 
 (defun adq/kill-window-and-maybe-buffer (x)
   "Kill window and optionally its buffer if the universal argument is supplied"
