@@ -10,6 +10,7 @@
 (defvar adq/wanted-themes
   '(atom-one-dark-theme
     challenger-deep-theme
+    borland-blue-theme
     darkokai-theme
     django-theme
     doom-themes
