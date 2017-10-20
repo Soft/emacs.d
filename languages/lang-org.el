@@ -4,8 +4,8 @@
 
 ;; Org mode configuration.
 
-;; NOTE:
-;; Remember to set `org-directory' and `org-default-notes-file' in local configuration.
+;; NOTE: Remember to set `org-directory', `org-default-notes-file' and
+;; `org-agenda-files' in local configuration.
 
 ;;; Code:
 
@@ -41,7 +41,10 @@
 
 (use-package org-bullets
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq org-bullets-bullet-list
+        '("◉" "○" "⯈" "🟊" "✪" "❧" "❥" "♫")))
 
 (bind-keys
  ("C-c o o" . org-capture)
