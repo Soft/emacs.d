@@ -36,7 +36,7 @@
   (("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-mini)
    ("C-x C-b" . helm-buffers-list)
-   ("C-c o"   . helm-occur)
+   ("C-c O"   . helm-occur)
    ("C-c S"   . helm-imenu)
    ("M-x"     . helm-M-x)
    ("C-h a"   . helm-apropos)
