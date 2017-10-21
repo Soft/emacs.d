@@ -15,6 +15,7 @@
     doctor-mode
     epa-list-keys
     eshell-mode
+    flycheck-error-list-mode
     geiser-repl-mode
     haskell-interactive-mode
     helpful-mode
