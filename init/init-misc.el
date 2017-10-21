@@ -57,6 +57,11 @@
         google-translate-default-target-language "en"
         google-translate-output-destination 'echo-area))
 
+(use-package google-translate-repl
+  :defer t
+  :commands (google-translate-repl)
+  :bind (("C-c x T" . google-translate-repl)))
+
 (defun adq/google-translate-with-defaults (d)
   "Query Google Translate with default languages. Reverses the
 direction if universal argument is supplied."

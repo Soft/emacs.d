@@ -17,6 +17,7 @@
     eshell-mode
     flycheck-error-list-mode
     geiser-repl-mode
+    google-translate-repl-mode
     haskell-interactive-mode
     helpful-mode
     inferior-emacs-lisp-mode
