@@ -29,6 +29,9 @@
 (defun google-translate-repl-supported-language-p (lang)
   (and (rassoc lang google-translate-supported-languages-alist) t))
 
+(defun google-translate-repl-code-to-name (lang)
+  (car (rassoc lang google-translate-supported-languages-alist)))
+
 (defun google-translate-repl-format-prompt ()
   "Reset Google translate REPL prompt based on current source and target languages."
   (format "%s→%s> "
@@ -45,12 +48,11 @@
 (defun google-translate-repl-parse-input (input)
   "Separate commands from input."
   (pcase input
-    ((or (pred (string-prefix-p ":source"))
-         (pred (string-prefix-p ":s")))
+    ((pred (string-prefix-p ":source "))
      (cons 'source (google-translate-repl-strip-command input)))
-    ((or (pred (string-prefix-p ":target"))
-         (pred (string-prefix-p ":t")))
+    ((pred (string-prefix-p ":target "))
      (cons 'target (google-translate-repl-strip-command input)))
+    (":swap" 'swap)
     (_ input)))
 
 (defun google-translate-repl-process-input (input)
@@ -60,15 +62,28 @@
       (`(source . ,lang)
        (if (and lang (google-translate-repl-supported-language-p lang))
            (setq google-translate-repl-source-language lang
-                 output (format "Source language set to %s" lang))
+                 output (format "Source language set to %s"
+                                (google-translate-repl-code-to-name lang)))
          (setq output "Invalid source language."))
        (google-translate-repl-reset-prompt))
       (`(target . ,lang)
        (if (and lang (google-translate-repl-supported-language-p lang))
            (setq google-translate-repl-target-language lang
-                 output (format "Target language set to %s" lang))
+                 output (format "Target language set to %s"
+                                (google-translate-repl-code-to-name lang)))
          (setq output "Invalid target language."))
        (google-translate-repl-reset-prompt))
+      ('swap
+       (let ((old-target google-translate-repl-target-language))
+         (setq google-translate-repl-target-language google-translate-repl-source-language
+               google-translate-repl-source-language old-target)
+         (google-translate-repl-reset-prompt)
+         (setq output
+               (format "Source language set to %s; Target language set to %s"
+                       (google-translate-repl-code-to-name
+                        google-translate-repl-source-language)
+                       (google-translate-repl-code-to-name
+                        google-translate-repl-target-language)))))
       ((pred (stringp)) 
        (let ((cleaned (s-trim input)))
          (if (s-present? cleaned)
