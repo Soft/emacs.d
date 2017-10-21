@@ -29,9 +29,9 @@ mistakenly committing unnecessary files.
 
 # New Modules
 
-In addition to configuring existing Emacs modules, Adequate contains bunch of
-new modules. Ideally, these would eventually make their way to Melpa, but for
-now.
+In addition to configuring existing Emacs modules, Adequate contains a bunch of
+new modules. Ideally, these would eventually make their way to
+[Melpa](http://melpa.milkbox.net/), but for now they can be found here.
 
 #### mpris-control
 
