@@ -1,6 +1,6 @@
 ;;; google-translate-repl.el --- REPL for Google translate -*- lexical-binding: t -*-
 
-;; Package-Requires: ((emacs "25.2"))
+;; Package-Requires: ((emacs "25.2") (google-translate))
 
 ;;; Commentary:
 
