@@ -32,7 +32,22 @@
    '(:eval
      (if (eq flycheck-last-status-change 'no-checker)
          ""
-       (flycheck-mode-line-status-text)))))
+       (flycheck-mode-line-status-text))))
+  (bind-keys
+   :map flycheck-error-list-mode-map
+   ("j" . next-line)
+   ("k" . previous-line))
+  ;; Redefine flycheck prefix to be C-c e as C-c ! is quite awkward on nordic
+  ;; keyboards
+  (define-key
+    flycheck-mode-map
+    flycheck-keymap-prefix
+    nil)
+  (setq flycheck-keymap-prefix (kbd "C-c e"))
+  (define-key
+    flycheck-mode-map
+    flycheck-keymap-prefix
+    flycheck-command-map))
 
 (use-package wcheck-mode
   :if (adq/programs-p "enchant")
