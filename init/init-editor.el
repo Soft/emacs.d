@@ -174,6 +174,7 @@ _r_: Revert buffer    _i_: Indent guides         _+_: Increase
                     ^^_n_: Line numbers
                     ^^_t_: Truncate lines
                     ^^_v_: Visual lines
+                    ^^_a_: Auto revert
 "
   ("d" magit-diff-buffer-file)
   ("r" revert-buffer)
@@ -183,6 +184,7 @@ _r_: Revert buffer    _i_: Indent guides         _+_: Increase
   ("n" nlinum-mode)
   ("t" toggle-truncate-lines)
   ("v" visual-line-mode)
+  ("a" auto-revert-mode)
   
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
