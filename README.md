@@ -27,8 +27,53 @@ inside its init directory. Additionally, having Adequate be in a separate
 location helps us keep the project files clean and reduces the possibility of
 mistakenly committing unnecessary files.
 
-# Major Bindings
+# New Modules
 
-# Structure
+In addition to configuring existing Emacs modules, Adequate contains bunch of
+new modules. Ideally, these would eventually make their way to Melpa, but for
+now.
 
-# Modifications
+#### mpris-control
+
+`mpris-control-info-mode` display the currently playing song in Emacs mode line.
+The mode should support all media players compatible with the [MPRIS D-Bus Interface
+Specification](https://specifications.freedesktop.org/mpris-spec/latest/).
+
+#### dbus-control
+
+`dbus-control-mode` is a global minor mode that exposes Emacs as a D-Bus
+service. This makes it possible to open files in existing Emacs instances using
+`emacs-opener.el` script`. You can achieve similar functionality using Emacs
+built-in daemon mode.
+
+#### all-monitors
+
+`all-monitors-fill-all-monitors` function can be used to quickly fill all the
+monitors with Emacs frames. By default, the new frames will be full screen
+state, but if universal argument is supplied, the frames will be maximized.
+
+#### ebuild-mode
+
+`ebuild-mode` can be used to edit
+[Portage's](https://wiki.gentoo.org/wiki/Portage) ebuild files.
+
+#### google-translate-repl
+
+`google-translate-repl` builds upon `google-translate` module by offering a
+REPL-like interface to the translator. `:source` and `:target` commands can be
+used to control source and target languages. The `:swap` command can be used to
+swap the source and target languages.
+
+#### guess-language-lite
+
+`gll-guess-language-lite-mode` builds upon `guess-language` module by providing
+a simpler mode for buffer language detection that does not try to support
+multiple languages in a single buffer.
+
+#### helm-emoji
+
+`helm-emoji` can be used to insert Emoji characters using Helm.
+
+#### helm-weechat
+
+`helm-weechat-buffer` can be used to select Weechat buffers.
