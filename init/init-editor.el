@@ -21,11 +21,14 @@
  tab-stop-list ()
  tab-width 2
  fill-column 80
+ visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)
  scroll-margin 3
  scroll-preserve-screen-position t
  save-interprogram-paste-before-kill t
  tramp-default-method "ssh"
  vc-follow-symlinks t)
+
+(diminish 'visual-line-mode " ⓥ")
 
 ;; Enabled narrow
 (put 'narrow-to-defun 'disabled nil)
@@ -112,6 +115,10 @@
   :ensure t
   :defer t)
 
+(use-package whitespace
+  :defer t
+  :diminish " ⓦ")
+
 (use-package dtrt-indent
   :ensure t
   :defer t
@@ -166,6 +173,7 @@ _d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
 _r_: Revert buffer    _i_: Indent guides         _+_: Increase
                     ^^_n_: Line numbers
                     ^^_t_: Truncate lines
+                    ^^_v_: Visual lines
 "
   ("d" magit-diff-buffer-file)
   ("r" revert-buffer)
@@ -174,6 +182,7 @@ _r_: Revert buffer    _i_: Indent guides         _+_: Increase
   ("i" highlight-indent-guides-mode)
   ("n" nlinum-mode)
   ("t" toggle-truncate-lines)
+  ("v" visual-line-mode)
   
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
