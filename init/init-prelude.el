@@ -120,7 +120,7 @@ present."
                         #'-all?)
                (progn (setq programs (cons x xs))
                       #'-any?))))
-    (funcal
+    (funcall
      fn
      (lambda (prog)
        (let ((cached (gethash prog adq/programs-p-cache 'not-present)))
