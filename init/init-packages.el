@@ -38,7 +38,9 @@
     t))
 
 (defun adq/install-packages-if-missing (packages &optional refresh)
-  "Install PACKAGES if they are not already installed. If REFRESH is non-nil, refresh packages before installing if adq/package-should-refresh-p returns non-nil."
+  "Install PACKAGES if they are not already installed. If REFRESH
+is non-nil, refresh packages before installing if
+`adq/package-should-refresh-p' returns non-nil."
   (let ((to-install (-remove #'package-installed-p packages)))
     (when to-install
       (when (and refresh (adq/package-should-refresh-p))
@@ -46,7 +48,8 @@
       (-each to-install #'package-install))))
 
 (defun adq/use-package-refresh-if-required (name ensure &rest args)
-  "Modify use-package's :ensure to refresh package archive when required."
+  "Modify use-package's :ensure to refresh package archive when
+required."
   (let ((package (or (when (eq ensure t)
                        (use-package-as-symbol name))
                      ensure)))
