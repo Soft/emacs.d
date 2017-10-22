@@ -89,12 +89,13 @@
          (if (s-present? cleaned)
              (setq output
                    (with-temp-buffer
-                     (google-translate-translate
-                      google-translate-repl-source-language
-                      google-translate-repl-target-language
-                      cleaned
-                      'current-buffer)
-                     (buffer-string)))
+                     (cl-letf (((symbol-function 'message) (lambda (&rest args))))
+                       (google-translate-translate
+                        google-translate-repl-source-language
+                        google-translate-repl-target-language
+                        cleaned
+                        'current-buffer)
+                       (buffer-string))))
            (setq output "")))))
     (comint-output-filter (get-buffer-process (current-buffer))
                           (concat  output "\n" google-translate-repl--prompt))))
