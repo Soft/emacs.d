@@ -103,9 +103,32 @@ containing it."
   (dolist (item to-add)
     (add-to-list list item)))
 
-(defun adq/programs-p (&rest xs)
-  "Returns t if any of the executables specified in XS are present."
-  (-any? 'executable-find xs))
+(defvar adq/programs-p-cache (make-hash-table :test 'equal))
+
+(defun adq/programs-p-clear-cache ()
+  "Clear the internal hash table used by `adq/programs-p'."
+  (interactive)
+  (setq adq/programs-p-cache (make-hash-table :test 'equal)))
+
+(defun adq/programs-p (x &rest xs)
+  "Returns t if any of the executables specified in arguments are
+present. If the first argument is :all, all the programs must be
+present."
+  (let* (programs
+         (fn (if (eq x :all)
+                 (progn (setq programs xs)
+                        #'-all?)
+               (progn (setq programs (cons x xs))
+                      #'-any?))))
+    (funcal
+     fn
+     (lambda (prog)
+       (let ((cached (gethash prog adq/programs-p-cache 'not-present)))
+         (if (eq cached 'not-present)
+             (let ((value (executable-find prog)))
+               (puthash prog value adq/programs-p-cache)
+               value)
+           cached))) programs)))
 
 (defun adq/adjust-hash (fn key table)
   "Look up KEY in TABLE and apply FN to the value and place the
@@ -122,7 +145,7 @@ called without an argument to create the initial value."
         (t max)))
 
 (defmacro adq/debug-message (message &rest args)
-  "Similar to message but only produces output when adq/emacs-debug
+  "Similar to message but only produces output when `adq/emacs-debug'
 is non-nil."
   (when adq/emacs-debug
     `(message ,message ,@args)))
