@@ -31,20 +31,31 @@
   :defer t
   :init
   (setq org-M-RET-may-split-line nil
+        org-return-follows-link t
+        org-hide-emphasis-markers t
+        org-src-fontify-natively t
+        org-src-tab-acts-natively t
         org-html-doctype "html5"
-        org-todo-keywords '((sequence "TODO" "STARTED" "DONE"))
+        org-todo-keywords '((sequence "TODO(t)" "STARTED(s)" "DONE(d)"))
         org-log-done 'time
         org-todo-keyword-faces '(("TODO" . adq/org-todo)
                                  ("STARTED" . adq/org-started)
                                  ("DONE" . adq/org-done)))
-  (add-hook 'org-mode-hook #'adq/org-setup))
+  (add-hook 'org-mode-hook #'adq/org-setup)
+  :config
+  (use-package evil-org
+    :ensure t
+    :after evil
+    :config
+    (add-hook 'org-mode-hook #'evil-org-mode)
+    (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme)))
 
 (use-package org-bullets
   :ensure t
   :defer t
   :config
   (setq org-bullets-bullet-list
-        '("◉" "○" "⯈" "🟊" "✪" "❧" "❥" "♫")))
+        '("◉" "○" "⯈" "🟊" "✪" "❧" "❥" "♫" "🟋")))
 
 (use-package helm-org-files
   :if (featurep 'helm)
