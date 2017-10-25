@@ -2,10 +2,8 @@
 
 ;;; Commentary:
 
-;; I didn't really use scratch buffer for emacs lisp so having it be a general
-;; purpose notepad is more useful for me.
-
-;; I've tried to patch Emacs to keep scratch content persistent.
+;; Make scratch buffer a general purpose persistent notepad.
+;; This tries to patch Emacs to keep persistent scratch.
 
 ;;; Code:
 
