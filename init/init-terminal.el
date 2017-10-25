@@ -178,6 +178,7 @@
 (defun adq/eshell-setup ()
   (eshell-fringe-status-mode)
   (with-editor-export-editor)
+  (company-mode -1) ;; Even better would be to only disable company when using TRAMP since it can be slow
   (setenv "TERM" "xterm-256color")
   (add-to-list 'eshell-preoutput-filter-functions #'xterm-color-filter)
   (setq xterm-color-preserve-properties t
