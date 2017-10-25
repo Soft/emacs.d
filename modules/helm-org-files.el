@@ -10,6 +10,7 @@
 
 (require 'rx)
 (require 'f)
+(require 'org)
 (require 'helm)
 
 (defconst helm-org-files--title-regex
@@ -19,7 +20,7 @@
   (with-temp-buffer
     (insert-file-contents path)
     (if (re-search-forward helm-org-files--title-regex nil t)
-        (match-string 1)
+        (propertize (match-string 1) 'face 'org-document-title)
       (file-name-nondirectory path))))
 
 (defun helm-org-files--files (path)
