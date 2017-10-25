@@ -46,6 +46,10 @@
   (setq org-bullets-bullet-list
         '("◉" "○" "⯈" "🟊" "✪" "❧" "❥" "♫")))
 
+(use-package helm-org-files
+  :if (featurep 'helm)
+  :bind (("C-c o f" . helm-org-files)))
+
 (bind-keys
  ("C-c o o" . org-capture)
  ("C-c o l" . org-store-link)

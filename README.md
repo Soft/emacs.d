@@ -70,10 +70,14 @@ swap the source and target languages.
 a simpler mode for buffer language detection that does not try to support
 multiple languages in a single buffer.
 
+#### helm-org-files
+
+Use Helm for finding and visiting Org files from `org-directory`.
+
 #### helm-emoji
 
-`helm-emoji` can be used to insert Emoji characters using Helm.
+Use Helm for inserting emoji characters.
 
 #### helm-weechat
 
-`helm-weechat-buffer` can be used to select Weechat buffers.
+Use Helm for selecting Weechat chat buffers.
