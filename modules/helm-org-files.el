@@ -24,7 +24,8 @@
       (file-name-nondirectory path))))
 
 (defun helm-org-files--files (path)
-  (f--files path (equal (f-ext it) "org") t))
+  (sort (f--files path (equal (f-ext it) "org") t)
+        #'file-newer-than-file-p))
 
 (defun helm-org-files--candidates ()
   (mapcar (lambda (path)
