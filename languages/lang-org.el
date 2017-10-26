@@ -46,6 +46,7 @@
   (use-package evil-org
     :ensure t
     :after evil
+    :diminish evil-org-mode
     :config
     (add-hook 'org-mode-hook #'evil-org-mode)
     (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme)))
