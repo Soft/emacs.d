@@ -13,7 +13,9 @@
     dashboard-mode
     dired-mode
     doctor-mode
-    epa-list-keys
+    epa-list-keys-mode
+    epa-key-mode
+    epa-info-mode
     eshell-mode
     flycheck-error-list-mode
     geiser-repl-mode
