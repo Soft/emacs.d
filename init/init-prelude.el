@@ -175,6 +175,12 @@ the current buffer when executed."
       (color-lighten-name color change)
     (color-darken-name color change)))
 
+(defun adq/insert-date (d)
+  (interactive "P")
+  (insert
+   (if d (format-time-string "%c")
+     (format-time-string "%A %x"))))
+
 (provide 'init-prelude)
 
 ;;; init-prelude.el ends here

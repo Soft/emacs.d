@@ -18,6 +18,7 @@
     epa-info-mode
     eshell-mode
     flycheck-error-list-mode
+    font-lock-studio-mode
     geiser-repl-mode
     google-translate-repl-mode
     haskell-interactive-mode
