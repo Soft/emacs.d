@@ -18,14 +18,14 @@
   (if-let ((location
             (save-excursion
               (goto-char (point-min))
-              (re-search-forward (concat "^#[[:space:]]*" title "$")))))
+              (re-search-forward (concat "^#[[:space:]]*" (regexp-quote title) "$") nil t))))
       (goto-char location)
     (error "Target not found")))
 
 (defun adq/markdown-follow-link-at-point-wrap (fn)
   (interactive)
   (if (markdown-link-p)
-      (let ((link (markdown-link-link)))
+      (let ((link (markdown-link-url)))
         (if (string-prefix-p "#" link)
             (progn
               (adq/markdown-jump-to-top-level-header (substring link 1))
