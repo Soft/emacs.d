@@ -69,6 +69,12 @@
              string-end)
          . systemd-mode))
 
+(use-package portage-mode
+  :commands (portage-mode portage-accept-keywords-mode portage-use-mode)
+  :mode (("/package\\.use" . portage-use-mode)
+         ("/package\\.accept_keywords" . portage-accept-keywords-mode)
+         ((rx "/package." (or "env" "license" "mask" "unmask")) . portage-mode)))
+
 (use-package ssh-config-mode
   :ensure t
   :mode (("/\\.ssh/config\\'" . ssh-config-mode)
