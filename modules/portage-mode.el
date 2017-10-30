@@ -150,6 +150,11 @@
   "Font lock rules for package.use files.")
 
 
+(defvar portage-mode-generic-font-lock-keywords
+  (list portage-mode-font-lock-keywords-atom)
+  "Font lock rules for generic Portage config modes.")
+
+
 (defvar portage-mode-syntax-table
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?# "<" table)
@@ -157,6 +162,12 @@
     table)
   "Syntax table for Portage files.")
 
+;;;###autoload
+(define-derived-mode portage-mode conf-mode "Portage"
+  "Major mode for editing Portage's config files."
+  (setq font-lock-defaults '(portage-mode-generic-font-lock-keywords))
+  (font-lock-mode 1)
+  (set-syntax-table portage-mode-syntax-table))
 
 ;;;###autoload
 (define-derived-mode portage-accept-keywords-mode conf-mode "Portage Keywords"
