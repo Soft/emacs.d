@@ -70,9 +70,9 @@
          . systemd-mode))
 
 (use-package portage-mode
-  :commands (portage-mode portage-accept-keywords-mode portage-use-mode)
-  :mode (("/package\\.use" . portage-use-mode)
-         ("/package\\.accept_keywords" . portage-accept-keywords-mode)
+  :commands (portage-mode portage-mode-accept-keywords-mode portage-mode-use-mode)
+  :mode (("/package\\.use" . portage-mode-use-mode)
+         ("/package\\.accept_keywords" . portage-mode-accept-keywords-mode)
          ((rx "/package." (or "env" "license" "mask" "unmask")) . portage-mode)))
 
 (use-package ssh-config-mode
