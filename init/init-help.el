@@ -43,16 +43,15 @@
    'helpful--buffer :around
    (lambda (fn &rest args)
      (let ((original-get-buffer-create (symbol-function 'get-buffer-create)))
-       (flet
-           ((get-buffer-create
-             (name)
-             (if-let ((_ adq/helpful-reuse-buffers)
-                      (buffer (car (adq/buffers-with-major-mode 'helpful-mode))))
-                 (progn
-                   (with-current-buffer buffer
-                     (rename-buffer name))
-                   buffer)
-               (funcall original-get-buffer-create name))))
+       (cl-letf (((symbol-function 'get-buffer-create)
+                  (lambda (name)
+                    (if-let ((_ adq/helpful-reuse-buffers)
+                             (buffer (car (adq/buffers-with-major-mode 'helpful-mode))))
+                        (progn
+                          (with-current-buffer buffer
+                            (rename-buffer name))
+                          buffer)
+                      (funcall original-get-buffer-create name)))))
          (apply fn args)))))
   (bind-keys
    :map helpful-mode-map
