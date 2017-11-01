@@ -45,6 +45,7 @@
 (require 'rx)
 (require 'subr-x)
 (require 'async)
+(require 'diff-mode) ;; For faces
 
 (defgroup portage-mode nil
   "Major mode for Portage files."
@@ -295,6 +296,24 @@ the process object."
        (when failure-callback
          (funcall failure-callback atom proc))))
    "u" atom))
+
+(defun portage-mode-display-use-flags ()
+  (interactive)
+  (if-let ((atom (portage-mode-atom-at-current-line)))
+      (portage-mode-use-flags-for-atom
+       atom
+       (lambda (atom flags)
+         (message "%s: %s"
+                  atom
+                  (string-join
+                   (mapcar (lambda (flag)
+                             (propertize (cdr flag)
+                                         'face
+                                         (if (car flag)
+                                             'portage-mode-use-enabled-face
+                                           'portage-mode-use-disabled-face)))
+                           flags)
+                   " "))))))
 
 ;; Mode definitions
 
