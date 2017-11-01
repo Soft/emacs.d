@@ -196,6 +196,8 @@
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?# "<" table)
     (modify-syntax-entry ?\n ">" table)
+    (dolist (c '(?: ?. ?- ?/ ?* ?~))
+      (modify-syntax-entry c "_" table))
     table)
   "Syntax table for Portage files.")
 
