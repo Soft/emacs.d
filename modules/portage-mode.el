@@ -46,6 +46,7 @@
 (require 'subr-x)
 (require 'async)
 (require 'diff-mode) ;; For faces
+(require 'eldoc)
 
 (defgroup portage-mode nil
   "Major mode for Portage files."
@@ -127,6 +128,8 @@
 
 (defvar portage-mode-use-mode-want-eldoc t
   "Should eldoc mode be enabled in `portage-mode-eldoc-use-mode'")
+
+(defvar portage-mode-use-mode-eldoc-cache (make-hash-table :test 'equal))
 
 ;; Regexp for matching atoms
 
@@ -305,10 +308,13 @@ the process object."
 
 (defun portage-mode-use-flags-eldoc-function ()
   (if-let ((atom (portage-mode-atom-at-current-line)))
-      (portage-mode-use-flags-for-atom
-       atom
-       (lambda (atom flags)
-         (eldoc-message (portage-mode-format-use-flags atom flags))))))
+      (if-let ((cached-flags (gethash atom portage-mode-use-mode-eldoc-cache)))
+          (eldoc-message (portage-mode-format-use-flags atom cached-flags))
+        (portage-mode-use-flags-for-atom
+         atom
+         (lambda (atom flags)
+           (puthash atom flags portage-mode-use-mode-eldoc-cache)
+           (eldoc-message (portage-mode-format-use-flags atom flags)))))))
 
 (defun portage-mode-format-use-flags (atom flags)
   (format "%s: %s"
