@@ -44,6 +44,7 @@ Key | Function
 `C-c x` | Prefix for misc features
 `C-c b` | Find file in a project
 `C-c i` | Emacs Lisp REPL
+`<F12>` | Neotree Toggle
 
 # New Modules
 
