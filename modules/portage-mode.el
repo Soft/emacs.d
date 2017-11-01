@@ -1,4 +1,4 @@
-;;; portage-mode.el ---- Portage support for Emacs -*- mode: Emacs-Lisp; lexical-binding: t; -*-
+;;; portage-mode.el ---- Portage support for Emacs -*- lexical-binding: t -*-
 
 ;; Author: Samuel Laurén <samuel.lauren@iki.fi>
 
@@ -105,37 +105,36 @@
 
 (defvar portage-mode-atom-regexp
   (rx
-   (seq
-    line-start
-    (group (optional ; Extended prefix operators
-            (or "~" "!" "!!" "*")))
-    (group (optional ; Prefix operators
-            (or ">" ">=" "=" "<=" "<")))
-    (group (any alpha) ; Package category
+   line-start
+   (group (optional ; Extended prefix operators
+           (or "~" "!" "!!" "*")))
+   (group (optional ; Prefix operators
+           (or ">" ">=" "=" "<=" "<")))
+   (group (any alpha) ; Package category
+          (0+ (any alnum ?_ ?.)
+              (0+ (seq "-"
+                       (any alpha) (0+ (any alnum ?_ ?.))))))
+   (group "/") ; Separator between package category and name
+   (group (any alpha) ; Package name
+          (0+ (any alnum ?_ ?.)
+              (0+ (seq "-"
+                       (any alpha) (0+ (any alnum ?_ ?.))))))
+   (optional
+    (group "-") ; Separator between name and version
+    (group (any digit) ; Package version
            (0+ (any alnum ?_ ?.)
                (0+ (seq "-"
-                        (any alpha) (0+ (any alnum ?_ ?.))))))
-    (group "/") ; Separator between package category and name
-    (group (any alpha) ; Package name
+                        (any alnum ?_ ?.) (0+ (any alnum ?_ ?.)))))))
+   (optional ; Slot operators
+    (group ":") ; TODO: Support sub-slots
+    (group (any digit)
+           (0+ (any digit ?.))))
+   (optional ; Overlay specification
+    (group "::")
+    (group (any alpha)
            (0+ (any alnum ?_ ?.)
                (0+ (seq "-"
-                        (any alpha) (0+ (any alnum ?_ ?.))))))
-    (optional
-     (group "-") ; Separator between name and version
-     (group (any digit) ; Package version
-            (0+ (any alnum ?_ ?.)
-                (0+ (seq "-"
-                         (any alnum ?_ ?.) (0+ (any alnum ?_ ?.)))))))
-    (optional ; Slot operators
-     (group ":") ; TODO: Support sub-slots
-     (group (any digit)
-            (0+ (any digit ?.))))
-    (optional ; Overlay specification
-     (group "::")
-     (group (any alpha)
-            (0+ (any alnum ?_ ?.)
-                (0+ (seq "-"
-                         (any alnum ?_ ?.) (0+ (any alnum ?_ ?.)))))))))
+                        (any alnum ?_ ?.) (0+ (any alnum ?_ ?.))))))))
   "Regular expression used for matching atoms.")
 
 (defvar portage-mode-font-lock-keywords-atom
@@ -196,7 +195,7 @@
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?# "<" table)
     (modify-syntax-entry ?\n ">" table)
-    (dolist (c '(?: ?. ?- ?/ ?* ?~))
+    (dolist (c '(?: ?. ?- ?/ ?* ?~ ?_))
       (modify-syntax-entry c "_" table))
     table)
   "Syntax table for Portage files.")

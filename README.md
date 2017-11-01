@@ -33,6 +33,13 @@ In addition to configuring existing Emacs modules, Adequate contains a bunch of
 new modules. Ideally, these would eventually make their way to
 [Melpa](http://melpa.milkbox.net/), but for now they can be found here.
 
+#### portage-mode
+
+`portage-mode`, `portage-mode-accept-keywords-mode` and `portage-mode-use-mode`
+add syntax highlighting and other convenience features for
+[Portage's](https://wiki.gentoo.org/wiki/Portage) configuration files. These are
+mainly useful in Gentoo-based environments.
+
 #### mpris-control
 
 `mpris-control-info-mode` display the currently playing song in Emacs mode line.
