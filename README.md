@@ -52,12 +52,35 @@ In addition to configuring existing Emacs modules, Adequate contains a bunch of
 new modules. Ideally, these would eventually make their way to
 [Melpa](http://melpa.milkbox.net/), but for now they can be found here.
 
+### Gentoo
+
 #### portage-mode
 
 `portage-mode`, `portage-mode-accept-keywords-mode` and `portage-mode-use-mode`
 add syntax highlighting and other convenience features for
 [Portage's](https://wiki.gentoo.org/wiki/Portage) configuration files. These are
 mainly useful in Gentoo-based environments.
+
+#### ebuild-mode
+
+`ebuild-mode` can be used to edit
+[Portage's](https://wiki.gentoo.org/wiki/Portage) ebuild files.
+
+### Helm
+
+#### helm-org-files
+
+Use Helm for finding and visiting Org files from `org-directory`.
+
+#### helm-emoji
+
+Use Helm for inserting emoji characters.
+
+#### helm-weechat
+
+Use Helm for selecting Weechat chat buffers.
+
+### Miscellaneous
 
 #### mpris-control
 
@@ -69,19 +92,14 @@ Specification](https://specifications.freedesktop.org/mpris-spec/latest/).
 
 `dbus-control-mode` is a global minor mode that exposes Emacs as a D-Bus
 service. This makes it possible to open files in existing Emacs instances using
-`emacs-opener.el` script`. You can achieve similar functionality using Emacs
-built-in daemon mode.
+`emacs-opener.el` script. Emacs built-in daemon mode provides similar
+functionality.
 
 #### all-monitors
 
 `all-monitors-fill-all-monitors` function can be used to quickly fill all the
 monitors with Emacs frames. By default, the new frames will be full screen
 state, but if universal argument is supplied, the frames will be maximized.
-
-#### ebuild-mode
-
-`ebuild-mode` can be used to edit
-[Portage's](https://wiki.gentoo.org/wiki/Portage) ebuild files.
 
 #### google-translate-repl
 
@@ -95,15 +113,3 @@ swap the source and target languages.
 `gll-guess-language-lite-mode` builds upon `guess-language` module by providing
 a simpler mode for buffer language detection that does not try to support
 multiple languages in a single buffer.
-
-#### helm-org-files
-
-Use Helm for finding and visiting Org files from `org-directory`.
-
-#### helm-emoji
-
-Use Helm for inserting emoji characters.
-
-#### helm-weechat
-
-Use Helm for selecting Weechat chat buffers.
