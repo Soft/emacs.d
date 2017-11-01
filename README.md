@@ -35,8 +35,15 @@ Key | Function
 `C-c t` | Buffer option hydra
 `C-c f` | Folding hydra
 `C-c m` | Bookmark hydra
+`C-c s` | Search within project with `ag` and Helm
+`C-c SPC` | [Helm swoop](https://github.com/ShingoFukuyama/helm-swoop) within project or file
+`C-c <return>` | Eshell or Term if universal argument was supplied
+`C-c g g` | Magit status
+`C-c g l` | Git log of current branch
+`C-c g d` | Diff unstaged or staged changes if universal argument was supplied
 `C-c x` | Prefix for misc features
 `C-c b` | Find file in a project
+`C-c i` | Emacs Lisp REPL
 
 # New Modules
 
