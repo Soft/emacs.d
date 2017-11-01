@@ -27,6 +27,17 @@ inside its init directory. Additionally, having Adequate be in a separate
 location helps us keep the project files clean and reduces the possibility of
 mistakenly committing unnecessary files.
 
+# Keybindings
+
+Key | Function
+--- | ---
+`C-c w` | Window option hydra
+`C-c t` | Buffer option hydra
+`C-c f` | Folding hydra
+`C-c m` | Bookmark hydra
+`C-c x` | Prefix for misc features
+`C-c b` | Find file in a project
+
 # New Modules
 
 In addition to configuring existing Emacs modules, Adequate contains a bunch of
