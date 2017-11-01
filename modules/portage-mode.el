@@ -285,7 +285,7 @@ output."
                  (buffer-substring (+ 1 (point)) (point-at-eol)))
            flags)
           (beginning-of-line 2))
-        flags))))
+        (nreverse flags)))))
 
 (defun portage-mode-use-flags-for-atom (atom success-callback &optional failure-callback)
   "Retrieve list of USE flags supported by ATOM. The process is
