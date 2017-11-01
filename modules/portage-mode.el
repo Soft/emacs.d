@@ -122,6 +122,9 @@
   "Face for enabled USE flags."
   :group 'portage-mode)
 
+(defvar portage-mode-equery-binary "equery"
+  "Name of equery binary.")
+
 ;; Regexp for matching atoms
 
 (defvar portage-mode-atom-regexp
@@ -286,7 +289,7 @@ and a list of supported USE flags.
 If equery fails FAILURE-CALLBACK will be called with the atom and
 the process object."
   (async-start-process
-   (format "equery %s" atom) "equery"
+   (format "equery %s" atom) portage-mode-equery-binary
    (lambda (proc)
      (if (and (eq (process-status proc) 'exit)
               (= (process-exit-status proc) 0))
