@@ -8,7 +8,7 @@
 Practical Emacs setup with Vim-ish influences and affection for
 [Hydras](https://github.com/abo-abo/hydra).
 
-# Install
+# Installation
 
 Unlike most Emacs configurations packages, Adequate emacs.d should not be
 installed as the `~/.emacs.d` directory. Instead, if you wish to use Adequate,
@@ -25,7 +25,7 @@ Not having Adequate's project directory be user's `~/.emacs.d` frees us from
 having to craft a detailed `.gitignore` for all the files Emacs might create
 inside its init directory. Additionally, having Adequate be in a separate
 location helps us keep the project files clean and reduces the possibility of
-mistakenly committing unnecessary files.
+inadvertently committing unnecessary files.
 
 # Keybindings
 
@@ -36,8 +36,8 @@ Key | Function
 `C-c f` | Folding hydra
 `C-c m` | Bookmark hydra
 `C-c s` | Search within project with `ag` and Helm
-`C-c SPC` | [Helm swoop](https://github.com/ShingoFukuyama/helm-swoop) within project or file
-`C-c <return>` | Eshell or Term if universal argument was supplied
+`C-c <space>` | [Helm swoop](https://github.com/ShingoFukuyama/helm-swoop) within project or file
+`C-c <return>` | Eshell or term if universal argument was supplied
 `C-c g g` | Magit status
 `C-c g l` | Git log of current branch
 `C-c g d` | Diff unstaged or staged changes if universal argument was supplied
