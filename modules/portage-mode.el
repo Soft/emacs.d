@@ -1,11 +1,30 @@
-;;; portage-mode.el ---- Portage support for Emacs -*- lexical-binding: t -*-
+;;; portage-mode.el ---- Major modes for editing Portage's configuration files -*- lexical-binding: t -*-
+
+;; Copyright (C) 2017 Samuel Laurén
 
 ;; Author: Samuel Laurén <samuel.lauren@iki.fi>
+;; Keywords: Portage, Gentoo, USE Flags, Configuration
+;; Package-Requires: ((emacs "25") (async))
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
 ;; Major modes for editing Portage's various configuration files. Adds syntax
-;; highlighting and useful utility functions for working with configuration
+;; highlighting and useful convenience functions for working with configuration
 ;; files.
 
 ;; Currently, the package provides three major modes:
@@ -25,6 +44,7 @@
 
 (require 'rx)
 (require 'subr-x)
+(require 'async)
 
 (defgroup portage-mode nil
   "Major mode for Portage files."
@@ -232,6 +252,38 @@ For example >=dev-qt/qtgui-5.6.1 becomes dev-qt/qtgui"
                  package-category
                  package-name)))
     (error "No package atom at point.")))
+
+(defun portage-mode-parse-equery-output (buffer)
+  "Parse USE flags from buffer containing 'equery u ATOM'
+output."
+  (with-current-buffer buffer
+    (save-excursion
+      (goto-char (point-min))
+      (let ((flags '()))
+        (while (not (eobp))
+          (forward-char)
+          (push (buffer-substring (point) (point-at-eol)) flags)
+          (beginning-of-line 2))
+        flags))))
+
+(defun portage-mode-use-flags-for-atom (atom success-callback &optional failure-callback)
+  "Retrieve list of USE flags supported by ATOM. The process is
+asynchronous and SUCCESS-CALLBACK will be called with the atom
+and a list of supported USE flags.
+
+If equery fails FAILURE-CALLBACK will be called with the atom and
+the process object."
+  (async-start-process
+   (format "equery %s" atom) "equery"
+   (lambda (proc)
+     (if (and (eq (process-status proc) 'exit)
+              (= (process-exit-status proc) 0))
+         (funcall success-callback
+                  atom
+                  (portage-mode-parse-equery-output (process-buffer proc)))
+       (when failure-callback
+         (funcall failure-callback atom proc))))
+   "u" atom))
 
 ;; Mode definitions
 
