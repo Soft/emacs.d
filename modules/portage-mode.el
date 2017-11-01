@@ -222,7 +222,7 @@
 
 ;; Convenience commands
 
-(defun portage-mode-current-atom ()
+(defun portage-mode-bounds-of-atom-at-point ()
   (save-match-data
     (if-let ((begin (save-excursion
                       (and (re-search-backward (rx (or line-start blank)) nil t)
@@ -232,15 +232,22 @@
                          (point)))))
         (cons begin end))))
 
+(defun portage-mode-atom-at-current-line ()
+  (save-match-data
+    (save-excursion
+      (beginning-of-line)
+      (when (re-search-forward portage-mode-atom-regexp (point-at-eol) t)
+        (match-string-no-properties 0)))))
+
 ;;;###autoload
-(defun portage-mode-simplify-atom-at-pt ()
+(defun portage-mode-simplify-atom-at-point ()
   "Clean package atom at point from any constraints if might
 have (version specifiers etc.) leaving only the
 category/package-name pair intact.
 
 For example >=dev-qt/qtgui-5.6.1 becomes dev-qt/qtgui"
   (interactive)
-  (if-let ((region (portage-mode-current-atom))
+  (if-let ((region (portage-mode-bounds-of-atom-at-point))
            (string (buffer-substring-no-properties (car region) (cdr region)))
            (match (string-match portage-mode-atom-regexp string))
            (package-category (match-string 3 string))
@@ -261,8 +268,12 @@ output."
       (goto-char (point-min))
       (let ((flags '()))
         (while (not (eobp))
-          (forward-char)
-          (push (buffer-substring (point) (point-at-eol)) flags)
+          (push
+           (cons (if (equal (buffer-substring (point)
+                                              (+ 1 (point))) "+")
+                     t nil)
+                 (buffer-substring (+ 1 (point)) (point-at-eol)))
+           flags)
           (beginning-of-line 2))
         flags))))
 
