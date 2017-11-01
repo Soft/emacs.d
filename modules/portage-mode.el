@@ -242,12 +242,18 @@
                          (point)))))
         (cons begin end))))
 
-(defun portage-mode-atom-at-current-line ()
+(defun portage-mode-atom-at-current-line (&optional properties)
+  "Returns package atom from the current line or nil if there is
+no package atom on the line. If optional PROPERTIES is non-nil,
+the returned string will have its associated string properties."
   (save-match-data
     (save-excursion
       (beginning-of-line)
       (when (re-search-forward portage-mode-atom-regexp (point-at-eol) t)
-        (match-string-no-properties 0)))))
+        (funcall (if properties
+                     'match-string
+                   'match-string-no-properties)
+                 0)))))
 
 ;;;###autoload
 (defun portage-mode-simplify-atom-at-point ()
@@ -307,7 +313,7 @@ the process object."
    "u" atom))
 
 (defun portage-mode-use-flags-eldoc-function ()
-  (if-let ((atom (portage-mode-atom-at-current-line)))
+  (if-let ((atom (portage-mode-atom-at-current-line t)))
       (if-let ((cached-flags (gethash atom portage-mode-use-mode-eldoc-cache)))
           (eldoc-message (portage-mode-format-use-flags atom cached-flags))
         (portage-mode-use-flags-for-atom
