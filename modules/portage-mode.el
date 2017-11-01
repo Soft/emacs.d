@@ -125,6 +125,9 @@
 (defvar portage-mode-equery-binary "equery"
   "Name of equery binary.")
 
+(defvar portage-mode-use-mode-want-eldoc t
+  "Should eldoc mode be enabled in `portage-mode-eldoc-use-mode'")
+
 ;; Regexp for matching atoms
 
 (defvar portage-mode-atom-regexp
@@ -300,25 +303,27 @@ the process object."
          (funcall failure-callback atom proc))))
    "u" atom))
 
-(defun portage-mode-display-use-flags ()
-  (interactive)
+(defun portage-mode-use-flags-eldoc-function ()
   (if-let ((atom (portage-mode-atom-at-current-line)))
       (portage-mode-use-flags-for-atom
        atom
        (lambda (atom flags)
-         (message "%s: %s"
-                  atom
-                  (string-join
-                   (mapcar (lambda (flag)
-                             (propertize (cdr flag)
-                                         'face
-                                         (if (car flag)
-                                             'portage-mode-use-enabled-face
-                                           'portage-mode-use-disabled-face)))
-                           flags)
-                   " "))))))
+         (eldoc-message (portage-mode-format-use-flags atom flags))))))
 
-;; Mode definitions
+(defun portage-mode-format-use-flags (atom flags)
+  (format "%s: %s"
+          atom
+          (string-join
+           (mapcar (lambda (flag)
+                     (propertize (cdr flag)
+                                 'face
+                                 (if (car flag)
+                                     'portage-mode-use-enabled-face
+                                   'portage-mode-use-disabled-face)))
+                   flags)
+           " ")))
+
+;; Major modes
 
 ;;;###autoload
 (define-derived-mode portage-mode conf-mode "Portage"
@@ -339,7 +344,11 @@ the process object."
   "Major mode for editing Portage's package.use files."
   (setq font-lock-defaults '(portage-mode-use-font-lock-keywords))
   (font-lock-mode 1)
-  (set-syntax-table portage-mode-syntax-table))
+  (set-syntax-table portage-mode-syntax-table)
+  (when (and (executable-find portage-mode-equery-binary)
+             portage-mode-use-mode-want-eldoc)
+    (set (make-local-variable 'eldoc-documentation-function)
+         #'portage-mode-use-flags-eldoc-function)))
 
 
 (provide 'portage-mode)
