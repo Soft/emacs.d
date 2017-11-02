@@ -263,7 +263,8 @@ category/package-name pair intact.
 
 For example >=dev-qt/qtgui-5.6.1 becomes dev-qt/qtgui"
   (interactive)
-  (if-let ((region (portage-mode-bounds-of-atom-at-point))
+  (if-let ((location (point))
+           (region (portage-mode-bounds-of-atom-at-point))
            (string (buffer-substring-no-properties (car region) (cdr region)))
            (match (string-match portage-mode-atom-regexp string))
            (package-category (match-string 3 string))
@@ -273,7 +274,8 @@ For example >=dev-qt/qtgui-5.6.1 becomes dev-qt/qtgui"
         (insert (format
                  "%s/%s "
                  package-category
-                 package-name)))
+                 package-name))
+        (goto-char location))
     (error "No package atom at point.")))
 
 (defun portage-mode-parse-equery-output (buffer)
