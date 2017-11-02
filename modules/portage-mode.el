@@ -344,14 +344,18 @@ the process object."
   "Major mode for editing Portage's config files."
   (setq font-lock-defaults '(portage-mode-generic-font-lock-keywords))
   (font-lock-mode 1)
-  (set-syntax-table portage-mode-syntax-table))
+  (set-syntax-table portage-mode-syntax-table)
+  (setq-local imenu-generic-expression
+              (list (list nil portage-mode-atom-regexp 0))))
 
 ;;;###autoload
 (define-derived-mode portage-mode-accept-keywords-mode conf-mode "Portage/Keywords"
   "Major mode for editing Portage's package.accept_keywords files."
   (setq font-lock-defaults '(portage-mode-accept-keywords-font-lock-keywords))
   (font-lock-mode 1)
-  (set-syntax-table portage-mode-syntax-table))
+  (set-syntax-table portage-mode-syntax-table)
+  (setq-local imenu-generic-expression
+              (list (list nil portage-mode-atom-regexp 0))))
 
 ;;;###autoload
 (define-derived-mode portage-mode-use-mode conf-mode "Portage/USE"
@@ -359,6 +363,8 @@ the process object."
   (setq font-lock-defaults '(portage-mode-use-font-lock-keywords))
   (font-lock-mode 1)
   (set-syntax-table portage-mode-syntax-table)
+  (setq-local imenu-generic-expression
+              (list (list nil portage-mode-atom-regexp 0)))
   (when (and (executable-find portage-mode-equery-binary)
              portage-mode-use-mode-want-eldoc)
     (set (make-local-variable 'eldoc-documentation-function)
