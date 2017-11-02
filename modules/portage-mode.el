@@ -50,6 +50,7 @@
 
 (defgroup portage-mode nil
   "Major mode for Portage files."
+  :group 'data
   :prefix "portage-mode-")
 
 ;; Faces for package atom highlights.
@@ -342,6 +343,7 @@ the process object."
 ;;;###autoload
 (define-derived-mode portage-mode conf-mode "Portage"
   "Major mode for editing Portage's config files."
+  :group 'portage-mode
   (setq font-lock-defaults '(portage-mode-generic-font-lock-keywords))
   (font-lock-mode 1)
   (set-syntax-table portage-mode-syntax-table)
@@ -349,22 +351,14 @@ the process object."
               (list (list nil portage-mode-atom-regexp 0))))
 
 ;;;###autoload
-(define-derived-mode portage-mode-accept-keywords-mode conf-mode "Portage/Keywords"
+(define-derived-mode portage-mode-accept-keywords-mode portage-mode "Portage/Keywords"
   "Major mode for editing Portage's package.accept_keywords files."
-  (setq font-lock-defaults '(portage-mode-accept-keywords-font-lock-keywords))
-  (font-lock-mode 1)
-  (set-syntax-table portage-mode-syntax-table)
-  (setq-local imenu-generic-expression
-              (list (list nil portage-mode-atom-regexp 0))))
+  (setq font-lock-defaults '(portage-mode-accept-keywords-font-lock-keywords)))
 
 ;;;###autoload
-(define-derived-mode portage-mode-use-mode conf-mode "Portage/USE"
+(define-derived-mode portage-mode-use-mode portage-mode "Portage/USE"
   "Major mode for editing Portage's package.use files."
   (setq font-lock-defaults '(portage-mode-use-font-lock-keywords))
-  (font-lock-mode 1)
-  (set-syntax-table portage-mode-syntax-table)
-  (setq-local imenu-generic-expression
-              (list (list nil portage-mode-atom-regexp 0)))
   (when (and (executable-find portage-mode-equery-binary)
              portage-mode-use-mode-want-eldoc)
     (set (make-local-variable 'eldoc-documentation-function)
