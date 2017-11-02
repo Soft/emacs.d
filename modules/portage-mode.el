@@ -341,7 +341,7 @@ the process object."
 ;; Major modes
 
 ;;;###autoload
-(define-derived-mode portage-mode conf-mode "Portage"
+(define-derived-mode portage-mode fundamental-mode "Portage"
   "Major mode for editing Portage's config files."
   :group 'portage-mode
   (setq font-lock-defaults '(portage-mode-generic-font-lock-keywords))
