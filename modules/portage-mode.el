@@ -27,11 +27,17 @@
 ;; highlighting and useful convenience functions for working with configuration
 ;; files.
 
-;; Currently, the package provides three major modes:
+;; The package provides three major modes:
 
-;; `portage-mode', a generic mode for working with Portage configuration
-;; `portage-mode-use-mode', a mode for working with package.use files
-;; `portage-mode-accept-keywords-mode', a mode for working with package.accept_keywords files
+;; - `portage-mode', a generic mode for working with Portage configuration
+;; - `portage-mode-use-mode', a mode for working with package.use files
+;; - `portage-mode-accept-keywords-mode', a mode for working with
+;;   package.accept_keywords files
+
+;; `portage-mode-use-mode' provides eldoc support when the user has equery is
+;; installed. This can be disabled by setting `portage-mode-use-mode-want-eldoc'
+;; to nil. By default, eldoc will display all available USE flags for the
+;; package in current line.
 
 ;; For use with `use-packge':
 ;;
@@ -279,7 +285,17 @@ For example >=dev-qt/qtgui-5.6.1 becomes dev-qt/qtgui"
         (goto-char location))
     (error "No package atom at point.")))
 
-(defun portage-mode-parse-equery-output (buffer)
+(defun portage-mode-browser-for-atom-at-current-line ()
+  "Open file browser with location of atoms ebuilds."
+  (interactive)
+  (if-let ((atom (portage-mode-atom-at-current-line)))
+      (portage-mode-metadata-for-atom
+       atom
+       (lambda (atom meta)
+         (if-let ((location (assq 'location meta)))
+             (browse-url (cadr location)))))))
+
+(defun portage-mode-parse-equery-u-output (buffer)
   "Parse USE flags from buffer containing 'equery u ATOM'
 output."
   (with-current-buffer buffer
@@ -296,6 +312,48 @@ output."
           (beginning-of-line 2))
         (nreverse flags)))))
 
+(defun portage-mode-parse-equery-m-output (buffer)
+  "Parse package metadata from buffer containing 'equery m ATOM'
+output."
+  (with-current-buffer buffer
+    (save-match-data
+      (save-excursion
+        (goto-char (point-min))
+        (let ((meta '()))
+          (while (not (eobp))
+            (re-search-forward
+             (rx line-start
+                 (group (1+ (not (any blank))))
+                 (* blank)
+                 (group (1+ not-newline)))
+             (point-at-eol) t)
+            (let* ((key (pcase (match-string-no-properties 1)
+                          ("Maintainer:" 'maintainer)
+                          ("Location:" 'location)
+                          ("Homepage:" 'homepage)
+                          ("Keywords:" 'keywords)
+                          ("License:" 'license)))
+                   (current (and key (assq key meta))))
+              (when key
+                (if current
+                    (push (match-string-no-properties 2) (cdr current))
+                  (push (cons key (list (match-string-no-properties 2))) meta)))) 
+            (beginning-of-line 2))
+          meta)))))
+
+(defun portage-mode-call-equery-async (subcommand parser atom success-callback &optional failure-callback)
+  (async-start-process
+   (format "equery %s %s" subcommand atom) portage-mode-equery-binary
+   (lambda (proc)
+     (if (and (eq (process-status proc) 'exit)
+              (= (process-exit-status proc) 0))
+         (funcall success-callback
+                  atom
+                  (funcall parser (process-buffer proc)))
+       (when failure-callback
+         (funcall failure-callback atom proc))))
+   "-C" subcommand atom))
+
 (defun portage-mode-use-flags-for-atom (atom success-callback &optional failure-callback)
   "Retrieve list of USE flags supported by ATOM. The process is
 asynchronous and SUCCESS-CALLBACK will be called with the atom
@@ -303,17 +361,12 @@ and a list of supported USE flags.
 
 If equery fails FAILURE-CALLBACK will be called with the atom and
 the process object."
-  (async-start-process
-   (format "equery %s" atom) portage-mode-equery-binary
-   (lambda (proc)
-     (if (and (eq (process-status proc) 'exit)
-              (= (process-exit-status proc) 0))
-         (funcall success-callback
-                  atom
-                  (portage-mode-parse-equery-output (process-buffer proc)))
-       (when failure-callback
-         (funcall failure-callback atom proc))))
-   "u" atom))
+  (portage-mode-call-equery-async "u" #'portage-mode-parse-equery-u-output
+                                  atom success-callback failure-callback))
+
+(defun portage-mode-metadata-for-atom (atom success-callback &optional failure-callback)
+  (portage-mode-call-equery-async "m" #'portage-mode-parse-equery-m-output
+                                  atom success-callback failure-callback))
 
 (defun portage-mode-use-flags-eldoc-function ()
   (if-let ((atom (portage-mode-atom-at-current-line t)))
