@@ -23,7 +23,7 @@
 
 ;;; Commentary:
 
-;; Major modes for editing Portage's various configuration files. Adds syntax
+;; Major modes for editing Portage's configuration files. Adds syntax
 ;; highlighting and useful convenience functions for working with configuration
 ;; files.
 
@@ -34,10 +34,23 @@
 ;; - `portage-mode-accept-keywords-mode', a mode for working with
 ;;   package.accept_keywords files
 
+;; # Eldoc support
+
 ;; `portage-mode-use-mode' provides eldoc support when the user has equery is
 ;; installed. This can be disabled by setting `portage-mode-use-mode-want-eldoc'
 ;; to nil. By default, eldoc will display all available USE flags for the
 ;; package in current line.
+
+;; # FlyCheck support
+
+;; `portage-mode-use-mode' includes a checker for invalid USE flags. Flags that
+;; are requested but that are not supported by the package in question are
+;; marked as errors.
+
+;; # Imenu support
+
+;; All Portage modes support imenu by allowing quick jumping between package
+;; entries.
 
 ;; For use with `use-packge':
 ;;
@@ -434,7 +447,7 @@ the process object."
                  (dolist (flag flags)
                    (unless (member (cdr flag) (mapcar #'cdr supported-flags))
                      (push (flycheck-error-new-at line (car flag) 'error
-                                                  (format "%s does not support \"%s\" flag" atom (cdr flag))
+                                                  (format "%s does not support %s flag" atom (cdr flag))
                                                   :checker checker)
                            errors)))
                  (portage-mode-decrement-and-call-when-zero
