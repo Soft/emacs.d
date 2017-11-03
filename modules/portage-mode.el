@@ -53,6 +53,8 @@
 (require 'async)
 (require 'diff-mode) ;; For faces
 (require 'eldoc)
+(require 'cl-lib)
+(require 'flycheck)
 
 (defgroup portage-mode nil
   "Major mode for Portage files."
@@ -136,7 +138,9 @@
 (defvar portage-mode-use-mode-want-eldoc t
   "Should eldoc mode be enabled in `portage-mode-eldoc-use-mode'")
 
-(defvar portage-mode-use-mode-eldoc-cache (make-hash-table :test 'equal))
+(defvar portage-mode-use-flag-cache (make-hash-table :test 'equal))
+
+(defvar portage-mode-metadata-cache (make-hash-table :test 'equal))
 
 ;; Regexp for matching atoms
 
@@ -173,6 +177,13 @@
                (0+ (seq "-"
                         (any alnum ?_ ?.) (0+ (any alnum ?_ ?.))))))))
   "Regular expression used for matching atoms.")
+
+(defvar portage-mode-use-flag-regexp
+  (rx
+   (or
+    (group "-" (not (any blank ?-)) (* (not (any blank))))
+    (group (not (any blank ?-)) (* (not (any blank))))))
+  "Regular expression used for matching USE flags.")
 
 (defvar portage-mode-font-lock-keywords-atom
   `(,portage-mode-atom-regexp
@@ -213,10 +224,7 @@
 
 (defvar portage-mode-use-font-lock-keywords
   `((,@portage-mode-font-lock-keywords-atom
-     (,(rx
-        (or
-         (group "-" (not (any blank ?-)) (* (not (any blank))))
-         (group (not (any blank ?-)) (* (not (any blank))))))
+     (,portage-mode-use-flag-regexp
       nil nil
       (1 'portage-mode-use-disabled-face nil t)
       (2 'portage-mode-use-enabled-face nil t))))
@@ -341,18 +349,21 @@ output."
             (beginning-of-line 2))
           meta)))))
 
-(defun portage-mode-call-equery-async (subcommand parser atom success-callback &optional failure-callback)
-  (async-start-process
-   (format "equery %s %s" subcommand atom) portage-mode-equery-binary
-   (lambda (proc)
-     (if (and (eq (process-status proc) 'exit)
-              (= (process-exit-status proc) 0))
-         (funcall success-callback
-                  atom
-                  (funcall parser (process-buffer proc)))
-       (when failure-callback
-         (funcall failure-callback atom proc))))
-   "-C" subcommand atom))
+(defun portage-mode-call-equery-async (subcommand parser atom success-callback &optional failure-callback cache)
+  (if-let ((cached (and cache (gethash atom cache))))
+      (funcall success-callback atom cached)
+    (async-start-process
+     (format "equery %s %s" subcommand atom) portage-mode-equery-binary
+     (lambda (proc) ;; NOTE: If execution fails we do not cache anything
+       (if (and (eq (process-status proc) 'exit)
+                (= (process-exit-status proc) 0))
+           (let ((parsed (funcall parser (process-buffer proc))))
+             (when cache
+               (puthash atom parsed cache))
+             (funcall success-callback atom parsed))
+         (when failure-callback
+           (funcall failure-callback atom proc))))
+     "-C" subcommand atom)))
 
 (defun portage-mode-use-flags-for-atom (atom success-callback &optional failure-callback)
   "Retrieve list of USE flags supported by ATOM. The process is
@@ -361,22 +372,21 @@ and a list of supported USE flags.
 
 If equery fails FAILURE-CALLBACK will be called with the atom and
 the process object."
-  (portage-mode-call-equery-async "u" #'portage-mode-parse-equery-u-output
-                                  atom success-callback failure-callback))
+  (portage-mode-call-equery-async "u" #'portage-mode-parse-equery-u-output atom
+                                  success-callback failure-callback portage-mode-use-flag-cache))
 
 (defun portage-mode-metadata-for-atom (atom success-callback &optional failure-callback)
-  (portage-mode-call-equery-async "m" #'portage-mode-parse-equery-m-output
-                                  atom success-callback failure-callback))
+  (portage-mode-call-equery-async "m" #'portage-mode-parse-equery-m-output atom
+                                  success-callback failure-callback portage-mode-metadata-cache))
+
+;; Eldoc support
 
 (defun portage-mode-use-flags-eldoc-function ()
   (if-let ((atom (portage-mode-atom-at-current-line t)))
-      (if-let ((cached-flags (gethash atom portage-mode-use-mode-eldoc-cache)))
-          (eldoc-message (portage-mode-format-use-flags atom cached-flags))
-        (portage-mode-use-flags-for-atom
-         atom
-         (lambda (atom flags)
-           (puthash atom flags portage-mode-use-mode-eldoc-cache)
-           (eldoc-message (portage-mode-format-use-flags atom flags)))))))
+      (portage-mode-use-flags-for-atom
+       atom
+       (lambda (atom flags)
+         (eldoc-message (portage-mode-format-use-flags atom flags))))))
 
 (defun portage-mode-format-use-flags (atom flags)
   (format "%s: %s"
@@ -390,6 +400,61 @@ the process object."
                                    'portage-mode-use-disabled-face)))
                    flags)
            " ")))
+
+;; Flycheck support
+
+(defmacro portage-mode-decrement-and-call-when-zero (place fn &rest args)
+  `(progn
+     (decf,place)
+     (when (zerop ,place)
+       (apply (quote,fn) (list ,@args)))))
+
+(defun portage-mode-start-use-flag-check (checker callback)
+  "Checker function for Flycheck. The checker checks buffer for
+  packages with USE flags that are not available for the
+  package."
+  (save-match-data
+    (save-excursion
+      (goto-char (point-min))
+      (let ((counter 1) ;; There is a possibility of race condition here in the way this variable is modified
+            (line 1)
+            (errors '()))
+        (while (not (eobp))
+          (when (re-search-forward portage-mode-atom-regexp (point-at-eol) t)
+            (let* ((atom (match-string-no-properties 0))
+                   (flags '()))
+              (while (re-search-forward portage-mode-use-flag-regexp (point-at-eol) t)
+                (push (cons (- (match-end 0) (line-beginning-position))
+                            (string-remove-prefix "-" (match-string-no-properties 0)))
+                      flags))
+              (incf counter)
+              (portage-mode-use-flags-for-atom
+               atom
+               (lambda (atom supported-flags)
+                 (dolist (flag flags)
+                   (unless (member (cdr flag) (mapcar #'cdr supported-flags))
+                     (push (flycheck-error-new-at line (car flag) 'error
+                                                  (format "%s does not support \"%s\" flag" atom (cdr flag))
+                                                  :checker checker)
+                           errors)))
+                 (portage-mode-decrement-and-call-when-zero
+                  counter portage-mode-finish-use-flag-check callback errors)))))
+          (beginning-of-line 2)
+          (incf line))
+        (portage-mode-decrement-and-call-when-zero
+         counter portage-mode-finish-use-flag-check callback errors)))))
+
+(defun portage-mode-finish-use-flag-check (callback errors)
+  (funcall callback 'finished errors))
+
+(flycheck-define-generic-checker 'portage-mode-use-flags
+  "Checker for detecting invalid USE flags."
+  :start #'portage-mode-start-use-flag-check
+  :modes '(portage-mode-use-mode))
+
+(defun portage-mode-setup-use-flag-checker ()
+  (interactive)
+  (add-to-list 'flycheck-checkers 'portage-mode-use-flags t))
 
 ;; Major modes
 
