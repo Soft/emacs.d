@@ -13,10 +13,13 @@
 
 (use-package pdf-tools
   :if (eq system-type 'gnu/linux)
+  :pin manual
   :ensure t
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
   (add-hook 'pdf-view-mode-hook #'adq/pdf-view-setup)
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-view-resize-factor 1.1)
   (bind-keys
    :map pdf-view-mode-map
    ("j" . pdf-view-next-line-or-next-page)
