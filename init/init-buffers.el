@@ -36,15 +36,16 @@
 
 (global-set-key [remap kill-buffer] #'adq/kill-buffer-keep-immortal)
 
-(defvar adq/prevent-editing-elpa t
-  "Prevent editing files from Elpa.")
+;; FIXME: This break package installation
+;; (defvar adq/prevent-editing-elpa t
+;;   "Prevent editing files from Elpa.")
 
 ;; Make files belonging to Elpa packages read only
-(add-hook 'find-file-hook
-          (lambda ()
-            (when (and adq/prevent-editing-elpa
-                       (f-descendant-of-p (buffer-file-name) package-user-dir))
-              (setq-local buffer-read-only t))))
+;; (add-hook 'find-file-hook
+;;           (lambda ()
+;;             (when (and adq/prevent-editing-elpa
+;;                        (f-descendant-of-p (buffer-file-name) package-user-dir))
+;;               (setq-local buffer-read-only t))))
 
 (provide 'init-buffers)
 

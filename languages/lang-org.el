@@ -51,6 +51,11 @@
     (add-hook 'org-mode-hook #'evil-org-mode)
     (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme)))
 
+(use-package ox-pandoc
+  :if (adq/programs-p "pandoc")
+  :ensure t
+  :after ox)
+
 (use-package org-bullets
   :ensure t
   :defer t
