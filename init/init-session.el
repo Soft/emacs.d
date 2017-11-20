@@ -11,7 +11,9 @@
   :defer t)
 
 (use-package saveplace
-  :init (save-place-mode))
+  :init
+  (setq save-place-forget-unreadable-files nil)
+  (save-place-mode))
 
 ;; FIXME: I don't think this saves additional variables properly.
 ;; I should consider looking into session mode.
