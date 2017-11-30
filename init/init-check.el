@@ -25,7 +25,8 @@
     "........"
     "...XX..."
     "...XX...") 
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  ;; There seems to be something wrong with rust-cargo and rust checkers
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc rust-cargo rust))
   (setq
    flycheck-mode-line-prefix "✔"
    flycheck-mode-line
