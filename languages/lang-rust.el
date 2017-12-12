@@ -8,7 +8,8 @@
 
 (defun adq/rust-setup ()
   "Defaults for Rust."
-  (racer-mode)
+  (when (getenv "RUST_SRC_PATH")
+    (racer-mode))
   (cargo-minor-mode)
   (eldoc-mode))
 
