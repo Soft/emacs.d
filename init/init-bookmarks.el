@@ -31,6 +31,8 @@
    'bm-fringe-persistent-face nil
    :foreground "#ff1452"
    :background nil)
+  (advice-add 'bm-bookmark-add :after (lambda (&rest args) (bm-save)))
+  (advice-add 'bm-bookmark-remove :after (lambda (&rest args) (bm-save)))
   (setq bm-cycle-all-buffers t
         bm-highlight-style 'bm-highlight-only-fringe
         bm-repository-size 1000)

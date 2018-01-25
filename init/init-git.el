@@ -92,6 +92,16 @@ staged changes."
                     (puthash key (cons file value) results)) 
                finally (return results)))))
 
+(defun adq/git-current-branch (&optional root)
+  "Return current git branch as a string."
+  (let ((repository (or root
+                        (adq/git-find-repository-root))))
+    (when repository
+      (let ((output
+             (ignore-errors
+               (process-lines adq/git-binary "-C" repository "rev-parse" "--symbolic-full-name" "--abbrev-ref" "HEAD"))))
+        (car output)))))
+
 (provide 'init-git)
 
 ;;; init-git.el ends here

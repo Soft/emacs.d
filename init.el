@@ -67,7 +67,7 @@
     (format "%s://%s" proto url)))
 
 (defvar package-archives
-  `(("melpa" . ,(adq/with-archive-protocol "melpa.milkbox.net/packages/"))
+  `(("melpa" . ,(adq/with-archive-protocol "melpa.org/packages/"))
     ("gnu" . ,(adq/with-archive-protocol "elpa.gnu.org/packages/"))))
 
 (require 'package)

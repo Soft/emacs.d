@@ -47,6 +47,18 @@
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit))
 
+(defun adq/where-am-i ()
+  (interactive)
+  (message "%s%s%sline: %d; column: %d"
+           (let ((path (or (buffer-file-name) (buffer-name))))
+             (format "%s; " path))
+           (if (projectile-project-p)
+               (format "%s; " (projectile-project-name)) "") 
+           (if-let ((branch (adq/git-current-branch)))
+               (format "%s; " branch) "")
+           (line-number-at-pos)
+           (current-column)))
+
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
