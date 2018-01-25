@@ -129,6 +129,11 @@
 (defvar adq/beacon-recalibration-percent 10
   "How many percents should beacon color differ from the background color.")
 
+(use-package dimmer
+  :ensure t
+  :init
+  (dimmer-activate))
+
 (use-package beacon
   :ensure t
   :diminish beacon-mode
@@ -140,7 +145,7 @@
   (defun adq/beacon-recalibrate-color ()
     (setq beacon-color
           (adq/color-derive adq/beacon-recalibration-percent
-                        (frame-parameter nil 'background-color))))
+                            (frame-parameter nil 'background-color))))
   (add-hook 'adq/switch-theme-hook #'adq/beacon-recalibrate-color))
 
 (use-package fill-column-indicator
