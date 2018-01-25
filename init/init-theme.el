@@ -26,7 +26,8 @@
     subatomic-theme
     sublime-themes
     twilight-anti-bright-theme
-    twilight-bright-theme)
+    twilight-bright-theme
+    zenburn-theme)
   "Themes that will be automatically installed if they are missing.")
 
 (adq/install-packages-if-missing adq/wanted-themes t)
