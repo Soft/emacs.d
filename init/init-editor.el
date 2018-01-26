@@ -59,6 +59,15 @@
            (line-number-at-pos)
            (current-column)))
 
+(bind-key "C-c x W" #'adq/where-am-i)
+
+;; I regularly work on projects with large TAGS files
+(advice-add
+ 'abort-if-file-too-large :around
+ (lambda (fn size op-type filename)
+   (unless (equal (f-filename filename) "TAGS")
+     (apply fn (list size op-type filename)))))
+
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
