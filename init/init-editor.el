@@ -48,6 +48,7 @@
  ("<escape>" . keyboard-quit))
 
 (defun adq/where-am-i ()
+  "Display quick summary of current location."
   (interactive)
   (message "%s%s%sline: %d; column: %d"
            (let ((path (or (buffer-file-name) (buffer-name))))
