@@ -14,10 +14,16 @@
   :defer t
   :ensure t)
 
+(defun adq/js-setup ()
+  (rainbow-identifiers-mode -1))
+
 (use-package js2-mode
-  :mode (("\\.js\\'" . js2-mode))
+  :mode (("\\.js\\'" . js2-mode)
+         ("\\.jsx\\'" . js2-mode))
   :interpreter ("node" . js2-mode)
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook #'adq/js-setup))
 
 (use-package js-comint
   :if (adq/programs-p "node")
