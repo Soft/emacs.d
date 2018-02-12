@@ -31,6 +31,10 @@
    'bm-fringe-persistent-face nil
    :foreground "#ff1452"
    :background nil)
+  (bind-keys
+   :map bm-show-mode-map
+   ("j" . next-line)
+   ("k" . previous-line))
   (advice-add 'bm-bookmark-add :after (lambda (&rest args) (bm-save)))
   (advice-add 'bm-bookmark-remove :after (lambda (&rest args) (bm-save)))
   (setq bm-cycle-all-buffers t
