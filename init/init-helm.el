@@ -46,6 +46,10 @@
   :if (adq/programs-p "ag")
   :ensure t)
 
+(use-package helm-rg
+  :if (adq/programs-p "rg")
+  :ensure t)
+
 (use-package helm-projectile
   :ensure t
   :config (helm-projectile-on)
