@@ -92,7 +92,7 @@ buffers."
      ^_k_       ^_0_: Delete This         _p_: Previous       _m_: Menubar    _z_: Zoom
  ^^    ↑       ^^_1_: Delete Others       _n_: Next           _s_: Scrollbar  _f_: Fullscreen
  _h_ ← · → _l_   _2_: Split Horizontally  _b_: Balance        _t_: Toolbar    _c_: Center
- ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      
+ ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      _e_: Theme
      ^_j_                              ^^^_R_: Anticlockwise  
 "
   ("h" windmove-left)
@@ -113,6 +113,7 @@ buffers."
   ("s" toggle-scroll-bar)
   ("t" toggle-tool-bar-mode-from-frame)
   ("c" centered-window-mode)
+  ("e" adq/switch-theme :exit t)
 
   ("0" delete-window)
   ("1" delete-other-windows)
