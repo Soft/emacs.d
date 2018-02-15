@@ -37,6 +37,17 @@
                  (length unrelated) name))
         (mapc #'kill-buffer (cl-remove-if 'buffer-base-buffer unrelated)))))
 
+(defun adq/projectile-revert-buffers ()
+  "Revert all project buffers."
+  (interactive)
+  (let ((name (projectile-project-name))
+        (buffers (projectile-project-buffers)))
+    (if (yes-or-no-p
+         (format "Are you sure you want to revert %d buffers(s) for '%s'? "
+                 (length buffers) name))
+        (mapc (lambda (buffer) (with-current-buffer buffer) (revert-buffer nil t t))
+              (cl-remove-if 'buffer-base-buffer buffers)))))
+
 (use-package projectile
   :ensure t
   :init (projectile-global-mode)
