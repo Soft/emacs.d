@@ -182,6 +182,8 @@ darker the new color will be is determined by CHANGE."
     (color-darken-name color change)))
 
 (defun adq/insert-date (d)
+  "Insert current date into the buffer. If invoked with the
+universal argument present, current time will also be inserted."
   (interactive "P")
   (insert
    (if d (format-time-string "%c")
