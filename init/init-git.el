@@ -30,7 +30,11 @@ staged changes."
 (use-package git-timemachine
   :ensure t
   :bind
-  (("C-c g t" . git-timemachine)))
+  (("C-c g t" . git-timemachine))
+  :config
+  (adq/after-load 'evil
+    (evil-make-overriding-map git-timemachine-mode-map 'normal)
+    (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 
 (use-package gitconfig-mode
   :mode ((".gitconfig" . gitconfig-mode)
