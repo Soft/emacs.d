@@ -55,13 +55,14 @@
 Bookmark
 ^^^^-------------------------
 _m_: Toggle      _l_: List
-_n_: Next
+_n_: Next        _L_: Helm
 _p_: Previous
 "
     ("m" bm-toggle)
     ("n" bm-next)
     ("p" bm-previous)
-    ("l" bm-show-all :exit t))
+    ("l" bm-show-all :exit t)
+    ("L" helm-bm :exit t))
   (bind-key "C-c m" #'adq/hydra-bm/body))
 
 (provide 'init-bookmarks)
