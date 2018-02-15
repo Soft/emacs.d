@@ -170,6 +170,12 @@ the current buffer when executed."
         (process-send-eof proc)))))
 
 (defun adq/color-derive (change color)
+  "Derive a new color based on COLOR that is either darker or
+lighter than the original. If the original COLOR is closer to
+black than white the returned color will be made lighter,
+alternatively, if the original COLOR is closer the white than
+black the returned color will be made darker. How much lighter or
+darker the new color will be is determined by CHANGE."
   (if (> (color-distance color "#ffffff")
          (color-distance color "#000000"))
       (color-lighten-name color change)
