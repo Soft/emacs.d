@@ -69,6 +69,10 @@
              string-end)
          . systemd-mode))
 
+(use-package nix-mode
+  :mode (("\\.nix\\'" . nix-mode))
+  :ensure t)
+
 (use-package portage-mode
   :commands (portage-mode portage-mode-accept-keywords-mode portage-mode-use-mode)
   :mode (("/package\\.use" . portage-mode-use-mode)
