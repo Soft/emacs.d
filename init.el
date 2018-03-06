@@ -172,6 +172,7 @@
              shell
              org
              docker
+             linux
              misc)))
   "Adequate emacs.d modules to load.")
 
