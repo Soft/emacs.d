@@ -47,13 +47,16 @@ is non-nil, refresh packages before installing if
         (package-refresh-contents))
       (-each to-install #'package-install))))
 
-(defun adq/use-package-refresh-if-required (name ensure &rest args)
+;; This might not be that useful since use-package seems to refresh the package
+;; archive
+(defun adq/use-package-refresh-if-required (name args state &optional no-refresh)
   "Modify use-package's :ensure to refresh package archive when
 required."
-  (let ((package (or (when (eq ensure t)
-                       (use-package-as-symbol name))
-                     ensure)))
-    (when (and package (not (package-installed-p package)))
+  (let ((package (use-package-as-symbol
+                  (if (eq (car args) t)
+                      name (car args)))))
+    (when (not (package-installed-p package))
+      (message "%s" package)
       (when (adq/package-should-refresh-p)
         (package-refresh-contents)))))
 
