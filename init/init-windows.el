@@ -93,7 +93,7 @@ buffers."
  ^^    ↑       ^^_1_: Delete Others       _n_: Next           _s_: Scrollbar  _f_: Fullscreen
  _h_ ← · → _l_   _2_: Split Horizontally  _b_: Balance        _t_: Toolbar    _c_: Center
  ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      _e_: Theme
-     ^_j_                              ^^^_R_: Anticlockwise  
+     ^_j_       ^_w_: Swap with largest   _R_: Anticlockwise  
 "
   ("h" windmove-left)
   ("j" windmove-down)
@@ -118,7 +118,8 @@ buffers."
   ("0" delete-window)
   ("1" delete-other-windows)
   ("2" split-window-below)
-  ("3" split-window-right))
+  ("3" split-window-right)
+  ("w" adq/swap-with-largest))
 
 (bind-key "C-c w" #'adq/hydra-manage-windows/body)
 
