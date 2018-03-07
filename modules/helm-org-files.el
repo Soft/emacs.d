@@ -43,6 +43,7 @@
             (cons (helm-org-files--title-for-file path) path))
           (helm-org-files--files org-directory)))
 
+;;;###autoload
 (defun helm-org-files ()
   "Use Helm to find and visit Org files from `org-directory'."
   (interactive)
