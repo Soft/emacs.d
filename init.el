@@ -33,13 +33,17 @@
 (when (version< emacs-version "25")
   (error "Adequate emacs.d requires Emacs 25"))
 
-;; Alter garbage collection policy for the duration of startup
+;; Alter garbage collection policy and file name handlers for the duration of
+;; startup
 
-(let ((default-threshold gc-cons-threshold))
-  (setq gc-cons-threshold 64000000)
+(let ((default-threshold gc-cons-threshold)
+      (default-file-name-handler-alist file-name-handler-alist))
+  (setq gc-cons-threshold 64000000
+        file-name-handler-alist nil)
   (add-hook 'after-init-hook
             #'(lambda ()
-                (setq gc-cons-threshold default-threshold))))
+                (setq gc-cons-threshold default-threshold
+                      file-name-handler-alist default-file-name-handler-alist))))
 
 (require 'subr-x) ; string-remove-suffix
 
@@ -84,6 +88,7 @@
 (advice-add #'package-refresh-contents :before #'adq/package-update-last-refresh-time)
 
 (unless package-archive-contents
+  (message "No package archive available, refreshing...")
   (package-refresh-contents))
 
 (unless (package-installed-p 'use-package)
