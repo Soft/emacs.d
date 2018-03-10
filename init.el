@@ -93,8 +93,12 @@
 
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
+
+(use-package diminish
+  :ensure t)
+
+(use-package bind-key
+  :ensure t)
 
 (setq load-prefer-newer t)
 (use-package auto-compile

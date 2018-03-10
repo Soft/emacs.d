@@ -166,7 +166,12 @@
 (use-package prog-mode
   :defer t
   :init
-  (add-hook 'prog-mode-hook #'adq/prog-mode-setup))
+  ;; Ugly hack to make sure we do not try to use the `adq/prog-mode-setup` hook
+  ;; before we have processed all the use-package definitions it depends on.
+  (add-hook
+   'after-init-hook
+   #'(lambda ()
+       (add-hook 'prog-mode-hook #'adq/prog-mode-setup))))
 
 (defun adq/text-mode-setup ()
   "Defaults for text modes."
