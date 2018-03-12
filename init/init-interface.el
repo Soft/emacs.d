@@ -108,7 +108,7 @@
 
 (bind-key "<f11>" #'adq/toggle-fullscreen)
 
-(use-package centered-window-mode
+(use-package centered-window
   :ensure t
   :defer t)
 
