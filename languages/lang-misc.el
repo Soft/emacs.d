@@ -39,50 +39,10 @@
   :interpreter ("scala" . scala-mode)
   :ensure t)
 
-(use-package ebuild-mode
-  :mode (("\\.ebuild\\'" . ebuild-mode)))
-
 (use-package qml-mode
   :mode (("\\.qml\\'" . qml-mode))
   :interpreter ("qml" . qml-mode)
   :ensure t)
-
-(use-package vimrc-mode
-  :mode (("\\.vim\\(rc\\)?\\'" . vimrc-mode))
-  :ensure t)
-
-(use-package systemd
-  :ensure t
-  :mode ((rx "."
-             (or "automount"
-                 "busname"
-                 "mount"
-                 "service"
-                 "slice"
-                 "socket"
-                 "swap"
-                 "target"
-                 "timer"
-                 "link"
-                 "netdev"
-                 "network")
-             string-end)
-         . systemd-mode))
-
-(use-package portage-mode
-  :commands (portage-mode portage-mode-accept-keywords-mode portage-mode-use-mode)
-  :mode (("/package\\.use" . portage-mode-use-mode)
-         ("/package\\.accept_keywords" . portage-mode-accept-keywords-mode)
-         ((rx "/package." (or "env" "license" "mask" "unmask")) . portage-mode)))
-
-(use-package ssh-config-mode
-  :ensure t
-  :mode (("/\\.ssh/config\\'" . ssh-config-mode)
-         ("/sshd?_config\\'" . ssh-config-mode)
-         ("/known_hosts\\'" . ssh-known-hosts-mode)
-         ("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
-  :config
-  (add-hook 'ssh-config-mode-hook #'turn-on-font-lock))
 
 (provide 'lang-misc)
 

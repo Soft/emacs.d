@@ -13,6 +13,8 @@
   :init
   (setq yas-verbosity 2)
   :config
+  (use-package yasnippet-snippets
+    :ensure t)
   (add-to-list
    'yas-snippet-dirs
    (f-join adq/init-directory "resources" "snippets") t))
