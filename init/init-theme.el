@@ -18,7 +18,7 @@
     espresso-theme
     gotham-theme
     hemisu-theme
-    kaolin-theme
+    kaolin-themes
     material-theme
     monokai-theme
     plan9-theme
