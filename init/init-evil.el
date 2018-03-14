@@ -28,6 +28,7 @@
     inferior-python-mode
     life-mode
     neotree-mode
+    ggtags-mode
     nov-mode
     paradox-menu-mode
     paradox-mode
