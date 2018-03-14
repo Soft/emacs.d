@@ -32,7 +32,7 @@
 
 (adq/install-packages-if-missing adq/wanted-themes t)
 
-(defvar adq/default-theme 'doom-vibrant
+(defvar adq/default-theme 'kaolin-aurora
   "Default theme for Emacs.")
 
 (defvar adq/switch-theme-hook nil
