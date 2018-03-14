@@ -13,7 +13,6 @@
 
 (use-package pdf-tools
   :if (eq system-type 'gnu/linux)
-  :pin manual
   :ensure t
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
