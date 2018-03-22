@@ -27,6 +27,11 @@ staged changes."
    :map magit-popup-mode-map
    ("<escape>" . magit-popup-quit)))
 
+(use-package magithub
+  :after magit
+  :config
+  (magithub-feature-autoinject 'all))
+
 (use-package git-timemachine
   :ensure t
   :bind
