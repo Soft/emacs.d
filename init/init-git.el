@@ -29,6 +29,7 @@ staged changes."
 
 (use-package magithub
   :after magit
+  :ensure t
   :config
   (magithub-feature-autoinject 'all))
 
