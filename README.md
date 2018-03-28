@@ -12,7 +12,7 @@ Practical Emacs setup with Vim-ish influences and affection for
 
 Unlike most Emacs configurations packages, Adequate emacs.d should not be
 installed as the `~/.emacs.d` directory. Instead, if you wish to use Adequate,
-you should make `~/.emacs` to be a symbolic link to the projects `init.el`. The
+you should make `~/.emacs` to be a symbolic link to the project's `init.el`. The
 initialization code will figure out where Adequate is installed and add the
 appropriate directories to Emacs load path.
 

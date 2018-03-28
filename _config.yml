@@ -1,0 +1,4 @@
+theme: jekyll-theme-cayman
+title: Adequate Emacs
+description: Practical Emacs setup with Vim-ish influences
+show_downloads: true
