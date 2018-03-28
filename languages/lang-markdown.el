@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-(fset 'pandoc-pdf-from-buffer
+(fset 'adq/pandoc-pdf-from-buffer
       (adq/make-compiler
        "pandoc"
        (adq/partial concat _ ".pdf")
@@ -36,7 +36,6 @@
 (defun adq/markdown-setup ()
   (when (locate-library "pandoc-mode")
     (pandoc-mode 1))
-  (typo-mode)
   (yas-minor-mode))
 
 (use-package markdown-mode
