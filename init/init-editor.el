@@ -187,6 +187,11 @@
   :ensure t
   :defer t)
 
+(use-package bury-successful-compilation
+  :ensure t
+  :init
+  (bury-successful-compilation))
+
 (use-package autorevert
   :defer t
   :config
