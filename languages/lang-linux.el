@@ -42,13 +42,17 @@
          ((rx "/package." (or "env" "license" "mask" "unmask")) . portage-mode)))
 
 (use-package ssh-config-mode
-  :ensure t
   :mode (("/\\.ssh/config\\'" . ssh-config-mode)
          ("/sshd?_config\\'" . ssh-config-mode)
          ("/known_hosts\\'" . ssh-known-hosts-mode)
          ("/authorized_keys2?\\'" . ssh-authorized-keys-mode))
+  :ensure t
   :config
   (add-hook 'ssh-config-mode-hook #'turn-on-font-lock))
+
+(use-package pkgbuild-mode
+  :mode (("/PKGBUILD\\'" . pkgbuild-mode))
+  :ensure t)
 
 (provide 'lang-linux)
 

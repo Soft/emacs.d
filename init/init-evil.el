@@ -28,6 +28,8 @@
     inferior-python-mode
     life-mode
     neotree-mode
+    magithub-dash-mode
+    magithub-issue-view-mode
     ggtags-mode
     nov-mode
     paradox-menu-mode
