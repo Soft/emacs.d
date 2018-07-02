@@ -38,9 +38,12 @@
   "ctags executable name")
 
 (defun adq/show-tags-table-list ()
+  "Show tags table list."
   (interactive)
-  (message (s-join "; " (or tags-table-list
-                            (list tags-file-name)))))
+  (message (s-join
+            (propertize "; " 'face font-lock-constant-face)
+            (or tags-table-list
+                (list tags-file-name)))))
 
 (defun adq/current-project-root ()
   "Get path to the current project root. This is the root of the
