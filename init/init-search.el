@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 
-;; Search configuration. Additionally, are some search related things in
+;; Search configuration. There are some additional search related options in
 ;; `init-helm.el'.
 
 ;;; Code:
@@ -22,25 +22,37 @@
       :ensure t
       :init (require 'evil-anzu))))
 
-;; FIXME: This really needs more work
-(use-package ggtags
-  :ensure t
-  :defer t
-  :diminish ggtags-mode ; Should this be hidden?
-  )
-
 (defvar adq/ctags-executable "ctags"
   "ctags executable name")
 
-(defun adq/update-project-ctags ()
+(defun adq/current-project-root ()
+  "Get path to the current project root. This is the root of the
+git repository or, if no git repository is present, directory
+containing the current file. Function returns nil if the current
+buffer is not associated with a file."
+  (or (adq/git-find-repository-root)
+      (when buffer-file-name
+        (f-dirname buffer-file-name))))
+
+(defun adq/setup-project-ctags ()
+  "Create tags for current project if they do not exist and set
+the tags file as active."
+  (interactive)
+  (let ((root (adq/current-project-root)))
+    (if root
+        (let ((tags-file (f-join root "TAGS")))
+          (if (f-exists-p tags-file)
+              (visit-tags-table tags-file)
+            (adq/update-project-ctags t)))
+      (error "Not in a project"))))
+
+(defun adq/update-project-ctags (&optional visit)
   "Update tags for the current project."
   (interactive)
-  (let ((root (or (adq/git-find-repository-root)
-                  (when buffer-file-name
-                    (f-dirname buffer-file-name))))
+  (let ((root (adq/current-project-root))
         (start-time (current-time)))
     (if (and root (adq/programs-p adq/ctags-executable))
-        (progn
+        (let ((tags-file (f-join root "TAGS")))
           (message "Updating tags for %s"
                    (propertize root 'face font-lock-string-face))
           (async-start-process (format "%s: %s" adq/ctags-executable root)
@@ -52,21 +64,27 @@
                                             (propertize root 'face font-lock-string-face)
                                             (propertize (format "%.2f" (time-to-seconds elapsed))
                                                         'face
-                                                        font-lock-constant-face))))
+                                                        font-lock-constant-face))
+                                   (when visit
+                                     (visit-tags-table tags-file))))
                                "-V"
                                "-e"
                                "-R"
                                "-f"
-                               (f-join root "TAGS")
+                               tags-file
                                root))
       (error "Could not update tags"))))
 
-(use-package dumb-jump
-  :ensure t
-  ;;:config (setq dumb-jump-selector 'helm)
-  :bind (("C-c d d" . dumb-jump-go)
-         ("C-c d b" . dumb-jump-back)
-         ("C-c d q" . dumb-jump-quick-look)))
+(bind-keys
+ :prefix-map adq/tags-prefix-keymap
+ :prefix-docstring "Keymap for operating with tags."
+ :prefix "C-c d"
+ ("U" . adq/setup-project-ctags)
+ ("u" . adq/update-project-ctags)
+ ("a" . xref-find-apropos)
+ ("d" . xref-find-definitions)
+ ("D" . xref-find-defintions-other-window)
+ ("r" . xref-find-refererences))
 
 (use-package ag
   :if (adq/programs-p "ag")
@@ -77,6 +95,7 @@
         ag-reuse-window t
         ag-reuse-buffers t))
 
+;; TODO: Replace with deadgrep once in Melpa
 (use-package ripgrep
   :if (adq/programs-p "rg")
   :defer t
