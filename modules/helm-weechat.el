@@ -32,15 +32,22 @@
      buffer)))
 
 (defvar helm-source-weechat
-  '((name . "WeeChat")
-    (candidates . (lambda ()
-                    (mapcar #'helm-weechat-format-buffer (weechat-buffer-list))))
-    (action . switch-to-buffer-dwim)))
+  (helm-build-sync-source "WeeChat"
+    :candidates (lambda ()
+                  (mapcar #'helm-weechat-format-buffer
+                          (weechat-buffer-list)))
+    :action '(("Select buffer" .
+               (lambda (buffer)
+                 (let ((window (get-buffer-window buffer)))
+                   (if window
+                       (select-window window)
+                     (switch-to-buffer buffer))))))))
 
 ;;;###autoload
 (defun helm-weechat-buffers ()
   (interactive)
-  (helm-other-buffer 'helm-source-weechat nil))
+  (helm :sources 'helm-source-weechat
+        :buffer "*helm select WeeChat buffer*"))
 
 (provide 'helm-weechat)
 
