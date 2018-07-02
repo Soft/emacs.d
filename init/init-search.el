@@ -54,6 +54,7 @@
                                                         'face
                                                         font-lock-constant-face))))
                                "-V"
+                               "-e"
                                "-R"
                                "-f"
                                (f-join root "TAGS")
