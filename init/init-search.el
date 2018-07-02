@@ -32,8 +32,15 @@
               ("<return>" . xref-goto-xref)
               ("S-<return>" . xref-show-location-at-point)))
 
+(setq tags-revert-without-query t)
+
 (defvar adq/ctags-executable "ctags"
   "ctags executable name")
+
+(defun adq/show-tags-table-list ()
+  (interactive)
+  (message (s-join "; " (or tags-table-list
+                            (list tags-file-name)))))
 
 (defun adq/current-project-root ()
   "Get path to the current project root. This is the root of the
