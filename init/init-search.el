@@ -22,6 +22,16 @@
       :ensure t
       :init (require 'evil-anzu))))
 
+(use-package xref
+  :bind (:map xref--xref-buffer-mode-map
+              ("q" . quit-window)
+              ("j" . xref-next-line)
+              ("k" . xref-prev-line)
+              ("J" . evil-scroll-down)
+              ("K" . evil-scroll-up)
+              ("<return>" . xref-goto-xref)
+              ("S-<return>" . xref-show-location-at-point)))
+
 (defvar adq/ctags-executable "ctags"
   "ctags executable name")
 
