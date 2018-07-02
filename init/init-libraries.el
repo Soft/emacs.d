@@ -23,6 +23,9 @@
 (use-package hydra
   :ensure t)
 
+(use-package async
+  :ensure t)
+
 (use-package fringe-helper
   :ensure t
   :functions (fringe-helper-define))

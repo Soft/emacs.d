@@ -26,7 +26,39 @@
 (use-package ggtags
   :ensure t
   :defer t
-  :diminish ggtags-mode)
+  :diminish ggtags-mode ; Should this be hidden?
+  )
+
+(defvar adq/ctags-executable "ctags"
+  "ctags executable name")
+
+(defun adq/update-project-ctags ()
+  "Update tags for the current project."
+  (interactive)
+  (let ((root (or (adq/git-find-repository-root)
+                  (when buffer-file-name
+                    (f-dirname buffer-file-name))))
+        (start-time (current-time)))
+    (if (and root (adq/programs-p adq/ctags-executable))
+        (progn
+          (message "Updating tags for %s"
+                   (propertize root 'face font-lock-string-face))
+          (async-start-process (format "%s: %s" adq/ctags-executable root)
+                               adq/ctags-executable
+                               (lambda (_)
+                                 (let* ((end-time (current-time))
+                                        (elapsed (time-subtract end-time start-time)))
+                                   (message "Tags updated for %s in %s seconds"
+                                            (propertize root 'face font-lock-string-face)
+                                            (propertize (format "%.2f" (time-to-seconds elapsed))
+                                                        'face
+                                                        font-lock-constant-face))))
+                               "-V"
+                               "-R"
+                               "-f"
+                               (f-join root "TAGS")
+                               root))
+      (error "Could not update tags"))))
 
 (use-package dumb-jump
   :ensure t
