@@ -30,12 +30,6 @@
 (use-package company
   :ensure t
   :diminish company-mode
-  :init
-  (add-hook
-   'after-init-hook
-   (lambda ()
-     (global-company-mode)
-     (company-statistics-mode)))
   :config
   (setq company-idle-delay 0.2
         company-show-numbers t

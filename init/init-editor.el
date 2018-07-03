@@ -82,7 +82,9 @@
   (origami-mode)
   (dtrt-indent-mode)
   (flycheck-mode)
-  (yas-minor-mode))
+  (yas-minor-mode)
+  (company-mode)
+  (company-statistics-mode))
 
 (use-package undo-tree
   :ensure t
