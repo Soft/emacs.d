@@ -25,6 +25,7 @@
 (use-package xref
   :bind (:map xref--xref-buffer-mode-map
               ("q" . quit-window)
+              ("<escape>" . quit-window)
               ("j" . xref-next-line)
               ("k" . xref-prev-line)
               ("J" . evil-scroll-down)
