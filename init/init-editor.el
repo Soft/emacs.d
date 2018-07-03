@@ -74,7 +74,7 @@
 ;; required packages. This can break the first setup.
 (defun adq/prog-mode-setup ()
   "Defaults for programming modes."
-  (nlinum-mode)
+  (setq-local display-line-numbers t)
   (global-prettify-symbols-mode)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode)
@@ -94,10 +94,6 @@
   :config
   (setq uniquify-buffer-name-style 'forward
         uniquify-separator " • "))
-
-(use-package nlinum
-  :ensure t
-  :defer t)
 
 (use-package wc-mode
   :defer t
