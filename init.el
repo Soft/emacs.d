@@ -30,8 +30,8 @@
 
 ;; Check version compatibility
 
-(when (version< emacs-version "25")
-  (error "Adequate emacs.d requires Emacs 25"))
+(when (version< emacs-version "26")
+  (error "Adequate emacs.d requires Emacs 26"))
 
 ;; Alter garbage collection policy and file name handlers for the duration of
 ;; startup
