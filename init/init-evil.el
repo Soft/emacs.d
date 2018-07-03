@@ -30,7 +30,6 @@
     neotree-mode
     magithub-dash-mode
     magithub-issue-view-mode
-    ggtags-mode
     nov-mode
     paradox-menu-mode
     paradox-mode
