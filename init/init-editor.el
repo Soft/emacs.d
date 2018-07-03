@@ -48,17 +48,17 @@
  ("<escape>" . keyboard-quit))
 
 (defun adq/where-am-i ()
-  "Display quick summary of current location."
+  "Display quick summary of the current location."
   (interactive)
-  (message "%s%s%sline: %d; column: %d"
+  (message "%s%s%sline: %s; column: %s"
            (let ((path (or (buffer-file-name) (buffer-name))))
-             (format "%s; " path))
+             (format "%s; " (propertize path 'face font-lock-string-face)))
            (if (projectile-project-p)
-               (format "%s; " (projectile-project-name)) "") 
+               (format "project: %s; " (propertize (projectile-project-name) 'face font-lock-type-face)) "") 
            (if-let ((branch (adq/git-current-branch)))
-               (format "%s; " branch) "")
-           (line-number-at-pos)
-           (current-column)))
+               (format "branch: %s; " (propertize branch 'face font-lock-builtin-face)) "")
+           (propertize (format "%d" (line-number-at-pos)) 'face font-lock-constant-face)
+           (propertize (format "%d" (current-column)) 'face font-lock-constant-face)))
 
 (bind-key "C-c x W" #'adq/where-am-i)
 
