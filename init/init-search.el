@@ -68,7 +68,8 @@ the tags file as active."
       (error "Not in a project"))))
 
 (defun adq/update-project-ctags (&optional visit)
-  "Update tags for the current project."
+  "Update tags for the current project. If the optional VISIT is
+supplied the tags file is visited once it has been generated."
   (interactive)
   (let ((root (adq/current-project-root))
         (start-time (current-time)))
