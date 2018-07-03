@@ -18,6 +18,7 @@
   (setq helm-buffers-fuzzy-matching           t
         helm-recentf-fuzzy-match              t
         helm-M-x-fuzzy-match                  t
+        helm-M-x-always-save-history          t
         helm-split-window-in-side-p           t
         helm-ff-skip-boring-files             t
         helm-imenu-fuzzy-match                t
