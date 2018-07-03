@@ -50,6 +50,7 @@
   (evil-mode)
   :config
   (setq evil-cross-lines t
+        evil-search-wrap t
         evil-default-cursor t
         evil-mode-beyond-eol t)
 
