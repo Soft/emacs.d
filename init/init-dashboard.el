@@ -40,6 +40,9 @@
    :map dashboard-mode-map
    ("j" . next-line)
    ("k" . previous-line))
+  (advice-add #'dashboard-refresh-buffer
+              :before (lambda ()
+                        (setq dashboard-startup-banner (adq/dashboard-select-banner))))
   (dashboard-setup-startup-hook))
 
 
