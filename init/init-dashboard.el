@@ -12,7 +12,7 @@
   "Location for user's dashboard banners.")
 
 (defun adq/dashboard-select-banner ()
-  "Return random file from user's banner directory of 'official."
+  "Return random file from user's banner directory or 'official."
   (-if-let (files
             (and (f-directory? adq/dashboard-user-banner-directory)
                  (f--files adq/dashboard-user-banner-directory
@@ -39,7 +39,9 @@
   (bind-keys
    :map dashboard-mode-map
    ("j" . next-line)
-   ("k" . previous-line))
+   ("k" . previous-line)
+   ("J" . dashboard-next-section)
+   ("K" . dashboard-previous-section))
   (advice-add #'dashboard-refresh-buffer
               :before (lambda ()
                         (setq dashboard-startup-banner (adq/dashboard-select-banner))))
