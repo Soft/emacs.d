@@ -29,6 +29,10 @@
   :init
   (add-hook 'dashboard-mode-hook #'adq/dashboard-setup)
   :config
+  (set-face-attribute
+   'dashboard-banner-logo-title-face nil
+   :inherit 'font-lock-type-face
+   :height 120)
   (setq dashboard-items '((recents . 10)
                           (projects . 5))
         dashboard-startup-banner (adq/dashboard-select-banner)
