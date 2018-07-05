@@ -105,6 +105,35 @@ files that are not currently open."
       (helm :sources 'adq/helm-bm-all-source
             :buffer "*helm bm all*")))
 
+  (adq/after-load 'dashboard
+    (defun adq/dashboard-insert-bm-list (list-display-name list)
+      (when (car list)
+        (dashboard-insert-heading list-display-name)
+        (mapc (lambda (bookmark)
+                (insert "\n    ")
+                (widget-create 'push-button
+                               :action (lambda (&rest ignore)
+                                         (find-file (car bookmark))
+                                         (goto-char (cadr bookmark)))
+                               :mouse-face 'highlight
+                               :follow-link "\C-m"
+                               :button-prefix ""
+                               :button-suffix ""
+                               :format "%[%t%]"
+                               (format "%s:%d: %s"
+                                       (f-filename (car bookmark))
+                                       (caddr bookmark)
+                                       (cadddr bookmark))))
+              list)))
+
+    (defun adq/dashboard-insert-bm (list-size)
+      (when (adq/dashboard-insert-bm-list
+             "Bookmarks:"
+             (dashboard-subseq (adq/bm-list-all-bookmarks) 0 list-size))
+        (dashboard-insert-shortcut "B" "Bookmarks:")))
+
+    (add-to-list 'dashboard-item-generators '(bm . adq/dashboard-insert-bm)))
+
   (defhydra adq/hydra-bm nil
     "
 Bookmarks

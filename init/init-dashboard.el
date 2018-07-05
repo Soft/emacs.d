@@ -34,7 +34,8 @@
    :inherit 'font-lock-type-face
    :height 120)
   (setq dashboard-items '((recents . 10)
-                          (projects . 5))
+                          (projects . 5)
+                          (bm . 5))
         dashboard-startup-banner (adq/dashboard-select-banner)
         dashboard-banner-logo-title
         (format "Welcome to Emacs, %s %s"
