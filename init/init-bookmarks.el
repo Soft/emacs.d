@@ -5,7 +5,6 @@
 ;; Use bm for bookmarks.
 
 ;;; Code:
-
 (use-package bm
   :ensure t
   :demand t
@@ -50,17 +49,74 @@
             (lambda ()
               (bm-buffer-save-all)
               (bm-repository-save)))
+
+  (defun adq/bm-list-all-bookmarks ()
+    "Generate a list of all bookmarks, including bookmerks from
+files that are not currently open."
+    (let ((bookmarks '()))
+      (cl-loop for entry in bm-repository
+               when (and (listp entry) (f-readable-p (car entry)))
+               do
+               (with-temp-buffer
+                 (insert-file-contents-literally (car entry))
+                 (cl-letf (((symbol-function 'bm-bookmark-add)
+                            (lambda (&optional annotation time temporary)
+                              (!cons (list (car entry)
+                                           (point)
+                                           (line-number-at-pos)
+                                           (string-trim (thing-at-point 'line t)))
+                                     bookmarks)))
+                           ((symbol-function 'message)
+                            (lambda (&rest _))))
+                   (bm-buffer-restore-2 (cdr entry)))))
+      bookmarks))
+
+  (adq/after-load 'helm
+    (require 'compile)
+
+    (defun adq/helm-bm-all-format-bookmark (bookmark)
+      "Format bookmark for display."
+      (let ((file (f-filename (car bookmark)))
+            (line (caddr bookmark))
+            (contents (cadddr bookmark)))
+        (cons
+         (format "%s:%s: %s"
+                 (propertize file 'face compilation-info-face)
+                 (propertize (format "%d" line) 'face compilation-line-face)
+                 contents)
+         bookmark)))
+
+    (defvar adq/helm-bm-all-source
+      (helm-build-sync-source "Helm All Bookmarks"
+        :candidates
+        (lambda ()
+          (mapcar #'adq/helm-bm-all-format-bookmark
+                  (adq/bm-list-all-bookmarks)))
+        :action
+        '(("Switch to buffer" .
+           (lambda (bookmark)
+             (find-file (car bookmark))
+             (goto-char (cadr bookmark))))))
+      "Helm source with all the bookmarks.")
+
+    (defun adq/helm-bm-list-all ()
+      "List all bookmarks usin Helm."
+      (interactive)
+      (helm :sources 'adq/helm-bm-all-source
+            :buffer "*helm bm all*")))
+
   (defhydra adq/hydra-bm nil
     "
-Bookmark
-^^^^-------------------------
-_m_: Toggle      _l_: Helm
-_n_: Next        _L_: List
-_p_: Previous
+Bookmarks
+^^^^------------------------------------------------
+_m_: Toggle      _l_: Bookmarks from Buffers
+_n_: Next        _a_: Bookmarks form All Files
+_p_: Previous    _L_: List
 "
     ("m" bm-toggle)
     ("n" bm-next)
     ("p" bm-previous)
+    ("a" adq/helm-bm-list-all :exit t)
     ("l" helm-bm :exit t)
     ("L" bm-show-all :exit t))
   (bind-key "C-c m" #'adq/hydra-bm/body))
