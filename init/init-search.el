@@ -105,7 +105,7 @@ supplied the tags file is visited once it has been generated."
  ("u" . adq/update-project-ctags)
  ("a" . xref-find-apropos)
  ("d" . xref-find-definitions)
- ("D" . xref-find-defintions-other-window)
+ ("D" . xref-find-definitions-other-window)
  ("r" . xref-find-refererences))
 
 (use-package ag
