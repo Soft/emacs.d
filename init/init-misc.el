@@ -152,7 +152,11 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (adq/add-to-list-many 'exec-path-from-shell-variables
-                        '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "PATH" "BROWSER"))
+                        '("SSH_AUTH_SOCK"
+                          "SSH_AGENT_PID"
+                          "GPG_AGENT_INFO"
+                          "PATH"
+                          "BROWSER"))
   (exec-path-from-shell-initialize))
 
 (provide 'init-misc)

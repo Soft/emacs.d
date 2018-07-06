@@ -43,20 +43,20 @@
    ("C-h a"   . helm-apropos)
    ("C-h i"   . helm-info-emacs)))
 
-(use-package helm-ag
-  :if (adq/programs-p "ag")
-  :ensure t)
-
-(use-package helm-rg
-  :if (adq/programs-p "rg")
-  :ensure t)
-
 (use-package helm-projectile
   :ensure t
   :config (helm-projectile-on)
   :bind
-  (("C-c b" . helm-projectile-find-file)
-   ("C-c s" . helm-projectile-ag)))
+  (("C-c b" . helm-projectile-find-file)))
+
+(fset 'adq/helm-projectile-search
+      (cond ((adq/programs-p "rg") 'helm-projectile-rg)
+            ((adq/programs-p "ag") 'helm-projectile-ag)
+            ((adq/programs-p "ack") 'helm-projectile-ack)
+            ((adq/programs-p "grep") 'helm-projectile-grep)
+            (t (lambda () (error "No search program available.")))))
+
+(bind-key "C-c s" #'adq/helm-projectile-search)
 
 (use-package helm-descbinds
   :ensure t
@@ -92,6 +92,7 @@
   :defer t
   :bind (("C-c p M" . helm-make-projectile)))
 
+;; This is also bound into the bookmark hydra in init-bookmarks.el
 (use-package helm-bm
   :ensure t
   :bind  (("C-x c M" . helm-bm)))
