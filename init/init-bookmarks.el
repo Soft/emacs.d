@@ -30,8 +30,8 @@
   (defface adq/bm-fringe-persistent-face
     '((t :foreground "#ff1452"))
     "Face for persistent bookmarks.")
-  (set bm-fringe-face 'adq/bm-fringe-face
-       bm-fringe-persistent-face 'adq/bm-fringe-persistent-face)
+  (setq bm-fringe-face 'adq/bm-fringe-face
+        bm-fringe-persistent-face 'adq/bm-fringe-persistent-face)
 
   (bind-keys
    :map bm-show-mode-map
