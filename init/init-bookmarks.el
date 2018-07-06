@@ -5,6 +5,7 @@
 ;; Use bm for bookmarks.
 
 ;;; Code:
+
 (use-package bm
   :ensure t
   :demand t
@@ -22,24 +23,28 @@
     "..XXX.."
     "...X..."
     ".......")
-  (set-face-attribute
-   'bm-fringe-face nil
-   :foreground "#ff14cc"
-   :background nil)
-  (set-face-attribute
-   'bm-fringe-persistent-face nil
-   :foreground "#ff1452"
-   :background nil)
+
+  (defface adq/bm-fringe-face
+    '((t :foreground "#ff14cc"))
+    "Face for bookmarks.")
+  (defface adq/bm-fringe-persistent-face
+    '((t :foreground "#ff1452"))
+    "Face for persistent bookmarks.")
+  (set bm-fringe-face 'adq/bm-fringe-face
+       bm-fringe-persistent-face 'adq/bm-fringe-persistent-face)
+
   (bind-keys
    :map bm-show-mode-map
    ("j" . next-line)
    ("k" . previous-line))
-  (advice-add 'bm-bookmark-add :after (lambda (&rest args) (bm-save)))
-  (advice-add 'bm-bookmark-remove :after (lambda (&rest args) (bm-save)))
+
   (setq bm-cycle-all-buffers t
         bm-highlight-style 'bm-highlight-only-fringe
         bm-repository-size 1000)
   (setq-default bm-buffer-persistence t)
+
+  (advice-add 'bm-bookmark-add :after (lambda (&rest args) (bm-save)))
+  (advice-add 'bm-bookmark-remove :after (lambda (&rest args) (bm-save)))
   (add-hook 'after-init-hook #'bm-repository-load)
   (add-hook 'find-file-hooks #'bm-buffer-restore)
   (add-hook 'after-rever-hook #'bm-buffer-restore)
