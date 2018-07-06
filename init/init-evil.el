@@ -40,6 +40,7 @@
     tetris-mode
     weechat-mode
     xkcd-mode
+    deadgrep-mode
     xref--xref-buffer-mode
     xwidget-webkit-mode)
   "Modes where Evil mode should not be used.")

@@ -78,7 +78,7 @@ direction if universal argument is supplied."
 
 (use-package google-this
   :ensure t
-  :bind-keymap (("C-c x s" . google-this-mode-submap)))
+  :bind-keymap (("C-c x S" . google-this-mode-submap)))
 
 (defun adq/nov-mode-setup ()
   (setq-local shr-width 80)

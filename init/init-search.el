@@ -117,11 +117,16 @@ supplied the tags file is visited once it has been generated."
         ag-reuse-window t
         ag-reuse-buffers t))
 
-;; TODO: Replace with deadgrep once in Melpa
-(use-package ripgrep
+(use-package deadgrep
   :if (adq/programs-p "rg")
-  :defer t
-  :ensure t)
+  :ensure t
+  :bind (("C-c x s" . deadgrep)
+         :map deadgrep-mode-map
+         ("j" . deadgrep-forward)
+         ("k" . deadgrep-backward)
+         ("J" . evil-scroll-down)
+         ("K" . evil-scroll-up)
+         ("<escape>" . quit-window)))
 
 (provide 'init-search)
 
