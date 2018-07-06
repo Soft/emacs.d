@@ -56,8 +56,7 @@
               (bm-repository-save)))
 
   (defun adq/bm-list-all-bookmarks ()
-    "Generate a list of all bookmarks, including bookmerks from
-files that are not currently open."
+    "Generate a list of all bookmarks from all files."
     (let ((bookmarks '()))
       (cl-loop for entry in bm-repository
                when (and (listp entry) (f-readable-p (car entry)))
