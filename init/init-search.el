@@ -106,7 +106,7 @@ supplied the tags file is visited once it has been generated."
  ("a" . xref-find-apropos)
  ("d" . xref-find-definitions)
  ("D" . xref-find-definitions-other-window)
- ("r" . xref-find-refererences))
+ ("r" . xref-find-references))
 
 (use-package ag
   :if (adq/programs-p "ag")
