@@ -57,13 +57,19 @@
   (setq recentf-max-saved-items 1000)
   (adq/add-to-list-many
    'recentf-exclude
-   '("/tmp/" "/ssh:" "/usr/share/emacs/" "\\.emacs\\.d/elpa/")))
+   '("/tmp/"
+     "/ssh:"
+     "/usr/share/emacs/"
+     "\\.emacs\\.d/elpa/"
+     "TAGS")))
 
 ;; Maybe I should reconsider this since it is so slow
 (use-package desktop
   :init
   (setq desktop-path (list user-emacs-directory)
+        desktop-dirname user-emacs-directory
         desktop-base-file-name "desktop"
+        desktop-save t
         desktop-restore-frames nil
         desktop-restore-eager 0
         desktop-auto-save-timeout 60)
