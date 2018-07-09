@@ -159,6 +159,17 @@ _H_: Increase  _S_: Increase  _B_: Increase
                           "BROWSER"))
   (exec-path-from-shell-initialize))
 
+(use-package epa
+  :defer t
+  :config
+  (setq epa-pinentry-mode 'loopback)
+  :bind (:map epa-key-list-mode-map
+              ("<tab>" . widget-forward)
+              ("<escape>" . epa-exit-buffer)
+              ("q" . epa-exit-buffer)
+              ("j" . next-line)
+              ("k" . previous-line)))
+
 (provide 'init-misc)
 
 ;;; init-misc.el ends here

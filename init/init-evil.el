@@ -13,7 +13,7 @@
     dashboard-mode
     dired-mode
     doctor-mode
-    epa-list-keys-mode
+    epa-key-list-mode
     epa-key-mode
     epa-info-mode
     eshell-mode
