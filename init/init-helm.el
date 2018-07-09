@@ -63,9 +63,11 @@
   :bind
   (("C-h b" . helm-descbinds)))
 
-(defun adq/helm-swoop-projectile-or-file ()
-  (interactive)
-  (if (projectile-project-p)
+(defun adq/helm-swoop-file-or-project (d)
+  "Use Helm Swoop on the current buffer or on the current project
+if universal argument is supplied."
+  (interactive "P")
+  (if d
       (helm-multi-swoop-projectile)
     (helm-swoop)))
 
@@ -77,7 +79,7 @@
         helm-swoop-use-line-number-face t
         helm-swoop-use-fuzzy-match      t))
 
-(bind-key "C-c SPC" #'adq/helm-swoop-projectile-or-file)
+(bind-key "C-c SPC" #'adq/helm-swoop-file-or-project)
 
 (use-package helm-themes
   :ensure t
