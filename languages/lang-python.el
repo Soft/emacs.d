@@ -35,11 +35,11 @@
 
 (cl-defun adq/python-setup-venv (&key (project nil)
                                       (site-packages nil))
-  "Setup new virtual environment. If `project' is defined, it
-will be used for finding the project root, otherwise the current
-project will be used. If `site-packages' is non nil, the
-newly-created virtual environment will have access to the system
-site packages."
+  "Setup new virtual environment for a project. If `project' is
+defined, it will be used for finding the project root, otherwise
+the current project will be used. If `site-packages' is non nil,
+the newly-created virtual environment will have access to the
+system site packages."
   (interactive)
   (if-let (root (car (project-roots (or project
                                         (project-current)))))
