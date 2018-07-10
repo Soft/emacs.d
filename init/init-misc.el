@@ -72,7 +72,6 @@ direction if universal argument is supplied."
 (bind-key "C-c x t" #'adq/google-translate-with-defaults)
 
 (use-package define-word
-  :defer t
   :ensure t
   :bind (("C-c x d" . define-word-at-point)))
 
@@ -141,6 +140,7 @@ _H_: Increase  _S_: Increase  _B_: Increase
     (pop-to-buffer-same-window buffer)))
 
 (defun adq/insert-wan-ip ()
+  "Insert WAN IP into the current buffer."
   (interactive)
   (request "https://api.ipify.org?format=json"
            :parser 'json-read
