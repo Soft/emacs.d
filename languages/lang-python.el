@@ -45,7 +45,8 @@ found."
 
 (defun adq/python-venv-activate (&optional project)
   "Find and activate virtual environment for the project."
-  (if-let ((venv (adq/python-find-project-venv project)))
+  (interactive)
+  (if-let (venv (adq/python-find-project-venv project))
       (progn
         (pyvenv-activate venv)
         (message "Activated virtual environment %s" venv))
