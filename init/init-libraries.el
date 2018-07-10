@@ -20,18 +20,27 @@
 (use-package f
   :ensure t)
 
+;; Emacs bindings that stick around
 (use-package hydra
   :ensure t)
 
+;; Async helpers
 (use-package async
   :ensure t)
 
+;; Library for performingwith HTTP requets
+(use-package request
+  :ensure t)
+
+;; Library for defining fringe bitmaps
 (use-package fringe-helper
   :ensure t
   :functions (fringe-helper-define))
 
+;; Common lisp compatability layer
 (use-package cl-lib)
 
+;; Functions for working with colors
 (use-package color
   :functions (color-distance
               color-lighten-name

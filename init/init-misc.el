@@ -140,6 +140,16 @@ _H_: Increase  _S_: Increase  _B_: Increase
       (restclient-mode))
     (pop-to-buffer-same-window buffer)))
 
+(defun adq/insert-wan-ip ()
+  (interactive)
+  (request "https://api.ipify.org?format=json"
+           :parser 'json-read
+           :sync t
+           :success (cl-function (lambda (&key data &allow-other-keys)
+                                   (insert (cdr (assoc 'ip data)))))
+           :error (cl-function (lambda (&allow-other-keys)
+                                 (error "Failed to retrieve WAN IP")))))
+
 (use-package dbus-control
   :if (and (not (daemonp)) (locate-library "dbus"))
   :commands (dbus-control-mode)
