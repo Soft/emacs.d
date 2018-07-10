@@ -35,21 +35,38 @@
   "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
 
+(defvar adq/pypi-address "https://pypi.org"
+  "Python package index address.")
+
 (defun adq/python-pypi-package-info (project &optional version)
   "Retrieve package info from Python package index."
   (cl-block query
-    (let ((pypi-domain "https://pypi.python.org"))
-      (request (if version
-                   (format "%s/pypi/%s/%s/json" pypi-domain project version)
-                 (format "%s/pypi/%s/json" pypi-domain project))
-               :parser 'json-read
-               :sync t
-               :error
-               (lambda (&rest _) (cl-return-from query))
-               :success
-               (cl-function
-                (lambda (&key data &allow-other-keys)
-                  (cl-return-from query data)))))))
+    (request (if version
+                 (format "%s/pypi/%s/%s/json" adq/pypi-address project version)
+               (format "%s/pypi/%s/json" adq/pypi-address project))
+             :parser 'json-read
+             :sync t
+             :error
+             (lambda (&rest _) (cl-return-from query))
+             :success
+             (cl-function
+              (lambda (&key data &allow-other-keys)
+                (cl-return-from query data))))))
+
+(defvar adq/python-classifier-cache '()
+  "Cached Python package classifiers.")
+
+(defun adq/python-get-classifiers ()
+  "Returns list of Python package classifiers."
+  (unless adq/python-classifier-cache
+    (request (concat adq/pypi-address "/pypi?%3Aaction=list_classifiers")
+             :parser 'buffer-string
+             :sync t
+             :success
+             (cl-function
+              (lambda (&key data &allow-other-keys)
+                (setq adq/python-classifier-cache (s-lines data))))))
+  adq/python-classifier-cache)
 
 (defun adq/python-insert-dependency (package &optional version)
   "Insert package dependency definition. When `version' is not
@@ -67,7 +84,7 @@ is used."
   "Insert Python setup.py template." nil
   "#!/usr/bin/env python" \n \n
   "from setuptools import setup, find_packages" \n \n
-  "setup(name=\"" (skeleton-read "Package name: ") "\"," \n
+  "setup(name=\"" (f-filename (f-dirname (buffer-file-name))) "\"," \n
   > "version=\"" (skeleton-read "Version: ") "\"," \n
   > "description=\"" (skeleton-read "Description: ") "\"," \n
   > "long_description=\"\"," \n
@@ -78,8 +95,8 @@ is used."
   > "}," \n
   > "install_requires=[" \n
   > "]," \n
-  > "keywords=[]" \n
-  > "license=\"" (skeleton-read "License: ") "\")" \n \n _)
+  > "keywords=[" \n
+  > "])" \n \n _)
 
 (define-auto-insert "setup\\.py\\'" 'adq/python-skeleton-setup)
 
