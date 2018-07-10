@@ -20,7 +20,8 @@
 (use-package ielm 
   :bind (("C-c i" . ielm))
   :init
-  (setq ielm-prompt "λ> ")
+  (setq ielm-prompt "λ> "
+        ielm-noisy nil)
   :config
   (add-hook 'ielm-mode-hook #'adq/ielm-setup))
 
@@ -88,6 +89,7 @@
   :config
   (bind-keys
    :map emacs-lisp-mode-map
+   ;; FIXME: Collides with FlyCheck
    ("C-c e" . macrostep-expand)
 
    ("C-c a r" . eval-region)
