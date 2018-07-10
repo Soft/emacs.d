@@ -35,6 +35,34 @@
   "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
 
+(defun adq/python-pypi-package-info (project &optional version)
+  "Retrieve package info from Python package index."
+  (cl-block query
+    (let ((pypi-domain "https://pypi.python.org"))
+      (request (if version
+                   (format "%s/pypi/%s/%s/json" pypi-domain project version)
+                 (format "%s/pypi/%s/json" pypi-domain project))
+               :parser 'json-read
+               :sync t
+               :error
+               (lambda (&rest _) (cl-return-from query))
+               :success
+               (cl-function
+                (lambda (&key data &allow-other-keys)
+                  (cl-return-from query data)))))))
+
+(defun adq/python-insert-dependency (package &optional version)
+  "Insert package dependency definition. When `version' is not
+specified, the latest version available on Python package index
+is used."
+  (interactive "sPackage: ")
+  (if-let (version
+           (or version
+               (let-alist (adq/python-pypi-package-info package)
+                 .info.version)))
+      (insert package "==" version)
+    (error "Could not find package %s" package)))
+
 (define-skeleton adq/python-skeleton-setup
   "Insert Python setup.py template." nil
   "#!/usr/bin/env python" \n \n
