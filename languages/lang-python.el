@@ -15,6 +15,10 @@
   :ensure t
   :defer t)
 
+(use-package anaconda-mode
+  :ensure t
+  :defer t)
+
 (defun adq/python-setup ()
   "Defaults for Python."
   (highlight-indent-guides-mode)
@@ -34,12 +38,14 @@
   `adq/python-setup-venv'.")
 
 (cl-defun adq/python-setup-venv (&key (project nil)
-                                      (site-packages nil))
+                                      (site-packages nil)
+                                      (activate nil))
   "Setup new virtual environment for a project. If `project' is
 defined, it will be used for finding the project root, otherwise
 the current project will be used. If `site-packages' is non nil,
 the newly-created virtual environment will have access to the
-system site packages."
+system site packages. If `activate' is non nill, the
+newly-created virtual environment is activated."
   (interactive)
   (if-let (root (car (project-roots (or project
                                         (project-current)))))
@@ -49,7 +55,10 @@ system site packages."
                                  (if site-packages '("--system-site-packages") '())
                                  (list env))))
               (pcase (apply #'call-process args)
-                (`0 (message "Virtual environment created at %s" env))
+                (`0 (progn
+                      (message "Virtual environment created at %s" env)
+                      (when activate
+                        (pyvenv-activate env))))
                 (_ (error "Failed to create virtual environment at %s" env))))
           (error "%s already exists" env)))
     (error "Could not find project root")))
@@ -76,10 +85,6 @@ found."
         (pyvenv-activate venv)
         (message "Activated virtual environment %s" venv))
     (error "Cannot find virtual environment")))
-
-(use-package anaconda-mode
-  :ensure t
-  :defer t)
 
 (use-package python
   :mode (("\\.py\\'" . python-mode))
