@@ -27,8 +27,6 @@
         helm-locate-fuzzy-match               t
         helm-ff-file-name-history-use-recentf t
         helm-lisp-fuzzy-completion            t)
-  ;; (if (adq/programs-p "curl")
-  ;;     (setq helm-net-prefer-curl t))
   (bind-keys
    :map helm-map
    ("<escape>" . helm-keyboard-quit)
@@ -56,7 +54,15 @@
             ((adq/programs-p "grep") 'helm-projectile-grep)
             (t (lambda () (error "No search program available.")))))
 
-(bind-key "C-c s" #'adq/helm-projectile-search)
+(defun adq/search-helm-or-deadgrep (d)
+  "Search project with Helm or, if universal argument is
+supplied, with deadgrep."
+  (interactive "P")
+  (if d
+      (deadgrep) ; FIXME: deadgrep might not be available
+    (adq/helm-projectile-search)))
+
+(bind-key "C-c s" #'adq/search-helm-or-deadgrep)
 
 (use-package helm-descbinds
   :ensure t
