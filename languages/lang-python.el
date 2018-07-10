@@ -29,6 +29,31 @@
   "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
 
+(defvar adq/python-venv-dirname "env"
+  "Name for virtual environments created with
+  `adq/python-setup-venv'.")
+
+(cl-defun adq/python-setup-venv (&key (project nil)
+                                      (site-packages nil))
+  "Setup new virtual environment. If `project' is defined, it
+will be used for finding the project root, otherwise the current
+project will be used. If `site-packages' is non nil, the
+newly-created virtual environment will have access to the system
+site packages."
+  (interactive)
+  (if-let (root (car (project-roots (or project
+                                        (project-current)))))
+      (let ((env (f-join root adq/python-venv-dirname)))
+        (if (not (f-exists? env))
+            (let ((args (-concat (list "python3" nil nil nil "-m" "venv")
+                                 (if site-packages '("--system-site-packages") '())
+                                 (list env))))
+              (pcase (apply #'call-process args)
+                (`0 (message "Virtual environment created at %s" env))
+                (_ (error "Failed to create virtual environment at %s" env))))
+          (error "%s already exists" env)))
+    (error "Could not find project root")))
+
 (defun adq/python-find-project-venv (&optional project)
   "Returns virtual environment directory of PROJECT or, if nil,
 the current project. Returns nil if no virtual environment is
