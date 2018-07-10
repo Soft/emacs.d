@@ -10,7 +10,8 @@
   :ensure t
   :defer t
   :config
-  (setq origami-show-fold-header t)
+  (setq origami-show-fold-header t
+        origami-fold-replacement " ⋯ ")
   (set-face-attribute
    'origami-fold-header-face nil
    :box nil
