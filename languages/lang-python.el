@@ -27,11 +27,33 @@
   ;; (when-let ((venv (adq/python-find-project-venv)))
   ;;   (pyvenv-activate venv)
   ;;   (message "Activated virtual environment %s" venv))
-  )
+  (when (and (equal (buffer-name) "setup.py")
+             (eq (buffer-size) 0))
+    (auto-insert)))
 
-(define-skeleton adq/python-doc-comment
+(define-skeleton adq/python-skeleton-doc-comment
   "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
+
+(define-skeleton adq/python-skeleton-setup
+  "Insert Python setup.py template." nil
+  "#!/usr/bin/env python" \n \n
+  "from setuptools import setup, find_packages" \n \n
+  "setup(name=\"" (skeleton-read "Package name: ") "\"," \n
+  > "version=\"" (skeleton-read "Version: ") "\"," \n
+  > "description=\"" (skeleton-read "Description: ") "\"," \n
+  > "long_description=\"\"," \n
+  > "packages=find_packages()," \n
+  > "entry_points={" \n
+  > "\"console_scripts\": [" \n
+  > "]" \n
+  > "}," \n
+  > "install_requires=[" \n
+  > "]," \n
+  > "keywords=[]" \n
+  > "license=\"" (skeleton-read "License: ") "\")" \n \n _)
+
+(define-auto-insert "setup\\.py\\'" 'adq/python-skeleton-setup)
 
 (defvar adq/python-venv-dirname "env"
   "Name for virtual environments created with
@@ -91,7 +113,7 @@ found."
   :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'adq/python-setup)
   :bind (:map python-mode-map
-              ("M-\"" . adq/python-doc-comment)))
+              ("M-\"" . adq/python-skeleton-doc-comment)))
 
 (provide 'lang-python)
 
