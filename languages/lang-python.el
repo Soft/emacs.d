@@ -18,12 +18,38 @@
 (defun adq/python-setup ()
   "Defaults for Python."
   (highlight-indent-guides-mode)
+  (anaconda-eldoc-mode)
   (pyvenv-mode)
-  (anaconda-eldoc-mode))
+  ;; (when-let ((venv (adq/python-find-project-venv)))
+  ;;   (pyvenv-activate venv)
+  ;;   (message "Activated virtual environment %s" venv))
+  )
 
 (define-skeleton adq/python-doc-comment
-  "Insert Python doc comment" nil
+  "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
+
+(defun adq/python-find-project-venv (&optional project)
+  "Returns virtual environment directory of PROJECT or, if nil,
+the current project. Returns nil if no virtual environment is
+found."
+  (cl-block find-venv
+    (dolist (root (project-roots (or project
+                                     (project-current)
+                                     (cl-return-from find-venv))))
+      (f-files root
+               (lambda (file)
+                 (when (equal (f-filename file) "pyvenv.cfg")
+                   (cl-return-from find-venv (f-dirname file))))
+               t))))
+
+(defun adq/python-venv-activate (&optional project)
+  "Find and activate virtual environment for the project."
+  (if-let ((venv (adq/python-find-project-venv project)))
+      (progn
+        (pyvenv-activate venv)
+        (message "Activated virtual environment %s" venv))
+    (error "Cannot find virtual environment")))
 
 (use-package anaconda-mode
   :ensure t
@@ -33,10 +59,8 @@
   :mode (("\\.py\\'" . python-mode))
   :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'adq/python-setup)
-  :config
-  (bind-keys
-   :map python-mode-map
-   ("M-\"" . adq/python-doc-comment)))
+  :bind (:map python-mode-map
+              ("M-\"" . adq/python-doc-comment)))
 
 (provide 'lang-python)
 
