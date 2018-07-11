@@ -84,7 +84,10 @@ is used."
   "Insert Python setup.py template." nil
   "#!/usr/bin/env python" \n \n
   "from setuptools import setup, find_packages" \n \n
-  "setup(name=\"" (f-filename (f-dirname (buffer-file-name))) "\"," \n
+  "setup(name=\""
+  (when (buffer-file-name)
+    (f-filename (f-dirname (buffer-file-name)))) |
+  (skeleton-read "Name: ") "\"," \n
   > "version=\"" (skeleton-read "Version: ") "\"," \n
   > "description=\"" (skeleton-read "Description: ") "\"," \n
   > "long_description=\"\"," \n
@@ -102,7 +105,7 @@ is used."
 
 (defvar adq/python-venv-dirname "env"
   "Name for virtual environments created with
-  `adq/python-setup-venv'.")
+`adq/python-setup-venv'.")
 
 (cl-defun adq/python-setup-venv (&key (project nil)
                                       (site-packages nil)
