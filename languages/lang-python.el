@@ -107,6 +107,7 @@ is used."
   ((adq/python-get-dependency (skeleton-read "Add Dependency: " nil t)) > "\"" str "\"," \n)
   > "]," \n
   > "keywords=[" \n
+  ((completing-read "Add Keywords: " (adq/python-get-classifiers) nil nil) > "\"" str "\"," \n)
   > "])" \n \n _)
 
 (define-auto-insert "setup\\.py\\'" 'adq/python-skeleton-setup)
