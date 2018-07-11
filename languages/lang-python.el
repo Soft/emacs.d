@@ -92,14 +92,15 @@ is used."
   "from setuptools import setup, find_packages" \n \n
   "setup(name=\""
   (when (buffer-file-name)
-    (f-filename (f-dirname (buffer-file-name)))) |
-  (skeleton-read "Name: ") "\"," \n
+    (setq v1 (f-filename (f-dirname (buffer-file-name))))) |
+  (setq v1 (skeleton-read "Name: ")) "\"," \n
   > "version=\"" (skeleton-read "Version: ") | "0.1" "\"," \n
   > "description=\"" (skeleton-read "Description: ") "\"," \n
   > "long_description=\"\"," \n
   > "packages=find_packages()," \n
   > "entry_points={" \n
   > "\"console_scripts\": [" \n
+  > "\"" v1 "=" v1 ":main\"" \n
   > "]" \n
   > "}," \n
   > "install_requires=[" \n
