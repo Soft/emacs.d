@@ -33,7 +33,8 @@
   (("C-h f" . helpful-function)
    ("C-h v" . helpful-variable)
    ("C-h c" . helpful-command)
-   ("C-h SPC" . helpful-at-point))
+   ("C-h M" . helpful-macro)
+   ("C-h h" . helpful-at-point))
   :config
   (adq/add-alternative-interactive helpful-function describe-function)
   (adq/add-alternative-interactive helpful-variable describe-variable)
