@@ -44,7 +44,7 @@
     flycheck-mode-map
     flycheck-keymap-prefix
     nil)
-  (setq flycheck-keymap-prefix (kbd "C-c e"))
+  (setq flycheck-keymap-prefix (kbd "C-c !"))
   (define-key
     flycheck-mode-map
     flycheck-keymap-prefix
