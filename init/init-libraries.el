@@ -30,12 +30,20 @@
 
 ;; Library for performingwith HTTP requets
 (use-package request
-  :ensure t)
+  :ensure t
+  :functions (request))
 
 ;; Library for defining fringe bitmaps
 (use-package fringe-helper
   :ensure t
-  :functions (fringe-helper-define))
+  :functions (fringe-helper-define)
+  :defines (request-timeout
+            request-backend
+            request-curl
+            request-curl-options
+            request-log-level
+            request-message-level
+            request-storage-directory))
 
 ;; Common lisp compatability layer
 (use-package cl-lib)
