@@ -68,16 +68,22 @@
                 (setq adq/python-classifier-cache (s-lines data))))))
   adq/python-classifier-cache)
 
+(defun adq/python-get-dependency (package &optional version)
+  "Return package dependency defition. When `version' is not
+specified, the latest version available on Python package index
+is used."
+  (when-let (version
+             (or version
+                 (let-alist (adq/python-pypi-package-info package)
+                   .info.version)))
+    (concat package "==" version)))
+
 (defun adq/python-insert-dependency (package &optional version)
   "Insert package dependency definition. When `version' is not
 specified, the latest version available on Python package index
 is used."
-  (interactive "sPackage: ")
-  (if-let (version
-           (or version
-               (let-alist (adq/python-pypi-package-info package)
-                 .info.version)))
-      (insert package "==" version)
+  (if-let (definition (adq/python-get-dependency package version))
+      (insert definition)
     (error "Could not find package %s" package)))
 
 (define-skeleton adq/python-skeleton-setup
@@ -88,7 +94,7 @@ is used."
   (when (buffer-file-name)
     (f-filename (f-dirname (buffer-file-name)))) |
   (skeleton-read "Name: ") "\"," \n
-  > "version=\"" (skeleton-read "Version: ") "\"," \n
+  > "version=\"" (skeleton-read "Version: ") | "0.1" "\"," \n
   > "description=\"" (skeleton-read "Description: ") "\"," \n
   > "long_description=\"\"," \n
   > "packages=find_packages()," \n
@@ -97,6 +103,7 @@ is used."
   > "]" \n
   > "}," \n
   > "install_requires=[" \n
+  ((adq/python-get-dependency (skeleton-read "Add Dependency: " nil t)) > "\"" str "\"," \n)
   > "]," \n
   > "keywords=[" \n
   > "])" \n \n _)
