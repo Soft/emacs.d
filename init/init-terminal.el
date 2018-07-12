@@ -54,14 +54,51 @@
   (comint-send-input))
 
 (use-package comint
+  :bind (:map comint-mode-map
+              ("C-l" . adq/comint-clear-buffer)
+              ("C-d" . kill-this-buffer))
   :config
   (add-hook
    'comint-exec-hook
    (lambda () (set-process-query-on-exit-flag (get-buffer-process (current-buffer)) nil)))
-  (bind-keys
-   :map comint-mode-map
-   ("C-l" . adq/comint-clear-buffer)
-   ("C-d" . kill-this-buffer)))
+
+  (setq comint-input-ring-size 10000)
+
+  ;; These definitions would make more sense in `init-session.el' but comint
+  ;; configuration is here.
+  (defun adq/comint-enable-persistent-history ()
+    (when-let (process (get-buffer-process (current-buffer)))
+      (let* ((comint-history-dir (f-join user-emacs-directory "comint"))
+             (comint-history-file (f-join comint-history-dir
+                                          (format "%s-history" (md5 (process-name process))))))
+        (unless (f-directory? comint-history-dir)
+          (f-mkdir comint-history-dir))
+        (setq-local comint-input-ring-file-name comint-history-file)
+        (when (f-file? comint-history-file)
+          (comint-read-input-ring))
+        ;; This might actually not be necessary as `kill-buffer-hook' seems to
+        ;; do the job.
+        (set-process-sentinel
+         process
+         (lambda (process _)
+           (when-let ((buffer (process-buffer process)))
+             (when (buffer-live-p buffer)
+               (with-current-buffer buffer
+                 (comint-write-input-ring)))))))))
+
+  (add-hook 'comint-mode-hook #'adq/comint-enable-persistent-history)
+  (add-hook
+   'kill-buffer-hook
+   (lambda ()
+     (when (derived-mode-p 'comint-mode)
+       (comint-write-input-ring))))
+  (add-hook
+   'kill-emacs-hook
+   (lambda ()
+     (dolist (buffer (buffer-list))
+       (with-current-buffer buffer
+         (when (derived-mode-p 'comint-mode)
+           (comint-write-input-ring)))))))
 
 (use-package em-term
   :config
