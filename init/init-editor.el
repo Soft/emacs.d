@@ -30,6 +30,8 @@
 
 ;; Change line truncation indicator
 (set-display-table-slot standard-display-table 0 ?↠)
+;; Change line continuation indicator
+(set-display-table-slot standard-display-table 1 ?←)
 
 (diminish 'visual-line-mode " ⓥ")
 
