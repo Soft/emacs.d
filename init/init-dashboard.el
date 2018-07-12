@@ -22,7 +22,10 @@
 
 (defun adq/dashboard-setup ()
   "Setup dashboard."
-  (setq-local mode-line-format nil))
+  (setq-local mode-line-format nil)
+  (let ((table (make-display-table)))
+    (set-display-table-slot table 0 ?\ )
+    (setq-local buffer-display-table table)))
 
 (use-package dashboard
   :ensure t

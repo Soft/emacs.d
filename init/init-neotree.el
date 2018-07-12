@@ -9,6 +9,9 @@
 (defun adq/neotree-setup ()
   "Defaults for neotree buffers."
   (setq-local mode-line-format nil)
+  (let ((table (make-display-table)))
+    (set-display-table-slot table 0 ?\ )
+    (setq-local buffer-display-table table))
   (hl-line-mode))
 
 (use-package neotree
