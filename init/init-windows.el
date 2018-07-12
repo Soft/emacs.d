@@ -70,11 +70,21 @@ buffers."
   (interactive "P")
   (quit-window (and x t)))
 
-;; FIXME: Nicer modeline
+(defvar adq/zoom-window-recalibration-percent 10
+  "How many percents should mode line color differ when zoomed
+  from the regular color.")
+
 (use-package zoom-window
   :defer t
   :ensure t
-  :bind (("C-x 4 z" . zoom-window-zoom)))
+  :bind (("C-x 4 z" . zoom-window-zoom))
+  :config
+  (defun adq/zoom-window-recalibrate-color ()
+    (setq zoom-window-mode-line-color
+          (adq/color-derive adq/zoom-window-recalibration-percent
+                            (face-background 'mode-line))))
+  (adq/zoom-window-recalibrate-color)
+  (add-hook 'adq/switch-theme-hook #'adq/zoom-window-recalibrate-color))
 
 (use-package transpose-frame
   :defer t

@@ -127,7 +127,8 @@
   (vhl/install-extension 'evil))
 
 (defvar adq/beacon-recalibration-percent 10
-  "How many percents should beacon color differ from the background color.")
+  "How many percents should beacon color differ from the
+  background color.")
 
 (use-package dimmer
   :ensure t
