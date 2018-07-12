@@ -216,7 +216,7 @@ _r_: Revert buffer    _i_: Indent guides         _+_: Increase
   
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)
-  ("n" nlinum-mode)
+  ("n" display-line-numbers-mode)
   ("t" toggle-truncate-lines)
   ("v" visual-line-mode)
   ("a" auto-revert-mode)
