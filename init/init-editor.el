@@ -28,6 +28,9 @@
  tramp-default-method "ssh"
  vc-follow-symlinks t)
 
+;; Change line truncation indicator
+(set-display-table-slot standard-display-table 0 ?↠)
+
 (diminish 'visual-line-mode " ⓥ")
 
 ;; Enabled narrow
