@@ -14,6 +14,9 @@
 (use-package flycheck
   :commands (flycheck-mode)
   :ensure t
+  :bind (:map flycheck-error-list-mode-map
+              ("j" . flycheck-error-list-next-error)
+              ("k" . flycheck-error-list-previous-error))
   :config
   (fringe-helper-define
     'flycheck-fringe-bitmap-double-arrow nil
@@ -27,6 +30,7 @@
     "...XX...") 
   ;; There seems to be something wrong with rust-cargo and rust checkers
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc rust-cargo rust))
+  ;; These don't actually do anything with telephone line enabled
   (setq
    flycheck-mode-line-prefix "✔"
    flycheck-mode-line
@@ -34,21 +38,18 @@
      (if (eq flycheck-last-status-change 'no-checker)
          ""
        (flycheck-mode-line-status-text))))
-  (bind-keys
-   :map flycheck-error-list-mode-map
-   ("j" . next-line)
-   ("k" . previous-line))
   ;; Redefine flycheck prefix to be C-c e as C-c ! is quite awkward on nordic
   ;; keyboards
-  (define-key
-    flycheck-mode-map
-    flycheck-keymap-prefix
-    nil)
-  (setq flycheck-keymap-prefix (kbd "C-c !"))
-  (define-key
-    flycheck-mode-map
-    flycheck-keymap-prefix
-    flycheck-command-map))
+  ;; (define-key
+  ;;   flycheck-mode-map
+  ;;   flycheck-keymap-prefix
+  ;;   nil)
+  ;; (setq flycheck-keymap-prefix (kbd "C-c !"))
+  ;; (define-key
+  ;;   flycheck-mode-map
+  ;;   flycheck-keymap-prefix
+  ;;   flycheck-command-map)
+  )
 
 (use-package wcheck-mode
   :if (adq/programs-p "enchant")
