@@ -27,6 +27,7 @@
         helm-locate-fuzzy-match               t
         helm-ff-file-name-history-use-recentf t
         helm-lisp-fuzzy-completion            t)
+  (add-to-list 'helm-boring-buffer-regexp-list "TAGS")
   (bind-keys
    :map helm-map
    ("<escape>" . helm-keyboard-quit)
