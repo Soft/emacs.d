@@ -49,6 +49,20 @@
   (unless (find-font (font-spec :name "all-the-icons"))
     (warn "Required fonts are missing. Remember to run `all-the-icons-install-fonts'")))
 
+(defun adq/icon-string (set icon)
+  "Return string containing `icon' from `set'."
+  (-let (((getter . family)
+          (pcase set
+            ('alltheicon '(all-the-icons-alltheicon . all-the-icons-alltheicon-family))
+            ('fileicon '(all-the-icons-fileicon . all-the-icons-fileicon-family))
+            ('faicon '(all-the-icons-faicon . all-the-icons-faicon-family))
+            ('octicon '(all-the-icons-octicon . all-the-icons-octicon-family))
+            ('wicon '(all-the-icons-wicon . all-the-icons-wicon-family))
+            ('material '(all-the-icons-material . all-the-icons-material-family)))))
+    (propertize (funcall getter icon)
+                'face `(:family ,(funcall family) :height 1.2)
+                'display '(raise -0.1))))
+
 (use-package page-break-lines
   :disabled
   :ensure t
