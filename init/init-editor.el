@@ -74,6 +74,16 @@
    (unless (equal (f-filename filename) "TAGS")
      (apply fn (list size op-type filename)))))
 
+;; Messages buffer bindings
+(bind-keys
+ :map messages-buffer-mode-map
+ ("q" . quit-window)
+ ("<escape>" . quit-window)
+ ("j" . next-line)
+ ("k" . previous-line)
+ ("J" . evil-scroll-down)
+ ("K" . evil-scroll-up))
+
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
