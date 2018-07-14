@@ -48,12 +48,28 @@
   ;; Add mode icon next to the buffer name
   (telephone-line-defsegment* adq/telephone-line-buffer-segment ()
     `(""
+      ,(concat
+        (pcase (format-mode-line "%*")
+          ("%" (propertize (adq/icon-string 'faicon "lock")
+                           'help-echo "Locked"
+                           'display '(raise -0.2)
+                           'height 0.9))
+          ("*" (propertize (adq/icon-string 'material "mode_edit")
+                           'help-echo "Modified"
+                           'display '(raise -0.2)
+                           'height 0.9))
+          ("-" (propertize (adq/icon-string 'material "save")
+                           'help-echo "Clean"
+                           'display '(raise -0.2)
+                           'height 0.9)))
+        " ")
       mode-line-mule-info
-      mode-line-modified
       mode-line-client
       mode-line-remote
       mode-line-frame-identification
-      ,(let ((icon (all-the-icons-icon-for-mode major-mode :height 0.9)))
+      ,(let ((icon (all-the-icons-icon-for-mode major-mode
+                                                :height 0.9
+                                                :v-adjust 0.01)))
          (if (stringp icon)
              (concat icon "  ")
            ""))
@@ -70,6 +86,7 @@
           (adq/icon-string 'octicon "git-branch")
           (cadr (s-split-up-to "[:-]" vc-mode 2)))
          'help-echo "Open Magit"
+         'display '(raise 0.1)
          'mouse-face '(:box 1)
          'local-map (make-mode-line-mouse-map
                      'mouse-1 #'magit-status)))
@@ -77,12 +94,12 @@
 
   (setq
    telephone-line-lhs
-   '((evil   . (telephone-line-evil-tag-segment))
-     (nil . (adq/telephone-line-vc-segment
-             telephone-line-erc-modified-channels-segment
-             telephone-line-process-segment))
-     (nil    . (telephone-line-projectile-segment
-                adq/telephone-line-buffer-segment)))
+   '((evil . (telephone-line-evil-tag-segment))
+     (nil  . (adq/telephone-line-vc-segment
+              telephone-line-erc-modified-channels-segment
+              telephone-line-process-segment))
+     (nil  . (telephone-line-projectile-segment
+              adq/telephone-line-buffer-segment)))
    telephone-line-rhs
    '((nil    . (adq/telephone-line-flycheck-segment
                 telephone-line-misc-info-segment))
