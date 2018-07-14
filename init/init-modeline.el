@@ -59,12 +59,28 @@
            ""))
       ,(telephone-line-raw mode-line-buffer-identification t)))
 
+  ;; Fancy icons for branches
+  (telephone-line-defsegment adq/telephone-line-vc-segment ()
+    (when vc-mode
+      (cond
+       ((s-match "Git[:-]" vc-mode)
+        (propertize
+         (format
+          "%s %s"
+          (adq/icon-string 'octicon "git-branch")
+          (cadr (s-split-up-to "[:-]" vc-mode 2)))
+         'help-echo "Open Magit"
+         'mouse-face '(:box 1)
+         'local-map (make-mode-line-mouse-map
+                     'mouse-1 #'magit-status)))
+       (t vc-mode))))
+
   (setq
    telephone-line-lhs
    '((evil   . (telephone-line-evil-tag-segment))
-     (accent . (telephone-line-vc-segment
-                telephone-line-erc-modified-channels-segment
-                telephone-line-process-segment))
+     (nil . (adq/telephone-line-vc-segment
+             telephone-line-erc-modified-channels-segment
+             telephone-line-process-segment))
      (nil    . (telephone-line-projectile-segment
                 adq/telephone-line-buffer-segment)))
    telephone-line-rhs
