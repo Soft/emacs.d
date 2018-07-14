@@ -4,6 +4,8 @@
 
 ;; Use telephone-line for pretty modeline
 
+;; TODO: Anzu segment
+
 ;;; Code:
 
 (use-package telephone-line-config
@@ -17,16 +19,16 @@
                     ('finished (if flycheck-current-errors
                                    (let-alist (flycheck-count-errors flycheck-current-errors)
                                      (if (or .error .warning)
-                                         (format "%s %s:%s"
-                                                 (adq/icon-string 'octicon "alert")
-                                                 (or .error 0)
-                                                 (or .warning 0))
+                                         (format "%s %d"
+                                                 (adq/icon-string 'octicon "x")
+                                                 (+ (or .error 0)
+                                                    (or .warning 0)))
                                        ""))
                                  (adq/icon-string 'octicon "check")))
                     ('running (adq/icon-string 'faicon "spinner"))
                     ('no-checker (adq/icon-string 'octicon "dash"))
                     ('not-checked (adq/icon-string 'octicon "circle-slash"))
-                    ('errored (adq/icon-string 'octicon "flame"))
+                    ('errored (adq/icon-string 'octicon "alert"))
                     ('interrupted (adq/icon-string 'octicon "stop"))
                     ('suspicious (adq/icon-string 'octicon "question")))))
         (propertize text
@@ -42,11 +44,34 @@
                     'mouse-face '(:box 1)
                     'local-map (make-mode-line-mouse-map
                                 'mouse-1 #'flycheck-list-errors)))))
-  (setq telephone-line-rhs
-        '((nil    . (adq/telephone-line-flycheck-segment
-                     telephone-line-misc-info-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (evil   . (telephone-line-airline-position-segment))))
+
+  ;; Add mode icon next to the buffer name
+  (telephone-line-defsegment* adq/telephone-line-buffer-segment ()
+    `(""
+      mode-line-mule-info
+      mode-line-modified
+      mode-line-client
+      mode-line-remote
+      mode-line-frame-identification
+      ,(let ((icon (all-the-icons-icon-for-mode major-mode :height 0.9)))
+         (if (stringp icon)
+             (concat icon "  ")
+           ""))
+      ,(telephone-line-raw mode-line-buffer-identification t)))
+
+  (setq
+   telephone-line-lhs
+   '((evil   . (telephone-line-evil-tag-segment))
+     (accent . (telephone-line-vc-segment
+                telephone-line-erc-modified-channels-segment
+                telephone-line-process-segment))
+     (nil    . (telephone-line-projectile-segment
+                adq/telephone-line-buffer-segment)))
+   telephone-line-rhs
+   '((nil    . (adq/telephone-line-flycheck-segment
+                telephone-line-misc-info-segment))
+     (accent . (telephone-line-major-mode-segment))
+     (evil   . (telephone-line-airline-position-segment))))
 
   (telephone-line-mode)
   :config
