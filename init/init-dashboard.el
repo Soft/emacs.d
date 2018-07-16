@@ -36,14 +36,17 @@
    'dashboard-banner-logo-title-face nil
    :inherit 'font-lock-type-face
    :height 120)
-  (setq dashboard-items '((recents . 10)
-                          (projects . 5)
-                          (bm . 5))
-        dashboard-startup-banner (adq/dashboard-select-banner)
-        dashboard-banner-logo-title
-        (format "Welcome to Emacs, %s %s"
-                (car (s-split " " (user-full-name)))
-                (adq/list-random-item '("🌈" "💖" "🌻" "🌸"))))
+  (setq
+   initial-buffer-choice
+   (lambda () (get-buffer "*dashboard*"))
+   dashboard-items '((recents . 10)
+                     (projects . 5)
+                     (bm . 5))
+   dashboard-startup-banner (adq/dashboard-select-banner)
+   dashboard-banner-logo-title
+   (format "Welcome to Emacs, %s %s"
+           (car (s-split " " (user-full-name)))
+           (adq/list-random-item '("🌈" "💖" "🌻" "🌸"))))
   (bind-keys
    :map dashboard-mode-map
    ("j" . next-line)
