@@ -6,12 +6,21 @@
 
 ;;; Code:
 
+(defvar adq/neotree-background-recalibration-percent 5
+  "How many percents should neotree background color differ from
+  the default background color.")
+
 (defun adq/neotree-setup ()
   "Defaults for neotree buffers."
   (let ((table (make-display-table)))
     (set-display-table-slot table 0 ?\ )
     (setq-local buffer-display-table table))
-  (hl-line-mode))
+  (hl-line-mode)
+  (face-remap-add-relative
+   'default
+   :background (adq/color-derive
+                adq/neotree-background-recalibration-percent
+                (frame-parameter nil 'background-color))))
 
 (defun adq/neotree-open-or-focus ()
   "Open or focus neotree."
