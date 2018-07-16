@@ -70,6 +70,15 @@ supplied, with deadgrep."
   :bind
   (("C-h b" . helm-descbinds)))
 
+(use-package helm-describe-modes
+  :ensure t)
+
+(use-package helm-xref
+  :ensure t
+  :after (:all xref helm)
+  :config
+  (setq xref-show-xrefs-function 'helm-xref-show-xrefs))
+
 (defun adq/helm-swoop-file-or-project (d)
   "Use Helm Swoop on the current buffer or on the current project
 if universal argument is supplied."
