@@ -38,7 +38,8 @@
    :height 120)
   (setq
    initial-buffer-choice
-   (lambda () (get-buffer "*dashboard*"))
+   (lambda () (or (get-buffer "*dashboard*")
+             (get-buffer "*scratch*")))
    dashboard-items '((recents . 10)
                      (projects . 5)
                      (bm . 5))
