@@ -60,8 +60,8 @@
    ("k" . previous-line)
    ("h" . left-char)
    ("l" . right-char)
-   ("J" . scroll-down)
-   ("K" . scroll-up)))
+   ("J" . scroll-up)
+   ("K" . scroll-down)))
 
 (bind-key "C-h K" #'describe-personal-keybindings)
 

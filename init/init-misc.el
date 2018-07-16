@@ -96,8 +96,8 @@ direction if universal argument is supplied."
    ("k" . previous-line)
    ("h" . left-char)
    ("l" . right-char)
-   ("J" . nov-scroll-down)
-   ("K" . nov-scroll-up)))
+   ("J" . nov-scroll-up)
+   ("K" . nov-scroll-down)))
 
 (use-package mpris-control
   :commands (mpris-control-info-mode))
