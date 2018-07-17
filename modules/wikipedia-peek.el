@@ -24,11 +24,15 @@
 (defvar-local wikipedia-peek--page-url nil
   "Article URL")
 
+(defvar-local wikipedia-peek--image-url nil
+  "Article image URL")
+
 (defvar wikipedia-peek-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map "q" #'quit-window)
     (define-key map "<escape>" #'quit-window)
     (define-key map "o" #'wikipedia-peek-browse-url)
+    (define-key map "i" #'wikipedia-peek-browse-image-url)
     map)
   "Keymap for `wikipedia-peek-mode'.")
 
@@ -45,6 +49,12 @@
   (if wikipedia-peek--page-url
       (browse-url wikipedia-peek--page-url)
     (error "No page URL.")))
+
+(defun wikipedia-peek-browse-image-url ()
+  (interactive)
+  (if wikipedia-peek--image-url
+      (browse-url wikipedia-peek--image-url)
+    (error "No image.")))
 
 (defun wikipedia-peek--api-url (article)
   (format "https://%s.wikipedia.org/api/rest_v1/page/summary/%s"
@@ -64,10 +74,9 @@
                             if (with-current-buffer buffer
                                  (eq major-mode 'wikipedia-peek-mode))
                             return buffer)))
-      (progn
-        (with-current-buffer buffer
-          (rename-buffer name)
-          buffer))
+      (with-current-buffer buffer
+        (rename-buffer name)
+        buffer)
     (get-buffer-create name)))
 
 (cl-defun wikipedia-peek--handle-success (&key data &allow-other-keys)
@@ -79,6 +88,8 @@
            (wikipedia-peek-mode))
          (erase-buffer)
          (setq-local wikipedia-peek--page-url .content_urls.desktop.page)
+         (when (and .originalimage .originalimage.source)
+           (setq-local wikipedia-peek--image-url .originalimage.source))
          (when .displaytitle
            (insert (propertize .displaytitle 'face 'wikipedia-peek-title-face) ?\n))
          (when .description
