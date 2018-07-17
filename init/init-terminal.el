@@ -56,7 +56,7 @@
 (use-package comint
   :bind (:map comint-mode-map
               ("C-l" . adq/comint-clear-buffer)
-              ("C-d" . kill-this-buffer))
+              ("C-d" . quit-window))
   :config
   (add-hook
    'comint-exec-hook
@@ -223,7 +223,7 @@
                                                eshell-output-filter-functions))
   (bind-keys
    :map eshell-mode-map
-   ("C-d" . kill-this-buffer)))
+   ("C-d" . quit-window)))
 
 (defun eshell/em (&rest args)
   "Open files in Emacs."
