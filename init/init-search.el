@@ -33,6 +33,12 @@
               ("<return>" . xref-goto-xref)
               ("S-<return>" . xref-show-location-at-point)))
 
+(use-package replace
+  :bind (:map occur-mode-map
+              ("j" . occur-next)
+              ("k" . occur-prev)
+              ("<escape>" . quit-window)))
+
 (setq tags-revert-without-query t)
 
 (defvar adq/ctags-executable "ctags"
