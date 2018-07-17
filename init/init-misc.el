@@ -180,6 +180,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
               ("j" . next-line)
               ("k" . previous-line)))
 
+(use-package wikipedia-peek
+  :bind (("C-c x W" . wikipedia-peek))
+  :commands (wikipedia-peek))
+
 (provide 'init-misc)
 
 ;;; init-misc.el ends here

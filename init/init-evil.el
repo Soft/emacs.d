@@ -43,7 +43,8 @@
     xkcd-mode
     deadgrep-mode
     xref--xref-buffer-mode
-    xwidget-webkit-mode)
+    xwidget-webkit-mode
+    wikipedia-peek-mode)
   "Modes where Evil mode should not be used.")
 
 (use-package evil
