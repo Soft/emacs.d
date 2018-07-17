@@ -49,6 +49,11 @@
                 neo-force-change-root t
                 neo-show-updir-line nil
                 neo-theme 'icons)
+  ;; Hide fringes from neotree windows
+  (advice-add #'neo-window--init :filter-return
+              (lambda (window)
+                (set-window-fringes window 0 0)
+                window))
   (adq/after-load 'projectile
     (setq projectile-switch-project-action #'neotree-projectile-action)))
 
