@@ -13,13 +13,18 @@
 (require 'org)
 
 (defvar wikipedia-peek-language "en"
-  "Two-letter language code specifying Wikipedia version.")
+  "Two-letter language code specifying Wikipedia version to use
+  with `wikipedia-peek-mode'.")
 
 (defvar wikipedia-peek-render-html t
-  "Should wikipedia-peek render HTML.")
+  "Should `wikipedia-peek-mode' render HTML.")
 
 (defvar wikipedia-peek-show-images t
-  "Should wikipedia-peek show images.")
+  "Should `wikipedia-peek-mode' show images.")
+
+(defvar wikipedia-peek-buffer-switch #'pop-to-buffer
+  "Function that is used for switching to the
+  `wikipedia-peek-mode' buffer.")
 
 (defvar-local wikipedia-peek--page-url nil
   "Article URL")
@@ -63,17 +68,17 @@
 
 (defmacro wikipedia-peek--enable-editing (&rest body)
   `(progn
-     (setq-local buffer-read-only nil)
+     (setq buffer-read-only nil)
      (unwind-protect
          (progn
            ,@body)
-       (setq-local buffer-read-only t))))
+       (setq buffer-read-only t))))
 
 (defun wikipedia-peek--get-buffer (name)
-  (if-let ((buffer (cl-loop for buffer being the buffers
-                            if (with-current-buffer buffer
-                                 (eq major-mode 'wikipedia-peek-mode))
-                            return buffer)))
+  (if-let ((buffer (cl-find-if (lambda (buffer)
+                                 (with-current-buffer buffer
+                                   (eq major-mode 'wikipedia-peek-mode)))
+                               (buffer-list))))
       (with-current-buffer buffer
         (rename-buffer name)
         buffer)
@@ -81,31 +86,34 @@
 
 (cl-defun wikipedia-peek--handle-success (&key data &allow-other-keys)
   (let-alist data
-    (let ((buffer (wikipedia-peek--get-buffer (format "*Wikipedia: %s*" .title))))
-      (with-current-buffer buffer
-        (wikipedia-peek--enable-editing
-         (unless (eq major-mode 'wikipedia-peek-mode)
-           (wikipedia-peek-mode))
-         (erase-buffer)
-         (setq-local wikipedia-peek--page-url .content_urls.desktop.page)
-         (when (and .originalimage .originalimage.source)
-           (setq-local wikipedia-peek--image-url .originalimage.source))
-         (when .displaytitle
-           (insert (propertize .displaytitle 'face 'wikipedia-peek-title-face) ?\n))
-         (when .description
-           (insert (propertize .description 'face 'wikipedia-peek-description-face) ?\n ?\n))
-         (if wikipedia-peek-render-html
-             (progn
-               (insert .extract_html)
-               (shr-render-region (point-min) (point-max)))
-           (insert .extract)))
-        (when (and wikipedia-peek-show-images .thumbnail .thumbnail.source)
-          (request .thumbnail.source
-                   :parser 'buffer-string
-                   :success (lambda (&rest args)
-                              (apply #'wikipedia-peek--handle-image buffer args))
-                   :error #'wikipedia-peek--handle-error))
-        (pop-to-buffer buffer)))))
+    (if (and .type (equal .type "standard"))
+        (let ((buffer (wikipedia-peek--get-buffer (format "*Wikipedia: %s*" .title))))
+          (with-current-buffer buffer
+            (setq-local wikipedia-peek--page-url .content_urls.desktop.page)
+            (when (and .originalimage .originalimage.source)
+              (setq-local wikipedia-peek--image-url .originalimage.source))
+            (wikipedia-peek--enable-editing
+             (unless (eq major-mode 'wikipedia-peek-mode)
+               (wikipedia-peek-mode))
+             (erase-buffer)
+             (when .displaytitle
+               (insert (propertize .displaytitle 'face 'wikipedia-peek-title-face) ?\n))
+             (when .description
+               (insert (propertize .description 'face 'wikipedia-peek-description-face) ?\n ?\n))
+             (let ((summary-start (point-max)))
+               (if wikipedia-peek-render-html
+                   (progn
+                     (insert .extract_html)
+                     (shr-render-region summary-start (point-max)))
+                 (insert .extract)))))
+          (funcall wikipedia-peek-buffer-switch buffer)
+          (when (and wikipedia-peek-show-images .thumbnail .thumbnail.source)
+            (request .thumbnail.source
+                     :parser 'buffer-string
+                     :success (lambda (&rest args)
+                                (apply #'wikipedia-peek--handle-image buffer args))
+                     :error #'wikipedia-peek--handle-error)))
+      (error "wikipedia-peek: invalid response."))))
 
 (cl-defun wikipedia-peek--handle-image (buffer &key data &allow-other-keys)
   (when (and data (buffer-live-p buffer))
