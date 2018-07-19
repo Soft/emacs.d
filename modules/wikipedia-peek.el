@@ -96,8 +96,8 @@
              (unless (eq major-mode 'wikipedia-peek-mode)
                (wikipedia-peek-mode))
              (erase-buffer)
-             (when .displaytitle
-               (insert (propertize .displaytitle 'face 'wikipedia-peek-title-face) ?\n))
+             (when .title
+               (insert (propertize .title 'face 'wikipedia-peek-title-face) ?\n))
              (when .description
                (insert (propertize .description 'face 'wikipedia-peek-description-face) ?\n ?\n))
              (let ((summary-start (point-max)))
