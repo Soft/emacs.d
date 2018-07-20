@@ -75,6 +75,15 @@
         desktop-auto-save-timeout 60)
   (desktop-save-mode 1))
 
+(use-package midnight
+  :diminish midnight-mode
+  :bind (("C-c x C" . clean-buffer-list))
+  :config
+  (add-to-list 'clean-buffer-list-kill-regexps
+               "*magit: ")
+  (add-to-list 'clean-buffer-list-kill-never-buffer-names
+               "*dashboard*"))
+
 (provide 'init-session)
 
 ;;; init-session.el ends here
