@@ -66,8 +66,16 @@
 ;; Setup package archives
 ;; EMACS_NO_TLS environment variable can be used to control if TLS should be used.
 
-(defun adq/with-archive-protocol (url)
-  (let ((proto (if (getenv "EMACS_NO_TLS") "http" "https")))
+(defconst adq/tls-enabled
+  (and (gnutls-available-p)
+       (not (getenv "EMACS_NO_TLS")))
+  "Will TLS be used.")
+
+(unless adq/tls-enabled
+  (message "Warning: TLS was disabled."))
+
+(defun adq/tls-add-protocol (url)
+  (let ((proto (if adq/tls-enabled "https" "http")))
     (format "%s://%s" proto url)))
 
 (setq
@@ -77,8 +85,8 @@
  network-security-level 'high)
 
 (defvar package-archives
-  `(("melpa" . ,(adq/with-archive-protocol "melpa.org/packages/"))
-    ("gnu" . ,(adq/with-archive-protocol "elpa.gnu.org/packages/"))))
+  `(("melpa" . ,(adq/tls-add-protocol "melpa.org/packages/"))
+    ("gnu" . ,(adq/tls-add-protocol "elpa.gnu.org/packages/"))))
 
 (require 'package)
 (package-initialize)
