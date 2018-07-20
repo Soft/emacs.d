@@ -70,6 +70,12 @@
   (let ((proto (if (getenv "EMACS_NO_TLS") "http" "https")))
     (format "%s://%s" proto url)))
 
+(setq
+ gnutls-algorithm-priority "SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%PROFILE_MEDIUM"
+ gnutls-min-prime-bits 1024
+ gnutls-verify-error t
+ network-security-level 'high)
+
 (defvar package-archives
   `(("melpa" . ,(adq/with-archive-protocol "melpa.org/packages/"))
     ("gnu" . ,(adq/with-archive-protocol "elpa.gnu.org/packages/"))))
@@ -82,7 +88,7 @@
 (defvar adq/package-last-refresh-time nil
   "Time when the package archive was last refreshed.")
 
-(defun adq/package-update-last-refresh-time (&rest args)
+(defun adq/package-update-last-refresh-time (&rest _)
   (setq adq/package-last-refresh-time (current-time)))
 
 (advice-add #'package-refresh-contents :before #'adq/package-update-last-refresh-time)
