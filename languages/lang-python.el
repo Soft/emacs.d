@@ -27,7 +27,9 @@
     ("!=" . ?≠)
     ("<=" . ?≤)
     (">=" . ?≥)
-    ("sum" . ?∑))
+    ("sum" . ?∑)
+    ("all" . ?∀)
+    ("any" . ?∃))
   "Symbol prettification alist for `python-mode'.")
 
 (defun adq/python-setup ()
