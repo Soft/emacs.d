@@ -17,6 +17,7 @@
     ("<<" . ?≪)
     ("->" . ?→)
     ("=" . ?≔)
+    ("*" . ?⁎)
     ("..." . ?…))
   "Symbol prettification alist for `c-mode'.")
 
