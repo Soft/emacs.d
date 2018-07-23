@@ -32,6 +32,10 @@
     ("..." . ?…))
   "Symbol prettification alist for `c++-mode'.")
 
+(use-package clang-format
+  :if (adq/programs-p "clang-format")
+  :ensure t
+  :defer t)
 
 (defun adq/c-setup ()
   "Defaults for C."
