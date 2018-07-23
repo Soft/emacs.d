@@ -13,7 +13,7 @@
   :config
   (use-package haskell-font-lock)
   (setq-default haskell-interactive-popup-errors nil
-                haskell-font-ock-symbols t))
+                haskell-font-lock-symbols t))
 
 (provide 'lang-haskell)
 
