@@ -21,12 +21,31 @@
     ("..." . ?…))
   "Symbol prettification alist for `c-mode'.")
 
+(defvar adq/c++-prettify-symbols-alist
+  '(("==" . ?≡)
+    ("!=" . ?≠)
+    ("<=" . ?≤)
+    (">=" . ?≥)
+    ("->" . ?→)
+    ("=" . ?≔)
+    ("*" . ?⁎)
+    ("..." . ?…))
+  "Symbol prettification alist for `c++-mode'.")
+
+
 (defun adq/c-setup ()
+  "Defaults for C."
   (setq-local prettify-symbols-alist adq/c-prettify-symbols-alist))
+
+
+(defun adq/c++-setup ()
+  "Defaults for C++."
+  (setq-local prettify-symbols-alist adq/c++-prettify-symbols-alist))
 
 (use-package cc-mode
   :defer t
   :init
-  (add-hook 'c-mode-hook #'adq/c-setup))
+  (add-hook 'c-mode-hook #'adq/c-setup)
+  (add-hook 'c++-mode-hook #'adq/c++-setup))
 
 ;;; lang-c.el ends here
