@@ -56,7 +56,9 @@
   :ensure t)
 
 (defun adq/css-setup ()
+  "Defaults for CSS."
   (rainbow-mode)
+  (aggressive-indent-mode)
   (css-eldoc-enable))
 
 (use-package css-mode
