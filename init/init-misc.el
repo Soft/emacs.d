@@ -48,6 +48,10 @@
     (nyan-start-animation)
     (nyan-toggle-wavy-trail)))
 
+(use-package uuidgen
+  :ensure t
+  :defer t)
+
 (use-package dpaste
   :defer t
   :ensure t)
