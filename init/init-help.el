@@ -27,6 +27,7 @@
   (setq which-key-idle-delay 0.5)
   (which-key-add-key-based-replacements
     "C-c d" "tags"
+    "C-c g" "git"
     "C-c x" "misc"
     "C-c o" "org"
     "C-c p" "project"))
