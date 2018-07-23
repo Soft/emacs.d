@@ -21,8 +21,16 @@
   :ensure t
   :diminish which-key-mode
   :init
+  (which-key-mode)
+  :config
+  (defvar which-key-idle-delay)
   (setq which-key-idle-delay 0.5)
-  (which-key-mode))
+  (which-key-add-key-based-replacements
+    "C-c d" "tags"
+    "C-c g" "git"
+    "C-c x" "misc"
+    "C-c o" "org"
+    "C-c p" "project"))
 
 (defvar adq/helpful-reuse-buffers t
   "Should helpful reuse existing buffers.")

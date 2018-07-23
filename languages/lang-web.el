@@ -14,7 +14,23 @@
   :defer t
   :ensure t)
 
+(defvar adq/js-prettify-symbols-alist
+  '(("==" . ?≈)
+    ("===" . ?≡)
+    ("!==" . ?≠)
+    ("!=" . ?≉)
+    ("<=" . ?≤)
+    (">=" . ?≥)
+    (">>" . ?≫)
+    ("<<" . ?≪)
+    ("=>" . ?⇒)
+    ("=" . ?≔)
+    ("..." . ?…))
+  "Symbol prettification alist for `js2-mode'.")
+
 (defun adq/js-setup ()
+  "Defaults for JavaScript."
+  (setq-local prettify-symbols-alist adq/js-prettify-symbols-alist)
   (rainbow-identifiers-mode -1))
 
 (use-package js2-mode
@@ -40,7 +56,9 @@
   :ensure t)
 
 (defun adq/css-setup ()
+  "Defaults for CSS."
   (rainbow-mode)
+  (aggressive-indent-mode)
   (css-eldoc-enable))
 
 (use-package css-mode

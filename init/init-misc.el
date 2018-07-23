@@ -6,6 +6,19 @@
 
 ;;; Code:
 
+(defvar adq/opener "xdg-open"
+  "Application used for opening files based on their type.")
+
+(defun adq/open-external ()
+  "Open file with an external application."
+  (interactive)
+  (if-let (file (cond ((eq major-mode 'dired-mode)
+                       (ignore-errors (dired-get-file-for-visit)))
+                      ((buffer-file-name) (buffer-file-name))
+                      (t (read-file-name "File: " nil nil t))))
+      (call-process adq/opener nil 0 nil file)
+    (error "No file to open")))
+
 (use-package xkcd
   :commands (xkcd-rand)
   :defer t
@@ -128,8 +141,8 @@ _H_: Increase  _S_: Increase  _B_: Increase
 (bind-key "C-c x c" #'adq/hydra-kurecolor/body)
 
 (use-package restclient
-  :ensure t
-  :defer t)
+  :mode (("\\.rest'" . restclient-mode))
+  :ensure t)
 
 (defun adq/restclient ()
   "Get a restclient buffer."
@@ -149,6 +162,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
                                    (insert (cdr (assoc 'ip data)))))
            :error (cl-function (lambda (&allow-other-keys)
                                  (error "Failed to retrieve WAN IP")))))
+
+(use-package lorem-ipsum
+  :ensure t
+  :defer t)
 
 (use-package dbus-control
   :if (and (not (daemonp)) (locate-library "dbus"))

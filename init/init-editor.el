@@ -84,13 +84,15 @@
  ("J" . evil-scroll-down)
  ("K" . evil-scroll-up))
 
+(global-prettify-symbols-mode 1)
+(setq prettify-symbols-unprettify-at-point t)
+
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
 (defun adq/prog-mode-setup ()
   "Defaults for programming modes."
   (setq-local display-line-numbers t)
-  (global-prettify-symbols-mode)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode)
   (fic-mode)
@@ -210,19 +212,24 @@
   :config
   (setq auto-revert-mode-text " 🅡"))
 
+(use-package sudo-edit
+  :ensure t
+  :defer t)
+
 (defhydra adq/hydra-buffer nil
   "
 ^Buffer^              ^Toggle^                   ^Text Size
 ^^^^^^------------------------------------------------------------
 _d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
 _r_: Revert buffer    _i_: Indent guides         _+_: Increase
-                    ^^_n_: Line numbers
+_s_: Change user      _n_: Line numbers
                     ^^_t_: Truncate lines
                     ^^_v_: Visual lines
                     ^^_a_: Auto revert
 "
-  ("d" magit-diff-buffer-file)
-  ("r" revert-buffer)
+  ("d" magit-diff-buffer-file :exit t)
+  ("r" revert-buffer :exit t)
+  ("s" sudo-edit :exit t)
   
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)
