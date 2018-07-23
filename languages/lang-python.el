@@ -19,8 +19,20 @@
   :ensure t
   :defer t)
 
+(defvar adq/python-prettify-symbols-alist
+  '(("lambda" . ?λ)
+    ("and" . ?∧)
+    ("or" . ?∨)
+    ("==" . ?≡)
+    ("!=" . ?≠)
+    ("<=" . ?≤)
+    (">=" . ?≥)
+    ("sum" . ?∑))
+  "Symbol prettification alist for `python-mode'.")
+
 (defun adq/python-setup ()
   "Defaults for Python."
+  (setq-local prettify-symbols-alist adq/python-prettify-symbols-alist)
   (highlight-indent-guides-mode)
   (anaconda-eldoc-mode)
   (pyvenv-mode)

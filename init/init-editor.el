@@ -84,13 +84,15 @@
  ("J" . evil-scroll-down)
  ("K" . evil-scroll-up))
 
+(global-prettify-symbols-mode 1)
+(setq prettify-symbols-unprettify-at-point t)
+
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
 ;; required packages. This can break the first setup.
 (defun adq/prog-mode-setup ()
   "Defaults for programming modes."
   (setq-local display-line-numbers t)
-  (global-prettify-symbols-mode)
   (rainbow-delimiters-mode)
   (rainbow-identifiers-mode)
   (fic-mode)
