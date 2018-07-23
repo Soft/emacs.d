@@ -6,8 +6,6 @@
 
 ;;; Code:
 
-(provide 'lang-c)
-
 (defvar adq/c-prettify-symbols-alist
   '(("==" . ?≡)
     ("!=" . ?≠)
@@ -51,5 +49,7 @@
   :init
   (add-hook 'c-mode-hook #'adq/c-setup)
   (add-hook 'c++-mode-hook #'adq/c++-setup))
+
+(provide 'lang-c)
 
 ;;; lang-c.el ends here
