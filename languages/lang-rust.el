@@ -6,10 +6,24 @@
 
 ;;; Code:
 
+(defvar adq/rust-prettify-symbols-alist
+  '(("==" . ?≡)
+    ("!=" . ?≠)
+    ("<=" . ?≤)
+    (">=" . ?≥)
+    (">>" . ?≫)
+    ("<<" . ?≪)
+    ("->" . ?→)
+    (".." . ?‥)
+    ("..." . ?…)
+    ("::" . ?∷))
+  "Symbol prettification alist for `rust-mode'.")
+
 (defun adq/rust-setup ()
   "Defaults for Rust."
   (when (getenv "RUST_SRC_PATH")
     (racer-mode))
+  (setq-local prettify-symbols-alist adq/rust-prettify-symbols-alist)
   (cargo-minor-mode)
   (eldoc-mode))
 
