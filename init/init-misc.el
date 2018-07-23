@@ -150,6 +150,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
            :error (cl-function (lambda (&allow-other-keys)
                                  (error "Failed to retrieve WAN IP")))))
 
+(use-package lorem-ipsum
+  :ensure t
+  :defer t)
+
 (use-package dbus-control
   :if (and (not (daemonp)) (locate-library "dbus"))
   :commands (dbus-control-mode)
