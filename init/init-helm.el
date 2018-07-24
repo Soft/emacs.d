@@ -53,7 +53,9 @@
             ((adq/programs-p "ag") 'helm-projectile-ag)
             ((adq/programs-p "ack") 'helm-projectile-ack)
             ((adq/programs-p "grep") 'helm-projectile-grep)
-            (t (lambda () (error "No search program available.")))))
+            (t (lambda ()
+                 (interactive)
+                 (error "No search program available.")))))
 
 (defun adq/search-helm-or-deadgrep (d)
   "Search project with Helm or, if universal argument is
