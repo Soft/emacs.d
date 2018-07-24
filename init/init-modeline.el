@@ -4,7 +4,10 @@
 
 ;; Use telephone-line for pretty modeline
 
-;; TODO: Anzu segment
+;; TODO:
+;; - Anzu segment
+;; - Nyan mode segment
+;; - Redo position segment
 
 ;;; Code:
 
@@ -45,7 +48,7 @@
                     'local-map (make-mode-line-mouse-map
                                 'mouse-1 #'flycheck-list-errors)))))
 
-  ;; Add mode icon next to the buffer name
+  ;; Add mode icon next to the buffer name and edit status in the beginning
   (telephone-line-defsegment* adq/telephone-line-buffer-segment ()
     `(""
       ,(concat

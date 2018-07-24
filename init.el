@@ -133,6 +133,8 @@
 
 (when adq/emacs-debug
   (setq use-package-verbose t
+        use-package-expand-minimally t
+        use-package-compute-statistics t
         debug-on-error t))
 
 ;; Benchmark init if we are running with debugging enabled.

@@ -54,6 +54,11 @@
   :mode (("/PKGBUILD\\'" . pkgbuild-mode))
   :ensure t)
 
+(use-package nginx-mode
+  :mode (("nginx\\.conf\\'" . nginx-mode)
+         ("/nginx/.+\\.conf\\'" . nginx-mode))
+  :ensure t)
+
 (provide 'lang-linux)
 
 ;;; lang-linux.el ends here
