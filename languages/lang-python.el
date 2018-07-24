@@ -38,8 +38,9 @@
   "Defaults for Python."
   (setq-local prettify-symbols-alist adq/python-prettify-symbols-alist)
   (highlight-indent-guides-mode)
-  (anaconda-eldoc-mode)
   (pyvenv-mode)
+  (anaconda-mode)
+  (anaconda-eldoc-mode)
   ;; (when-let ((venv (adq/python-find-project-venv)))
   ;;   (pyvenv-activate venv)
   ;;   (message "Activated virtual environment %s" venv))
