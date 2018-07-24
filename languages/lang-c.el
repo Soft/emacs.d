@@ -48,7 +48,12 @@
   :defer t
   :init
   (add-hook 'c-mode-hook #'adq/c-setup)
-  (add-hook 'c++-mode-hook #'adq/c++-setup))
+  (add-hook 'c++-mode-hook #'adq/c++-setup)
+  :bind
+  (:map c++-mode
+        ("C-c a =" . clang-format-buffer))
+  (:map c-mode
+        ("C-c a =" . clang-format-buffer)))
 
 (provide 'lang-c)
 
