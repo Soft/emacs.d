@@ -31,6 +31,10 @@
         haskell-font-lock-symbols t)
   (intero-mode))
 
+(adq/region-switch-command adq/hindent-format-region-or-buffer
+  #'hindent-reformat-region #'hindent-reformat-buffer
+  "Use hindent to format region or buffer.")
+
 ;; FIXME: All the commands might not be present
 (use-package haskell-mode
   :ensure t
@@ -40,7 +44,7 @@
   (add-hook 'haskell-mode-hook  #'adq/haskell-setup)
   :bind
   (:map haskell-mode-map
-        ("C-c a =" . hindent-reformat-buffer)
+        ("C-c a =" . adq/hindent-format-region-or-buffer)
         ("C-c a r" . hlint-refactor-refactor-at-point)
         ("C-c a R" . hlint-refactor-refactor-buffer)
         ("C-c a a" . hasky-stack-execute)))
