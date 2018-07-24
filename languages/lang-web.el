@@ -14,6 +14,10 @@
   :defer t
   :ensure t)
 
+(use-package web-beautify
+  :ensure t
+  :defer t)
+
 (defvar adq/js-prettify-symbols-alist
   '(("==" . ?≈)
     ("===" . ?≡)
@@ -39,15 +43,13 @@
   :interpreter ("node" . js2-mode)
   :ensure t
   :init
-  (add-hook 'js2-mode-hook #'adq/js-setup))
+  (add-hook 'js2-mode-hook #'adq/js-setup)
+  :bind
+  (:map js2-mode-map
+        ("C-c a =" . web-beautify-js)))
 
 (use-package js-comint
   :if (adq/programs-p "node")
-  :ensure t
-  :defer t)
-
-(use-package web-beautify
-  :if (adq/programs-p "js-beautify")
   :ensure t
   :defer t)
 
@@ -65,7 +67,10 @@
   :ensure t
   :mode (("\\.css\\'" . css-mode))
   :init
-  (add-hook 'css-mode-hook #'adq/css-setup))
+  (add-hook 'css-mode-hook #'adq/css-setup)
+  :bind
+  (:map css-mode-map
+        ("C-c a =" . web-beautify-css)))
 
 (use-package scss-mode
   :mode (("\\.scss\''" . scss-mode))
@@ -82,7 +87,10 @@
          ("\\.mustache\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
          ("\\.tsx\\'" . web-mode))
-  :ensure t)
+  :ensure t
+  :bind
+  (:map web-mode-map
+        ("C-c a =" . web-beautify-html)))
 
 (provide 'lang-web)
 
