@@ -150,6 +150,17 @@ is non-nil."
   (when adq/emacs-debug
     `(message ,message ,@args)))
 
+(defmacro adq/region-switch-command (name with-region without-region &optional docstring)
+  "Make a combination command that executes WITH-REGION if region
+is active and WITHOUT-REGION if there is no active region."
+  (declare (indent defun))
+  `(defun ,name ()
+     ,@(if docstring (list docstring) '())
+     (interactive)
+     (if (region-active-p)
+         (call-interactively ,with-region)
+       (call-interactively ,without-region))))
+
 (defun adq/make-compiler (command name-transformer args-maker)
   "Create a new interactive command that receives the content of
 the current buffer when executed."
