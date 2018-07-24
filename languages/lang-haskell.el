@@ -19,7 +19,9 @@
 (use-package hasky-stack
   :if (adq/programs-p "stack")
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq hasky-stack-auto-target t))
 
 (use-package intero
   :ensure t
@@ -47,7 +49,9 @@
         ("C-c a =" . adq/hindent-format-region-or-buffer)
         ("C-c a r" . hlint-refactor-refactor-at-point)
         ("C-c a R" . hlint-refactor-refactor-buffer)
-        ("C-c a a" . hasky-stack-execute)))
+        ("C-c a a" . hasky-stack-execute)
+        ("C-c a c" . hasky-stack-package-action-popup)
+        ("C-c a s" . haskell-sort-imports)))
 
 (provide 'lang-haskell)
 
