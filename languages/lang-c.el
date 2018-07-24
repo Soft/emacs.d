@@ -44,6 +44,10 @@
   "Defaults for C++."
   (setq-local prettify-symbols-alist adq/c++-prettify-symbols-alist))
 
+(adq/region-switch-command adq/clang-format-region-or-buffer
+  #'clang-format-region #'clang-format-buffer
+  "Use clang-format to format region or buffer.")
+
 (use-package cc-mode
   :defer t
   :init
@@ -51,9 +55,9 @@
   (add-hook 'c++-mode-hook #'adq/c++-setup)
   :bind
   (:map c++-mode
-        ("C-c a =" . clang-format-buffer))
+        ("C-c a =" . adq/clang-format-region-or-buffer))
   (:map c-mode
-        ("C-c a =" . clang-format-buffer)))
+        ("C-c a =" . adq/clang-format-region-or-buffer)))
 
 (provide 'lang-c)
 
