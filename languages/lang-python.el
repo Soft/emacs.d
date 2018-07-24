@@ -185,8 +185,12 @@ found."
   :mode (("\\.py\\'" . python-mode))
   :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'adq/python-setup)
-  :bind (:map python-mode-map
-              ("M-\"" . adq/python-skeleton-doc-comment)))
+  :bind
+  (:map python-mode-map
+        ("M-\"" . adq/python-skeleton-doc-comment)
+        ("C-c a =" . yapfify-buffer)
+        ("C-c a R" . adq/python-venv-activate)
+        ("C-c a S" . adq/python-setup-venv)))
 
 (provide 'lang-python)
 

@@ -84,24 +84,22 @@
 
 (use-package elisp-mode
   :defer t
+  :bind
+  (:map emacs-lisp-mode-map
+        ("C-c a m" . macrostep-expand)
+
+        ("C-c a r" . eval-region)
+        ("C-c a b" . eval-buffer)
+        ("C-c a f" . eval-defun)
+        ("C-c a e" . adq/eval-and-replace-region)
+
+        ("C-c a s f" . elisp-refs-function)
+        ("C-c a s m" . elisp-refs-macro)
+        ("C-c a s v" . elisp-refs-variable)
+        ("C-c a s s" . elisp-refs-symbol)
+        ("C-c a s S" . elisp-refs-special))
   :init
-  (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup)
-  :config
-  (bind-keys
-   :map emacs-lisp-mode-map
-   ;; FIXME: Collides with FlyCheck
-   ("C-c e" . macrostep-expand)
-
-   ("C-c a r" . eval-region)
-   ("C-c a b" . eval-buffer)
-   ("C-c a f" . eval-defun)
-   ("C-c a e" . adq/eval-and-replace-region)
-
-   ("C-c r f" . elisp-refs-function)
-   ("C-c r m" . elisp-refs-macro)
-   ("C-c r v" . elisp-refs-variable)
-   ("C-c r s" . elisp-refs-symbol)
-   ("C-c r S" . elisp-refs-special)))
+  (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup))
 
 (use-package geiser
   :if (adq/programs-p "guile" "racket")

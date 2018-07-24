@@ -189,6 +189,7 @@ universal argument present, current time will also be inserted."
    (if d (format-time-string "%c")
      (format-time-string "%A %x"))))
 
+
 (provide 'init-prelude)
 
 ;;; init-prelude.el ends here

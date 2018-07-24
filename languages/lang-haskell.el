@@ -6,14 +6,44 @@
 
 ;;; Code:
 
+(use-package hindent
+  :if (adq/programs-p "hindent")
+  :ensure t
+  :defer t)
+
+(use-package hlint-refactor
+  :if (adq/programs-p "hlint")
+  :ensure t
+  :defer t)
+
+(use-package hasky-stack
+  :if (adq/programs-p "stack")
+  :ensure t
+  :defer t)
+
+(use-package intero
+  :ensure t
+  :defer t)
+
+(defun adq/haskell-setup ()
+  "Defaults for Haskell."
+  (setq haskell-interactive-popup-errors nil
+        haskell-font-lock-symbols t)
+  (intero-mode))
+
+;; FIXME: All the commands might not be present
 (use-package haskell-mode
   :ensure t
   :mode (("\\.hs\\'" . haskell-mode)
          ("\\.lhs\\'" . literate-haskell-mode))
   :config
-  (use-package haskell-font-lock)
-  (setq-default haskell-interactive-popup-errors nil
-                haskell-font-lock-symbols t))
+  (add-hook 'haskell-mode-hook  #'adq/haskell-setup)
+  :bind
+  (:map haskell-mode-map
+        ("C-c a =" . hindent-reformat-buffer)
+        ("C-c a r" . hlint-refactor-refactor-at-point)
+        ("C-c a R" . hlint-refactor-refactor-buffer)
+        ("C-c a a" . hasky-stack-execute)))
 
 (provide 'lang-haskell)
 
