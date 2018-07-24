@@ -26,6 +26,7 @@
   (defvar which-key-idle-delay)
   (setq which-key-idle-delay 0.5)
   (which-key-add-key-based-replacements
+    "C-c a" "marjor-mode"
     "C-c d" "tags"
     "C-c g" "git"
     "C-c x" "misc"
