@@ -82,10 +82,16 @@
   :ensure t
   :defer t)
 
+(use-package elisp-format
+  :ensure t
+  :defer t)
+
 (use-package elisp-mode
   :defer t
   :bind
   (:map emacs-lisp-mode-map
+        ("C-c a =" . elisp-format-buffer)
+
         ("C-c a m" . macrostep-expand)
 
         ("C-c a r" . eval-region)
