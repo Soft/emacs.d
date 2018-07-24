@@ -54,10 +54,11 @@
   (add-hook 'c-mode-hook #'adq/c-setup)
   (add-hook 'c++-mode-hook #'adq/c++-setup)
   :bind
-  (:map c++-mode
-        ("C-c a =" . adq/clang-format-region-or-buffer))
-  (:map c-mode
-        ("C-c a =" . adq/clang-format-region-or-buffer)))
+  (
+   :map c++-mode-map
+   ("C-c a =" . adq/clang-format-region-or-buffer)
+   :map c-mode-map
+   ("C-c a =" . adq/clang-format-region-or-buffer)))
 
 (provide 'lang-c)
 
