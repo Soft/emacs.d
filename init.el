@@ -131,11 +131,12 @@
 (defconst adq/emacs-debug
   (and (getenv "EMACS_DEBUG") t))
 
-(when adq/emacs-debug
-  (setq use-package-verbose t
-        use-package-expand-minimally t
-        use-package-compute-statistics t
-        debug-on-error t))
+(if adq/emacs-debug
+    (setq use-package-verbose t
+          use-package-expand-minimally t
+          use-package-compute-statistics t
+          debug-on-error t)
+  (setq debug-on-error nil))
 
 ;; Benchmark init if we are running with debugging enabled.
 
