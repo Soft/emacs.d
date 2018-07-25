@@ -85,7 +85,7 @@
  ("K" . evil-scroll-up))
 
 (global-prettify-symbols-mode 1)
-(setq prettify-symbols-unprettify-at-point t)
+(setq prettify-symbols-unprettify-at-point 'right-edge)
 
 ;; FIXME:
 ;; This could be called before the use-package has installed all the
