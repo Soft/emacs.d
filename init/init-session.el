@@ -61,7 +61,8 @@
      "/ssh:"
      "/usr/share/emacs/"
      "\\.emacs\\.d/elpa/"
-     "TAGS")))
+     "TAGS"
+     "\\.stack-work/")))
 
 ;; Maybe I should reconsider this since it is so slow
 (use-package desktop
