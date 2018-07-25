@@ -86,11 +86,15 @@
   :ensure t
   :defer t)
 
+(adq/region-switch-command adq/elisp-format-region-or-buffer
+  #'elisp-format-region #'elisp-format-buffer
+  "Use elisp-format to format region or buffer.")
+
 (use-package elisp-mode
   :defer t
   :bind
   (:map emacs-lisp-mode-map
-        ("C-c a =" . elisp-format-buffer)
+        ("C-c a =" . adq/elisp-format-region-or-buffer)
 
         ("C-c a m" . macrostep-expand)
 
