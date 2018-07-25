@@ -207,6 +207,11 @@
   :init
   (bury-successful-compilation))
 
+(use-package compile
+  :defer t
+  :config
+  (setq compilation-scroll-output t))
+
 (use-package autorevert
   :defer t
   :config
