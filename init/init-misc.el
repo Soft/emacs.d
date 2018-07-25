@@ -145,7 +145,7 @@ _H_: Increase  _S_: Increase  _B_: Increase
 (bind-key "C-c x c" #'adq/hydra-kurecolor/body)
 
 (use-package restclient
-  :mode (("\\.rest'" . restclient-mode))
+  :mode (("\\.restclient'" . restclient-mode))
   :ensure t)
 
 (defun adq/restclient ()
