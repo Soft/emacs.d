@@ -76,7 +76,8 @@
         desktop-auto-save-timeout 60)
   (desktop-save-mode 1)
   :config
-  (add-to-list 'desktop-clear-preserve-buffers "\\*dashboard\\*"))
+  (add-to-list 'desktop-clear-preserve-buffers
+               "\\*dashboard\\*"))
 
 (use-package midnight
   :diminish midnight-mode
