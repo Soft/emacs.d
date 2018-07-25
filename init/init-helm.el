@@ -40,7 +40,8 @@
    ("C-c S"   . helm-imenu)
    ("M-x"     . helm-M-x)
    ("C-h a"   . helm-apropos)
-   ("C-h i"   . helm-info-emacs)))
+   ("C-h i"   . helm-info-emacs)
+   ("C-c y"   . helm-show-kill-ring)))
 
 (use-package helm-projectile
   :ensure t
