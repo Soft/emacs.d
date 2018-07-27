@@ -111,7 +111,7 @@ if universal argument is supplied."
 (use-package helm-make
   :ensure t
   :defer t
-  :bind (("C-c p M" . helm-make-projectile)))
+  :bind (("C-c C-p M" . helm-make-projectile)))
 
 ;; This is also bound into the bookmark hydra in init-bookmarks.el
 (use-package helm-bm
