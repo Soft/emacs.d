@@ -72,7 +72,7 @@
   "Will TLS be used.")
 
 (unless adq/tls-enabled
-  (message "Warning: TLS was disabled."))
+  (warn "TLS was disabled."))
 
 (defun adq/tls-add-protocol (url)
   (let ((proto (if adq/tls-enabled "https" "http")))
