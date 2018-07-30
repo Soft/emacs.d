@@ -53,7 +53,8 @@
         ("C-c a c" . hasky-stack-package-action-popup)
         ("C-c a s" . haskell-sort-imports)
         ("C-c a e" . intero-restart)
-        ("C-c a d" . haskell-hoogle)))
+        ("C-c a d" . haskell-hoogle)
+        ("C-c d d" . intero-goto-definition)))
 
 (provide 'lang-haskell)
 

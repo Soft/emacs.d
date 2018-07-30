@@ -37,13 +37,16 @@
 ;; startup
 
 (let ((default-threshold gc-cons-threshold)
-      (default-file-name-handler-alist file-name-handler-alist))
+      (default-file-name-handler-alist file-name-handler-alist)
+      (default-gc-cons-percentage gc-cons-percentage))
   (setq gc-cons-threshold 64000000
-        file-name-handler-alist nil)
+        file-name-handler-alist nil
+        gc-cons-percentage 0.6)
   (add-hook 'after-init-hook
             #'(lambda ()
                 (setq gc-cons-threshold default-threshold
-                      file-name-handler-alist default-file-name-handler-alist))))
+                      file-name-handler-alist default-file-name-handler-alist
+                      gc-cons-percentage default-gc-cons-percentage))))
 
 (require 'subr-x) ; string-remove-suffix
 
@@ -72,7 +75,7 @@
   "Will TLS be used.")
 
 (unless adq/tls-enabled
-  (message "Warning: TLS was disabled."))
+  (warn "TLS was disabled."))
 
 (defun adq/tls-add-protocol (url)
   (let ((proto (if adq/tls-enabled "https" "http")))
