@@ -75,6 +75,10 @@ staged changes."
   :ensure t
   :bind (("C-c g b" . browse-at-remote)))
 
+(use-package github-clone
+  :ensure t
+  :bind (("C-c g c" . github-clone)))
+
 (defvar adq/git-binary "git"
   "Git binary path.")
 
