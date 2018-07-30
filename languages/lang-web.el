@@ -38,14 +38,22 @@
   (rainbow-identifiers-mode -1))
 
 (use-package js2-mode
-  :mode (("\\.js\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-mode))
+  :mode (("\\.js\\'" . js2-mode))
   :interpreter ("node" . js2-mode)
   :ensure t
   :init
   (add-hook 'js2-mode-hook #'adq/js-setup)
   :bind
   (:map js2-mode-map
+        ("C-c a =" . web-beautify-js)))
+
+(use-package rjsx-mode
+  :mode (("\\.jsx\\'" . rjsx-mode))
+  :ensure t
+  :init
+  (add-hook 'rjsx-mode-hook #'adq/js-setup)
+  :bind
+  (:map rjsx-mode-map
         ("C-c a =" . web-beautify-js)))
 
 (use-package js-comint
