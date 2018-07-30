@@ -8,6 +8,7 @@
 ;;; Code:
 
 (use-package pcre2el
+  :disabled ;; This seems to cause some errors.
   :ensure t
   :diminish pcre-mode
   :init (pcre-mode))
