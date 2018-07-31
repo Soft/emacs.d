@@ -94,7 +94,8 @@
   :mode (("\\.p?html?\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode))
+         ("\\.tsx\\'" . web-mode)
+         ("\\.vue\\'" . web-mode))
   :ensure t
   :bind
   (:map web-mode-map
