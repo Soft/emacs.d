@@ -65,8 +65,6 @@
            (propertize (format "%d" (line-number-at-pos)) 'face font-lock-constant-face)
            (propertize (format "%d" (current-column)) 'face font-lock-constant-face)))
 
-(bind-key "C-c x W" #'adq/where-am-i)
-
 ;; I regularly work on projects with large TAGS files
 (advice-add
  'abort-if-file-too-large :around
@@ -228,13 +226,14 @@
 _d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
 _r_: Revert buffer    _i_: Indent guides         _+_: Increase
 _s_: Change user      _n_: Line numbers
-                    ^^_t_: Truncate lines
+_f_: Where am I?      _t_: Truncate lines
                     ^^_v_: Visual lines
                     ^^_a_: Auto revert
 "
   ("d" magit-diff-buffer-file :exit t)
   ("r" revert-buffer :exit t)
   ("s" sudo-edit :exit t)
+  ("f" adq/where-am-i :exit t)
   
   ("w" whitespace-mode)
   ("i" highlight-indent-guides-mode)
