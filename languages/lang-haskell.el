@@ -27,6 +27,21 @@
   :ensure t
   :defer t)
 
+(defvar adq/haskell-font-lock-symbols-alist
+  '((">>" . "≫")
+    ("<<" . "≪")
+    (">>>" . "⋙")
+    ("<<<" . "⋘")
+    ("<~" . "⇜")
+    ("++" . "⧺")
+    ("+++" . "⧻")
+    ("***" . "⁂")
+    ("<>" . "⊕")
+    ("<*>" . "⊛")
+    ("<|>" . "⟠")
+    ("<$>" . "↥"))
+  "Symbol prettification alist for `haskell-mode'.")
+
 (defun adq/haskell-setup ()
   "Defaults for Haskell."
   (setq haskell-interactive-popup-errors nil
@@ -48,6 +63,8 @@
                 ("runhaskell" . haskell-mode))
   :config
   (add-hook 'haskell-mode-hook  #'adq/haskell-setup)
+  (setq haskell-font-lock-symbols-alist
+        (append haskell-font-lock-symbols-alist adq/haskell-font-lock-symbols-alist))
   :bind
   (:map haskell-mode-map
         ("C-c a =" . adq/hindent-format-region-or-buffer)
