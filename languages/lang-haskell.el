@@ -41,7 +41,11 @@
 (use-package haskell-mode
   :ensure t
   :mode (("\\.hs\\'" . haskell-mode)
-         ("\\.lhs\\'" . literate-haskell-mode))
+         ("\\.lhs\\'" . literate-haskell-mode)
+         ("\\.cabal\\'" . haskell-cabal-mode)
+         ("\\.ghci\\'" . ghci-script-mode))
+  :interpreter (("runghc" . haskell-mode)
+                ("runhaskell" . haskell-mode))
   :config
   (add-hook 'haskell-mode-hook  #'adq/haskell-setup)
   :bind
