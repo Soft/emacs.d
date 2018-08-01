@@ -38,8 +38,10 @@
     ("***" . "⁂")
     ("<>" . "⊕")
     ("<*>" . "⊛")
-    ("<|>" . "⟠")
-    ("<$>" . "↥"))
+    ("<|>" . "⦶")
+    ("<$>" . "↥")
+    ("*>" . "⩺")
+    ("<*" . "⩹"))
   "Symbol prettification alist for `haskell-mode'.")
 
 (defun adq/haskell-setup ()
