@@ -67,9 +67,7 @@
   :interpreter (("runghc" . haskell-mode)
                 ("runhaskell" . haskell-mode))
   :config
-  ;; This might not be the right time to update this list. It seems that
-  ;; haskell-mode might need to be enabled twice in order for the new symbols to
-  ;; appear. Not sure what is happening there.
+  (setq haskell-font-lock-symbols t)
   (setq haskell-font-lock-symbols-alist
         (append haskell-font-lock-symbols-alist adq/haskell-extra-font-lock-symbols-alist))
   (add-hook 'haskell-mode-hook  #'adq/haskell-setup)
