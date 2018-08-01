@@ -245,7 +245,7 @@ _f_: Where am I?      _t_: Truncate lines
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
 
-(bind-key "C-c t" #'adq/hydra-buffer/body)
+(bind-key "C-c e" #'adq/hydra-buffer/body)
 
 (provide 'init-editor)
 
