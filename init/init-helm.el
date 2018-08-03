@@ -94,9 +94,10 @@ if universal argument is supplied."
   :ensure t
   :defer t
   :config
-  (setq helm-swoop-speed-or-color       t
+  (setq helm-swoop-speed-or-color       nil
         helm-swoop-use-line-number-face t
-        helm-swoop-use-fuzzy-match      t))
+        helm-swoop-use-fuzzy-match      t
+        helm-swoop-pre-input-function   (lambda ())))
 
 (bind-key "C-c SPC" #'adq/helm-swoop-file-or-project)
 
