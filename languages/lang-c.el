@@ -35,6 +35,11 @@
   :ensure t
   :defer t)
 
+(use-package modern-cpp-font-lock
+  :ensure t
+  :defert t
+  :diminish modern-c++-font-lock-mode)
+
 (defun adq/c-setup ()
   "Defaults for C."
   (setq-local prettify-symbols-alist adq/c-prettify-symbols-alist))
@@ -42,6 +47,7 @@
 
 (defun adq/c++-setup ()
   "Defaults for C++."
+  (modern-c++-font-lock-mode)
   (setq-local prettify-symbols-alist adq/c++-prettify-symbols-alist))
 
 (adq/region-switch-command adq/clang-format-region-or-buffer
