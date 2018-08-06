@@ -85,7 +85,8 @@
  gnutls-algorithm-priority "SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%PROFILE_MEDIUM"
  gnutls-min-prime-bits 1024
  gnutls-verify-error t
- network-security-level 'high)
+ ;;; network-security-level 'high
+ )
 
 (defvar package-archives
   `(("melpa" . ,(adq/tls-add-protocol "melpa.org/packages/"))
