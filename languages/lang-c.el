@@ -37,7 +37,7 @@
 
 (use-package modern-cpp-font-lock
   :ensure t
-  :defert t
+  :defer t
   :diminish modern-c++-font-lock-mode)
 
 (defun adq/c-setup ()
