@@ -42,6 +42,14 @@ staged changes."
     (evil-make-overriding-map git-timemachine-mode-map 'normal)
     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 
+(use-package git-messenger
+  :ensure t
+  :defer t
+  :bind
+  (("C-c g m" . git-messenger:popup-message))
+  :config
+  (setq git-messenger:use-magit-popup t))
+
 (use-package gitconfig-mode
   :mode ((".gitconfig" . gitconfig-mode)
          (".gitmodules" . gitconfig-mode))
