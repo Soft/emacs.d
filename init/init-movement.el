@@ -25,7 +25,14 @@
   (interactive)
   (avy--generic-jump "(\\|)" nil 'pre))
 
-(bind-key "C-c j p" #'adq/avy-goto-paren)
+(defun adq/avy-goto-block ()
+  "Jump to a block."
+  (interactive)
+  (avy--generic-jump (rx (or "(" ")" "{" "}" "[" "]")) nil 'pre))
+
+(bind-keys
+ ("C-c j p" . adq/avy-goto-paren)
+ ("C-c j b" . adq/avy-goto-block))
 
 ;; This doesn't really seem to work the way I want. Maybe I'll switch to
 ;; something else.
