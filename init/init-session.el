@@ -79,9 +79,17 @@
   (add-to-list 'desktop-clear-preserve-buffers
                "\\*dashboard\\*"))
 
+(defun adq/desktop-clear-prompt ()
+  "Prompt for confirmation before clearing desktop."
+  (interactive)
+  (when (yes-or-no-p "Clear desktop? ")
+    (desktop-clear)))
+
+(bind-key "C-c x C" #'adq/desktop-clear-prompt)
+
 (use-package midnight
   :diminish midnight-mode
-  :bind (("C-c x C" . clean-buffer-list))
+  :bind (("C-c x m" . clean-buffer-list))
   :config
   (add-to-list 'clean-buffer-list-kill-regexps
                "*magit: ")
