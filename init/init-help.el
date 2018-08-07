@@ -28,6 +28,7 @@
   (which-key-add-key-based-replacements
     "C-c a" "marjor-mode"
     "C-c d" "tags"
+    "C-c j" "jump"
     "C-c g" "git"
     "C-c x" "misc"
     "C-c o" "org"
