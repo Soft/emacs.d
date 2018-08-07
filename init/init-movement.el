@@ -9,14 +9,23 @@
 (use-package avy
   :defer t
   :ensure t
+  :functions (avy--generic-jump)
   :bind (("C-c j j" . avy-goto-word-1)
          ("C-c j s" . avy-goto-subword-0)
          ("C-c j m" . avy-goto-symbol-1)
          ("C-c j l" . avy-goto-line)
          ("C-c j c" . avy-goto-char))
   :config
+  (setq avy-style 'pre)
   (adq/after-load 'isearch
     (bind-key "C-j" #'avy-isearch isearch-mode-map)))
+
+(defun adq/avy-goto-paren ()
+  "Jump to a paren."
+  (interactive)
+  (avy--generic-jump "(\\|)" nil 'pre))
+
+(bind-key "C-c j p" #'adq/avy-goto-paren)
 
 ;; This doesn't really seem to work the way I want. Maybe I'll switch to
 ;; something else.
