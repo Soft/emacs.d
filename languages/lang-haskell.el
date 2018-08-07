@@ -57,6 +57,42 @@
   #'hindent-reformat-region #'hindent-reformat-buffer
   "Use hindent to format region or buffer.")
 
+(defun adq/helm-stack-hoogle-transformer (candidates _source)
+  (cl-loop for candidate in candidates
+           when (stringp candidate)
+           collect
+           (let ((parts (s-split-up-to " -- " candidate 2)))
+             (if (cadr parts)
+                 (cons (car parts) (cadr parts))
+               (car parts)))))
+
+(defvar adq/helm-source-stack-hoogle
+  (helm-build-async-source "Hoogle"
+    :candidates-process
+    (lambda ()
+      (start-process "Hoogle" nil
+                     "stack"
+                     "hoogle"
+                     "--no-setup"
+                     "--"
+                     "search"
+                     "--count=512"
+                     "--link"
+                     helm-pattern))
+    :requires-pattern 3
+    :action '(("Browse documentation" . browse-url))
+    :filtered-candidate-transformer #'adq/helm-stack-hoogle-transformer)
+  "Source for searching Stack managed Hoogle.")
+
+(defun adq/helm-stack-hoogle (d)
+  "Search Stack managed Hoogle."
+  (interactive "P")
+  (helm :sources #'adq/helm-source-stack-hoogle
+        :prompt "Hoogle: "
+        :input (when-let (symbol (and d (symbol-at-point)))
+                 (symbol-name symbol))
+        :buffer "*Hoogle search*"))
+
 ;; FIXME: All the commands might not be present
 (use-package haskell-mode
   :ensure t
@@ -81,7 +117,8 @@
         ("C-c a s" . haskell-sort-imports)
         ("C-c a e" . intero-restart)
         ("C-c a p" . intero-list-buffers)
-        ("C-c a d" . haskell-hoogle)
+        ("C-c a h" . adq/helm-stack-hoogle)
+        ("C-c a H" . haskell-hoogle)
 
         ("C-c d d" . intero-goto-definition)))
 
