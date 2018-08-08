@@ -66,7 +66,7 @@
                  (cons (car parts) (cadr parts))
                (car parts)))))
 
-(defvar adq/helm-source-stack-hoogle
+(defvar adq/helm-stack-hoogle-source
   (helm-build-async-source "Hoogle"
     :candidates-process
     (lambda ()
@@ -85,11 +85,12 @@
   "Source for searching Stack managed Hoogle.")
 
 (defun adq/helm-stack-hoogle (d)
-  "Search Stack managed Hoogle."
+  "Search Stack managed Hoogle. The initial search string is the
+symbol at point unless universal argument is supplied."
   (interactive "P")
-  (helm :sources #'adq/helm-source-stack-hoogle
+  (helm :sources #'adq/helm-stack-hoogle-source
         :prompt "Hoogle: "
-        :input (when-let (symbol (and d (symbol-at-point)))
+        :input (when-let (symbol (and (not d) (symbol-at-point)))
                  (symbol-name symbol))
         :buffer "*Hoogle search*"))
 
