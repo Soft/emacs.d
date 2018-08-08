@@ -20,19 +20,37 @@
   (adq/after-load 'isearch
     (bind-key "C-j" #'avy-isearch isearch-mode-map)))
 
-(defun adq/avy-goto-paren ()
-  "Jump to a paren."
-  (interactive)
-  (avy--generic-jump "(\\|)" nil 'pre))
+(autoload 'avy--generic-jump "avy")
 
-(defun adq/avy-goto-block ()
-  "Jump to a block."
-  (interactive)
-  (avy--generic-jump (rx (or "(" ")" "{" "}" "[" "]")) nil 'pre))
+(defmacro adq/avy-jump-command (name doc regex)
+  "Make Avy jump command based on a regular expression."
+  (declare (indent defun))
+  `(defun ,name ()
+     ,doc
+     (interactive)
+     (avy--generic-jump ,regex nil 'pre)))
+
+(adq/avy-jump-command adq/avy-goto-paren
+  "Jump to a parenthesis."
+  "(\\|)")
+
+(adq/avy-jump-command adq/avy-goto-open-paren
+  "Jump to an open parenthesis."
+  "(")
+
+(adq/avy-jump-command adq/avy-goto-closing-paren
+  "Jump to a closing parenthesis."
+  ")")
+
+(adq/avy-jump-command adq/avy-goto-block
+  "Jump to a block"
+  (rx (or "(" ")" "{" "}" "[" "]")))
 
 (bind-keys
  ("C-c j p" . adq/avy-goto-paren)
- ("C-c j b" . adq/avy-goto-block))
+ ("C-c j b" . adq/avy-goto-block)
+ ("C-c j (" . adq/avy-goto-open-paren)
+ ("C-c j )" . adq/avy-goto-closing-paren))
 
 ;; This doesn't really seem to work the way I want. Maybe I'll switch to
 ;; something else.
