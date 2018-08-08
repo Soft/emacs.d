@@ -247,6 +247,18 @@ _f_: Where am I?      _t_: Truncate lines
 
 (bind-key "C-c e" #'adq/hydra-buffer/body)
 
+(defun adq/find-user-init-file ()
+  "Open user's Emacs init file."
+  (interactive)
+  (find-file user-init-file))
+
+(defun adq/find-file-in-adq ()
+  "Open a file belonging to Adequate Emacs.d."
+  (interactive)
+  (projectile-find-file-in-directory adq/init-directory))
+
+(bind-key "<f9>" #'adq/find-file-in-adq)
+
 (provide 'init-editor)
 
 ;;; init-editor.el ends here

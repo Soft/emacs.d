@@ -6,13 +6,6 @@
 
 ;;; Code:
 
-(defun adq/find-user-init-file ()
-  "Open user's emacs init file."
-  (interactive)
-  (find-file user-init-file))
-
-(bind-key "<f9>" #'adq/find-user-init-file)
-
 (defun adq/ielm-setup ()
   (hl-sexp-mode)
   (rainbow-delimiters-mode))
