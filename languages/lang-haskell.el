@@ -58,6 +58,7 @@
   "Use hindent to format region or buffer.")
 
 (defun adq/helm-stack-hoogle-transformer (candidates _source)
+  "Candidate transformer for `adq/helm-stack-hoogle'."
   (cl-loop for candidate in candidates
            when (stringp candidate)
            collect
