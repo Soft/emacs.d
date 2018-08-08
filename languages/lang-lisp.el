@@ -25,11 +25,14 @@
   :config
   (add-hook 'ielm-mode-hook #'adq/ielm-setup))
 
-;; FIXME: Make macrostep play nice with Evil
 (use-package macrostep
   :defer t
   :ensure t
-  :diminish macrostep-mode)
+  :diminish macrostep-mode
+  :config
+  (adq/after-load 'evil
+    (evil-make-overriding-map macrostep-keymap 'normal)
+    (add-hook 'macrostep-mode-hook #'evil-normalize-keymaps)))
 
 (use-package elisp-refs
   :ensure t
