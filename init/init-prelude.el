@@ -161,11 +161,16 @@ is active and WITHOUT-REGION if there is no active region."
          (call-interactively ,with-region)
        (call-interactively ,without-region))))
 
-(defun adq/compiler-command-sentinel (process _status)
+(defun adq/compiler-command-handler (command start-time process _status)
+  "Handler for proces events from `adq/compiler-command' based
+compilers."
   (when (eq (process-status process) 'exit)
     (pcase (process-exit-status process)
-      (`0 (message "Compilation finished"))
-      (_ (error "Compilation failed")
+      (`0 (message "%s finished in %.2f seconds"
+                   command
+                   (time-to-seconds
+                    (time-subtract (current-time) start-time))))
+      (n (message "%s failed with status %d" command n)
          (pop-to-buffer (process-buffer process))))))
 
 (defmacro adq/compiler-command (name doc command &rest body)
@@ -178,6 +183,7 @@ is active and WITHOUT-REGION if there is no active region."
          (dir (gensym))
          (args (gensym))
          (proc (gensym))
+         (start-time (gensym))
          (buffer (gensym)))
     `(defun ,name ()
        ,doc
@@ -185,6 +191,7 @@ is active and WITHOUT-REGION if there is no active region."
        (let* ((,base-name (file-name-base buffer-file-name))
               (,dir (file-name-directory buffer-file-name))
               (,buffer (get-buffer-create (concat "*" ,command ": " buffer-file-name "*")))
+              (,start-time (current-time))
               (,args
                (let ((it (concat (file-name-as-directory ,dir) ,base-name)))
                  ,@body))
@@ -192,7 +199,9 @@ is active and WITHOUT-REGION if there is no active region."
                       :name ,command
                       :buffer ,buffer
                       :command (cons ,command ,args)
-                      :sentinel #'adq/compiler-command-sentinel)))
+                      :sentinel
+                      (lambda (process status)
+                        (adq/compiler-command-handler ,command ,start-time process status)))))
          (process-send-string ,proc (buffer-string))
          (process-send-eof ,proc)))))
 
