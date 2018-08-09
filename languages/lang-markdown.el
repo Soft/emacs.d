@@ -6,11 +6,24 @@
 
 ;;; Code:
 
+(defvar-local adq/pandoc-pdf-from-buffer-use-citeproc nil
+  "Use pandoc-citeproc with `adq/pandoc-pdf-from-buffer'.")
+
+(defun adq/pandoc-toggle-citeproc ()
+  "Toggle use of pandoc-citeproc with
+  `adq/pandoc-pdf-from-buffer'."
+  (interactive)
+  (setq-local adq/pandoc-pdf-from-buffer-use-citeproc
+              (not adq/pandoc-pdf-from-buffer-use-citeproc)))
+
 (fset 'adq/pandoc-pdf-from-buffer
       (adq/make-compiler
        "pandoc"
        (adq/partial concat _ ".pdf")
-       (lambda (output) `("-o" ,output "-f" "markdown"))))
+       (lambda (output)
+         `(,@(if adq/pandoc-pdf-from-buffer-use-citeproc
+                 '("--filter" "pandoc-citeproc") '())
+           "-o" ,output "-f" "markdown"))))
 
 ;; Patch markdown-mode link jumping to work with links internal to document
 
@@ -61,6 +74,8 @@
          ("\\.markdown\\'" . markdown-mode))
   :init
   (add-hook 'markdown-mode-hook #'adq/markdown-setup)
+  :bind (:map markdown-mode-map
+              ("C-c a a" . adq/pandoc-pdf-from-buffer))
   :config
   (setq markdown-bold-underscore t
         markdown-enable-math t
@@ -69,10 +84,7 @@
            do (set-face-attribute
                (intern (format "markdown-header-face-%d" i)) nil :height (+ 1.0 (/ 1.0 i))))
   (set-face-attribute 'markdown-blockquote-face nil :slant 'italic)
-  (advice-add 'markdown-follow-link-at-point :around #'adq/markdown-follow-link-at-point-wrap)
-  (bind-keys
-   :map markdown-mode-map
-   ("C-c c c" . pandoc-convert-to-pdf)))
+  (advice-add 'markdown-follow-link-at-point :around #'adq/markdown-follow-link-at-point-wrap))
 
 (use-package pandoc-mode
   :if (adq/programs-p "pandoc")
