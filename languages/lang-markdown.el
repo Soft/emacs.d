@@ -13,8 +13,11 @@
   "Toggle use of pandoc-citeproc with
   `adq/pandoc-pdf-from-buffer'."
   (interactive)
-  (setq-local adq/pandoc-pdf-from-buffer-use-citeproc
-              (not adq/pandoc-pdf-from-buffer-use-citeproc)))
+  (message
+   (if (setq-local adq/pandoc-pdf-from-buffer-use-citeproc
+                   (not adq/pandoc-pdf-from-buffer-use-citeproc))
+       "pandoc-citeproc enabled"
+     "pandoc-citeproc disabled")))
 
 (adq/compiler-command adq/pandoc-pdf-from-buffer
   "Compile markdown to PDF using Pandoc."
