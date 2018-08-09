@@ -161,6 +161,13 @@ is active and WITHOUT-REGION if there is no active region."
          (call-interactively ,with-region)
        (call-interactively ,without-region))))
 
+(defun adq/compiler-command-sentinel (process _status)
+  (when (eq (process-status process) 'exit)
+    (pcase (process-exit-status process)
+      (`0 (message "Compilation finished"))
+      (_ (error "Compilation failed")
+         (pop-to-buffer (process-buffer process))))))
+
 (defmacro adq/compiler-command (name doc command &rest body)
   "Make compiler command that receives the contents of the
   current buffer when executed. BODY has access to the name of
@@ -170,23 +177,22 @@ is active and WITHOUT-REGION if there is no active region."
   (let* ((base-name (gensym))
          (dir (gensym))
          (args (gensym))
-         (proc (gensym)))
+         (proc (gensym))
+         (buffer (gensym)))
     `(defun ,name ()
        ,doc
        (interactive)
        (let* ((,base-name (file-name-base buffer-file-name))
               (,dir (file-name-directory buffer-file-name))
+              (,buffer (get-buffer-create (concat "*" ,command ": " buffer-file-name "*")))
               (,args
                (let ((it (concat (file-name-as-directory ,dir) ,base-name)))
                  ,@body))
-              (,proc (apply #'start-process
-                            (cl-concatenate
-                             #'list
-                             (list ,command
-                                   (concat "*" ,command ": " buffer-file-name "*")
-                                   ,command)
-                             ,args))))
-         (message "Compiling with %s" ,command)
+              (,proc (make-process
+                      :name ,command
+                      :buffer ,buffer
+                      :command (cons ,command ,args)
+                      :sentinel #'adq/compiler-command-sentinel)))
          (process-send-string ,proc (buffer-string))
          (process-send-eof ,proc)))))
 
