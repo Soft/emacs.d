@@ -16,14 +16,13 @@
   (setq-local adq/pandoc-pdf-from-buffer-use-citeproc
               (not adq/pandoc-pdf-from-buffer-use-citeproc)))
 
-(fset 'adq/pandoc-pdf-from-buffer
-      (adq/make-compiler
-       "pandoc"
-       (adq/partial concat _ ".pdf")
-       (lambda (output)
-         `(,@(if adq/pandoc-pdf-from-buffer-use-citeproc
-                 '("--filter" "pandoc-citeproc") '())
-           "-o" ,output "-f" "markdown"))))
+(adq/compiler-command adq/pandoc-pdf-from-buffer
+  "Compile markdown to PDF using Pandoc."
+  "pandoc"
+  (let ((out (concat it ".pdf")))
+    `(,@(if adq/pandoc-pdf-from-buffer-use-citeproc
+            '("--filter" "pandoc-citeproc") '())
+      "-o" ,out "-f" "markdown")))
 
 ;; Patch markdown-mode link jumping to work with links internal to document
 

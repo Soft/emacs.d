@@ -161,24 +161,34 @@ is active and WITHOUT-REGION if there is no active region."
          (call-interactively ,with-region)
        (call-interactively ,without-region))))
 
-(defun adq/make-compiler (command name-transformer args-maker)
-  "Create a new interactive command that receives the content of
-the current buffer when executed."
-  (let* ((command-base (file-name-base command))
-         (process-name (concat command-base "-process"))
-         (buffer-name (format "*%s-Log*" (capitalize command-base)))
-         (args (list process-name buffer-name command)))
-    (lambda ()
-      (interactive)
-      (let* ((name (file-name-base buffer-file-name))
-             (dir (file-name-directory buffer-file-name))
-             (output (funcall name-transformer
-                              (concat (file-name-as-directory dir) name)))
-             (proc (apply #'start-process
-                          (cl-concatenate 'list args (funcall args-maker output)))))
-        (message "%s: %s" (capitalize command-base) output)
-        (process-send-string proc (buffer-string))
-        (process-send-eof proc)))))
+(defmacro adq/compiler-command (name doc command &rest body)
+  "Make compiler command that receives the contents of the
+  current buffer when executed. BODY has access to the name of
+  the input file without the file extension through `it'
+  variable."
+  (declare (indent defun))
+  (let* ((base-name (gensym))
+         (dir (gensym))
+         (args (gensym))
+         (proc (gensym)))
+    `(defun ,name ()
+       ,doc
+       (interactive)
+       (let* ((,base-name (file-name-base buffer-file-name))
+              (,dir (file-name-directory buffer-file-name))
+              (,args
+               (let ((it (concat (file-name-as-directory ,dir) ,base-name)))
+                 ,@body))
+              (,proc (apply #'start-process
+                            (cl-concatenate
+                             #'list
+                             (list ,command
+                                   (concat "*" ,command ": " buffer-file-name "*")
+                                   ,command)
+                             ,args))))
+         (message "Compiling with %s" ,command)
+         (process-send-string ,proc (buffer-string))
+         (process-send-eof ,proc)))))
 
 (defun adq/color-derive (change color)
   "Derive a new color based on COLOR that is either darker or
