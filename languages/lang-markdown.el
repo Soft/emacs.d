@@ -38,6 +38,21 @@
     (pandoc-mode 1))
   (yas-minor-mode))
 
+(define-skeleton adq/pandoc-skeleton-yaml-metadata
+  "Insert Pandoc YAML metadata block template." nil
+  "---"
+  > "title: " (skeleton-read "Title: ") \n
+  > "author: " (user-full-name) \n
+  > "date: " (format-time-string "%A %x") \n
+  > "papersize: a4" \n
+  > "lang: en" \n
+  > "geometry: margin=1in" \n
+  > "colorlinks: yes" \n
+  > "fontfamily: fbb" \n
+  > "fontsize: 12pt" \n
+  > "linestretch: 1.25" \n
+  > "..." \n \n _)
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
