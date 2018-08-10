@@ -23,9 +23,9 @@
   "Compile markdown to PDF using Pandoc."
   "pandoc"
   (let ((out (concat it ".pdf")))
-    `(,@(if adq/pandoc-pdf-from-buffer-use-citeproc
-            '("--filter" "pandoc-citeproc") '())
-      "-o" ,out "-f" "markdown")))
+    `(,out . (,@(if adq/pandoc-pdf-from-buffer-use-citeproc
+                    '("--filter" "pandoc-citeproc") '())
+              "-o" ,out "-f" "markdown"))))
 
 ;; Patch markdown-mode link jumping to work with links internal to document
 

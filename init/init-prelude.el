@@ -161,27 +161,35 @@ is active and WITHOUT-REGION if there is no active region."
          (call-interactively ,with-region)
        (call-interactively ,without-region))))
 
-(defun adq/compiler-command-handler (command start-time process _status)
+(defun adq/compiler-command-handler (command start-time output process _status)
   "Handler for proces events from `adq/compiler-command' based
 compilers."
   (when (eq (process-status process) 'exit)
     (pcase (process-exit-status process)
-      (`0 (message "%s finished in %.2f seconds"
-                   command
-                   (time-to-seconds
-                    (time-subtract (current-time) start-time))))
-      (n (message "%s failed with status %d" command n)
-         (pop-to-buffer (process-buffer process))))))
+      (`0 (message "%s produced %s in %s seconds"
+                   (propertize command 'face font-lock-type-face)
+                   (propertize (file-name-nondirectory output)
+                               'face font-lock-string-face)
+                   (propertize
+                    (format "%.2f"
+                            (time-to-seconds
+                             (time-subtract (current-time) start-time)))
+                    'face font-lock-constant-face)))
+      (n (message "%s failed with status %s"
+                  (propertize command 'face font-lock-type-face) n)
+         (propertize (format "%s" (pop-to-buffer (process-buffer process)))
+                     'face font-lock-constant-face)))))
 
 (defmacro adq/compiler-command (name doc command &rest body)
   "Make compiler command that receives the contents of the
-  current buffer when executed. BODY has access to the name of
-  the input file without the file extension through `it'
-  variable."
+  current buffer when executed. BODY must return a (OUTPUT .
+  ARGS) where OUTPUT is the output file name and ARGS a list or
+  arguments to COMMAND. BODY has access to the name of the input
+  file without the file extension through `it' variable."
   (declare (indent defun))
   (let* ((base-name (gensym))
          (dir (gensym))
-         (args (gensym))
+         (result (gensym))
          (proc (gensym))
          (start-time (gensym))
          (buffer (gensym)))
@@ -192,16 +200,17 @@ compilers."
               (,dir (file-name-directory buffer-file-name))
               (,buffer (get-buffer-create (concat "*" ,command ": " buffer-file-name "*")))
               (,start-time (current-time))
-              (,args
+              (,result
                (let ((it (concat (file-name-as-directory ,dir) ,base-name)))
                  ,@body))
               (,proc (make-process
                       :name ,command
                       :buffer ,buffer
-                      :command (cons ,command ,args)
+                      :command (cons ,command (cdr ,result))
                       :sentinel
                       (lambda (process status)
-                        (adq/compiler-command-handler ,command ,start-time process status)))))
+                        (adq/compiler-command-handler
+                         ,command ,start-time (car ,result) process status)))))
          (process-send-string ,proc (buffer-string))
          (process-send-eof ,proc)))))
 
