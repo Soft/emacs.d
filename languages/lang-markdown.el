@@ -9,6 +9,9 @@
 (defvar-local adq/pandoc-pdf-from-buffer-use-citeproc nil
   "Use pandoc-citeproc with `adq/pandoc-pdf-from-buffer'.")
 
+(defvar-local adq/pandoc-pdf-target-file nil
+  "Path to the pandoc target.")
+
 (defun adq/pandoc-toggle-citeproc ()
   "Toggle use of pandoc-citeproc with
   `adq/pandoc-pdf-from-buffer'."
@@ -19,10 +22,19 @@
        "pandoc-citeproc enabled"
      "pandoc-citeproc disabled")))
 
+(defun adq/pandoc-pdf-open-target ()
+  "Open target document created with
+`adq/pandoc-pdf-from-buffer'."
+  (interactive)
+  (if adq/pandoc-pdf-target-file
+      (call-process adq/opener nil 0 nil adq/pandoc-pdf-target-file)
+    (error "No target file. Make sure to run `adq/pandoc-pdf-from-buffer' first.")))
+
 (adq/compiler-command adq/pandoc-pdf-from-buffer
   "Compile markdown to PDF using Pandoc."
   "pandoc"
   (let ((out (concat it ".pdf")))
+    (setq-local adq/pandoc-pdf-target-file out)
     `(,out . (,@(if adq/pandoc-pdf-from-buffer-use-citeproc
                     '("--filter" "pandoc-citeproc") '())
               "-o" ,out "-f" "markdown"))))
@@ -77,7 +89,8 @@
   :init
   (add-hook 'markdown-mode-hook #'adq/markdown-setup)
   :bind (:map markdown-mode-map
-              ("C-c a a" . adq/pandoc-pdf-from-buffer))
+              ("C-c a a" . adq/pandoc-pdf-from-buffer)
+              ("C-c a o" . adq/pandoc-pdf-open-target))
   :config
   (setq markdown-bold-underscore t
         markdown-enable-math t
