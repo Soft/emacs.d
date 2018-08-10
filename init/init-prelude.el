@@ -187,12 +187,12 @@ compilers."
   arguments to COMMAND. BODY has access to the name of the input
   file without the file extension through `it' variable."
   (declare (indent defun))
-  (let* ((base-name (gensym))
-         (dir (gensym))
-         (result (gensym))
-         (proc (gensym))
-         (start-time (gensym))
-         (buffer (gensym)))
+  (let ((base-name (gensym))
+        (dir (gensym))
+        (result (gensym))
+        (proc (gensym))
+        (start-time (gensym))
+        (buffer (gensym)))
     `(defun ,name ()
        ,doc
        (interactive)
