@@ -22,6 +22,16 @@
        "pandoc-citeproc enabled"
      "pandoc-citeproc disabled")))
 
+(defun adq/pandoc-bibliography-present-p ()
+  "Check if Pandoc yaml metadata block contains bibliography
+  key."
+  (save-excursion
+    (goto-char (point-min))
+    (when-let ((start (re-search-forward (rx line-start "---" line-end) nil t))
+               (end (re-search-forward (rx line-start "..." line-end) nil t)))
+      (goto-char start)
+      (and (re-search-forward (rx line-start "bibliography: ") end t) t))))
+
 (defun adq/pandoc-pdf-open-target ()
   "Open target document created with
 `adq/pandoc-pdf-from-buffer'."
@@ -63,7 +73,9 @@
 (defun adq/markdown-setup ()
   (when (locate-library "pandoc-mode")
     (pandoc-mode 1))
-  (yas-minor-mode))
+  (yas-minor-mode)
+  (when (adq/pandoc-bibliography-present-p)
+    (setq-local adq/pandoc-pdf-from-buffer-use-citeproc t)))
 
 (define-skeleton adq/pandoc-skeleton-yaml-metadata
   "Insert Pandoc YAML metadata block template." nil
