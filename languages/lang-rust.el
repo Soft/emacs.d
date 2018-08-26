@@ -20,6 +20,8 @@
 
 (defun adq/rust-setup ()
   "Defaults for Rust."
+  (when (featurep 'flycheck)
+    (flycheck-rust-setup))
   (when (getenv "RUST_SRC_PATH")
     (racer-mode))
   (setq-local prettify-symbols-alist adq/rust-prettify-symbols-alist)
@@ -36,6 +38,10 @@
 (use-package cargo
   :defer t
   :ensure t)
+
+(use-package flycheck-rust
+  :ensure t
+  :defer t)
 
 (use-package rust-mode
   :ensure t
