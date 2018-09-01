@@ -7,6 +7,8 @@
 ;; Flycheck checker for finding internal links in markdown documents where the
 ;; link target does not exist.
 
+;; Additionally, patches `markdown-mode' to work with internal links.
+
 ;;; Code:
 
 (require 'markdown-mode)
@@ -42,11 +44,37 @@
                collect (cons (match-string-no-properties 1) (match-beginning 1))))))
 
 (defun markdown-internal-links-title-identifiers ()
-  "Return hash table with document identifers as keys."
+  "Return hash table with document identifers as keys and
+  position as values."
   (let ((hash (make-hash-table :test 'equal)))
     (dolist (title (markdown-internal-links-list-titles))
-      (puthash (markdown-internal-links-derive-identifier (car title)) t hash))
+      (puthash (markdown-internal-links-derive-identifier (car title)) (cdr title) hash))
     hash))
+
+;;;###autoload
+(defun markdown-internal-links-follow-link-at-point-wrapper (fn)
+  (interactive)
+  (if (markdown-link-p)
+      (let ((link (markdown-link-url)))
+        (if (string-prefix-p "#" link)
+            (if-let ((position
+                      (gethash (markdown-internal-links-derive-identifier
+                                (substring link 1))
+                               (markdown-internal-links-title-identifiers)
+                               nil)))
+                (goto-char position)
+              (error "Link target does not exist"))
+          (call-interactively fn)))
+    (error "No link at point")))
+
+;;;###autoload
+(defun markdown-internal-links-enable-follow-link-at-point ()
+  "Enable `markdown-follow-link-at-point' to follow internal
+  links."
+  (interactive)
+  (advice-add 'markdown-follow-link-at-point
+              :around
+              #'markdown-internal-links-follow-link-at-point-wrapper))
 
 ;;;###autoload
 (defun markdown-internal-links-check-links (checker callback)

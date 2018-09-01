@@ -49,28 +49,8 @@
                     '("--filter" "pandoc-citeproc") '())
               "-o" ,out "-f" "markdown"))))
 
-;; Patch markdown-mode link jumping to work with links internal to document
-
-(defun adq/markdown-jump-to-top-level-header (title)
-  (if-let ((location
-            (save-excursion
-              (goto-char (point-min))
-              (re-search-forward (concat "^#[[:space:]]*" (regexp-quote title) "$") nil t))))
-      (goto-char location)
-    (error "Target not found")))
-
-(defun adq/markdown-follow-link-at-point-wrap (fn)
-  (interactive)
-  (if (markdown-link-p)
-      (let ((link (markdown-link-url)))
-        (if (string-prefix-p "#" link)
-            (progn
-              (adq/markdown-jump-to-top-level-header (substring link 1))
-              (message "%s" link))
-          (call-interactively fn)))
-    (error "No link at point")))
-
 (defun adq/markdown-setup ()
+  (flycheck-mode 1)
   (when (locate-library "pandoc-mode")
     (pandoc-mode 1))
   (yas-minor-mode)
@@ -93,8 +73,8 @@
   > "..." \n \n _)
 
 (use-package markdown-internal-links
-  :after markdown-mode
-  :commands (markdown-internal-links-enable-checker))
+  :commands (markdown-internal-links-enable-checker
+             markdown-internal-links-enable-follow-link-at-point))
 
 (use-package markdown-mode
   :ensure t
@@ -108,14 +88,16 @@
               ("C-c a a" . adq/pandoc-pdf-from-buffer)
               ("C-c a o" . adq/pandoc-pdf-open-target))
   :config
+  (when (featurep 'flycheck)
+    (markdown-internal-links-enable-checker))
+  (markdown-internal-links-enable-follow-link-at-point)
   (setq markdown-bold-underscore t
         markdown-enable-math t
         markdown-command "pandoc")
   (cl-loop for i from 1 to 6
            do (set-face-attribute
                (intern (format "markdown-header-face-%d" i)) nil :height (+ 1.0 (/ 1.0 i))))
-  (set-face-attribute 'markdown-blockquote-face nil :slant 'italic)
-  (advice-add 'markdown-follow-link-at-point :around #'adq/markdown-follow-link-at-point-wrap))
+  (set-face-attribute 'markdown-blockquote-face nil :slant 'italic))
 
 (use-package pandoc-mode
   :if (adq/programs-p "pandoc")
