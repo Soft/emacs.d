@@ -50,6 +50,10 @@
   ;;   flycheck-command-map)
   )
 
+(use-package helm-flycheck
+  :ensure t
+  :bind (("C-x c !" . helm-flycheck)))
+
 (use-package wcheck-mode
   :if (adq/programs-p "enchant")
   :defer t

@@ -101,7 +101,6 @@
                             errors)))))
     (funcall callback 'finished errors)))
 
-;;;###autoload
 (flycheck-define-generic-checker 'markdown-internal-links
   "Checker for finding internal links with missing targets."
   :start #'markdown-internal-links-check-links
