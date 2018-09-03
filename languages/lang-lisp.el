@@ -7,7 +7,7 @@
 ;;; Code:
 
 (defun adq/ielm-setup ()
-  (hl-sexp-mode)
+  (highlight-blocks-mode)
   (rainbow-delimiters-mode))
 
 (use-package ielm 
@@ -31,9 +31,11 @@
   :ensure t
   :defer t)
 
-(use-package hl-sexp
+(use-package highlight-blocks
   :defer t
-  :ensure t)
+  :ensure t
+  :config
+  (setq highlight-blocks-max-innermost-block-count 1))
 
 (use-package paredit
   :defer t
@@ -51,7 +53,7 @@
 
 (defun adq/lisp-setup ()
   "Defaults for lisp-like modes"
-  (hl-sexp-mode)
+  (highlight-blocks-mode)
   (aggressive-indent-mode)
   (enable-paredit-mode)
   (evil-paredit-mode)
