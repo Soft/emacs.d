@@ -187,7 +187,8 @@ found."
   "Use yapf to format region or buffer.")
 
 (use-package python
-  :mode (("\\.py\\'" . python-mode))
+  :mode (("\\.py\\'" . python-mode)
+         ("/SConscript\\'" . python-mode))
   :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'adq/python-setup)
   :bind
