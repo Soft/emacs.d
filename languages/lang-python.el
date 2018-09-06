@@ -188,7 +188,8 @@ found."
 
 (use-package python
   :mode (("\\.py\\'" . python-mode)
-         ("/SConscript\\'" . python-mode))
+         ("/SConscript\\'" . python-mode)
+         ("/SConstruct\\'" . python-mode))
   :interpreter (("python" . python-mode))
   :init (add-hook 'python-mode-hook #'adq/python-setup)
   :bind
