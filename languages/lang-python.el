@@ -70,15 +70,14 @@ taking indentation into account when deciding when to break lines."
         (save-restriction
           (narrow-to-region start end)
           (goto-char (point-min))
-          (while (re-search-forward
-                  (rx (group line-start (1+ whitespace))) nil t)
-            (replace-match ""))
+          (adq/re-search-forward-replace
+           (rx (group line-start (1+ whitespace))) "")
           (let ((fill-column (- fill-column indent)))
             (fill-region (point-min) (point-max)))
           (goto-char (point-min))
-          (while (re-search-forward
-                  (rx (group line-start)) nil t)
-            (replace-match (make-string indent ? ))))
+          (adq/re-search-forward-replace
+           (rx (group line-start))
+           (make-string indent ? )))
       (error "No docstring at point"))))
 
 (defvar adq/pypi-address "https://pypi.org"

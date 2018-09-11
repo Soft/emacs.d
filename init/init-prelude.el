@@ -144,6 +144,18 @@ called without an argument to create the initial value."
         ((< value max) value)
         (t max)))
 
+(defun adq/re-search-forward-replace (regexp replacement &optional bound count)
+  "Search forward using regular expression REGEXP replacing
+matches with REPLACEMENT. BOUND sets the limit for the search."
+  (while (re-search-forward regexp bound t count)
+    (replace-match replacement)))
+
+(defun adq/re-search-backward-replace (regexp replacement &optional bound count)
+  "Search backwards using regular expression REGEXP replacing
+matches with REPLACEMENT. BOUND sets the limit for the search."
+  (while (re-search-backward regexp bound t count)
+    (replace-match replacement)))
+
 (defmacro adq/debug-message (message &rest args)
   "Similar to message but only produces output when `adq/emacs-debug'
 is non-nil."
