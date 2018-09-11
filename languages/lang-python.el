@@ -52,6 +52,35 @@
   "Insert Python doc comment." nil
   > "\"\"\"" _ "\"\"\"" \n)
 
+(defun adq/python-format-docstring-at-point ()
+  "Format Python docstring at point. Adjust the length of lines
+taking indentation into account when deciding when to break lines."
+  (interactive)
+  (save-excursion
+    (if-let ((quote-start (search-backward "\"\"\"" nil t))
+             (quote-end (search-forward "\"\"\"" nil t 2))
+             (line-start
+              (save-excursion
+                (goto-char quote-start)
+                (re-search-backward "^" nil t)
+                (point)))
+             (indent (- quote-start line-start))
+             (start (+ quote-start 3))
+             (end (- quote-end 3)))
+        (save-restriction
+          (narrow-to-region start end)
+          (goto-char (point-min))
+          (while (re-search-forward
+                  (rx (group line-start (1+ whitespace))) nil t)
+            (replace-match ""))
+          (let ((fill-column (- fill-column indent)))
+            (fill-region (point-min) (point-max)))
+          (goto-char (point-min))
+          (while (re-search-forward
+                  (rx (group line-start)) nil t)
+            (replace-match (make-string indent ? ))))
+      (error "No docstring at point"))))
+
 (defvar adq/pypi-address "https://pypi.org"
   "Python package index address.")
 
