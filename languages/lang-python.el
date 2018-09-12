@@ -15,6 +15,11 @@
   :ensure t
   :defer t)
 
+(use-package blacken
+  :if (adq/programs-p "black")
+  :ensure t
+  :defer t)
+
 (use-package anaconda-mode
   :ensure t
   :defer t)
