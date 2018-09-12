@@ -67,17 +67,20 @@ taking indentation into account when deciding when to break lines."
              (indent (- quote-start line-start))
              (start (+ quote-start 3))
              (end (- quote-end 3)))
-        (save-restriction
-          (narrow-to-region start end)
-          (goto-char (point-min))
-          (adq/re-search-forward-replace
-           (rx (group line-start (1+ whitespace))) "")
-          (let ((fill-column (- fill-column indent)))
-            (fill-region (point-min) (point-max)))
-          (goto-char (point-min))
-          (adq/re-search-forward-replace
-           (rx (group line-start))
-           (make-string indent ? )))
+        (progn
+          (save-restriction
+            (narrow-to-region start end)
+            (goto-char (point-min))
+            (adq/re-search-forward-replace
+             (rx (group line-start (1+ whitespace))) "")
+            (let ((fill-column (- fill-column (+ indent 1))))
+              (fill-region (point-min) (point-max)))
+            (goto-char (point-min))
+            (adq/re-search-forward-replace
+             (rx (group line-start))
+             (make-string indent ?\s)))
+          (delete-trailing-whitespace
+           quote-start quote-end))
       (error "No docstring at point"))))
 
 (defvar adq/pypi-address "https://pypi.org"
