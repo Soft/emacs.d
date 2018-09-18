@@ -41,6 +41,10 @@
   :defer t
   :ensure t)
 
+(use-package highlight-numbers
+  :defer t
+  :ensure t)
+
 (use-package paredit
   :defer t
   :diminish paredit-mode
@@ -59,6 +63,7 @@
   "Defaults for lisp-like modes"
   (highlight-blocks-mode)
   (highlight-quoted-mode)
+  (highlight-numbers-mode)
   (aggressive-indent-mode)
   (enable-paredit-mode)
   (evil-paredit-mode)
