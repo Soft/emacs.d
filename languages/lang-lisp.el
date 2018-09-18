@@ -37,6 +37,10 @@
   :config
   (setq highlight-blocks-max-innermost-block-count 1))
 
+(use-package highlight-quoted
+  :defer t
+  :ensure t)
+
 (use-package paredit
   :defer t
   :diminish paredit-mode
@@ -54,6 +58,7 @@
 (defun adq/lisp-setup ()
   "Defaults for lisp-like modes"
   (highlight-blocks-mode)
+  (highlight-quoted-mode)
   (aggressive-indent-mode)
   (enable-paredit-mode)
   (evil-paredit-mode)
