@@ -129,7 +129,7 @@ buffers."
   ("1" delete-other-windows)
   ("2" split-window-below)
   ("3" split-window-right)
-  ("w" adq/swap-with-largest))
+  ("w" adq/swap-with-largest :exit t))
 
 (bind-key "C-c w" #'adq/hydra-manage-windows/body)
 
