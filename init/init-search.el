@@ -173,7 +173,9 @@ supplied the tags file is visited once it has been generated."
     (interactive)
     (helm :sources #'adq/helm-fd-source
           :prompt "fd: "
-          :buffer "*fd*")))
+          :buffer "*fd*"))
+
+  (bind-key "C-x c d" #'adq/helm-fd))
 
 (provide 'init-search)
 
