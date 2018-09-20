@@ -135,6 +135,46 @@ supplied the tags file is visited once it has been generated."
          ("K" . evil-scroll-up)
          ("<escape>" . quit-window)))
 
+(adq/after-load 'helm
+  (defvar adq/helm-fd-directory (expand-file-name "~")
+    "Current base directory.")
+
+  (defun adq/helm-fd-transformer (candidates _source)
+    "Candidate transformer for `adq/helm-fd'."
+    (cl-loop for candidate in candidates
+             when (stringp candidate)
+             collect
+             (let ((dir
+                    (string-remove-prefix adq/helm-fd-directory
+                                          (file-name-directory candidate)))
+                   (filename (file-name-nondirectory candidate)))
+               (cons (if dir (concat (propertize dir 'face 'font-lock-comment-face)
+                                     (propertize filename 'face 'font-lock-type-face))
+                       (propertize filename 'face 'font-lock-type-face))
+                     candidate))))
+
+  (defvar adq/helm-fd-source
+    (helm-build-async-source "fd"
+      :candidates-process
+      (lambda ()
+        (start-process "fd" nil "fd" "--color" "never"
+                       helm-pattern
+                       adq/helm-fd-directory))
+      :header-name
+      (lambda (name)
+        (format "%s in %s" name adq/helm-fd-directory))
+      :requires-pattern 3
+      :action '(("Find file" . find-file))
+      :filtered-candidate-transformer #'adq/helm-fd-transformer)
+    "Source for searching files with fd.")
+
+  (defun adq/helm-fd ()
+    "Find file with fd."
+    (interactive)
+    (helm :sources #'adq/helm-fd-source
+          :prompt "fd: "
+          :buffer "*fd*")))
+
 (provide 'init-search)
 
 ;;; init-search.el ends here
