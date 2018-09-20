@@ -168,9 +168,12 @@ supplied the tags file is visited once it has been generated."
       :filtered-candidate-transformer #'adq/helm-fd-transformer)
     "Source for searching files with fd.")
 
-  (defun adq/helm-fd ()
+  (defun adq/helm-fd (d)
     "Find file with fd."
-    (interactive)
+    (interactive "P")
+    (setq adq/helm-fd-directory
+          (if d (read-directory-name default-directory)
+            (expand-file-name "~")))
     (helm :sources #'adq/helm-fd-source
           :prompt "fd: "
           :buffer "*fd*"))
