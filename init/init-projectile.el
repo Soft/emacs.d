@@ -50,6 +50,7 @@
 
 (use-package projectile
   :ensure t
+  :bind (("C-c C-p" . projectile-command-map))
   :init (projectile-global-mode)
   :config
   (setq
