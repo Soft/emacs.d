@@ -157,7 +157,7 @@ supplied the tags file is visited once it has been generated."
     (helm-build-async-source "fd"
       :candidates-process
       (lambda ()
-        (start-process "fd" nil "fd" "--follow" "--color" "never"
+        (start-process "fd" nil "fd" "--follow" "--color" "never" "--"
                        helm-pattern
                        adq/helm-fd-directory))
       :header-name
