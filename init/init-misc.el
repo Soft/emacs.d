@@ -20,13 +20,17 @@
     (error "No file to open")))
 
 (use-package xkcd
-  :commands (xkcd-rand)
-  :defer t
   :ensure t
+  :commands (xkcd-rand xkcd-get-latest xkcd-get)
+  :defer t
   :preface
   (add-to-list 'recentf-exclude
                "\\.emacs\\.d/xkcd/")
-  :bind (("C-c x X" . xkcd-rand))
+  :init
+  (bind-key
+   "C-c x X"
+   (adq/switch-command (xkcd-get-latest)
+                       (xkcd-rand)))
   :config
   (bind-keys
    :map xkcd-mode-map
@@ -34,7 +38,12 @@
    ("l" . xkcd-next)
    ("k" . xkcd-prev)
    ("j" . xkcd-next)
+   ("g" . xkcd-rand)
    ("q" . xkcd-kill-buffer)
+   ("<" . (lambda ()
+            (interactive)
+            (xkcd-get 1)))
+   (">" . xkcd-get-latest)
    ("<escape>" . xkcd-kill-buffer)))
 
 ;; FIXME: Telephone-line compatability
