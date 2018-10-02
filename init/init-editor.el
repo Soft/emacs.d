@@ -191,6 +191,11 @@
   (gll-guess-language-lite-mode)
   (wc-mode))
 
+(use-package which-func
+  :bind (("C-c x w" . which-function-mode))
+  :config
+  (setq which-func-unknown "-"))
+
 (use-package text-mode
   :defer t
   :init

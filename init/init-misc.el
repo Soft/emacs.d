@@ -60,7 +60,7 @@
 (use-package sunshine
   :defer t
   :ensure t
-  :bind (("C-c x w" . sunshine-forecast))
+  :bind (("C-c x f" . sunshine-forecast))
   :config
   (setq sunshine-units 'metric
         sunshine-show-icons t))
