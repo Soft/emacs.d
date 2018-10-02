@@ -119,6 +119,10 @@ if universal argument is supplied."
   :ensure t
   :bind  (("C-x c M" . helm-bm)))
 
+(use-package helm-fd
+  :commands (helm-fd)
+  :bind (("C-x c d" . helm-fd)))
+
 (provide 'init-helm)
 
 ;;; init-helm.el ends here
