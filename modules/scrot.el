@@ -57,7 +57,7 @@
              (?q "Quality" "--quality " read-number)
              (?e "Execute" "--exec ")
              (?t "Thumbnail" "--thumb " read-number))
-  :actions '((?c "Fullscreen" scrot-full-screen)
+  :actions '((?\r "Fullscreen" scrot-full-screen)
              (?s "Selection" scrot-select-window)
              (?f "Focused" scrot-focused-window)))
 
