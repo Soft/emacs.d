@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Utilities for taking screenshots using scrot
+;; Magit-style interface for taking screenshots with scrot.
 
 ;;; Code:
 
@@ -26,9 +26,9 @@ arguments."
    :sentinel
    (lambda (process _event)
      (when (eq (process-status process) 'exit)
-       (if (eq (process-exit-status process) 0)
-           (message "Screenshot saved %s" file)
-         (error "Taking screenshot failed"))))))
+       (pcase (process-exit-status process)
+         (`0 (message "Screenshot saved %s" file))
+         (n (error "Taking screenshot failed (exit code: %d)" n)))))))
 
 (defun scrot-fullscreen (file &optional args)
   "Take screenshot of the entire screen."
