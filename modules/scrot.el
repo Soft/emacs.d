@@ -14,6 +14,8 @@
   "Scrot command")
 
 (defun scrot-exec (file &optional args)
+  "Execute scrot with `file' as output path and `args' as
+arguments."
   (make-process
    :name "scrot"
    :command (append
