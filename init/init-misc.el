@@ -103,7 +103,7 @@ direction if universal argument is supplied."
 
 (use-package google-this
   :ensure t
-  :bind-keymap (("C-c x S" . google-this-mode-submap)))
+  :bind-keymap (("C-c x g" . google-this-mode-submap)))
 
 (defun adq/nov-mode-setup ()
   (setq-local shr-width 80)
@@ -213,6 +213,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
 (use-package wikipedia-peek
   :bind (("C-c x W" . wikipedia-peek))
   :commands (wikipedia-peek))
+
+(use-package scrot
+  :bind (("C-c x S" . scrot))
+  :commands (scrot))
 
 (provide 'init-misc)
 
