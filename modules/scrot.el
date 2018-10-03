@@ -61,7 +61,8 @@ arguments."
              (?t "Thumbnail" "--thumb " read-number))
   :actions '((?\r "Fullscreen" scrot-fullscreen)
              (?s "Selection" scrot-select-window)
-             (?f "Focused" scrot-focused-window)))
+             (?f "Focused" scrot-focused-window))
+  :default-action scrot-fullscreen)
 
 (provide 'scrot)
 ;;; scrot.el ends here
