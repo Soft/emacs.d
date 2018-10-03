@@ -13,6 +13,9 @@
 (defvar helm-fd-directory (expand-file-name "~")
   "Current base directory.")
 
+(defvar helm-fd-command "fd"
+  "Command that helm-fd will use.")
+
 (defun helm-fd-transformer (candidates _source)
   "Candidate transformer for `helm-fd'."
   (cl-loop for candidate in candidates
@@ -31,7 +34,8 @@
   (helm-build-async-source "fd"
     :candidates-process
     (lambda ()
-      (start-process "fd" nil "fd" "--follow" "--color" "never" "--"
+      (start-process "fd" nil helm-fd-command
+                     "--follow" "--color" "never" "--"
                      helm-pattern
                      helm-fd-directory))
     :header-name
@@ -42,6 +46,7 @@
     :filtered-candidate-transformer #'helm-fd-transformer)
   "Source for searching files with fd.")
 
+;;;###autoload
 (defun helm-fd (d)
   "Find files with fd."
   (interactive "P")
