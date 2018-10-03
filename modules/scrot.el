@@ -31,19 +31,19 @@
 (defun scrot-full-screen (file &optional args)
   "Take screenshot of the entire screen."
   (interactive
-   (list (read-file-name "Output file: " nil nil nil nil)
+   (list (read-file-name "Output file: ")
          (scrot-arguments)))
   (scrot-exec file args))
 
 (defun scrot-select-window (file &optional args)
   "Take screenshot of selected area."
-  (interactive (list (read-file-name "Output file: " nil nil nil nil)
+  (interactive (list (read-file-name "Output file: ")
                      (scrot-arguments)))
   (scrot-exec file (cons "--select" args)))
 
 (defun scrot-focused-window (file &optional args)
   "Take screenshot of focused window."
-  (interactive (list (read-file-name "Output file: " nil nil nil nil)
+  (interactive (list (read-file-name "Output file: ")
                      (scrot-arguments)))
   (scrot-exec file (cons "--focused" args)))
 
