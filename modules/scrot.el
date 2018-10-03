@@ -28,7 +28,7 @@
            (message "Screenshot saved %s" file)
          (error "Taking screenshot failed"))))))
 
-(defun scrot-full-screen (file &optional args)
+(defun scrot-fullscreen (file &optional args)
   "Take screenshot of the entire screen."
   (interactive
    (list (read-file-name "Output file: ")
@@ -57,7 +57,7 @@
              (?q "Quality" "--quality " read-number)
              (?e "Execute" "--exec ")
              (?t "Thumbnail" "--thumb " read-number))
-  :actions '((?\r "Fullscreen" scrot-full-screen)
+  :actions '((?\r "Fullscreen" scrot-fullscreen)
              (?s "Selection" scrot-select-window)
              (?f "Focused" scrot-focused-window)))
 
