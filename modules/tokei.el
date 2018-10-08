@@ -15,12 +15,18 @@
 
 (defvar-local tokei-paths '())
 
+(defvar tokei-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "g") #'tokei-mode-refresh)
+    map)
+  "Keymap for tokei-mode.")
+
 (defun tokei-exec (paths callback &rest args)
-  "Execute tokei at `path` calling callback with the result."
+  "Execute tokei with `paths` calling callback with the result."
   (let* ((root (string-join paths " "))
-         (buffer (generate-new-buffer (format "*execute: tokei %s*" root))))
+         (buffer (generate-new-buffer (format "task: tokei %s*" root))))
     (make-process
-     :name (format "tokei %s" root)
+     :name (format "task: tokei %s" root)
      :buffer buffer
      :noquery t
      :command (append (list tokei-command
@@ -43,36 +49,58 @@
                           (format "Tokei returned an error (exit code: %d)" n)))))
          (kill-buffer buffer))))))
 
+(defun tokei-make-entry (lang files lines code comments blanks)
+  "Make tokei entry."
+  (list lang
+        (vector lang
+                (number-to-string files)
+                (number-to-string lines)
+                (number-to-string code)
+                (number-to-string comments)
+                (number-to-string blanks))))
+
 (defun tokei-mode-refresh ()
   "Refresh `tokei-mode' buffer contents."
+  (interactive)
   (tokei-exec
    tokei-paths
    (lambda (statistics buffer)
-     (with-current-buffer buffer
-       (setq tabulated-list-entries
-             (cl-loop for (lang . data) in statistics
-                      collect
-                      (list
-                       lang
-                       (vector
-                        lang
-                        (number-to-string
-                         (length (cdr (assoc "stats" data))))
-                        (number-to-string
-                         (cdr (assoc "lines" data)))
-                        (number-to-string
-                         (cdr (assoc "code" data)))
-                        (number-to-string
-                         (cdr (assoc "comments" data)))
-                        (number-to-string
-                         (cdr (assoc "blanks" data)))))))
-       (tabulated-list-print t)))
+     (when (buffer-live-p buffer)
+       (with-current-buffer buffer
+         (setq tabulated-list-entries
+               (cl-loop for (lang . data) in statistics
+                        for files = (length (cdr (assoc "stats" data)))
+                        for lines = (cdr (assoc "lines" data))
+                        for code = (cdr (assoc "code" data))
+                        for comments = (cdr (assoc "comments" data))
+                        for blanks = (cdr (assoc "blanks" data))
+                        summing files into total-files
+                        summing lines into total-lines
+                        summing code into total-code
+                        summing comments into total-comments
+                        summing blanks into total-blanks
+                        collect
+                        (tokei-make-entry lang files lines code comments blanks)
+                        into entries
+                        finally return
+                        (append
+                         entries
+                         (list (tokei-make-entry
+                                "Total"
+                                total-files
+                                total-lines
+                                total-code
+                                total-comments
+                                total-blanks)))))
+         (tabulated-list-print t))))
    (current-buffer)))
 
 (define-derived-mode tokei-mode tabulated-list-mode "Tokei"
-  "Major mode for displaying Tokei statistics."
+  "Major mode for displaying Tokei statistics.
+
+\\{tokei-mode-map}"
   (setq tabulated-list-format
-        '[("Language" 30)
+        '[("Language" 40)
           ("Files" 10 nil :right-align t)
           ("Lines" 10 nil :right-align t)
           ("Code" 10 nil :right-align t)
