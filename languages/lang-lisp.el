@@ -86,6 +86,21 @@
       (pp (-sort #'string< (read (delete-and-extract-region from to)))
           (current-buffer)))))
 
+(defvar adq/emacs-lisp-scratch-name "*elisp scratch*"
+  "Emacs lisp scratch buffer name.")
+
+(defun adq/emacs-lisp-scratch (d)
+  "Switch to scratch buffer for evaluating Emacs lisp. If the
+buffer does not exist it is created. If universal argument is
+supplied, new buffer is always created."
+  (interactive "P")
+  (with-current-buffer
+      (if d (generate-new-buffer adq/emacs-lisp-scratch-name)
+        (get-buffer-create adq/emacs-lisp-scratch-name))
+    (unless (eq major-mode 'lisp-interaction-mode)
+      (lisp-interaction-mode))
+    (pop-to-buffer (current-buffer))))
+
 (use-package package-lint
   :ensure t
   :defer t)
