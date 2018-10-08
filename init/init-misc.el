@@ -218,6 +218,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :bind (("C-c x S" . scrot))
   :commands (scrot))
 
+(use-package tokei
+  :bind (("C-c x T" . tokei))
+  :commands (tokei))
+
 (provide 'init-misc)
 
 ;;; init-misc.el ends here
