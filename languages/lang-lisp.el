@@ -11,7 +11,7 @@
   (rainbow-delimiters-mode))
 
 (use-package ielm 
-  :bind (("C-c i" . ielm))
+  :defer t
   :init
   (setq ielm-prompt "λ> "
         ielm-noisy nil)
@@ -101,6 +101,15 @@ supplied, new buffer is always created."
       (lisp-interaction-mode))
     (pop-to-buffer (current-buffer))))
 
+(defun adq/ielm-or-scratch (d)
+  "Switch to IELM or Emacs lisp scratch buffer if universal
+argument is supplied."
+  (interactive "P")
+  (if d (adq/emacs-lisp-scratch nil)
+    (ielm)))
+
+(bind-key "C-c i" #'adq/ielm-or-scratch)
+
 (use-package package-lint
   :ensure t
   :defer t)
@@ -116,21 +125,39 @@ supplied, new buffer is always created."
 (use-package elisp-mode
   :defer t
   :bind
-  (:map emacs-lisp-mode-map
-        ("C-c a =" . adq/elisp-format-region-or-buffer)
+  (:map
+   emacs-lisp-mode-map
+   ("C-c a =" . adq/elisp-format-region-or-buffer)
 
-        ("C-c a m" . macrostep-expand)
+   ("C-c a m" . macrostep-expand)
 
-        ("C-c a r" . eval-region)
-        ("C-c a b" . eval-buffer)
-        ("C-c a f" . eval-defun)
-        ("C-c a e" . adq/eval-and-replace-region)
+   ("C-c a r" . eval-region)
+   ("C-c a b" . eval-buffer)
+   ("C-c a f" . eval-defun)
+   ("C-c a e" . adq/eval-and-replace-region)
 
-        ("C-c a s f" . elisp-refs-function)
-        ("C-c a s m" . elisp-refs-macro)
-        ("C-c a s v" . elisp-refs-variable)
-        ("C-c a s s" . elisp-refs-symbol)
-        ("C-c a s S" . elisp-refs-special))
+   ("C-c a s f" . elisp-refs-function)
+   ("C-c a s m" . elisp-refs-macro)
+   ("C-c a s v" . elisp-refs-variable)
+   ("C-c a s s" . elisp-refs-symbol)
+   ("C-c a s S" . elisp-refs-special)
+   :map
+   lisp-interaction-mode-map
+   ("C-<return>" . eval-print-last-sexp)
+   ("C-c a =" . adq/elisp-format-region-or-buffer)
+
+   ("C-c a m" . macrostep-expand)
+
+   ("C-c a r" . eval-region)
+   ("C-c a b" . eval-buffer)
+   ("C-c a f" . eval-defun)
+   ("C-c a e" . adq/eval-and-replace-region)
+
+   ("C-c a s f" . elisp-refs-function)
+   ("C-c a s m" . elisp-refs-macro)
+   ("C-c a s v" . elisp-refs-variable)
+   ("C-c a s s" . elisp-refs-symbol)
+   ("C-c a s S" . elisp-refs-special))
   :init
   (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup))
 
