@@ -62,7 +62,7 @@ arguments."
   :actions '((?\r "Fullscreen" scrot-fullscreen)
              (?s "Selection" scrot-select-window)
              (?f "Focused" scrot-focused-window))
-  :default-action scrot-fullscreen)
+  :default-action 'scrot-fullscreen)
 
 (provide 'scrot)
 ;;; scrot.el ends here
