@@ -108,6 +108,7 @@
           ("Code" 10 nil :right-align t)
           ("Comments" 10 nil :right-align t)
           ("Blanks" 10 nil :right-align t)])
+  (setq-local tokei-paths (project-roots (project-current t)))
   (tabulated-list-init-header)
   (tokei-mode-refresh))
 
@@ -120,10 +121,9 @@
                   (format "*tokei %s*"
                           (string-join roots " ")))))
     (with-current-buffer buffer
-      (setq-local tokei-paths roots)
-      (if (eq major-mode 'tokei-mode)
-          (tokei-mode-refresh)
-        (tokei-mode)))
+      (unless (eq major-mode 'tokei-mode)
+        (tokei-mode))
+      (tokei-mode-refresh))
     (pop-to-buffer buffer)))
 
 (provide 'tokei)
