@@ -19,10 +19,10 @@
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "g") #'tokei-mode-refresh)
     map)
-  "Keymap for tokei-mode.")
+  "Keymap for `tokei-mode'.")
 
 (defun tokei-exec (paths callback &rest args)
-  "Execute tokei with `paths` calling callback with the result."
+  "Execute tokei with `paths' calling `callback' with the result."
   (let* ((root (string-join paths " "))
          (buffer (generate-new-buffer (format "task: tokei %s*" root))))
     (make-process
@@ -62,6 +62,8 @@
 (defun tokei-mode-refresh ()
   "Refresh `tokei-mode' buffer contents."
   (interactive)
+  (unless tokei-paths
+    (error "`tokei-paths' is not set."))
   (tokei-exec
    tokei-paths
    (lambda (statistics buffer)
@@ -79,7 +81,7 @@
                         summing code into total-code
                         summing comments into total-comments
                         summing blanks into total-blanks
-                        collect
+                        collecting
                         (tokei-make-entry lang files lines code comments blanks)
                         into entries
                         finally return
