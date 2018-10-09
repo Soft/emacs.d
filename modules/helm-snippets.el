@@ -1,6 +1,6 @@
 ;; helm-snippets.el --- Library for creating Helm prompts for inserting snippets  -*- lexical-binding: t -*-
 
-;; Package-Requires: ((emacs "26.1") ("helm"))
+;; Package-Requires: ((emacs "26.1") (helm))
 
 ;;; Commentary:
 
