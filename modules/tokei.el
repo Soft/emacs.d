@@ -120,17 +120,27 @@
          (tabulated-list-print t))))
    (current-buffer)))
 
+(defun tokei-make-number-comparer (col)
+  (lambda (a b)
+    (> (string-to-number (elt (cadr a) col) 10)
+       (string-to-number (elt (cadr b) col) 10))))
+
+(defun tokei-make-string-comparer (col)
+  (lambda (a b)
+    (string-greaterp (elt (cadr a) col)
+                     (elt (cadr b) col))))
+
 (define-derived-mode tokei-mode tabulated-list-mode "Tokei"
   "Major mode for displaying source code statistics using Tokei.
 
 \\{tokei-mode-map}"
   (setq tabulated-list-format
-        '[("Language" 40)
-          ("Files" 10 nil :right-align t)
-          ("Lines" 10 nil :right-align t)
-          ("Code" 10 nil :right-align t)
-          ("Comments" 10 nil :right-align t)
-          ("Blanks" 10 nil :right-align t)])
+        `[("Language" 40 ,(tokei-make-string-comparer 0))
+          ("Files" 10 ,(tokei-make-number-comparer 1) :right-align t)
+          ("Lines" 10 ,(tokei-make-number-comparer 2) :right-align t)
+          ("Code" 10 ,(tokei-make-number-comparer 3) :right-align t)
+          ("Comments" 10 ,(tokei-make-number-comparer 4) :right-align t)
+          ("Blanks" 10 ,(tokei-make-number-comparer 5) :right-align t)])
   (setq-local tokei-paths tokei-roots)
   (tabulated-list-init-header)
   (tokei-mode-refresh))
