@@ -66,4 +66,4 @@
   "🞼" "🞽" "🞾" "🞿" "✳" "❊" "❋" "✺" "∗" "⊛" "❇" "❈" "❄" "❅" "❆" "✿" "❀" "❁" "✾")
 
 (provide 'helm-snippets)
-;;; tokei.el ends here
+;;; helm-snippets.el ends here
