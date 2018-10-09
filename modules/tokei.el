@@ -103,11 +103,12 @@
                         summing comments into total-comments
                         summing blanks into total-blanks
                         collecting
-                        (tokei-make-entry lang files lines code comments blanks)
+                        (list lang files lines code comments blanks)
                         into entries
                         finally return
                         (append
-                         entries
+                         (mapcar (apply-partially #'apply #'tokei-make-entry)
+                                 (cl-stable-sort entries #'> :key #'caddr)) 
                          (list (tokei-make-entry
                                 "Total"
                                 total-files
@@ -120,7 +121,7 @@
    (current-buffer)))
 
 (define-derived-mode tokei-mode tabulated-list-mode "Tokei"
-  "Major mode for displaying Tokei statistics.
+  "Major mode for displaying source code statistics using Tokei.
 
 \\{tokei-mode-map}"
   (setq tabulated-list-format
