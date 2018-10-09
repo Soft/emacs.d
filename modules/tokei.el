@@ -121,11 +121,13 @@
    (current-buffer)))
 
 (defun tokei-make-number-comparer (col)
+  "Make function that compares numerical strings in column `col'."
   (lambda (a b)
     (> (string-to-number (elt (cadr a) col) 10)
        (string-to-number (elt (cadr b) col) 10))))
 
 (defun tokei-make-string-comparer (col)
+  "Make function that compares strings in column `col'."
   (lambda (a b)
     (string-greaterp (elt (cadr a) col)
                      (elt (cadr b) col))))
@@ -150,7 +152,7 @@
   "Display code statistics about current project."
   (interactive)
   (unless (tokei-supported-p)
-    (error "tokei is not available or does not seem to support JSON output format."))
+    (error "tokei is not available or it does not support JSON output format."))
   (let* ((roots (project-roots (project-current t)))
          (buffer (get-buffer-create
                   (format "*tokei %s*"
