@@ -125,8 +125,9 @@ if universal argument is supplied."
 
 (use-package helm-snippets
   :functions (helm-snippets-define)
-  :commands (helm-snippets-arrow)
-  :bind (("C-x 8 A" . helm-snippets-arrow)))
+  :commands (helm-snippets-arrow helm-snippets-star)
+  :bind (("C-x 8 A" . helm-snippets-arrow)
+         ("C-x 8 s" . helm-snippets-star)))
 
 (provide 'init-helm)
 
