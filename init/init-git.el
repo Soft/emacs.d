@@ -25,7 +25,9 @@ staged changes."
   :config
   (bind-keys
    :map magit-popup-mode-map
-   ("<escape>" . magit-popup-quit)))
+   ("<escape>" . magit-popup-quit)
+   :map magit-status-mode-map
+   ("<escape>" . magit-mode-bury-buffer)))
 
 (use-package magithub
   :after magit
