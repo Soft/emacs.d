@@ -42,14 +42,15 @@
 (defun tokei-exec (paths callback &rest args)
   "Execute tokei with `paths' calling `callback' with the result."
   (let* ((root (string-join paths " "))
-         (buffer (generate-new-buffer (format "task: tokei %s*" root))))
+         (buffer (generate-new-buffer (format "task: tokei %s*" root)))
+         (command (append (list tokei-command
+                                "--output" "json" "--")
+                          paths)))
     (make-process
      :name (format "task: tokei %s" root)
      :buffer buffer
      :noquery t
-     :command (append (list tokei-command
-                            "--output" "json" "--")
-                      paths)
+     :command command
      :sentinel
      (lambda (process _event)
        (unwind-protect
@@ -153,7 +154,7 @@
   (interactive)
   (unless (tokei-supported-p)
     (error "tokei is not available or it does not support JSON output format."))
-  (let* ((roots (project-roots (project-current t)))
+  (let* ((roots (mapcar #'expand-file-name (project-roots (project-current t))))
          (buffer (get-buffer-create
                   (format "*tokei %s*"
                           (string-join roots " ")))))
