@@ -1,25 +1,43 @@
-;; tokei.el --- Code Statistics  -*- lexical-binding: t -*-
+;; tokei.el --- Display Source Code Statistics  -*- lexical-binding: t -*-
 
 ;; Package-Requires: ((emacs "26.1"))
 
 ;;; Commentary:
 
-;; Display code statistics using tokei.
+;; Display source code statistics using tokei.
 
 ;;; Code:
 
 (require 'tabulated-list)
 
+(defgroup tokei nil
+  "Major mode for displaying source code statistics using Tokei."
+  :group 'tools
+  :prefix "tokei-")
+
 (defvar tokei-command "tokei"
   "Tokei command.")
 
-(defvar-local tokei-paths '())
+(defvar tokei-roots '())
+
+(defvar tokei-paths '())
+
+(defface tokei-totals
+  '((t (:inherit bold)))
+  "Face for totals."
+  :group 'tokei)
 
 (defvar tokei-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "g") #'tokei-mode-refresh)
+    (define-key map (kbd "q") #'kill-buffer)
     map)
   "Keymap for `tokei-mode'.")
+
+(defun tokei-supported-p ()
+  "Returns t if tokei is available and supports JSON output."
+  (and (executable-find tokei-command)
+       (eq (call-process tokei-command nil nil nil "--output" "json" "/dev/null") 0)))
 
 (defun tokei-exec (paths callback &rest args)
   "Execute tokei with `paths' calling `callback' with the result."
@@ -49,15 +67,18 @@
                           (format "Tokei returned an error (exit code: %d)" n)))))
          (kill-buffer buffer))))))
 
-(defun tokei-make-entry (lang files lines code comments blanks)
+(defun tokei-make-entry (lang files lines code comments blanks &optional face)
   "Make tokei entry."
   (list lang
-        (vector lang
-                (number-to-string files)
-                (number-to-string lines)
-                (number-to-string code)
-                (number-to-string comments)
-                (number-to-string blanks))))
+        (cl-map 'vector (if face
+                            (lambda (str) (propertize str 'face face))
+                          #'identity)
+                (vector lang
+                        (number-to-string files)
+                        (number-to-string lines)
+                        (number-to-string code)
+                        (number-to-string comments)
+                        (number-to-string blanks)))))
 
 (defun tokei-mode-refresh ()
   "Refresh `tokei-mode' buffer contents."
@@ -82,33 +103,47 @@
                         summing comments into total-comments
                         summing blanks into total-blanks
                         collecting
-                        (tokei-make-entry lang files lines code comments blanks)
+                        (list lang files lines code comments blanks)
                         into entries
                         finally return
                         (append
-                         entries
+                         (mapcar (apply-partially #'apply #'tokei-make-entry)
+                                 (cl-stable-sort entries #'> :key #'caddr)) 
                          (list (tokei-make-entry
                                 "Total"
                                 total-files
                                 total-lines
                                 total-code
                                 total-comments
-                                total-blanks)))))
+                                total-blanks
+                                'tokei-totals)))))
          (tabulated-list-print t))))
    (current-buffer)))
 
+(defun tokei-make-number-comparer (col)
+  "Make function that compares numerical strings in column `col'."
+  (lambda (a b)
+    (> (string-to-number (elt (cadr a) col) 10)
+       (string-to-number (elt (cadr b) col) 10))))
+
+(defun tokei-make-string-comparer (col)
+  "Make function that compares strings in column `col'."
+  (lambda (a b)
+    (string-greaterp (elt (cadr a) col)
+                     (elt (cadr b) col))))
+
 (define-derived-mode tokei-mode tabulated-list-mode "Tokei"
-  "Major mode for displaying Tokei statistics.
+  "Major mode for displaying source code statistics using Tokei.
 
 \\{tokei-mode-map}"
   (setq tabulated-list-format
-        '[("Language" 40)
-          ("Files" 10 nil :right-align t)
-          ("Lines" 10 nil :right-align t)
-          ("Code" 10 nil :right-align t)
-          ("Comments" 10 nil :right-align t)
-          ("Blanks" 10 nil :right-align t)])
-  (setq-local tokei-paths (project-roots (project-current t)))
+        `[("Language" 40 ,(tokei-make-string-comparer 0))
+          ("Files" 10 ,(tokei-make-number-comparer 1) :right-align t)
+          ("Lines" 10 ,(tokei-make-number-comparer 2) :right-align t)
+          ("Code" 10 ,(tokei-make-number-comparer 3) :right-align t)
+          ("Comments" 10 ,(tokei-make-number-comparer 4) :right-align t)
+          ("Blanks" 10 ,(tokei-make-number-comparer 5) :right-align t)])
+  (setq-local tokei-paths tokei-roots)
   (tabulated-list-init-header)
   (tokei-mode-refresh))
 
@@ -116,13 +151,16 @@
 (defun tokei ()
   "Display code statistics about current project."
   (interactive)
+  (unless (tokei-supported-p)
+    (error "tokei is not available or it does not support JSON output format."))
   (let* ((roots (project-roots (project-current t)))
          (buffer (get-buffer-create
                   (format "*tokei %s*"
                           (string-join roots " ")))))
     (with-current-buffer buffer
       (unless (eq major-mode 'tokei-mode)
-        (tokei-mode))
+        (let ((tokei-roots roots))
+          (tokei-mode)))
       (tokei-mode-refresh))
     (pop-to-buffer buffer)))
 

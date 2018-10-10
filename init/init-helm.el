@@ -123,6 +123,12 @@ if universal argument is supplied."
   :commands (helm-fd)
   :bind (("C-x c d" . helm-fd)))
 
+(use-package helm-snippets
+  :functions (helm-snippets-define)
+  :commands (helm-snippets-arrow helm-snippets-star)
+  :bind (("C-x 8 A" . helm-snippets-arrow)
+         ("C-x 8 s" . helm-snippets-star)))
+
 (provide 'init-helm)
 
 ;;; init-helm.el ends here

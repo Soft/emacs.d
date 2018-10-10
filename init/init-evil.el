@@ -39,6 +39,7 @@
     sunshine-mode
     term-mode
     tetris-mode
+    tokei-mode
     weechat-mode
     xkcd-mode
     deadgrep-mode
