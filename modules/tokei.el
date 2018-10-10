@@ -6,6 +6,11 @@
 
 ;; Display source code statistics using tokei.
 
+;; Tokei needs to be installed with support for json output
+
+;; To install tokei using cargo:
+;; cargo install tokei --features json
+
 ;;; Code:
 
 (require 'tabulated-list)
@@ -44,7 +49,7 @@
     map)
   "Keymap for `tokei-mode'.")
 
-(defun tokei-supported-p ()
+(defun tokei-available-p ()
   "Returns t if tokei is available and supports JSON output."
   (and (executable-find tokei-command)
        (eq (call-process tokei-command nil nil nil "--output" "json" "/dev/null") 0)))
@@ -171,7 +176,7 @@
 (defun tokei ()
   "Display code statistics about current project."
   (interactive)
-  (unless (tokei-supported-p)
+  (unless (tokei-available-p)
     (error "tokei is not available or it does not support JSON output format."))
   (let* ((roots (mapcar #'expand-file-name (project-roots (project-current t))))
          (buffer (get-buffer-create
