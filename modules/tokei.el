@@ -22,9 +22,19 @@
 
 (defvar tokei-paths '())
 
-(defface tokei-totals
-  '((t (:inherit bold)))
+(defface tokei-totals-face
+  '((t :inherit bold))
   "Face for totals."
+  :group 'tokei)
+
+(defface tokei-language-face
+  '((t :inherit font-lock-builtin-face))
+  "Face for language names."
+  :group 'tokei)
+
+(defface tokei-number-face
+  '((t :inherit font-lock-string-face))
+  "Face for numbers."
   :group 'tokei)
 
 (defvar tokei-mode-map
@@ -68,18 +78,20 @@
                           (format "Tokei returned an error (exit code: %d)" n)))))
          (kill-buffer buffer))))))
 
-(defun tokei-make-entry (lang files lines code comments blanks &optional face)
+(defun tokei-propertize (value &optional fn)
+  (if (consp value)
+      (propertize (funcall (or fn #'identity) (car value)) 'face (cdr value))
+    (funcall (or fn #'identity) value)))
+
+(defun tokei-make-entry (lang files lines code comments blanks)
   "Make tokei entry."
   (list lang
-        (cl-map 'vector (if face
-                            (lambda (str) (propertize str 'face face))
-                          #'identity)
-                (vector lang
-                        (number-to-string files)
-                        (number-to-string lines)
-                        (number-to-string code)
-                        (number-to-string comments)
-                        (number-to-string blanks)))))
+        (vector (tokei-propertize lang) 
+                (tokei-propertize files #'number-to-string)
+                (tokei-propertize lines #'number-to-string)
+                (tokei-propertize code #'number-to-string)
+                (tokei-propertize comments #'number-to-string)
+                (tokei-propertize blanks #'number-to-string))))
 
 (defun tokei-mode-refresh ()
   "Refresh `tokei-mode' buffer contents."
@@ -108,16 +120,23 @@
                         into entries
                         finally return
                         (append
-                         (mapcar (apply-partially #'apply #'tokei-make-entry)
-                                 (cl-stable-sort entries #'> :key #'caddr)) 
+                         (mapcar
+                          (lambda (entry)
+                            (pcase-let ((`(,lang ,files ,lines ,code ,comments ,blanks) entry))
+                              (tokei-make-entry (cons lang 'tokei-language-face)
+                                                (cons files 'tokei-number-face)
+                                                (cons lines 'tokei-number-face)
+                                                (cons code 'tokei-number-face)
+                                                (cons comments 'tokei-number-face)
+                                                (cons blanks 'tokei-number-face))))
+                          (cl-stable-sort entries #'> :key #'caddr)) 
                          (list (tokei-make-entry
-                                "Total"
-                                total-files
-                                total-lines
-                                total-code
-                                total-comments
-                                total-blanks
-                                'tokei-totals)))))
+                                (cons "Total" 'tokei-totals-face)
+                                (cons total-files 'tokei-totals-face)
+                                (cons total-lines 'tokei-totals-face)
+                                (cons total-code 'tokei-totals-face)
+                                (cons total-comments 'tokei-totals-face)
+                                (cons total-blanks 'tokei-totals-face))))))
          (tabulated-list-print t))))
    (current-buffer)))
 
