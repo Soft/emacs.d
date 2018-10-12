@@ -9,6 +9,7 @@
 ;;; Code:
 
 (require 'helm)
+(require 'ansi-color)
 
 (defvar helm-fd-directory (expand-file-name "~")
   "Current base directory.")
@@ -21,21 +22,16 @@
   (cl-loop for candidate in candidates
            when (stringp candidate)
            collect
-           (let ((dir
-                  (string-remove-prefix helm-fd-directory
-                                        (file-name-directory candidate)))
-                 (filename (file-name-nondirectory candidate)))
-             (cons (if dir (concat (propertize dir 'face 'font-lock-comment-face)
-                                   (propertize filename 'face 'font-lock-type-face))
-                     (propertize filename 'face 'font-lock-type-face))
-                   candidate))))
+           (let ((colored (let ((ansi-color-context nil))
+                            (ansi-color-apply candidate))))
+             (cons colored (substring-no-properties colored)))))
 
 (defvar helm-fd-source
   (helm-build-async-source "fd"
     :candidates-process
     (lambda ()
       (start-process "fd" nil helm-fd-command
-                     "--follow" "--color" "never" "--"
+                     "--follow" "--color" "always" "--"
                      helm-pattern
                      helm-fd-directory))
     :header-name
