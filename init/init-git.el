@@ -21,7 +21,8 @@ staged changes."
   (("C-c g g" . magit-status)
    ("C-c g p" . magit-dispatch-popup)
    ("C-c g d" . adq/magit-diff-unstaged-or-staged)
-   ("C-c g l" . magit-log-current))
+   ("C-c g l" . magit-log-current)
+   ("C-c g L" . magit-log-buffer-file))
   :config
   (bind-keys
    :map magit-popup-mode-map
