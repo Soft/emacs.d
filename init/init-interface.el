@@ -157,6 +157,7 @@
   :init
   (beacon-mode)
   :config
+  (add-to-list 'beacon-dont-blink-major-modes 'tabulated-list-mode)
   ;; It would be nice if this took into account the background color of the
   ;; location where point is.
   (defun adq/beacon-recalibrate-color ()
