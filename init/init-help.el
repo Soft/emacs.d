@@ -99,6 +99,16 @@
   (keyfreq-mode)
   (keyfreq-autosave-mode))
 
+(use-package man
+  :defer t
+  :bind (:map Man-mode-map
+              ("J" . evil-scroll-down)
+              ("K" . evill-scroll-up)
+              ("C-n" . Man-next-section)
+              ("C-p" . Man-previous-section))
+  :config
+  (setq Man-width 80))
+
 (provide 'init-help)
 
 ;;; init-help.el ends here
