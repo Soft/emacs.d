@@ -28,7 +28,6 @@
     (">>" . ?≫)
     ("<<" . ?≪)
     ("=>" . ?⇒)
-    ("=" . ?≔)
     ("..." . ?…))
   "Symbol prettification alist for `js2-mode'.")
 
