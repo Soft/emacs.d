@@ -36,6 +36,10 @@
   (setq-local prettify-symbols-alist adq/js-prettify-symbols-alist)
   (rainbow-identifiers-mode -1))
 
+(defun adq/web-setup ()
+  "Defaults for `web-mode'."
+  (rainbow-identifiers-mode -1))
+
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))
   :interpreter ("node" . js2-mode)
@@ -96,6 +100,8 @@
          ("\\.tsx\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
   :ensure t
+  :init
+  (add-hook 'web-mode-hook #'adq/web-setup)
   :bind
   (:map web-mode-map
         ("C-c a =" . web-beautify-html)))
