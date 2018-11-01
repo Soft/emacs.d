@@ -104,6 +104,12 @@ supplied the tags file is visited once it has been generated."
                                root))
       (error "Could not update tags"))))
 
+(defun adq/disable-tags ()
+  "Disable all tags."
+  (interactive)
+  (setq tags-table-list nil
+        tags-file-name nil))
+
 (bind-keys
  :prefix-map adq/tags-prefix-keymap
  :prefix-docstring "Keymap for operating with tags."
