@@ -59,6 +59,10 @@
          ("/nginx/.+\\.conf\\'" . nginx-mode))
   :ensure t)
 
+(use-package systemtap-mode
+  :mode (("\\.stp\\''" . systemtap-mode))
+  :ensure t)
+
 (provide 'lang-linux)
 
 ;;; lang-linux.el ends here
