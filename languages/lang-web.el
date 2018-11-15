@@ -38,7 +38,12 @@
 
 (defun adq/web-setup ()
   "Defaults for `web-mode'."
-  (rainbow-identifiers-mode -1))
+  (setq-local web-mode-markup-indent-offset 2)
+  (setq-local web-mode-css-indent-offset 2)
+  (setq-local web-mode-code-indent-offset 2)
+  (setq-local web-mode-block-padding 0)
+  (setq-local web-mode-style-padding 0)
+  (setq-local web-mode-script-padding 0))
 
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))
