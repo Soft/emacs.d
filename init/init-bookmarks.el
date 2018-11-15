@@ -43,8 +43,18 @@
         bm-repository-size 1000)
   (setq-default bm-buffer-persistence t)
 
-  (advice-add 'bm-bookmark-add :after (lambda (&rest args) (bm-save)))
-  (advice-add 'bm-bookmark-remove :after (lambda (&rest args) (bm-save)))
+  (defun adq/bm-save ()
+    "Save bookmarks to persistent repository."
+    (interactive)
+    (bm-buffer-save-all)
+    (bm-repository-save))
+
+  (advice-add 'bm-bookmark-add
+              :after (lambda (&rest args)
+                       (adq/bm-save)))
+  (advice-add 'bm-bookmark-remove
+              :after (lambda (&rest args)
+                       (adq/bm-save)))
   (add-hook 'after-init-hook #'bm-repository-load)
   (add-hook 'find-file-hooks #'bm-buffer-restore)
   (add-hook 'after-rever-hook #'bm-buffer-restore)
