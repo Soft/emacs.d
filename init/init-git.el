@@ -80,7 +80,34 @@ staged changes."
 (use-package smerge-mode
   :defer t
   :init
+  (defhydra adq/hydra-smerge nil
+    "
+^Move^             ^Keep^            ^Diff^                ^Action^
+^^^^----------------------------------------------------------------------------
+_n_: Next          _a_: All          _L_: Base/lower       _e_: Ediff
+_p_: Previous      _b_: Base         _U_: Base/upper       _r_: Auto resolve
+                 ^^_l_: Lower        _B_: Upper/lower      _c_: Combine
+                 ^^_u_: Upper                            ^^_k_: Kill current
+                 ^^_RET_: Current
+"
+    ("n" smerge-next)
+    ("p" smerge-prev)
+    ("a" smerge-keep-all)
+    ("b" smerge-keep-base)
+    ("l" smerge-keep-lower)
+    ("u" smerge-keep-upper)
+    ("RET" smerge-keep-current)
+    ("L" smerge-diff-base-lower)
+    ("U" smerge-diff-base-upper)
+    ("B" smerge-diff-upper-lower)
+    ("e" smerge-ediff)
+    ("r" smerge-resolve)
+    ("c" smerge-combine-with-next)
+    ("k" smerge-kill-current))
+  (bind-key "C-c g s" #'adq/hydra-smerge/body)
   (setq smerge-command-prefix "\C-cgv"))
+
+
 
 (use-package browse-at-remote
   :ensure t

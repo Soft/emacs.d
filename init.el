@@ -151,7 +151,7 @@
   :config (add-hook 'after-init-hook #'benchmark-init/deactivate))
 
 ;; Order of modules to load.
-;; This is sensitive to changes as there might be dependencies between modules.
+;; This is sensitive to changes as there can be dependencies between modules.
 
 (defvar adq/module-load-order
   '((init . (customize
