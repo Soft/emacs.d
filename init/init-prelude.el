@@ -91,7 +91,7 @@ containing it."
 (defun adq/buffers-with-major-mode (mode)
   "Get a list of buffer with MODE."
   (-filter
-   (lambda (buffer) (with-current-buffer buffer (eq mode major-mode)))
+   (lambda (buffer) (eq mode (buffer-local-value 'major-mode buffer)))
    (buffer-list)))
 
 (defun adq/list-random-item (list)

@@ -28,8 +28,8 @@
   (if (eq major-mode 'neotree-mode)
       (neotree-hide)
     (cl-loop for window being the windows
-             if (with-current-buffer (window-buffer window)
-                  (eq major-mode 'neotree-mode))
+             if (eq 'neotree-mode
+                    (buffer-local-value 'major-mode (window-buffer window)))
              return (set-frame-selected-window nil window)
              finally (neotree-show))))
 
