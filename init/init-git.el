@@ -30,11 +30,9 @@ staged changes."
    :map magit-status-mode-map
    ("<escape>" . magit-mode-bury-buffer)))
 
-(use-package magithub
+(use-package forge
   :after magit
-  :ensure t
-  :config
-  (magithub-feature-autoinject 'all))
+  :ensure t)
 
 (use-package git-timemachine
   :ensure t
