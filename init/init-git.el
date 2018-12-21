@@ -30,6 +30,18 @@ staged changes."
    :map magit-status-mode-map
    ("<escape>" . magit-mode-bury-buffer)))
 
+(defun adq/magit-find-project ()
+  "Open Magit status buffer for a project."
+  (interactive)
+  (if-let ((projects (-filter #'adq/git-repository-root-p
+                              (projectile-relevant-known-projects))))
+      (projectile-completing-read
+       "Magit project: " projects
+       :action #'magit-status)
+    (user-error "There are no known projects")))
+
+(bind-key "C-c g P" #'adq/magit-find-project)
+
 (use-package forge
   :after magit
   :ensure t)
@@ -117,6 +129,10 @@ _p_: Previous      _b_: Base         _U_: Base/upper       _r_: Auto resolve
 
 (defvar adq/git-binary "git"
   "Git binary path.")
+
+(defun adq/git-repository-root-p (root)
+  "Check if path `root' is a git repository root."
+  (f-exists? (f-join root ".git")))
 
 (defun adq/git-find-repository-root ()
   "Try to find git repository root starting from current working directory."
