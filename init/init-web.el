@@ -30,6 +30,7 @@
               ("B" . eww-list-bookmarks)
               ("I" . eww-list-histories)
               ("b" . eww-list-buffers)
+              ("A" . eww-add-bookmark)
               ("q" . quit-window))
   :init
   (autoload 'eww-read-bookmarks "eww")
@@ -55,11 +56,32 @@
 
     (defun adq/dashboard-insert-eww-bookmarks (list-size)
       (when (adq/dashboard-insert-eww-bookmarks-list
-             "eww:"
+             "Eww:"
              (dashboard-subseq (eww-read-bookmarks) 0 list-size))
-        (dashboard-insert-shortcut "E" "eww:")))
+        (dashboard-insert-shortcut "E" "Eww:")))
 
-    (add-to-list 'dashboard-item-generators '(eww . adq/dashboard-insert-eww-bookmarks))))
+    (add-to-list 'dashboard-item-generators '(eww . adq/dashboard-insert-eww-bookmarks)))
+
+  (adq/after-load 'helm
+    (defun adq/helm-eww-bookmarks-candidates ()
+      "Helm candidate source for Eww bookmarks."
+      (mapcar (lambda (bookmark)
+                (let ((title (plist-get bookmark :title))
+                      (url (plist-get bookmark :url)))
+                  (cons (format "%s - %s"
+                                (propertize title 'face font-lock-type-face)
+                                (propertize url 'face font-lock-string-face))
+                        url)))
+              (eww-read-bookmarks)))
+
+    (defun adq/helm-eww-bookmarks ()
+      "List Eww bookmarks using Helm."
+      (interactive)
+      (helm :sources (helm-build-sync-source "eww-bookmarks"
+                       :candidates #'adq/helm-eww-bookmarks-candidates
+                       :action (helm-make-actions
+                                "Browse" #'eww))
+            :buffer "*helm eww-bookmarks*"))))
 
 (provide 'init-web)
 
