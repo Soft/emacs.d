@@ -42,7 +42,8 @@
              (get-buffer "*scratch*")))
    dashboard-items '((recents . 10)
                      (projects . 5)
-                     (bm . 5))
+                     (bm . 5)
+                     (eww . 5))
    dashboard-startup-banner (adq/dashboard-select-banner)
    dashboard-banner-logo-title
    (format "Welcome to Emacs, %s %s"

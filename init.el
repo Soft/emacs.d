@@ -166,6 +166,7 @@
              backups
              check
              interface
+             web
              dashboard
              snippets
              fonts
