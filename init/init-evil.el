@@ -18,6 +18,8 @@
     epa-info-mode
     eshell-mode
     eww-mode
+    eww-bookmark-mode
+    eww-history-mode
     flycheck-error-list-mode
     font-lock-studio-mode
     geiser-repl-mode

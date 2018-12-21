@@ -29,9 +29,25 @@
               ("<backtab>" . shr-previous-link)
               ("B" . eww-list-bookmarks)
               ("I" . eww-list-histories)
-              ("b" . eww-list-buffers)
+              ("U" . eww-list-buffers)
               ("A" . eww-add-bookmark)
-              ("q" . quit-window))
+              ("c" . eww-toggle-colors)
+              ("F" . eww-toggle-fonts)
+              ("q" . quit-window)
+              :map eww-bookmark-mode-map
+              ("j" . next-line)
+              ("k" . previous-line)
+              ("h" . left-char)
+              ("l" . right-char)
+              ("J" . scroll-up)
+              ("K" . scroll-down)
+              :map eww-history-mode-map
+              ("j" . next-line)
+              ("k" . previous-line)
+              ("h" . left-char)
+              ("l" . right-char)
+              ("J" . scroll-up)
+              ("K" . scroll-down))
   :init
   (autoload 'eww-read-bookmarks "eww")
   (adq/after-load 'dashboard
