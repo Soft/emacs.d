@@ -17,6 +17,7 @@
     epa-key-mode
     epa-info-mode
     eshell-mode
+    eww-mode
     flycheck-error-list-mode
     font-lock-studio-mode
     geiser-repl-mode

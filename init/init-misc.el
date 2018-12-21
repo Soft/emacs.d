@@ -46,6 +46,33 @@
    (">" . xkcd-get-latest)
    ("<escape>" . xkcd-kill-buffer)))
 
+(use-package eww
+  :defer t
+  :bind (:map eww-mode-map
+              ("j" . next-line)
+              ("k" . previous-line)
+              ("h" . left-char)
+              ("l" . right-char)
+              ("J" . scroll-up)
+              ("K" . scroll-down)
+              ("o" . eww)
+              ("O" . eww-browse-with-external-browser)
+              ("<return>" . eww-follow-link)
+              ("[" . eww-previous-url)
+              ("]" . eww-next-url)
+              ("g" . eww-reload)
+              ("H" . eww-back-url)
+              ("L" . eww-forward-url)
+              ("<backspace>" . eww-back-url)
+              ("<left>" . eww-back-url)
+              ("<right>" . eww-forward-url)
+              ("<tab>" . shr-next-link)
+              ("<backtab>" . shr-previous-link)
+              ("B" . eww-list-bookmarks)
+              ("I" . eww-list-histories)
+              ("b" . eww-list-buffers)
+              ("q" . quit-window)))
+
 ;; FIXME: Telephone-line compatability
 (use-package nyan-mode
   :disabled
