@@ -1,7 +1,7 @@
 ;;; init.el --- Adequate emacs.d -*- lexical-binding: t -*-
 
 ;; Adequate emacs.d -- Opionated Emacs configuration
-;; Copyright (C) 2018 Samuel Laurén
+;; Copyright (C) 2019 Samuel Laurén
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 ;; This is my humble attempt at trying to configure Emacs the way I like it.
 ;; Eternally work in progress.
 
-;; Samuel Laurén 💗 2014-2018
+;; Samuel Laurén 💗 2014-2019
 
 ;;; Code:
 
