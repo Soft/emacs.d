@@ -6,6 +6,11 @@
 
 ;;; Code:
 
+(defun adq/eww-mode-setup ()
+  "Defaults for eww-mode buffers."
+  (setq-local shr-color-visible-luminance-min 70)
+  (setq-local shr-use-fonts nil))
+
 (use-package eww
   :bind
   (("C-c x e" . eww)
@@ -99,7 +104,8 @@
                        :candidates #'adq/helm-eww-bookmarks-candidates
                        :action (helm-make-actions
                                 "Browse" #'eww))
-            :buffer "*helm eww-bookmarks*"))))
+            :buffer "*helm eww-bookmarks*")))
+  (add-hook 'eww-mode-hook #'adq/eww-mode-setup))
 
 (provide 'init-web)
 

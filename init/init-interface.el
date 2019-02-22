@@ -149,7 +149,7 @@
 (use-package dimmer
   :ensure t
   :init
-  (dimmer-activate))
+  (dimmer-mode))
 
 (use-package beacon
   :ensure t

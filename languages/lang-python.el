@@ -18,7 +18,9 @@
 (use-package blacken
   :if (adq/programs-p "black")
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (setq blacken-line-length 79))
 
 (use-package anaconda-mode
   :ensure t
