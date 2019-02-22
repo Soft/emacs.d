@@ -9,8 +9,8 @@
 ;; I like themes
 (defvar adq/wanted-themes
   '(atom-one-dark-theme
-    challenger-deep-theme
     borland-blue-theme
+    challenger-deep-theme
     darkokai-theme
     django-theme
     doom-themes
@@ -19,6 +19,7 @@
     gotham-theme
     hemisu-theme
     kaolin-themes
+    kooten-theme
     material-theme
     monokai-theme
     plan9-theme
@@ -32,7 +33,7 @@
 
 (adq/install-packages-if-missing adq/wanted-themes t)
 
-(defvar adq/default-theme 'kaolin-aurora
+(defvar adq/default-theme 'kaolin-dark
   "Default theme for Emacs.")
 
 (defvar adq/switch-theme-hook nil
