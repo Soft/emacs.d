@@ -27,7 +27,7 @@ inside its init directory. Additionally, having Adequate be in a separate
 location helps us keep the project files clean and reduces the possibility of
 inadvertently committing unnecessary files.
 
-# Keybindings
+# Key bindings
 
 Key | Function
 --- | ---
