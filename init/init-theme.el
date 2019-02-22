@@ -79,13 +79,6 @@
   :ensure t
   :init (color-theme-approximate-on))
 
-(use-package gtk-style-ext
-  :if (and (featurep 'gtk) (locate-library "gtk-style-ext-sys"))
-  :diminish gtk-style-ext-adapt-to-theme-mode
-  :init
-  (gtk-style-ext-dark-theme-mode 1)
-  (gtk-style-ext-adapt-to-theme-mode 1))
-
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               (lambda (frame)
