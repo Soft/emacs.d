@@ -50,12 +50,6 @@
   (load-theme theme t)
   (run-hooks 'adq/switch-theme-hook))
 
-;; Make keywords always cursive
-(add-hook 'adq/switch-theme-hook
-          (lambda ()
-            (set-face-attribute 'font-lock-keyword-face nil
-                                :slant 'italic)))
-
 (defun adq/current-theme ()
   "Displays the current theme."
   (interactive)

@@ -57,6 +57,26 @@
 (bind-keys ("<C-mouse-4>" . text-scale-increase)
            ("<C-mouse-5>" . text-scale-decrease))
 
+;; Make keywords always cursive
+(add-hook 'adq/switch-theme-hook #'adq/setup-font-personalization)
+
+(defun adq/setup-font-personalization ()
+  (let ((comment-family "fantasque sans mono"))
+    (set-face-attribute 'font-lock-keyword-face nil
+                        :slant 'italic)
+    (set-face-attribute 'font-lock-comment-face nil
+                        :slant 'italic
+                        :weight 'bold)
+    (set-face-attribute 'font-lock-doc-face nil
+                        :slant 'italic
+                        :weight 'bold)
+    (when (find-font (font-spec :name comment-family))
+      (set-face-attribute 'font-lock-comment-face nil
+                          :family comment-family)
+      (set-face-attribute 'font-lock-doc-face nil
+                          :family comment-family))))
+
+
 (provide 'init-fonts)
 
 ;;; init-fonts.el ends here.
