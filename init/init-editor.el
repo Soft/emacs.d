@@ -25,6 +25,7 @@
  scroll-margin 3
  scroll-preserve-screen-position t
  save-interprogram-paste-before-kill t
+ kill-ring-max 250
  tramp-default-method "ssh"
  vc-follow-symlinks t)
 
