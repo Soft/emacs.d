@@ -15,6 +15,11 @@
   :ensure t
   :defer t)
 
+(use-package py-isort
+  :if (adq/programs-p "isort")
+  :ensure t
+  :defer t)
+
 (use-package blacken
   :if (adq/programs-p "black")
   :ensure t
