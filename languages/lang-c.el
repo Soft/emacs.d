@@ -13,7 +13,8 @@
     (">>" . ?≫)
     ("<<" . ?≪)
     ("->" . ?→)
-    ("..." . ?…))
+    ("..." . ?…)
+    ("||" . ?‖))
   "Symbol prettification alist for `c-mode'.")
 
 (defvar adq/c++-prettify-symbols-alist
@@ -22,7 +23,8 @@
     (">=" . ?≥)
     ("->" . ?→)
     ("::" . ?∷)
-    ("..." . ?…))
+    ("..." . ?…)
+    ("||" . ?‖))
   "Symbol prettification alist for `c++-mode'.")
 
 (use-package clang-format
