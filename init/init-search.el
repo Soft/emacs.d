@@ -70,7 +70,7 @@ the tags file as active."
     (if root
         (let ((tags-file (f-join root "TAGS")))
           (if (f-exists-p tags-file)
-              (visit-tags-table tags-file)
+              (add-to-list 'tags-table-list tags-file)
             (adq/update-project-ctags t)))
       (error "Not in a project"))))
 
@@ -95,7 +95,7 @@ supplied the tags file is visited once it has been generated."
                                                         'face
                                                         font-lock-constant-face))
                                    (when visit
-                                     (visit-tags-table tags-file))))
+                                     (add-to-list 'tags-table-list tags-file))))
                                "-V"
                                "-e"
                                "-R"
@@ -107,6 +107,7 @@ supplied the tags file is visited once it has been generated."
 (defun adq/disable-tags ()
   "Disable all tags."
   (interactive)
+  (message "Disabling all tags")
   (setq tags-table-list nil
         tags-file-name nil))
 
@@ -116,6 +117,7 @@ supplied the tags file is visited once it has been generated."
  :prefix "C-c d"
  ("U" . adq/setup-project-ctags)
  ("u" . adq/update-project-ctags)
+ ("c" . adq/disable-tags)
  ("a" . xref-find-apropos)
  ("d" . xref-find-definitions)
  ("D" . xref-find-definitions-other-window)
