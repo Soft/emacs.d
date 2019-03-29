@@ -30,8 +30,6 @@
    ("H" . eww-back-url)
    ("L" . eww-forward-url)
    ("<backspace>" . eww-back-url)
-   ("<left>" . eww-back-url)
-   ("<right>" . eww-forward-url)
    ("<tab>" . shr-next-link)
    ("<backtab>" . shr-previous-link)
    ("B" . eww-list-bookmarks)
