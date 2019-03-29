@@ -111,6 +111,10 @@ supplied the tags file is visited once it has been generated."
   (setq tags-table-list nil
         tags-file-name nil))
 
+(use-package etags
+  :defer t
+  :commands (tags-reset-tags-tables))
+
 (bind-keys
  :prefix-map adq/tags-prefix-keymap
  :prefix-docstring "Keymap for operating with tags."
