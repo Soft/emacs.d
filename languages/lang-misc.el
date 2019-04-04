@@ -39,6 +39,11 @@
   :interpreter ("scala" . scala-mode)
   :ensure t)
 
+(use-package groovy-mode
+  :mode (("\\.groovy" . groovy-mode)
+         ("/Jenkinsfile" . groovy-mode))
+  :ensure t)
+
 (use-package qml-mode
   :mode (("\\.qml\\'" . qml-mode))
   :interpreter ("qml" . qml-mode)
