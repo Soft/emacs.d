@@ -49,6 +49,11 @@
   :interpreter ("qml" . qml-mode)
   :ensure t)
 
+(use-package cmake-mode
+  :mode (("/CMakeLists\\.txt\\'" . cmake-mode)
+         ("\\.cmake\\'" . cmake-mode))
+  :ensure t)
+
 (provide 'lang-misc)
 
 ;;; lang-misc.el ends here
