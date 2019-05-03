@@ -61,7 +61,8 @@ staged changes."
   :bind
   (("C-c g m" . git-messenger:popup-message))
   :config
-  (setq git-messenger:use-magit-popup t))
+  (setq git-messenger:use-magit-popup t
+        git-messenger:show-detail t))
 
 (use-package gitconfig-mode
   :mode ((".gitconfig" . gitconfig-mode)
