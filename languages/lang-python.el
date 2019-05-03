@@ -240,7 +240,8 @@ found."
         ("M-\"" . adq/python-skeleton-doc-comment)
         ("C-c a =" . adq/python-format-region-or-buffer)
         ("C-c a R" . adq/python-venv-activate)
-        ("C-c a S" . adq/python-setup-venv)))
+        ("C-c a S" . adq/python-setup-venv)
+        ("C-c a i" . py-isort-buffer)))
 
 (provide 'lang-python)
 
