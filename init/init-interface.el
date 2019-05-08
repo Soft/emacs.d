@@ -160,7 +160,8 @@
   (adq/add-to-list-many
    'beacon-dont-blink-major-modes
    '(tabulated-list-mode
-     eww-mode))
+     eww-mode
+     deadgrep-mode))
   ;; It would be nice if this took into account the background color of the
   ;; location where point is.
   (defun adq/beacon-recalibrate-color ()

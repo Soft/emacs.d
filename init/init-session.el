@@ -73,7 +73,19 @@
         desktop-save t
         desktop-restore-frames nil
         desktop-restore-eager 0
-        desktop-auto-save-timeout 60)
+        desktop-auto-save-timeout 60
+        desktop-globals-to-save
+        '(desktop-missing-file-warning
+          search-ring
+          regexp-search-ring
+          register-alist
+          file-name-history))
+  (add-hook 'desktop-save-mode-hook
+            (lambda ()
+              (setq tags-add-tables nil)))
+  (add-hook 'desktop-delay-hook
+            (lambda ()
+              (setq tags-add-tables t)))
   (desktop-save-mode 1)
   :config
   (add-to-list 'desktop-clear-preserve-buffers

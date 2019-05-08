@@ -177,6 +177,10 @@
   :ensure t
   :defer t)
 
+(use-package symbol-overlay
+  :ensure t
+  :defer t)
+
 (use-package prog-mode
   :defer t
   :init

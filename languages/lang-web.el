@@ -103,7 +103,9 @@
          ("\\.mustache\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
          ("\\.tsx\\'" . web-mode)
-         ("\\.vue\\'" . web-mode))
+         ("\\.vue\\'" . web-mode)
+         ("\\.j2\\'" . web-mode)
+         ("\\.jinja2\\'" . web-mode))
   :ensure t
   :init
   (add-hook 'web-mode-hook #'adq/web-setup)
