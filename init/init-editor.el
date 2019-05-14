@@ -93,7 +93,10 @@
   "Defaults for programming modes."
   (setq-local display-line-numbers t)
   (rainbow-delimiters-mode)
-  (rainbow-identifiers-mode)
+  ;; Fixme this could be done in a neater way
+  (unless
+      (-contains-p '(web-mode js2-mode) major-mode)
+    (rainbow-identifiers-mode))
   (fic-mode)
   (origami-mode)
   (dtrt-indent-mode)

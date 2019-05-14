@@ -33,17 +33,18 @@
 
 (defun adq/js-setup ()
   "Defaults for JavaScript."
-  (setq-local prettify-symbols-alist adq/js-prettify-symbols-alist)
-  (rainbow-identifiers-mode -1))
+  (setq-local prettify-symbols-alist adq/js-prettify-symbols-alist))
 
 (defun adq/web-setup ()
   "Defaults for `web-mode'."
-  (setq-local web-mode-markup-indent-offset 2)
-  (setq-local web-mode-css-indent-offset 2)
-  (setq-local web-mode-code-indent-offset 2)
-  (setq-local web-mode-block-padding 0)
-  (setq-local web-mode-style-padding 0)
-  (setq-local web-mode-script-padding 0))
+  (adq/setq-local
+      web-mode-enable-css-colorization t
+      web-mode-markup-indent-offset 2
+      web-mode-css-indent-offset 2
+      web-mode-code-indent-offset 2
+      web-mode-block-padding 0
+      web-mode-style-padding 0
+      web-mode-script-padding 0))
 
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))

@@ -107,8 +107,9 @@ direction if universal argument is supplied."
   :bind-keymap (("C-c x g" . google-this-mode-submap)))
 
 (defun adq/nov-mode-setup ()
-  (setq-local shr-width 80)
-  (setq-local shr-use-fonts nil))
+  (adq/setq-local
+      shr-width 80
+      shr-use-fonts nil))
 
 (use-package nov
   :ensure nov
