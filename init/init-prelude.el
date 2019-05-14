@@ -162,6 +162,16 @@ is non-nil."
   (when adq/emacs-debug
     `(message ,message ,@args)))
 
+(defmacro adq/setq-local (var val &rest others)
+  "Set one or more buffer local variables in current buffer."
+  (declare (indent 1))
+  (let ((assignments (-partition 2 (cons var (cons val others)))))
+    `(progn
+       ,@(mapcar
+          (lambda (assignment)
+            `(setq-local ,(car assignment) ,(cadr assignment)))
+          assignments))))
+
 (defmacro adq/region-switch-command (name with-region without-region &optional docstring)
   "Make a combination command that executes WITH-REGION if region
 is active and WITHOUT-REGION if there is no active region."
