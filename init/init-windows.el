@@ -122,7 +122,8 @@ buffers."
   ("b" balance-windows)
 
   ("z" zoom-window-zoom
-   (if (zoom-window--enable-p)
+   (if (and (featurep 'zoom-window)
+            (zoom-window--enable-p))
        "[x]" "[ ]"))
   ("f" adq/toggle-fullscreen
    (if (frame-parameter nil 'fullscreen)
