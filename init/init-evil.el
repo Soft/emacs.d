@@ -93,6 +93,11 @@
   :ensure t
   :defer t)
 
+(use-package evil-iedit-state
+  :after evil
+  :demand t
+  :ensure t)
+
 (defhydra adq/hydra-evil-numbers (global-map "C-c")
   "Operate on the number"
   ("+" evil-numbers/inc-at-pt)
