@@ -41,6 +41,7 @@
     ("M" helm-mark-all)
     ("g" helm-beginning-of-buffer)
     ("G" helm-end-of-buffer)
+    ("RET" helm-execute-persistent-action)
     ("1" (helm-select-nth-action 0))
     ("2" (helm-select-nth-action 1))
     ("3" (helm-select-nth-action 2))
@@ -50,7 +51,8 @@
     ("7" (helm-select-nth-action 6))
     ("8" (helm-select-nth-action 7))
     ("9" (helm-select-nth-action 8))
-    ("0" (helm-select-nth-action 9)))
+    ("0" (helm-select-nth-action 9))
+    ("<escape>" nil))
   (bind-keys
    :map helm-map
    ("<escape>" . helm-keyboard-quit)
