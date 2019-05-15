@@ -236,24 +236,36 @@
   "
 ^Buffer^              ^Toggle^                   ^Text Size
 ^^^^^^------------------------------------------------------------
-_d_: Diff with file   _w_: Visible whitespace    _-_: Decrease
-_r_: Revert buffer    _i_: Indent guides         _+_: Increase
-_s_: Change user      _n_: Line numbers
-_f_: Where am I?      _t_: Truncate lines
-                    ^^_v_: Visual lines
-                    ^^_a_: Auto revert
+_d_: Diff with file   _w_: ?w? Visible whitespace    _-_: Decrease
+_r_: Revert buffer    _i_: ?i? Indent guides         _+_: Increase
+_s_: Change user      _n_: ?n? Line numbers
+_f_: Where am I?      _t_: ?t? Truncate lines
+                    ^^_v_: ?v? Visual lines
+                    ^^_a_: ?a? Auto revert
 "
   ("d" magit-diff-buffer-file :exit t)
   ("r" revert-buffer :exit t)
   ("s" sudo-edit :exit t)
   ("f" adq/where-am-i :exit t)
   
-  ("w" whitespace-mode)
-  ("i" highlight-indent-guides-mode)
-  ("n" display-line-numbers-mode)
-  ("t" toggle-truncate-lines)
-  ("v" visual-line-mode)
-  ("a" auto-revert-mode)
+  ("w" whitespace-mode
+   (if (bound-and-true-p whitespace-mode)
+       "[x]" "[ ]"))
+  ("i" highlight-indent-guides-mode
+   (if (bound-and-true-p highlight-indent-guides-mode)
+       "[x]" "[ ]"))
+  ("n" display-line-numbers-mode
+   (if (bound-and-true-p display-line-numbers-mode)
+       "[x]" "[ ]"))
+  ("t" toggle-truncate-lines
+   (if (bound-and-true-p truncate-lines)
+       "[x]" "[ ]"))
+  ("v" visual-line-mode
+   (if (bound-and-true-p visual-line-mode)
+       "[x]" "[ ]"))
+  ("a" auto-revert-mode
+   (if (bound-and-true-p auto-revert-mode)
+       "[x]" "[ ]"))
   
   ("-" text-scale-decrease)
   ("+" text-scale-increase))
