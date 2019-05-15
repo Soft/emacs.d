@@ -27,6 +27,9 @@
       (other-window 1)
     (switch-to-buffer (other-buffer))))
 
+(use-package golden-ratio
+  :ensure t)
+
 (defun adq/swap-with-largest ()
   "Swap the current window's buffer with the largest window. The largest window is then selected."
   (interactive)
@@ -77,6 +80,7 @@ buffers."
 (use-package zoom-window
   :defer t
   :ensure t
+  :functions (zoom-window--enable-p)
   :bind (("C-x 4 z" . zoom-window-zoom))
   :config
   (defun adq/zoom-window-recalibrate-color ()
@@ -99,10 +103,10 @@ buffers."
   "
 ^Move^         ^^Window^                 ^Layout^            ^Control
 ^^^^^^^^^^----------------------------------------------------------------------------------------------
-     ^_k_       ^_0_: Delete This         _p_: Previous       _m_: Menubar    _z_: Zoom
- ^^    ↑       ^^_1_: Delete Others       _n_: Next           _s_: Scrollbar  _f_: Fullscreen
- _h_ ← · → _l_   _2_: Split Horizontally  _b_: Balance        _t_: Toolbar    _c_: Center
- ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      _e_: Theme
+     ^_k_       ^_0_: Delete This         _p_: Previous       _m_: ?m? Menubar    _z_: ?z? Zoom
+ ^^    ↑       ^^_1_: Delete Others       _n_: Next           _s_: ?s? Scrollbar  _f_: ?f? Fullscreen
+ _h_ ← · → _l_   _2_: Split Horizontally  _b_: Balance        _t_: ?t? Toolbar    _c_: ?c? Center
+ ^^    ↓       ^^_3_: Split Vertically    _r_: Clockwise      _e_:     Theme      _g_: ?g? Golden ratio
      ^_j_       ^_w_: Swap with largest   _R_: Anticlockwise  
 "
   ("h" windmove-left)
@@ -117,12 +121,27 @@ buffers."
   ("p" winner-undo)
   ("b" balance-windows)
 
-  ("z" zoom-window-zoom)
-  ("f" adq/toggle-fullscreen)
-  ("m" toggle-menu-bar-mode-from-frame)
-  ("s" toggle-scroll-bar)
-  ("t" toggle-tool-bar-mode-from-frame)
-  ("c" centered-window-mode)
+  ("z" zoom-window-zoom
+   (if (zoom-window--enable-p)
+       "[x]" "[ ]"))
+  ("f" adq/toggle-fullscreen
+   (if (frame-parameter nil 'fullscreen)
+       "[x]" "[ ]"))
+  ("m" toggle-menu-bar-mode-from-frame
+   (if (bound-and-true-p menu-bar-mode)
+       "[x]" "[ ]"))
+  ("s" toggle-scroll-bar
+   (if (frame-parameter nil 'vertical-scroll-bars)
+       "[x]" "[ ]"))
+  ("t" toggle-tool-bar-mode-from-frame
+   (if (bound-and-true-p tool-bar-mode)
+       "[x]" "[ ]"))
+  ("c" centered-window-mode
+   (if (bound-and-true-p centered-window-mode)
+       "[x]" "[ ]"))
+  ("g" golden-ratio-mode
+   (if (bound-and-true-p golden-ratio-mode)
+       "[x]" "[ ]"))
   ("e" adq/switch-theme :exit t)
 
   ("0" delete-window)
