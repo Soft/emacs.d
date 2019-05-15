@@ -28,11 +28,7 @@
         helm-ff-file-name-history-use-recentf t
         helm-lisp-fuzzy-completion            t)
   (add-to-list 'helm-boring-buffer-regexp-list "TAGS")
-  (bind-keys
-   :map helm-map
-   ("<escape>" . helm-keyboard-quit)
-   ("C-w" . backward-kill-word))
-  (defhydra adq/helm-hydra (helm-map "M-SPC")
+  (defhydra adq/helm-hydra nil
     "Helm"
     ("j" helm-next-line)
     ("k" helm-previous-line)
@@ -55,6 +51,11 @@
     ("8" (helm-select-nth-action 7))
     ("9" (helm-select-nth-action 8))
     ("0" (helm-select-nth-action 9)))
+  (bind-keys
+   :map helm-map
+   ("<escape>" . helm-keyboard-quit)
+   ("C-w" . backward-kill-word)
+   ("M-SPC" . adq/helm-hydra/body))
   :bind
   (("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-mini)
