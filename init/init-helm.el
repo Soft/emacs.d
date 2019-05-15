@@ -41,6 +41,7 @@
     ("M" helm-mark-all)
     ("g" helm-beginning-of-buffer)
     ("G" helm-end-of-buffer)
+    ("<tab>" helm-select-action)
     ("RET" helm-execute-persistent-action)
     ("1" (helm-select-nth-action 0))
     ("2" (helm-select-nth-action 1))
