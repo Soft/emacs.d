@@ -50,7 +50,7 @@
         (if d (read-directory-name default-directory)
           (expand-file-name "~")))
   (helm :sources #'helm-fd-source
-        :prompt "fd: "
+        :prompt (format "fd %s: " helm-fd-directory)
         :buffer "*fd*"))
 
 
