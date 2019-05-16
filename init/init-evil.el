@@ -11,15 +11,16 @@
     bm-show-mode
     comint-mode
     dashboard-mode
+    deadgrep-mode
     dired-mode
     doctor-mode
+    epa-info-mode
     epa-key-list-mode
     epa-key-mode
-    epa-info-mode
     eshell-mode
-    eww-mode
     eww-bookmark-mode
     eww-history-mode
+    eww-mode
     flycheck-error-list-mode
     font-lock-studio-mode
     geiser-repl-mode
@@ -30,10 +31,10 @@
     inferior-haskell-mode
     inferior-python-mode
     life-mode
-    neotree-mode
     magithub-dash-mode
     magithub-issue-view-mode
     messages-buffer-mode
+    neotree-mode
     nov-mode
     paradox-menu-mode
     paradox-mode
@@ -43,12 +44,12 @@
     term-mode
     tetris-mode
     tokei-mode
+    vterm-mode
     weechat-mode
+    wikipedia-peek-mode
     xkcd-mode
-    deadgrep-mode
     xref--xref-buffer-mode
-    xwidget-webkit-mode
-    wikipedia-peek-mode)
+    xwidget-webkit-mode)
   "Modes where Evil mode should not be used.")
 
 (use-package evil
