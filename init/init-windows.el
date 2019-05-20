@@ -28,7 +28,8 @@
     (switch-to-buffer (other-buffer))))
 
 (use-package golden-ratio
-  :ensure t)
+  :ensure t
+  :init (golden-ratio-mode))
 
 (defun adq/swap-with-largest ()
   "Swap the current window's buffer with the largest window. The largest window is then selected."
