@@ -120,7 +120,7 @@ buffers."
 
   ("n" winner-redo)
   ("p" winner-undo)
-  ("b" balance-windows)
+  ("b" balance-windows :exit t)
 
   ("z" zoom-window-zoom
    (if (and (featurep 'zoom-window)
