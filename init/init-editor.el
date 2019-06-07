@@ -184,6 +184,12 @@
   :ensure t
   :defer t)
 
+(use-package find-file
+  :ensure t
+  :defer t
+  :config
+  (setq ff-always-try-to-create nil))
+
 (use-package prog-mode
   :defer t
   :init
