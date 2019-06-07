@@ -240,13 +240,14 @@ _d_: Diff with file   _w_: ?w? Visible whitespace    _-_: Decrease
 _r_: Revert buffer    _i_: ?i? Indent guides         _+_: Increase
 _s_: Change user      _n_: ?n? Line numbers
 _f_: Where am I?      _t_: ?t? Truncate lines
-                    ^^_v_: ?v? Visual lines
+_b_: Bury buffer      _v_: ?v? Visual lines
                     ^^_a_: ?a? Auto revert
 "
   ("d" magit-diff-buffer-file :exit t)
   ("r" revert-buffer :exit t)
   ("s" sudo-edit :exit t)
   ("f" adq/where-am-i :exit t)
+  ("b" bury-buffer :exit t)
   
   ("w" whitespace-mode
    (if (bound-and-true-p whitespace-mode)
