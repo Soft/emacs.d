@@ -27,7 +27,8 @@
         helm-locate-fuzzy-match               t
         helm-ff-file-name-history-use-recentf t
         helm-lisp-fuzzy-completion            t)
-  (add-to-list 'helm-boring-buffer-regexp-list "TAGS")
+  (adq/add-to-list-many 'helm-boring-buffer-regexp-list
+                        '("TAGS" "compilation_commands.json"))
   (defhydra adq/helm-hydra nil
     "Helm"
     ("j" helm-next-line)
