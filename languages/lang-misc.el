@@ -15,6 +15,10 @@
   :mode (("\\.go\\'" . go-mode))
   :ensure t)
 
+(use-package nim-mode
+  :mode (("\\.nim\\'" . nim-mode))
+  :ensure t)
+
 (use-package csharp-mode
   :mode (("\\.cs\\'" . csharp-mode))
   :ensure t)
