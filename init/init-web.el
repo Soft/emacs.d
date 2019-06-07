@@ -8,8 +8,11 @@
 
 (defun adq/eww-mode-setup ()
   "Defaults for eww-mode buffers."
-  (setq-local shr-color-visible-luminance-min 70)
-  (setq-local shr-use-fonts nil))
+  (setq-local shr-color-visible-luminance-min 70))
+
+(use-package eww-lnum
+  :ensure t
+  :defer t)
 
 (use-package eww
   :bind
@@ -37,6 +40,7 @@
    ("U" . eww-list-buffers)
    ("A" . eww-add-bookmark)
    ("c" . eww-toggle-colors)
+   ("f" . eww-lnum-follow)
    ("F" . eww-toggle-fonts)
    ("q" . quit-window)
    :map eww-bookmark-mode-map
