@@ -59,8 +59,10 @@
   :bind
   (
    :map c++-mode-map
+   ("C-c a o" . ff-find-other-file)
    ("C-c a =" . adq/clang-format-region-or-buffer)
    :map c-mode-map
+   ("C-c a o" . ff-find-other-file)
    ("C-c a =" . adq/clang-format-region-or-buffer)))
 
 (provide 'lang-c)
