@@ -39,6 +39,7 @@
     paradox-menu-mode
     paradox-mode
     plasma-mode
+    rtags-mode
     snake-mode
     sunshine-mode
     term-mode
