@@ -18,8 +18,8 @@ staged changes."
 (use-package magit
   :ensure t
   :bind
-  (("C-c g g" . magit-status)
-   ("C-c g p" . magit-dispatch-popup)
+  (("C-c g RET" . magit-dispatch-popup)
+   ("C-c g g" . magit-status)
    ("C-c g d" . adq/magit-diff-unstaged-or-staged)
    ("C-c g l" . magit-log-current)
    ("C-c g L" . magit-log-buffer-file))
@@ -166,7 +166,13 @@ _p_: Previous      _b_: Base         _U_: Base/upper       _r_: Auto resolve
     (when repository
       (let ((output
              (ignore-errors
-               (process-lines adq/git-binary "-C" repository "rev-parse" "--symbolic-full-name" "--abbrev-ref" "HEAD"))))
+               (process-lines adq/git-binary
+                              "-C"
+                              repository
+                              "rev-parse"
+                              "--symbolic-full-name"
+                              "--abbrev-ref"
+                              "HEAD"))))
         (car output)))))
 
 (provide 'init-git)
