@@ -167,6 +167,7 @@
              check
              interface
              web
+             feed
              dashboard
              snippets
              fonts

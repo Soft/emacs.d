@@ -14,6 +14,8 @@
     deadgrep-mode
     dired-mode
     doctor-mode
+    elfeed-search-mode
+    elfeed-show-mode
     epa-info-mode
     epa-key-list-mode
     epa-key-mode
