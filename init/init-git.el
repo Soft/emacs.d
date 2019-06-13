@@ -24,6 +24,7 @@ staged changes."
    ("C-c g l" . magit-log-current)
    ("C-c g L" . magit-log-buffer-file))
   :config
+  (setq magit-list-refs-sortby "-creatordate")
   (bind-keys
    :map magit-popup-mode-map
    ("<escape>" . magit-popup-quit)
