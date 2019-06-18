@@ -23,6 +23,16 @@
     (setq-local shr-width adq/elfeed-display-width))
   (setq-local shr-bullet "• "))
 
+(defun adq/elfeed-toggle-images ()
+  "Toggle image display."
+  (interactive)
+  (if shr-inhibit-images
+      (progn
+        (setq-local shr-inhibit-images nil)
+        (elfeed-show-refresh))
+    (progn
+      (setq-local shr-inhibit-images t)
+      (elfeed-show-refresh))))
 
 (use-package elfeed
   :ensure t
@@ -37,6 +47,7 @@
    ("/" . elfeed-search-set-filter)
    :map elfeed-show-mode-map
    ("f" . eww-follow-link)
+   ("i" . adq/elfeed-toggle-images)
    ("j" . next-line)
    ("k" . previous-line)
    ("h" . left-char)
