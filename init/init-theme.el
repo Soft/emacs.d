@@ -17,6 +17,7 @@
     dracula-theme
     espresso-theme
     gotham-theme
+    gruvbox-theme
     hemisu-theme
     kaolin-themes
     kooten-theme
