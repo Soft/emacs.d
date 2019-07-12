@@ -43,7 +43,7 @@
    ("k" . previous-line)
    ("K" . scroll-down)
    ("J" . scroll-up)
-   ("o" . elfeed-show-entry)
+   ("o" . elfeed-search-show-entry)
    ("/" . elfeed-search-set-filter)
    :map elfeed-show-mode-map
    ("f" . eww-follow-link)
@@ -55,7 +55,8 @@
    ("K" . scroll-down)
    ("J" . scroll-up))
   :config
-  (add-hook 'elfeed-show-mode-hook #'adq/elfeed-show-setup))
+  (add-hook 'elfeed-show-mode-hook #'adq/elfeed-show-setup)
+  (setq elfeed-show-entry-switch #'switch-to-buffer-other-window))
 
 (provide 'init-feed)
 
