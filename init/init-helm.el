@@ -157,6 +157,11 @@ if universal argument is supplied."
   :bind (("C-x 8 A" . helm-snippets-arrow)
          ("C-x 8 s" . helm-snippets-star)))
 
+(use-package helm-systemd
+  :ensure t
+  :if (adq/programs-p "systemctl")
+  :bind (("C-x c S" . helm-systemd)))
+
 (provide 'init-helm)
 
 ;;; init-helm.el ends here
