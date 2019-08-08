@@ -199,6 +199,7 @@
              rust
              haskell
              latex
+             go
              web
              markdown
              shell

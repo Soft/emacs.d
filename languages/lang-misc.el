@@ -11,10 +11,6 @@
          ("\\.yml\\'" . yaml-mode))
   :ensure t)
 
-(use-package go-mode
-  :mode (("\\.go\\'" . go-mode))
-  :ensure t)
-
 (use-package nim-mode
   :mode (("\\.nim\\'" . nim-mode))
   :ensure t)
