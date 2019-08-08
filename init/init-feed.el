@@ -34,8 +34,16 @@
       (setq-local shr-inhibit-images t)
       (elfeed-show-refresh))))
 
+(defun adq/elfeed-toggle-unread ()
+  "Toggle unread tag for selected entries."
+  (interactive)
+  (elfeed-search-toggle-all 'unread))
+
 (use-package elfeed
   :ensure t
+  :commands
+  (elfeed-search-toggle-all
+   elfeed-show-refresh)
   :bind
   (("C-c x F" . elfeed)
    :map elfeed-search-mode-map
@@ -43,6 +51,7 @@
    ("k" . previous-line)
    ("K" . scroll-down)
    ("J" . scroll-up)
+   ("m" . adq/elfeed-toggle-unread)
    ("o" . elfeed-search-show-entry)
    ("/" . elfeed-search-set-filter)
    :map elfeed-show-mode-map
