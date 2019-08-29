@@ -21,7 +21,8 @@
               adq/elfeed-display-width))
          (get-buffer-window-list))
     (setq-local shr-width adq/elfeed-display-width))
-  (setq-local shr-bullet "• "))
+  (setq-local shr-bullet "• ")
+  (setq-local shr-use-fonts nil))
 
 (defun adq/elfeed-toggle-images ()
   "Toggle image display."
