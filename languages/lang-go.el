@@ -28,6 +28,11 @@
   (when (package-installed-p 'company-go)
     (setq-local company-backends '(company-go))))
 
+(use-package go-errcheck
+  :if (adq/programs-p "errcheck")
+  :ensure t
+  :defer t)
+
 (use-package company-go
   :if (adq/programs-p "gocode")
   :ensure t
