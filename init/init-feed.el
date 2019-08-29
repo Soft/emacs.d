@@ -40,6 +40,13 @@
   (interactive)
   (elfeed-search-toggle-all 'unread))
 
+(defun adq/elfeed-search-show-entry-no-switch ()
+  "Show entry without switching buffer."
+  (interactive)
+  (let ((elfeed-show-entry-switch (lambda (&args))))
+    (cl-letf (((symbol-function 'forward-line) (lambda (&args))))
+      (call-interactively #'elfeed-search-show-entry))))
+
 (use-package elfeed
   :ensure t
   :commands
@@ -55,6 +62,7 @@
    ("m" . adq/elfeed-toggle-unread)
    ("o" . elfeed-search-show-entry)
    ("/" . elfeed-search-set-filter)
+   ("v" . adq/elfeed-search-show-entry-no-switch)
    :map elfeed-show-mode-map
    ("f" . eww-follow-link)
    ("i" . adq/elfeed-toggle-images)
