@@ -14,11 +14,8 @@
 (defvar ff-screenshot-profile "ff-screenshot"
   "Firefox profile name to use for taking screenshots.")
 
-(defvar ff-screenshot-default-width 1000
-  "Default screenshot width.")
-
-(defvar ff-screenshot-default-height 800
-  "Default screenshot height.")
+(defvar ff-screenshot-default-size '(1000 . 800)
+  "Default screenshot size.")
 
 (defun ff-screenshot-exec (done-cb &optional args)
   "Launch Firefox and call done-cb after process exits."
@@ -33,18 +30,27 @@
          (n (error "Executing firefox failed (exit code: %d)" n)))))))
 
 ;;;###autoload
-(defun ff-screenshot-capture (url path done-cb &optional width height)
+(defun ff-screenshot-capture (url path done-cb &optional size)
   "Take screenshot of URL and save it to PATH. Call done-cb if
-taking screenshot succeeds."
-  (let ((width (or width ff-screenshot-default-width))
-        (height (or height ff-screenshot-default-height)))
+taking screenshot succeeds.
+
+Size can have one of the followign forms:
+- (WIDTH . HEIGHT)
+- WIDTH
+- nil"
+  (let ((size (pcase size
+                (`(,width . ,height) (format "%d,%d" width height))
+                ((pred integerp) (format "%d" size))
+                (`nil nil)
+                (_ (error "Invalid size")))))
     (ff-screenshot-exec
      done-cb
      `("--headless"
        "--no-remote"
        "-P" ,ff-screenshot-profile
        "--screenshot" ,path
-       "--window-size" ,(format "%d,%d" width height)
+       ,@(when size
+           `("--window-size" ,size))
        ,url))))
 
 ;;;###autoload
@@ -56,7 +62,8 @@ taking screenshot succeeds."
      url
      path
      (lambda ()
-       (find-file path)))))
+       (find-file path))
+     ff-screenshot-default-size)))
 
 (provide 'ff-screenshot)
 
