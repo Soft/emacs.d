@@ -115,6 +115,7 @@
   ("-" adq/frame-alpha-dec))
 
 (defun adq/toggle-fullscreen ()
+  "Toggle fullscreen mode for the current frame."
   (interactive)
   (if (eq window-system 'x)
       (x-send-client-message
@@ -123,6 +124,18 @@
     (error "toggle-fulscreen is only available on X windows systems.")))
 
 (bind-key "<f11>" #'adq/toggle-fullscreen)
+
+(defun adq/toggle-pseudo-fullscreen ()
+  "Toggle pseudo-fullscreen mode for the current frame."
+  (interactive)
+  (if (and (eq (frame-parameter nil 'fullscreen) 'maximized)
+           (frame-parameter nil 'undecorated))
+      (progn
+        (set-frame-parameter nil 'fullscreen nil)
+        (set-frame-parameter nil 'undecorated nil))
+    (progn
+      (set-frame-parameter nil 'fullscreen 'maximized)
+      (set-frame-parameter nil 'undecorated t))))
 
 (use-package centered-window
   :ensure t
