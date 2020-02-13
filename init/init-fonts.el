@@ -5,7 +5,7 @@
 ;; Font configuration.
 
 ;; Adequate has a CSS-style font fallback system where upon start it
-;; successively tries a series of recommended fonts until it finds a one that is
+;; successively tries a series of recommended fonts until it finds one that is
 ;; available.
 
 ;; Currently, Adequate tries to first use Iosevka font
@@ -61,15 +61,15 @@
 (add-hook 'adq/switch-theme-hook #'adq/setup-font-personalization)
 
 (defun adq/setup-font-personalization ()
-  (let ((comment-family "fantasque sans mono"))
+  (let ((comment-family "victor mono"))
     (set-face-attribute 'font-lock-keyword-face nil
                         :slant 'italic)
     (set-face-attribute 'font-lock-comment-face nil
                         :slant 'italic
-                        :weight 'bold)
+                        :weight 'normal)
     (set-face-attribute 'font-lock-doc-face nil
                         :slant 'italic
-                        :weight 'bold)
+                        :weight 'normal)
     (when (find-font (font-spec :name comment-family))
       (set-face-attribute 'font-lock-comment-face nil
                           :family comment-family)
