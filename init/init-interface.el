@@ -160,6 +160,7 @@
   background color.")
 
 (use-package dimmer
+  :disabled
   :ensure t
   :init
   (dimmer-mode))
