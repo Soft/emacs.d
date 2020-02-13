@@ -31,16 +31,16 @@
   (interactive "p")
   (funcall-interactively
    (if adq/prefer-eshell
-       (adq/switch-command (adq/get-eshell) (adq/get-multi-term))
-     (adq/switch-command (adq/get-multi-term) (adq/get-eshell)))
+       (adq/switch-command #'adq/get-eshell #'adq/get-multi-term)
+     (adq/switch-command #'adq/get-multi-term #'adq/get-eshell))
    d))
 
 (defun adq/new-shell-like (d)
   (interactive "p")
   (funcall-interactively
    (if adq/prefer-eshell
-       (adq/switch-command (eshell) (multi-term))
-     (adq/switch-command (multi-term) (eshell)))
+       (adq/switch-command #'eshell #'multi-term)
+     (adq/switch-command #'multi-term #'eshell))
    d))
 
 (bind-keys

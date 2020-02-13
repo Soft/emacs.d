@@ -45,15 +45,14 @@
   `(eval-after-load ,feature
      '(progn ,@body)))
 
-(defmacro adq/numeric-argument-switch (form &rest others)
-  "Makes a function that executes a FORM based on a numeric argument."
-  (let* ((forms (cons form others))
-         (conds (cl-loop for (i . f) in forms
-                         collect `((equal d ,i) ,f))))
-    `(lambda (d)
-       (interactive "p")
-       (cond ,@conds
-             (t (error "No action bound to %d" d))))))
+(defun adq/switch-command (fn &rest fns)
+  "Returns an interactive function that executes fn based on a numeric argument."
+  (lambda (p)
+    (interactive "p")
+    (funcall-interactively
+     (or (nth (truncate (log p 4))
+              (cons fn fns))
+         (lambda () (error "No action bound to %d" p))))))
 
 ;; FIXME: This doesn't really work with interactive functions that take arguments
 (defun adq/repeating (key fn &rest args)
@@ -65,14 +64,6 @@
                         (set-transient-map map)))
       (define-key map (kbd key) #'action)
       #'action)))
-
-(defmacro adq/switch-command (form &rest others)
-  "Make a multi-purpose command that executes a FORM based on a numeric argument."
-  (let* ((forms (cons form others))
-         (nums (cl-loop for i from 1 to (1-  (length forms))
-                        collect (expt 4 i)))
-         (args (cl-mapcar #'cons (cons 1 nums) forms)))
-    `(adq/numeric-argument-switch ,@args)))
 
 (defun adq/switch-to-buffer-dwim (buffer)
   "Display BUFFER in the selected window or, if the buffer is

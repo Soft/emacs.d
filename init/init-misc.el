@@ -29,8 +29,8 @@
   :init
   (bind-key
    "C-c x X"
-   (adq/switch-command (xkcd-get-latest)
-                       (xkcd-rand)))
+   (adq/switch-command #'xkcd-get-latest
+                       #'xkcd-rand))
   :config
   (bind-keys
    :map xkcd-mode-map
