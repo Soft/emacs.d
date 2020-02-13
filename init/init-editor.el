@@ -226,6 +226,8 @@
 
 (use-package compile
   :defer t
+  :bind (("<f5>" . compile)
+         ("<S-f5>" . recompile))
   :config
   (setq compilation-scroll-output t))
 
