@@ -10,6 +10,17 @@
   :ensure t
   :defer t)
 
+(use-package vterm
+  :ensure t
+  :functions (vterm-mode)
+  :config
+  (add-hook 'vterm-exit-functions
+            (lambda (buffer process)
+              (kill-buffer buffer)))
+  (add-hook 'vterm-set-title-functions
+            (lambda (title)
+              (rename-buffer (format "*vterm: %s*" title)))))
+
 (defun adq/get-multi-term ()
   "Switch to an existing terminal buffer or open a new one."
   (interactive)
@@ -24,28 +35,45 @@
    (adq/compose 'car (adq/partial adq/buffers-with-major-mode 'eshell-mode))
    'eshell))
 
-(defvar adq/prefer-eshell t
-  "Should command that launch or retrieve terminals prefer eshell over multi-term.")
+(defun adq/get-vterm ()
+  "Switch to an existing vterm buffer or open a new one."
+  (interactive)
+  (adq/switch-or-call
+   (adq/compose 'car (adq/partial adq/buffers-with-major-mode 'vterm-mode))
+   'vterm))
 
-(defun adq/get-shell-like (d)
-  (interactive "p")
-  (funcall-interactively
-   (if adq/prefer-eshell
-       (adq/switch-command #'adq/get-eshell #'adq/get-multi-term)
-     (adq/switch-command #'adq/get-multi-term #'adq/get-eshell))
-   d))
+(defvar adq/preferred-shells '(vterm eshell term)
+  "Shell preferences.")
 
-(defun adq/new-shell-like (d)
-  (interactive "p")
-  (funcall-interactively
-   (if adq/prefer-eshell
-       (adq/switch-command #'eshell #'multi-term)
-     (adq/switch-command #'multi-term #'eshell))
-   d))
+(defun adq/get-shell ()
+  "Get preffed shell."
+  (interactive)
+  (call-interactively
+   (apply #'adq/switch-command
+          (mapcar (lambda (shell)
+                    (pcase shell
+                      ('vterm #'adq/get-vterm)
+                      ('eshell #'adq/get-eshell)
+                      ('term #'adq/get-multi-term)
+                      (_ (error "Unknown shell"))))
+                  adq/preferred-shells))))
+
+(defun adq/new-shell ()
+  "Get new shell."
+  (interactive)
+  (call-interactively
+   (apply #'adq/switch-command
+          (mapcar (lambda (shell)
+                    (pcase shell
+                      ('vterm #'vterm)
+                      ('eshell #'eshell)
+                      ('term #'multi-term)
+                      (_ (error "Unknown shell"))))
+                  adq/preferred-shells))))
 
 (bind-keys
- ("C-c <return>" . adq/get-shell-like)
- ("C-c <C-return>" . adq/new-shell-like))
+ ("C-c <return>" . adq/get-shell)
+ ("C-c <C-return>" . adq/new-shell))
 
 (defun adq/comint-clear-buffer ()
   "Clear current comint buffer."
@@ -215,7 +243,8 @@
 (defun adq/eshell-setup ()
   (eshell-fringe-status-mode)
   (with-editor-export-editor)
-  (company-mode -1) ;; Even better would be to only disable company when using TRAMP since it can be slow
+  ;; Even better would be to only disable company when using TRAMP since it can be slow
+  (company-mode -1)
   (setenv "TERM" "xterm-256color")
   (add-to-list 'eshell-preoutput-filter-functions #'xterm-color-filter)
   (setq xterm-color-preserve-properties t
@@ -230,24 +259,6 @@
   (if (null args)
       (bury-buffer)
     (-each  (-map #'expand-file-name (eshell-flatten-list args)) #'find-file)))
-
-;; This is quite drastic but messing up eshell by running git diff isn't nice.
-(defun eshell/git (&rest args)
-  "Launch Magit based on git subcommand."
-  (if-let ((command (car (eshell-flatten-list args)))
-           (handler (pcase command
-                      ("diff" 'magit-diff-popup)
-                      ("log" 'magit-log-popup)
-                      ("commit" 'magit-commit-popup)
-                      ("branch" 'magit-branch-popup)
-                      ("push" 'magit-push-popup)
-                      ("pull" 'magit-fetch-popup)
-                      ("cherry-pick" 'magit-cherry-pick-popup)
-                      ("reset" 'magit-reset-popup)
-                      ("status" 'magit-status)
-                      (_ (error "Unknown command: %s" command)))))
-      (call-interactively handler)
-    (magit-status)))
 
 (use-package eshell
   :defer t
