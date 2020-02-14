@@ -160,6 +160,7 @@
   background color.")
 
 (use-package dimmer
+  :disabled
   :ensure t
   :init
   (dimmer-mode))
@@ -175,7 +176,8 @@
    '(tabulated-list-mode
      eww-mode
      deadgrep-mode
-     vterm-mode))
+     vterm-mode
+     treemacs-mode))
   ;; It would be nice if this took into account the background color of the
   ;; location where point is.
   (defun adq/beacon-recalibrate-color ()

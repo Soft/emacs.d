@@ -73,7 +73,9 @@
 
 (use-package helm-projectile
   :ensure t
-  :config (helm-projectile-on)
+  :config
+  (setq helm-projectile-set-input-automatically nil)
+  (helm-projectile-on)
   :bind
   (("C-c b" . helm-projectile-find-file)))
 
