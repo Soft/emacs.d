@@ -240,6 +240,9 @@
   :ensure t
   :defer t)
 
+(use-package prettify-quotes
+  :commands (prettify-quotes-region))
+
 (defhydra adq/hydra-buffer nil
   "
 ^Buffer^              ^Toggle^                   ^Text Size

@@ -54,6 +54,17 @@
          ("\\.cmake\\'" . cmake-mode))
   :ensure t)
 
+(defun adq/twee-setup ()
+  "Defaults for Twee."
+  (gll-guess-language-lite-mode))
+
+(use-package twee-mode
+  :commands (twee-mode)
+  :mode (("\\.tw\\'" . twee-mode)
+         ("\\.twee\\'" . twee-mode))
+  :init
+  (add-hook 'twee-mode-hook #'adq/twee-setup))
+
 (provide 'lang-misc)
 
 ;;; lang-misc.el ends here
