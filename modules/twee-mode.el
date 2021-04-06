@@ -99,7 +99,12 @@
        (group (+ (not (or "|" "]"))))
        (group "|"))
       (group (+ (not "]")))
-      (group "]]")))
+      (group "]")
+      (optional
+       (group "[")
+       (* (not "]"))
+       (group "]"))
+      (group "]")))
 
 (defvar twee-mode-heading-regexp
   (rx line-start
@@ -163,7 +168,10 @@
      (2 'twee-mode-link-label-face nil t)
      (3 'twee-mode-link-face nil t)
      (4 'twee-mode-passage-name-face)
-     (5 'twee-mode-link-face))
+     (5 'twee-mode-link-face)
+     (6 'twee-mode-link-face nil t)
+     (7 'twee-mode-link-face nil t)
+     (8 'twee-mode-link-face))
     (,twee-mode-heading-regexp
      (1 'twee-mode-heading-prefix-face)
      (2 'twee-mode-heading-text-face))
