@@ -43,12 +43,27 @@
 
 (defface twee-mode-heading-text-face
   '((t (:inherit font-lock-string-face)))
-  "Face for heading texts."
+  "Face for heading text."
   :group 'twee-mode)
 
 (defface twee-mode-list-face
   '((t (:inherit font-lock-preprocessor-face)))
   "Face for lists."
+  :group 'twee-mode)
+
+(defface twee-mode-blockquote-prefix-face
+  '((t (:inherit font-lock-preprocessor-face)))
+  "Face for blockquote prefixes."
+  :group 'twee-mode)
+
+(defface twee-mode-blockquote-text-face
+  '((t (:inherit font-lock-doc-face)))
+  "Face for blockquote text."
+  :group 'twee-mode)
+
+(defface twee-mode-rule-face
+  '((t (:inherit font-lock-preprocessor-face)))
+  "Face for horizontal rules."
   :group 'twee-mode)
 
 (defface twee-mode-variable-sigil-face
@@ -86,6 +101,10 @@
   "Face for underline."
   :group 'twee-mode)
 
+(defface twee-mode-strikethrough-face
+  '((t (:strike-through t)))
+  "Face for underline."
+  :group 'twee-mode)
 
 (defvar twee-mode-passage-header-regexp
   (rx line-start
@@ -116,6 +135,16 @@
       (group (or "*" "#"))
       (+ blank)
       (+ not-newline)))
+
+(defvar twee-mode-blockquote-regexp
+  (rx line-start
+      (group (+ ">"))
+      (group (* any))))
+
+(defvar twee-mode-rule-regexp
+  (rx line-start
+      (group "----")
+      line-end))
 
 (defvar twee-mode-variable-regexp
   (rx
@@ -159,6 +188,13 @@
     (+ (not "_"))
     "__")))
 
+(defvar twee-mode-strikethrough-regexp
+  (rx
+   (group
+    "=="
+    (+ (not "="))
+    "==")))
+
 (defvar twee-mode-font-lock-keywords
   `((,twee-mode-passage-header-regexp
      (1 'twee-mode-passage-prefix-face)
@@ -177,6 +213,11 @@
      (2 'twee-mode-heading-text-face))
     (,twee-mode-list-regexp
      (1 'twee-mode-list-face))
+    (,twee-mode-blockquote-regexp
+     (1 'twee-mode-blockquote-prefix-face)
+     (2 'twee-mode-blockquote-text-face))
+    (,twee-mode-rule-regexp
+     (1 'twee-mode-rule-face))
     (,twee-mode-variable-regexp
      (1 'twee-mode-variable-sigil-face)
      (2 'twee-mode-variable-name-face))
@@ -193,7 +234,9 @@
     (,twee-mode-strong-regexp
      (1 'twee-mode-strong-face))
     (,twee-mode-underline-regexp
-     (1 'twee-mode-underline-face))))
+     (1 'twee-mode-underline-face))
+    (,twee-mode-strikethrough-regexp
+     (1 'twee-mode-strikethrough-face))))
 
 ;;;###autoload
 (define-derived-mode twee-mode fundamental-mode "Twee"
