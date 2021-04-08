@@ -1,11 +1,29 @@
 ;;; twee-mode.el ---- Major modes for editing twee files -*- lexical-binding: t -*-
 
+;; Copyright (C) 2021 Samuel Laurén
+
+;; Author: Samuel Laurén <samuel.lauren@iki.fi>
+;; Keywords: Twee, SugarCube
 ;; Package-Requires: ((emacs "27.1"))
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
-;; Major modes for editing twee files.
-;; This mode supports a small sub-set of SugarCube's syntax.
+;; Major modes for editing twee files that use SugarCube.
 
 ;;; Code:
 
@@ -293,12 +311,22 @@
     (,twee-mode-strikethrough-regexp
      (1 'twee-mode-strikethrough-face))))
 
+(defvar twee-mode-syntax-table
+  (let ((table (make-syntax-table)))
+    (modify-syntax-entry ?/ ". 14" table)
+    (modify-syntax-entry ?* ". 23b" table)
+    (modify-syntax-entry ?/ ". 14" table)
+    (modify-syntax-entry ?% ". 23b" table)
+    table)
+  "Syntax table for twee-mode.")
+
 ;;;###autoload
 (define-derived-mode twee-mode fundamental-mode "Twee"
   "Major modes for editing twee files."
   :group 'twee-mode
   (setq font-lock-defaults '(twee-mode-font-lock-keywords))
   (font-lock-mode 1)
+  (set-syntax-table twee-mode-syntax-table)
   (setq-local comment-start "/*")
   (setq-local comment-start-skip "/\\*+[ \t]*")
   (setq-local comment-end "*/")
