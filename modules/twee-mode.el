@@ -16,6 +16,11 @@
   :group 'data
   :prefix "twee-mode-")
 
+(defface twee-mode-delimiter-face
+  '((t (:inherit font-lock-preprocessor-face)))
+  "Face for delimiters."
+  :group 'twee-mode)
+
 (defface twee-mode-passage-prefix-face
   '((t (:inherit font-lock-keyword-face)))
   "Face for passage prefixes."
@@ -26,14 +31,19 @@
   "Face for passage names."
   :group 'twee-mode)
 
-(defface twee-mode-link-face
-  '((t (:inherit font-lock-preprocessor-face)))
-  "Face for links."
-  :group 'twee-mode)
-
 (defface twee-mode-link-label-face
   '((t (:inherit font-lock-string-face)))
   "Face for link label."
+  :group 'twee-mode)
+
+(defface twee-mode-image-title-face
+  '((t (:inherit font-lock-string-face)))
+  "Face for image titles."
+  :group 'twee-mode)
+
+(defface twee-mode-image-source-face
+  '((t (:inherit font-lock-keyword-face)))
+  "Face for image sources."
   :group 'twee-mode)
 
 (defface twee-mode-heading-prefix-face
@@ -81,11 +91,6 @@
   "Face for variable names."
   :group 'twee-mode)
 
-(defface twee-mode-macro-face
-  '((t (:inherit font-lock-preprocessor-face)))
-  "Face for macros."
-  :group 'twee-mode)
-
 (defface twee-mode-macro-name-face
   '((t (:inherit font-lock-function-name-face)))
   "Face for macro names."
@@ -120,13 +125,32 @@
 (defvar twee-mode-link-regexp
   (rx (group "[[")
       (optional
-       (group (+ (not (or "|" "]"))))
+       (group (+ (not (or "|" "]")))) ; label
        (group "|"))
-      (group (+ (not "]")))
+      (group (+ (not "]"))) ; target passage
       (group "]")
       (optional
        (group "[")
-       (* (not "]"))
+       (* (not "]")) ; setter
+       (group "]"))
+      (group "]")))
+
+(defvar twee-mode-image-regexp
+  (rx (group "[")
+      (group "img")
+      (group "[")
+      (optional
+       (group (+ (not (or "|" "]")))) ; title
+       (group "|"))
+      (group (+ (not "]"))) ; source
+      (group "]")
+      (optional
+       (group "[")
+       (group (+ (not "]"))) ; link
+       (group "]"))
+      (optional
+       (group "[")
+       (+ (not "]")) ; setter
        (group "]"))
       (group "]")))
 
@@ -214,14 +238,28 @@
      (1 'twee-mode-passage-prefix-face)
      (2 'twee-mode-passage-name-face))
     (,twee-mode-link-regexp
-     (1 'twee-mode-link-face)
+     (1 'twee-mode-delimiter-face)
      (2 'twee-mode-link-label-face nil t)
-     (3 'twee-mode-link-face nil t)
+     (3 'twee-mode-delimiter-face nil t)
      (4 'twee-mode-passage-name-face)
-     (5 'twee-mode-link-face)
-     (6 'twee-mode-link-face nil t)
-     (7 'twee-mode-link-face nil t)
-     (8 'twee-mode-link-face))
+     (5 'twee-mode-delimiter-face)
+     (6 'twee-mode-delimiter-face nil t)
+     (7 'twee-mode-delimiter-face nil t)
+     (8 'twee-mode-delimiter-face))
+    (,twee-mode-image-regexp
+     (1 'twee-mode-delimiter-face)
+     (2 'twee-mode-macro-name-face)
+     (3 'twee-mode-delimiter-face)
+     (4 'twee-mode-image-title-face nil t)
+     (5 'twee-mode-delimiter-face nil t)
+     (6 'twee-mode-image-source-face)
+     (7 'twee-mode-delimiter-face)
+     (8 'twee-mode-delimiter-face nil t)
+     (9 'twee-mode-passage-name-face nil t)
+     (10 'twee-mode-delimiter-face nil t)
+     (11 'twee-mode-delimiter-face nil t)
+     (12 'twee-mode-delimiter-face nil t)
+     (13 'twee-mode-delimiter-face))
     (,twee-mode-heading-regexp
      (1 'twee-mode-heading-prefix-face)
      (2 'twee-mode-heading-text-face))
@@ -239,13 +277,13 @@
      (1 'twee-mode-variable-sigil-face)
      (2 'twee-mode-variable-name-face))
     (,twee-mode-macro-start-regexp
-     (1 'twee-mode-macro-face)
+     (1 'twee-mode-delimiter-face)
      (2 'twee-mode-macro-name-face)
-     (3 'twee-mode-macro-face))
+     (3 'twee-mode-delimiter-face))
     (,twee-mode-macro-end-regexp
-     (1 'twee-mode-macro-face)
+     (1 'twee-mode-delimiter-face)
      (2 'twee-mode-macro-name-face)
-     (3 'twee-mode-macro-face))
+     (3 'twee-mode-delimiter-face))
     (,twee-mode-emphasis-regexp
      (1 'twee-mode-emphasis-face))
     (,twee-mode-strong-regexp
