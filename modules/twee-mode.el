@@ -66,6 +66,11 @@
   "Face for horizontal rules."
   :group 'twee-mode)
 
+(defface twee-mode-line-continuation-face
+  '((t (:inherit font-lock-comment-delimiter-face)))
+  "Face for line continuations."
+  :group 'twee-mode)
+
 (defface twee-mode-variable-sigil-face
   '((t (:inherit font-lock-preprocessor-face)))
   "Face for variable sigils."
@@ -146,6 +151,15 @@
       (group "----")
       line-end))
 
+(defvar twee-mode-line-continuation-regexp
+  (rx (or (seq line-start
+               (* blank)
+               (group "\\"))
+          (seq
+           (group "\\")
+           (* blank)
+           line-end))))
+
 (defvar twee-mode-variable-regexp
   (rx
    (group "$")
@@ -218,6 +232,9 @@
      (2 'twee-mode-blockquote-text-face))
     (,twee-mode-rule-regexp
      (1 'twee-mode-rule-face))
+    (,twee-mode-line-continuation-regexp
+     (1 'twee-mode-line-continuation-face nil t)
+     (2 'twee-mode-line-continuation-face nil t))
     (,twee-mode-variable-regexp
      (1 'twee-mode-variable-sigil-face)
      (2 'twee-mode-variable-name-face))
