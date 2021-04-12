@@ -182,6 +182,10 @@ _H_: Increase  _S_: Increase  _B_: Increase
   :ensure t
   :defer t)
 
+(use-package urldecode
+  :commands (urldecode-replace-region)
+  :defer t)
+
 (use-package dbus-control
   :if (and (not (daemonp)) (locate-library "dbus"))
   :commands (dbus-control-mode)
