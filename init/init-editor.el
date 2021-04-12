@@ -67,13 +67,6 @@
            (propertize (format "%d" (line-number-at-pos)) 'face font-lock-constant-face)
            (propertize (format "%d" (current-column)) 'face font-lock-constant-face)))
 
-;; I regularly work on projects with large TAGS files
-(advice-add
- 'abort-if-file-too-large :around
- (lambda (fn size op-type filename)
-   (unless (equal (f-filename filename) "TAGS")
-     (apply fn (list size op-type filename)))))
-
 ;; Messages buffer bindings
 (bind-keys
  :map messages-buffer-mode-map
