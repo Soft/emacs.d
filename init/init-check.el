@@ -28,7 +28,8 @@
     "........"
     "...XX..."
     "...XX...") 
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  (setq-default flycheck-disabled-checkers
+                '(emacs-lisp-checkdoc python-flake8 python-pylint python-mypy python-pycompile))
   ;; These don't actually do anything with telephone line enabled
   (setq
    flycheck-mode-line-prefix "✔"
