@@ -44,6 +44,7 @@
                      (projects . 5)
                      (bm . 5)
                      (eww . 5))
+   dashboard-footer-messages '("Happy coding!")
    dashboard-startup-banner (adq/dashboard-select-banner)
    dashboard-banner-logo-title
    (format "Welcome to Emacs, %s %s"
