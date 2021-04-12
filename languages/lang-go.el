@@ -23,8 +23,8 @@
   (add-hook 'before-save-hook #'gofmt-before-save nil t)
   (adq/setq-local compilation-read-command nil
                   compile-command "go build")
-  (when (package-installed-p 'go-eldoc)
-    (go-eldoc-setup))
+  ;; (when (package-installed-p 'go-eldoc)
+  ;;   (go-eldoc-setup))
   (when (package-installed-p 'company-go)
     (setq-local company-backends '(company-go))))
 
