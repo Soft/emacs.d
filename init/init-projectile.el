@@ -50,15 +50,12 @@
 
 (use-package projectile
   :ensure t
-  :bind (("C-c C-p" . projectile-command-map))
+  :bind (("C-c p" . projectile-command-map))
   :init (projectile-global-mode)
   :config
   (setq
    projectile-completion-system 'helm
-   projectile-mode-line
-   '(:eval (if (projectile-project-p)
-               (format " <%s>" (projectile-project-name))
-             "")))
+   projectile-mode-line-prefix " ")
   (bind-keys
    :map projectile-command-map
    ("C" . adq/projectile-cd)
