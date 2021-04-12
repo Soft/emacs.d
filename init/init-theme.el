@@ -22,6 +22,8 @@
     kaolin-themes
     kooten-theme
     material-theme
+    modus-operandi-theme
+    modus-vivendi-theme
     monokai-theme
     plan9-theme
     spacemacs-theme
@@ -34,7 +36,7 @@
 
 (adq/install-packages-if-missing adq/wanted-themes t)
 
-(defvar adq/default-theme 'kaolin-dark
+(defvar adq/default-theme 'modus-vivendi
   "Default theme for Emacs.")
 
 (defvar adq/switch-theme-hook nil
