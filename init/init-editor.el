@@ -164,8 +164,7 @@
 (use-package dtrt-indent
   :ensure t
   :defer t
-  :config
-  (setq dtrt-indent-active-mode-line-info "↹ "))
+  :diminish dtrt-indent-mode)
 
 (use-package writegood-mode
   :ensure t
