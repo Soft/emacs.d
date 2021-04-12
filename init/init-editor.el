@@ -180,14 +180,14 @@
 
 (use-package highlight-indent-guides
   :ensure t
-  :defer t)
+  :defer t
+  :diminish highlight-indent-guides-mode)
 
 (use-package symbol-overlay
   :ensure t
   :defer t)
 
 (use-package find-file
-  :ensure t
   :defer t
   :config
   (setq ff-always-try-to-create nil))
