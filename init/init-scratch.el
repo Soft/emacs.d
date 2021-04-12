@@ -36,6 +36,15 @@
    (with-current-buffer "*scratch*"
      (run-hooks 'org-mode-hook))))
 
+(defun adq/new-scratch-buffer ()
+  "Open new scratch buffer."
+  (interactive)
+  (let ((buffer (generate-new-buffer "*scratch*")))
+    (switch-to-buffer buffer)
+    (lisp-interaction-mode)
+    (insert (format ";; %s\n\n" (format-time-string "%A %x")))
+    (setq buffer-offer-save t)))
+
 (provide 'init-scratch)
 
 ;;; init-scratch.el ends here
