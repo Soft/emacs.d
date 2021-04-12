@@ -104,7 +104,9 @@
   (flycheck-mode)
   (yas-minor-mode)
   (company-mode)
-  (company-statistics-mode))
+  (company-statistics-mode)
+  (which-function-mode)
+  (flyspell-prog-mode))
 
 (use-package undo-tree
   :ensure t
