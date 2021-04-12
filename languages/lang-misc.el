@@ -25,8 +25,7 @@
 
 (use-package ruby-mode
   :mode (("\\.rb\\'" . ruby-mode))
-  :interpreter "ruby"
-  :ensure t)
+  :interpreter "ruby")
 
 (use-package php-mode
   :mode (("\\.php\\'" . php-mode))
