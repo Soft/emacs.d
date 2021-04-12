@@ -167,7 +167,8 @@
              movement
              debugging
              xwidget
-             neotree
+             ;; neotree
+             sidebar
              chat
              pdf
              modeline
