@@ -66,21 +66,6 @@
 (dolist (subdir '("init" "languages" "modules"))
   (add-to-list 'load-path (expand-file-name subdir adq/init-directory)))
 
-;; Setup package archives
-;; EMACS_NO_TLS environment variable can be used to control if TLS should be used.
-
-(defconst adq/tls-enabled
-  (and (gnutls-available-p)
-       (not (getenv "EMACS_NO_TLS")))
-  "Will TLS be used.")
-
-(unless adq/tls-enabled
-  (warn "TLS was disabled."))
-
-(defun adq/tls-add-protocol (url)
-  (let ((proto (if adq/tls-enabled "https" "http")))
-    (format "%s://%s" proto url)))
-
 (setq
  gnutls-algorithm-priority "SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%PROFILE_MEDIUM"
  gnutls-min-prime-bits 1024
@@ -88,12 +73,9 @@
  ;;; network-security-level 'high
  )
 
-(defvar package-archives
-  `(("melpa" . ,(adq/tls-add-protocol "melpa.org/packages/"))
-    ("gnu" . ,(adq/tls-add-protocol "elpa.gnu.org/packages/"))))
-
-(require 'package)
-(package-initialize)
+(setq package-archives
+      `(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")))
 
 ;; Record package archive refresh times.
 
@@ -105,9 +87,9 @@
 
 (advice-add #'package-refresh-contents :before #'adq/package-update-last-refresh-time)
 
-(unless package-archive-contents
-  (message "No package archive available, refreshing...")
-  (package-refresh-contents))
+;; (unless package-archive-contents
+;;   (message "No package archive available, refreshing...")
+;;   (package-refresh-contents))
 
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
