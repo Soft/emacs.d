@@ -81,7 +81,6 @@
   (css-eldoc-enable))
 
 (use-package css-mode
-  :ensure t
   :mode (("\\.css\\'" . css-mode))
   :init
   (add-hook 'css-mode-hook #'adq/css-setup)
