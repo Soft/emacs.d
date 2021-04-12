@@ -63,7 +63,7 @@
                 'face `(:family ,(funcall family) :height 1.2)
                 'display '(raise -0.1))))
 
-(memoize 'adq/icon-string)
+;;(memoize 'adq/icon-string)
 
 (use-package page-break-lines
   :disabled
