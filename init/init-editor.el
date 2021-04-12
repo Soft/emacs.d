@@ -27,6 +27,7 @@
  save-interprogram-paste-before-kill t
  kill-ring-max 250
  tramp-default-method "ssh"
+ history-delete-duplicates t
  vc-follow-symlinks t)
 
 ;; Change line truncation indicator
