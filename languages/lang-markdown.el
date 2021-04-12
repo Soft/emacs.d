@@ -47,7 +47,7 @@
     (setq-local adq/pandoc-pdf-target-file out)
     `(,out . (,@(if adq/pandoc-pdf-from-buffer-use-citeproc
                     '("--filter" "pandoc-citeproc") '())
-              "-o" ,out "-f" "markdown"))))
+              "-o" ,out "-f" "markdown" "--pdf-engine" "xelatex"))))
 
 (defun adq/markdown-setup ()
   (flycheck-mode 1)
