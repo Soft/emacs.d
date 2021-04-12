@@ -63,7 +63,7 @@
   (setq evil-cross-lines t
         evil-search-wrap t
         evil-default-cursor t
-        evil-mode-beyond-eol t)
+        evil-undo-system 'undo-tree)
 
   (dolist
       (mode adq/evil-disabled-modes)
