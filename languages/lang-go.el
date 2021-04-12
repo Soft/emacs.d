@@ -28,6 +28,14 @@
   (when (package-installed-p 'company-go)
     (setq-local company-backends '(company-go))))
 
+(define-derived-mode conf-go-mod-mode conf-mode "Go Module"
+  "Mode for editing go.mod files."
+  (conf-mode-initialize "//"))
+
+(setq auto-mode-alist
+      (append '(("/go\\.mod$" . conf-go-mod-mode))
+              auto-mode-alist))
+
 (use-package go-errcheck
   :if (adq/programs-p "errcheck")
   :ensure t
