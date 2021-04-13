@@ -244,8 +244,14 @@ darker the new color will be is determined by CHANGE."
 universal argument present, current time will also be inserted."
   (interactive "P")
   (insert
-   (if d (format-time-string "%c")
-     (format-time-string "%A %x"))))
+   (if d
+       (let* ((tz (format-time-string "%z")))
+         (concat
+          (format-time-string "%Y-%m-%dT%T")
+          (substring tz 0 3)
+          ":"
+          (substring tz 3 5)))
+     (format-time-string "%Y-%m-%d"))))
 
 
 (provide 'init-prelude)
