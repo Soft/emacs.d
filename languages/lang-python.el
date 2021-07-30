@@ -10,11 +10,6 @@
   :ensure t
   :defer t)
 
-(use-package yapfify
-  :if (adq/programs-p "yapf")
-  :ensure t
-  :defer t)
-
 (use-package py-isort
   :if (adq/programs-p "isort")
   :ensure t
@@ -27,10 +22,6 @@
   :config
   (setq blacken-line-length 79))
 
-(use-package anaconda-mode
-  :ensure t
-  :defer t)
-
 (defvar adq/python-prettify-symbols-alist
   '(("lambda" . ?λ)
     ("and" . ?∧)
@@ -41,6 +32,7 @@
     (">=" . ?≥)
     (">>" . ?≫)
     ("<<" . ?≪)
+    ("->" . ?→)
     ("not in" . ?∉)
     ("in" . ?∈)
     ("sum" . ?Σ)
@@ -53,11 +45,9 @@
   (setq-local prettify-symbols-alist adq/python-prettify-symbols-alist)
   (highlight-indent-guides-mode)
   (pyvenv-mode)
-  ;; (anaconda-mode)
-  ;; (anaconda-eldoc-mode)
-  ;; (when-let ((venv (adq/python-find-project-venv)))
-  ;;   (pyvenv-activate venv)
-  ;;   (message "Activated virtual environment %s" venv))
+  (when-let ((venv (adq/python-find-project-venv)))
+    (pyvenv-activate venv)
+    (message "Activated virtual environment %s" venv))
   (when (and (equal (buffer-name) "setup.py")
              (eq (buffer-size) 0))
     (auto-insert)))
@@ -227,9 +217,11 @@ found."
         (message "Activated virtual environment %s" venv))
     (error "Cannot find virtual environment")))
 
-(adq/region-switch-command adq/python-format-region-or-buffer
-  #'yapfify-region #'yapfify-buffer
-  "Use yapf to format region or buffer.")
+(defun adq/python-format-buffer ()
+  "Format python buffer."
+  (interactive)
+  (py-isort-buffer)
+  (blacken-buffer))
 
 (use-package python
   :mode (("\\.py\\'" . python-mode)
@@ -240,7 +232,7 @@ found."
   :bind
   (:map python-mode-map
         ("M-\"" . adq/python-skeleton-doc-comment)
-        ("C-c a =" . adq/python-format-region-or-buffer)
+        ("C-c a =" . adq/python-format-buffer)
         ("C-c a R" . adq/python-venv-activate)
         ("C-c a S" . adq/python-setup-venv)
         ("C-c a i" . py-isort-buffer)))
