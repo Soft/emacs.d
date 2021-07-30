@@ -14,6 +14,7 @@
     (">>" . ?≫)
     ("<<" . ?≪)
     ("<-" . ?←)
+    (":=" . ?≔)
     ("..." . ?…))
   "Symbol prettification alist for `go-mode'.")
 
