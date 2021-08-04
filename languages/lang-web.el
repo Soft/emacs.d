@@ -105,6 +105,7 @@
          ("\\.tsx\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.j2\\'" . web-mode)
+         ("\\.jinja\\'" . web-mode)
          ("\\.jinja2\\'" . web-mode))
   :ensure t
   :init
