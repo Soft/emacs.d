@@ -37,7 +37,8 @@
     ("in" . ?∈)
     ("sum" . ?Σ)
     ("all" . ?∀)
-    ("any" . ?∃))
+    ("any" . ?∃)
+    ("..." . ?…))
   "Symbol prettification alist for `python-mode'.")
 
 (defun adq/python-setup ()
