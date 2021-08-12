@@ -14,6 +14,7 @@
     ("<<" . ?≪)
     ("->" . ?→)
     ("..." . ?…)
+    ("*" . ?∗)
     ("||" . ?‖))
   "Symbol prettification alist for `c-mode'.")
 
@@ -23,6 +24,8 @@
     (">=" . ?≥)
     ("->" . ?→)
     ("..." . ?…)
+    ("*" . ?∗)
+    ("::" . ?∷)
     ("||" . ?‖))
   "Symbol prettification alist for `c++-mode'.")
 
