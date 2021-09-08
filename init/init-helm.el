@@ -148,6 +148,14 @@ if universal argument is supplied."
   :commands (helm-fd)
   :bind (("C-x c d" . helm-fd)))
 
+(use-package helm-zoxide
+  :commands (helm-zoxide
+             helm-zoxide-enable-find-file-hook)
+  :if (adq/programs-p "zoxide")
+  :init
+  (helm-zoxide-enable-find-file-hook)
+  :bind (("C-x c z" . helm-zoxide)))
+
 (use-package helm-snippets
   :functions (helm-snippets-define)
   :commands (helm-snippets-arrow helm-snippets-star)
