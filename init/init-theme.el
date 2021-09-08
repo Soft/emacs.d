@@ -36,7 +36,7 @@
 
 (adq/install-packages-if-missing adq/wanted-themes t)
 
-(defvar adq/default-theme 'modus-vivendi
+(defvar adq/default-theme 'doom-horizon
   "Default theme for Emacs.")
 
 (defvar adq/switch-theme-hook nil
