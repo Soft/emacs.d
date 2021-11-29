@@ -1,11 +1,7 @@
+\#*
 *~
 *.elc
-TAGS
-GPATH
-GRTAGS
-GTAGS
 local/*
 !local/.empty
 resources/banners/*
 !resources/banners/.empty
-\#*
