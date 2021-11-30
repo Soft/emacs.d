@@ -1,6 +1,8 @@
 ;;; config-themes.el -*- lexical-binding: t; -*-
 
-(use-package kaolin-themes :defer t)
+(use-package kaolin-themes :defer t
+  :config
+  (setq kaolin-themes-underline-wave nil))
 
 (use-package doom-themes :defer t)
 
