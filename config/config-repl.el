@@ -18,6 +18,6 @@
    (lambda ()
      (set-process-query-on-exit-flag
       (get-buffer-process (current-buffer)) nil)))
-  (setq comint-input-ring-size 10000))
+  (setq comint-input-ring-size 16384))
 
 (provide 'config-repl)

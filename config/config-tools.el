@@ -24,9 +24,9 @@
   (setq pdf-view-page-resize-factor 1.1))
 
 (use-package exec-path-from-shell
-  :defer 2
+  :defer 1
   :config
-  (adq/add-many-to-list-many
+  (adq/add-many-to-list
    'exec-path-from-shell-variables
    '("SSH_AUTH_SOCK"
      "SSH_AGENT_PID"

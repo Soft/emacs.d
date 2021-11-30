@@ -7,7 +7,7 @@
      (eq mode (buffer-local-value 'major-mode buffer)))
    (buffer-list)))
 
-(defun adq/add-many-to-list-many (list elements &optional append compare-fn)
+(defun adq/add-many-to-list (list elements &optional append compare-fn)
   "Add ELEMENTS to LIST using add-to-list."
   (dolist (item elements)
     (add-to-list list item append compare-fn)))
