@@ -1,18 +1,13 @@
 ;;; config-lsp.el -*- lexical-binding: t; -*-
 
-(defvar adq/lsp-enabled-modes
-  (append
-   (when (adq/programs-p "clangd")
-     '(c-mode c++-mode))
-   (when (adq/programs-p "gopls")
-     '(go-mode))
-   (when (adq/programs-p "rust-analyzer")
-     '(rust-mode))
-   (when (adq/programs-p "haskell-language-server")
-     '(haskell-mode literate-haskell-mode))
-   (when (adq/programs-p "pyls")
-     '(python-mode)))
-  "List of modes where LSP should be enabled.")
+(defun adq/lsp-wanted-p (mode)
+  "Returns t if LSP should be enabled for MODE."
+  (pcase mode
+    ((or 'c-mode 'c++mode) (adq/programs-p "clangd"))
+    ('go-mode (adq/programs-p "gopls"))
+    ('rust-mode (adq/programs-p "rust-analyzer"))
+    ('haskell-mode (adq/programs-p "haskell-language-server"))
+    ('python-mode (adq/programs-p "pyls"))))
 
 (defun adq/maybe-enable-lsp ()
   "Try to enable LSP support. Language server support will be
@@ -20,7 +15,7 @@ enabled if the buffer is part of a project and its major mode is
 in `adq/lsp-enabled-modes'."
   (interactive)
   (when (and (adq/projectile-buffer-project)
-             (seq-contains-p adq/lsp-enabled-modes major-mode))
+             (adq/lsp-wanted-p major-mode))
     (lsp-deferred)))
 
 (use-package lsp-mode
@@ -38,9 +33,8 @@ in `adq/lsp-enabled-modes'."
 
 (use-package helm-lsp
   :after lsp-mode
-  :config
-  (define-key lsp-mode-map
-    [remap xref-find-apropos]
-    #'helm-lsp-workspace-symbol))
+  :bind
+  (:map lsp-mode-map
+        ("<remap> <xref-find-apropos>" . helm-lsp-workspace-symbol)))
 
 (provide 'config-lsp)
