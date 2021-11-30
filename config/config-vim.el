@@ -20,9 +20,13 @@
         evil-respect-visual-line-mode t
         evil-undo-system 'undo-tree)
   :bind (:map evil-normal-state-map
+              ("<remap> <evil-next-line>" . evil-next-visual-line)
+              ("<remap> <evil-previous-line>" . evil-previous-visual-line)
               ("J" . evil-scroll-down)
               ("K" . evil-scroll-up)
               :map evil-visual-state-map
+              ("<remap> <evil-next-line>" . evil-next-visual-line)
+              ("<remap> <evil-previous-line>" . evil-previous-visual-line)
               ("J" . evil-scroll-down)
               ("K" . evil-scroll-up))
   :config
