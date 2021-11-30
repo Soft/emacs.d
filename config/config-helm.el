@@ -46,6 +46,7 @@
      :min-height height)))
 
 (use-package helm-posframe
+  :disabled t
   :after helm
   :config
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-top-center
