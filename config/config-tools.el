@@ -23,4 +23,17 @@
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-view-page-resize-factor 1.1))
 
+(use-package exec-path-from-shell
+  :defer 2
+  :config
+  (adq/add-many-to-list-many
+   'exec-path-from-shell-variables
+   '("SSH_AUTH_SOCK"
+     "SSH_AGENT_PID"
+     "GPG_AGENT_INFO"
+     "BROWSER")
+   nil
+   #'equal)
+  (exec-path-from-shell-initialize))
+
 (provide 'config-tools)
