@@ -1,5 +1,12 @@
 ;;; config-prelude.el -*- lexical-binding: t; -*-
 
+(defun adq/buffers-with-major-mode (mode)
+  "Get a list of buffer with MODE."
+  (seq-filter
+   (lambda (buffer)
+     (eq mode (buffer-local-value 'major-mode buffer)))
+   (buffer-list)))
+
 (defun adq/repeating (key fn &rest args)
   "Makes a function that can be repeated with additional key presses."
   (let ((map (make-sparse-keymap)))
