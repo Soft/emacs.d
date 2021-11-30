@@ -3,11 +3,12 @@
 (use-package projectile
   :init (projectile-global-mode)
   :bind
-  (:map projectile-mode-map
-        ("C-c p" . projectile-command-map)
+  (("C-c c" . projectile-compile-project)
+   :map projectile-mode-map
+   ("C-c p" . projectile-command-map)
    :map projectile-command-map
-        ("C" . adq/projectile-cd)
-        ("K" . adq/projectile-kill-unrelated-buffers)))
+   ("C" . adq/projectile-cd)
+   ("K" . adq/projectile-kill-unrelated-buffers)))
 
 (defun adq/cd-here ()
   "Change working directory to current file's location."

@@ -62,10 +62,6 @@
   :bind
   (("M-Q" . unfill-toggle)))
 
-(use-package compile
-  :bind
-  (("C-c c" . compile)))
-
 (use-package bury-successful-compilation
   :after compile
   :config
