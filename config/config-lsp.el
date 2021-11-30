@@ -30,6 +30,7 @@ in `adq/lsp-enabled-modes'."
   (add-hook 'prog-mode-hook #'adq/maybe-enable-lsp)
   :config
   (setq
+   lsp-file-watch-threshold nil
    lsp-keep-workspace-alive nil
    lsp-enable-snippet nil)
   (with-eval-after-load 'which-key
