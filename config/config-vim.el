@@ -33,6 +33,7 @@
   :after evil
   :diminish evil-collection-unimpaired-mode
   :config
+  (setq evil-collection-key-blacklist '("J" "K"))
   (evil-collection-init))
 
 (use-package evil-surround
