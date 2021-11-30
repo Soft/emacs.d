@@ -14,7 +14,9 @@
     kaolin-ocean
     doom-one
     doom-monokai-pro
-    doom-dracula))
+    doom-dracula
+    doom-xcode
+    modus-vivendi))
 
 (load-theme
  (seq-random-elt adq/favorite-themes) t)
