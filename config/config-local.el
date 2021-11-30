@@ -13,11 +13,12 @@
      (when adq/emacs-debug
        (message "Loading %s" path))
      (puthash path t adq/loaded-local-files)
-     (load path nil nil t))
+     (load path nil nil t)
+     path)
    (seq-sort-by #'file-name-base #'string<
                 (seq-filter (lambda (path)
                               (or force
-                                  (gethash path adq/loaded-local-files)))
+                                  (not (gethash path adq/loaded-local-files))))
                             (directory-files adq/local-files-directory t "\\.el\\'")))))
 
 (add-hook 'after-init-hook #'adq/load-local-files)
