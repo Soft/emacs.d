@@ -6,14 +6,13 @@
   :init
   (require 'helm-config)
   :bind
-  (("C-x C-f" . helm-find-files)
-   ("C-x b" . helm-mini)
-   ("C-x C-b" . helm-buffers-list)
-   ("C-c O" . helm-occur)
+  (("<remap> <find-file>" . helm-find-files)
+   ("<remap> <list-buffers>" . helm-buffers-list)
+   ("<remap> <switch-to-buffer>" . helm-mini)
+   ("<remap> <execute-extended-command>" . helm-M-x)
+   ("<remap> <apropos-command>" . helm-apropos)
+   ("<remap> <info>" . helm-info-emacs)
    ("C-c k" . helm-imenu)
-   ("M-x" . helm-M-x)
-   ("C-h a" . helm-apropos)
-   ("C-h i" . helm-info-emacs)
    ("C-c y" . helm-show-kill-ring)
    :map helm-map
    ("<escape>" . helm-keyboard-quit)
@@ -52,7 +51,6 @@
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-top-center
         helm-posframe-size-function #'adq/helm-posframe-get-size)
   (helm-posframe-enable))
-
 (use-package helm-projectile
   :after (helm projectile)
   :hook (projectile-mode . helm-projectile-on)
