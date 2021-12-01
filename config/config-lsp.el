@@ -3,7 +3,7 @@
 (defun adq/lsp-wanted-p (mode)
   "Returns t if LSP should be enabled for MODE."
   (pcase mode
-    ((or 'c-mode 'c++mode) (adq/programs-p "clangd"))
+    ((or 'c-mode 'c++-mode) (adq/programs-p "clangd"))
     ('go-mode (adq/programs-p "gopls"))
     ('rust-mode (adq/programs-p "rust-analyzer"))
     ('haskell-mode (adq/programs-p "haskell-language-server"))
@@ -35,6 +35,9 @@ in `adq/lsp-enabled-modes'."
   :after lsp-mode
   :bind
   (:map lsp-mode-map
-        ("<remap> <xref-find-apropos>" . helm-lsp-workspace-symbol)))
+        ("<remap> <xref-find-apropos>" .
+         (lambda ()
+           (interactive) ;; Use symbol at point by default
+           (helm-lsp-workspace-symbol t)))))
 
 (provide 'config-lsp)
