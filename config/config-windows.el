@@ -37,6 +37,24 @@ The largest window is then selected."
 (bind-key "C-x o" (adq/repeating "o" #'adq/switch-window-or-buffer))
 (bind-key "C-<tab>" #'adq/switch-window-or-buffer)
 
+(defun adq/split-window-vertically ()
+  "Split window vertically and rebalance."
+  (interactive)
+  (split-window-right)
+  (balance-windows))
+
+(defun adq/split-window-horizontally ()
+  "Split window horizontally an rebalance."
+  (interactive)
+  (split-window-below)
+  (balance-windows))
+
+(defun adq/delete-window ()
+  "Delete window and rebalance."
+  (interactive)
+  (delete-window)
+  (balance-windows))
+
 (defhydra adq/hydra-manage-windows nil
   "
 ^Move^         ^^Window^                 ^Layout^            ^Control
@@ -52,28 +70,30 @@ The largest window is then selected."
   ("k" windmove-up)
   ("l" windmove-right)
 
+  ("0" adq/delete-window)
+  ("1" delete-other-windows)
+  ("2" adq/split-window-horizontally)
+  ("3" adq/split-window-vertically)
+  ("w" adq/swap-with-largest :exit t)
+
+  ("p" winner-undo)
+  ("n" winner-redo)
+  ("b" balance-windows :exit t)
   ("r" rotate-frame-clockwise)
   ("R" rotate-frame-anticlockwise)
 
-  ("n" winner-redo)
-  ("p" winner-undo)
-
-  ("b" balance-windows :exit t)
-
-  ("f" toggle-frame-fullscreen)
   ("m" toggle-menu-bar-mode-from-frame)
   ("s" toggle-scroll-bar)
   ("t" tab-bar-mode)
   ("T" toggle-tool-bar-mode-from-frame)
-
   ("e" adq/switch-theme :exit t)
 
-  ("0" delete-window)
-  ("1" delete-other-windows)
-  ("2" split-window-below)
-  ("3" split-window-right)
-  ("w" adq/swap-with-largest :exit t))
+  ("f" toggle-frame-fullscreen))
 
-(bind-key "C-c w" #'adq/hydra-manage-windows/body)
+(bind-keys
+ ("C-c w" . adq/hydra-manage-windows/body)
+ ("<remap> <split-window-below>" . adq/split-window-horizontally)
+ ("<remap> <split-window-right>" . adq/split-window-vertically)
+ ("<remap> <delete-window>" . adq/delete-window))
 
 (provide 'config-windows)
