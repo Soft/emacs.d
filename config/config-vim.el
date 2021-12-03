@@ -6,6 +6,7 @@
     inferior-emacs-lisp-mode
     inferior-haskell-mode
     inferior-python-mode
+    cider-repl-mode
     vterm-mode))
 
 (use-package evil
