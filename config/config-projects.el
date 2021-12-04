@@ -3,7 +3,7 @@
 (use-package projectile
   :init (projectile-global-mode)
   :bind
-  (("C-c c" . projectile-compile-project)
+  (("C-c r" . projectile-compile-project)
    :map projectile-mode-map
    ("C-c p" . projectile-command-map)
    :map projectile-command-map

@@ -2,11 +2,11 @@
 
 (use-package elisp-refs
   :bind (:map emacs-lisp-mode-map
-              ("C-c a s f" . elisp-refs-function)
-              ("C-c a s m" . elisp-refs-macro)
-              ("C-c a s v" . elisp-refs-variable)
-              ("C-c a s s" . elisp-refs-symbol)
-              ("C-c a s S" . elisp-refs-special)))
+              ("C-c c s f" . elisp-refs-function)
+              ("C-c c s m" . elisp-refs-macro)
+              ("C-c c s v" . elisp-refs-variable)
+              ("C-c c s s" . elisp-refs-symbol)
+              ("C-c c s S" . elisp-refs-special)))
 
 (use-package package-lint :defer t)
 
@@ -67,29 +67,36 @@ supplied, new buffer is always created."
   :straight nil
   :defer t
   :bind (:map emacs-lisp-mode-map
-              ("C-c a r" . eval-region)
-              ("C-c a b" . eval-buffer)
-              ("C-c a f" . eval-defun))
-  :init
+              ("C-c c r" . eval-region)
+              ("C-c c b" . eval-buffer)
+              ("C-c c f" . eval-defun))
+  :config
   (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup))
 
 (use-package clojure-mode
   :mode (("\\.clj\\'" . clojure-mode)
          ("\\.cljc\\'" . clojure-mode)
          ("\\.cljs\\'" . clojurescript-mode))
-  :init
+  :config
   (add-hook 'clojure-mode-hook #'adq/lisp-setup)
   (add-hook 'clojurescript-mode-hook #'adq/lisp-setup))
 
 (use-package cider
-  :hook (clojure-mode . cider-mode)
+  :after clojure-mode
+  :hook (clojure-mod . cider-mode)
   :bind (:map clojure-mode-map
-              ("C-c a j" . cider-jack-in)
-              ("C-c a r" . cider-eval-region)
-              ("C-c a b" . cider-eval-buffer)
-              ("C-c a f" . cider-eval-defun-at-point))
+              ("C-c c j" . cider-jack-in)
+              ("C-c c r" . cider-eval-region)
+              ("C-c c b" . cider-eval-buffer)
+              ("C-c c f" . cider-eval-defun-at-point))
   :config
+  (add-hook 'cider-repl-mode-hook #'company-mode)
   (setq cider-repl-display-help-banner nil
         cider-show-error-buffer 'except-in-repl))
+
+(use-package helm-cider
+  :after (cider helm)
+  :config
+  (helm-cider-mode))
 
 (provide 'env-lisp)
