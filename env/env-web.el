@@ -9,7 +9,7 @@
 (use-package css-mode
   :straight nil
   :mode (("\\.css\\'" . css-mode))
-  :init
+  :config
   (add-hook 'css-mode-hook #'adq/css-setup))
 
 (use-package scss-mode
@@ -35,7 +35,7 @@
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode))
   :interpreter ("node" . js2-mode)
-  :init
+  :config
   (add-hook 'js2-mode-hook #'adq/js-setup))
 
 (use-package web-mode

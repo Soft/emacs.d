@@ -121,9 +121,10 @@ found."
          ("/SConscript\\'" . python-mode)
          ("/SConstruct\\'" . python-mode))
   :interpreter (("python" . python-mode))
-  :init (add-hook 'python-mode-hook #'adq/python-setup)
   :bind
   (:map python-mode-map
-        ("M-\"" . adq/python-skeleton-doc-comment)))
+        ("M-\"" . adq/python-skeleton-doc-comment))
+  :config
+  (add-hook 'python-mode-hook #'adq/python-setup))
 
 (provide 'env-python)

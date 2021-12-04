@@ -26,6 +26,9 @@
 
 (use-package go-mode
   :mode (("\\.go\\'" . go-mode))
-  :init (add-hook 'go-mode-hook #'adq/go-setup))
+  :config
+  (add-hook 'go-mode-hook #'adq/go-setup)
+  (when (adq/programs-p "goimports")
+    (setq gofmt-command "goimports")))
 
 (provide 'env-go)

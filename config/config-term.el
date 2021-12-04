@@ -29,7 +29,7 @@
 
 (use-package vterm
   :defer t
-  :init
+  :config
   (add-hook 'vterm-mode-hook #'adq/vterm-setup))
 
 (bind-key "C-c <RET>" #'adq/toggle-vterm)

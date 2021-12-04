@@ -21,9 +21,8 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init
-  (add-hook 'markdown-mode-hook #'adq/markdown-setup)
   :config
+  (add-hook 'markdown-mode-hook #'adq/markdown-setup)
   (setq markdown-bold-underscore t
         markdown-enable-math t
         markdown-command "pandoc")

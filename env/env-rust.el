@@ -24,6 +24,7 @@
 (use-package rust-mode
   :mode (("\\.rs\\'" . rust-mode)
          ("\\.lalrpop\\'" . rust-mode))
-  :init (add-hook 'rust-mode-hook #'adq/rust-setup))
+  :config
+  (add-hook 'rust-mode-hook #'adq/rust-setup))
 
 (provide 'env-rust)

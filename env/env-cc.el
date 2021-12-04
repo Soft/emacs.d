@@ -42,7 +42,7 @@
 (use-package cc-mode
   :straight nil
   :defer t
-  :init
+  :config
   (add-hook 'c-mode-hook #'adq/c-setup)
   (add-hook 'c++-mode-hook #'adq/c++-setup))
 

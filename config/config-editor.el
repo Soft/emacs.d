@@ -93,8 +93,8 @@
   :straight nil
   :init
   (global-prettify-symbols-mode)
-  (add-hook 'prog-mode-hook #'adq/prog-mode-setup)
   :config
+  (add-hook 'prog-mode-hook #'adq/prog-mode-setup)
   (setq prettify-symbols-unprettify-at-point 'right-edge))
 
 (add-hook 'after-save-hook
