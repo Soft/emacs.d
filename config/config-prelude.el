@@ -67,4 +67,19 @@ present."
             cached)))
       progs))))
 
+(defmacro adq/use-local-package (name &rest args)
+  "Use local package from Adequate's modules directory."
+  (declare (indent 1))
+  (unless (memq :disabled args)
+    `(progn
+       (straight-use-package
+        '(,name
+          :local-repo ,(concat adq/adequate-directory
+                               (file-name-as-directory "modules")
+                               (symbol-name name))
+          :type git))
+       (use-package ,name
+         :straight nil
+         ,@args))))
+
 (provide 'config-prelude)

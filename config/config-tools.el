@@ -36,4 +36,6 @@
    #'equal)
   (exec-path-from-shell-initialize))
 
+(adq/use-local-package tokei :defer t)
+
 (provide 'config-tools)

@@ -47,4 +47,8 @@
 (use-package docker-compose-mode
   :mode (("/docker-compose.*\.yml\\'" . docker-compose-mode)))
 
+(adq/use-local-package twee-mode
+  :mode (("\\.tw\\'" . twee-mode)
+         ("\\.twee\\'" . twee-mode)))
+
 (provide 'env-misc)

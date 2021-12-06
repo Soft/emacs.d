@@ -80,6 +80,8 @@
   (setq uniquify-buffer-name-style 'forward
         uniquify-separator " • "))
 
+(adq/use-local-package prettify-quotes :defer t)
+
 (bind-keys
  ("C-w" . backward-kill-word)
  ("<escape>" . keyboard-quit)

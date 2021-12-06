@@ -51,16 +51,20 @@
   (setq helm-posframe-poshandler #'posframe-poshandler-frame-top-center
         helm-posframe-size-function #'adq/helm-posframe-get-size)
   (helm-posframe-enable))
+
 (use-package helm-projectile
   :after (helm projectile)
   :hook (projectile-mode . helm-projectile-on)
   :bind (("C-c b" . helm-projectile-find-file)))
 
 (use-package helm-swoop
+  :after helm
   :bind (("C-c SPC" . helm-swoop))
   :config
   (setq helm-swoop-speed-or-color t
         helm-swoop-use-line-number-face t))
+
+(adq/use-local-package helm-fd :defer t)
 
 (use-package helm-descbinds :defer t)
 
