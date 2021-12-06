@@ -1,8 +1,9 @@
 ;;; env-lisp.el -*- lexical-binding: t; -*-
 
 (use-package elisp-refs
+  :after elisp-mode
   :bind (:map emacs-lisp-mode-map
-              ("C-c c s f" . elisp-refs-function)
+              ("C-c c s d" . elisp-refs-function)
               ("C-c c s m" . elisp-refs-macro)
               ("C-c c s v" . elisp-refs-variable)
               ("C-c c s s" . elisp-refs-symbol)
@@ -10,7 +11,10 @@
 
 (use-package package-lint :defer t)
 
-(use-package macrostep :defer t)
+(use-package macrostep
+  :after elisp-mode
+  :bind (:map emacs-lisp-mode-map
+              ("C-c c e" . macrostep-expand)))
 
 (use-package highlight-quoted :defer t)
 
@@ -69,7 +73,7 @@ supplied, new buffer is always created."
   :bind (:map emacs-lisp-mode-map
               ("C-c c r" . eval-region)
               ("C-c c b" . eval-buffer)
-              ("C-c c f" . eval-defun))
+              ("C-c c d" . eval-defun))
   :config
   (add-hook 'emacs-lisp-mode-hook #'adq/lisp-setup))
 
@@ -88,7 +92,8 @@ supplied, new buffer is always created."
               ("C-c c j" . cider-jack-in)
               ("C-c c r" . cider-eval-region)
               ("C-c c b" . cider-eval-buffer)
-              ("C-c c f" . cider-eval-defun-at-point))
+              ("C-c c d" . cider-eval-defun-at-point)
+              ("C-c c f" . cider-format-buffer))
   :config
   (add-hook 'cider-repl-mode-hook #'company-mode)
   (setq cider-repl-display-help-banner nil

@@ -4,7 +4,10 @@
 
 (use-package py-isort :defer t)
 
-(use-package blacken :defer t)
+(use-package blacken
+  :after python
+  :bind (:map python-mode-map
+              ("C-c c f" . blacken-buffer)))
 
 (defvar adq/python-prettify-symbols-alist
   '(("lambda" . ?λ)
