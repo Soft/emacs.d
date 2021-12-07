@@ -35,6 +35,9 @@
   :mode (("\\.qml\\'" . qml-mode))
   :interpreter ("qml" . qml-mode))
 
+(use-package swift-mode
+  :mode (("\\.swift\\'" . swift-mode)))
+
 (use-package cmake-mode
   :mode (("/CMakeLists\\.txt\\'" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)))
