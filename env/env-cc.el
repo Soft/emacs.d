@@ -1,5 +1,15 @@
 ;;; env-cc.el -*- lexical-binding: t; -*-
 
+(use-package clang-format
+  :after cc-mode
+  :bind
+  (:map
+   c-mode-map
+   ("C-c c f" . clang-format-buffer)
+   :map
+   c++-mode-map
+   ("C-c c f" . clang-format-buffer)))
+
 (defvar adq/c-prettify-symbols-alist
   '(("!=" . ?≠)
     ("<=" . ?≤)
@@ -26,7 +36,6 @@
 (use-package modern-cpp-font-lock
   :hook (c++-mode . modern-c++-font-lock-mode)
   :diminish modern-c++-font-lock-mode)
-
 
 (defun adq/c-setup ()
   "Defaults for C."
