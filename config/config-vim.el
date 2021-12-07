@@ -54,12 +54,18 @@
     ("+" evil-numbers/inc-at-pt)
     ("-" evil-numbers/dec-at-pt)))
 
+(use-package evil-matchit
+  :after evil
+  :diminish global-evil-matchit-mode
+  :config
+  (global-evil-matchit-mode))
+
 (use-package evil-nerd-commenter
   :after evil
   :bind
   (:map evil-normal-state-map
         ("\\" . evilnc-comment-or-uncomment-lines)
-   :map evil-visual-state-map
+        :map evil-visual-state-map
         ("\\" . evilnc-comment-or-uncomment-lines)))
 
 (provide 'config-vim)
