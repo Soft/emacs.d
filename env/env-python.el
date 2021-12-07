@@ -126,7 +126,11 @@ found."
   :interpreter (("python" . python-mode))
   :bind
   (:map python-mode-map
-        ("M-\"" . adq/python-skeleton-doc-comment))
+        ("M-\"" . adq/python-skeleton-doc-comment)
+        ("C-c c j" . run-python)
+        ("C-c c r" . python-shell-send-region)
+        ("C-c c b" . python-shell-send-buffer)
+        ("C-c c d" . python-shell-send-defun))
   :config
   (add-hook 'python-mode-hook #'adq/python-setup))
 
