@@ -28,8 +28,8 @@
   :interpreter ("scala" . scala-mode))
 
 (use-package groovy-mode
-  :mode (("\\.groovy" . groovy-mode)
-         ("/Jenkinsfile" . groovy-mode)))
+  :mode (("\\.groovy\\'" . groovy-mode)
+         ("/Jenkinsfile\\'" . groovy-mode)))
 
 (use-package qml-mode
   :mode (("\\.qml\\'" . qml-mode))
