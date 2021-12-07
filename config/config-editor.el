@@ -41,7 +41,9 @@
 
 (use-package highlight-indent-guides
   :defer t
-  :diminish highlight-indent-guides-mode)
+  :diminish highlight-indent-guides-mode
+  :config
+  (setq-default highlight-indent-guides-method 'bitmap))
 
 (use-package aggressive-indent
   :defer t
