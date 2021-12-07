@@ -52,11 +52,12 @@
   :hook (prog-mode . volatile-highlights-mode)
   :diminish volatile-highlights-mode
   :config
-  (vhl/define-extension 'evil
-                        'evil-paste-after
-                        'evil-paste-before
-                        'evil-paste-pop
-                        'evil-move)
-  (vhl/install-extension 'evil))
+  (with-eval-after-load 'evil
+    (vhl/define-extension 'evil
+                          'evil-paste-after
+                          'evil-paste-before
+                          'evil-paste-pop
+                          'evil-move)
+    (vhl/install-extension 'evil)))
 
 (provide 'config-interface)
