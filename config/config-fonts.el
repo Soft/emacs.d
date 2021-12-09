@@ -8,6 +8,10 @@
   "Victor Mono"
   "Default comment font.")
 
+(defvar adq/term-font-family
+  "Iosevka Term"
+  "Default terminal font.")
+
 (defvar adq/variable-width-font-family
   "Iosevka Aile"
   "Default monospace font.")

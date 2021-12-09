@@ -1,7 +1,11 @@
 ;;; config-term.el -*- lexical-binding: t; -*-
 
 (defvar adq/vterm-face-overrides
-  '(:background "#000000" :foreground "#ffffff")
+  `(
+    :background "#000000"
+    :foreground "#ffffff"
+    :family ,adq/term-font-family
+    )
   "Face overrides for `vterm-mode' buffers.")
 
 (defun adq/vterm-setup ()
