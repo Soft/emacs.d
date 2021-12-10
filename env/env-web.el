@@ -8,9 +8,7 @@
 
 (use-package css-mode
   :straight nil
-  :mode (("\\.css\\'" . css-mode))
-  :config
-  (add-hook 'css-mode-hook #'adq/css-setup))
+  :mode (("\\.css\\'" . css-mode)))
 
 (use-package scss-mode
   :mode (("\\.scss\''" . scss-mode)))
