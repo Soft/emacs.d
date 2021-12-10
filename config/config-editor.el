@@ -31,6 +31,12 @@
   (global-undo-tree-mode)
   :diminish undo-tree-mode)
 
+(use-package tree-sitter
+  :config
+  (use-package tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode)
   :diminish rainbow-delimiters-mode)
