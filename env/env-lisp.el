@@ -88,12 +88,16 @@ supplied, new buffer is always created."
 (use-package cider
   :after clojure-mode
   :hook (clojure-mod . cider-mode)
-  :bind (:map clojure-mode-map
-              ("C-c c j" . cider-jack-in)
-              ("C-c c r" . cider-eval-region)
-              ("C-c c b" . cider-eval-buffer)
-              ("C-c c d" . cider-eval-defun-at-point)
-              ("C-c c f" . cider-format-buffer))
+  :bind (:map
+         clojure-mode-map
+         ("C-c c j" . cider-jack-in)
+         ("C-c c r" . cider-eval-region)
+         ("C-c c b" . cider-eval-buffer)
+         ("C-c c d" . cider-eval-defun-at-point)
+         ("C-c c f" . cider-format-buffer)
+         :map
+         cider-repl-mode-map
+         ("C-l" . cider-repl-clear-buffer))
   :config
   (add-hook 'cider-repl-mode-hook #'company-mode)
   (setq cider-repl-display-help-banner nil
