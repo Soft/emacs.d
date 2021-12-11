@@ -14,12 +14,20 @@ or 'official if the directory is empty."
       (seq-random-elt banners)
     'official))
 
+(defun adq/dashboard-setup ()
+  "Defaults for `dashboard-mode' buffers."
+  (setq-local line-spacing 2))
+
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents . 10)
                           (projects . 5))
         dashboard-footer-messages '("Happy coding!")
-        dashboard-startup-banner (adq/dashboard-select-banner)))
+        dashboard-startup-banner (adq/dashboard-select-banner)
+        dashboard-center-content t
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t)
+  (add-hook 'dashboard-mode-hook #'adq/dashboard-setup))
 
 (provide 'config-dashboard)
