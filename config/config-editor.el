@@ -4,7 +4,7 @@
  ad-redefinition-accept 'accept
  sentence-end-double-space nil
  indent-tabs-mode nil
- tab-stop-list ()
+ tab-stop-list nil
  tab-width 2
  fill-column 80
  visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow)
@@ -18,6 +18,7 @@
  confirm-kill-emacs #'y-or-n-p
  confirm-kill-processes nil
  find-file-visit-truename t
+ backward-delete-char-untabify-method 'hungry
  completion-styles '(flex))
 
 (use-package dtrt-indent
@@ -69,6 +70,12 @@
 (use-package unfill
   :bind
   (("M-Q" . unfill-toggle)))
+
+(use-package compile
+  :straight nil
+  :defer t
+  :config
+  (setq compilation-scroll-output t))
 
 (use-package bury-successful-compilation
   :after compile
