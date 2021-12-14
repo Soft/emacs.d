@@ -38,4 +38,14 @@
 
 (bind-key "C-c <RET>" #'adq/toggle-vterm)
 
+(use-package eshell
+  :straight nil
+  :defer t
+  :config
+  (setq eshell-banner-message ""
+        eshell-hist-ignoredups t)
+  (bind-keys
+   :map eshell-mode-map
+   ("C-d" . quit-window)))
+
 (provide 'config-term)
