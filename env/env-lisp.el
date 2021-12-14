@@ -104,6 +104,7 @@ supplied, new buffer is always created."
         cider-show-error-buffer 'except-in-repl))
 
 (use-package helm-cider
+  :requires config-helm
   :after (cider helm)
   :config
   (helm-cider-mode))
