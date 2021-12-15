@@ -19,37 +19,40 @@
    ("C-w" . backward-kill-word))
   :config
   (setq
-   helm-buffers-fuzzy-matching t
-   helm-recentf-fuzzy-match t
-   helm-M-x-fuzzy-match t
+   helm-ff-file-name-history-use-recentf t
    helm-M-x-always-save-history t
    helm-split-window-in-side-p t
-   helm-ff-skip-boring-files t
-   helm-imenu-fuzzy-match t
-   helm-semantic-fuzzy-match t
+   helm-ff-skip-boring-files t)
+  (setq
+   helm-M-x-fuzzy-match t
    helm-apropos-fuzzy-match t
+   helm-buffers-fuzzy-matching t
+   helm-file-cache-fuzzy-match t
+   helm-imenu-fuzzy-match t
+   helm-lisp-fuzzy-completion t
    helm-locate-fuzzy-match t
-   helm-ff-file-name-history-use-recentf t
-   helm-lisp-fuzzy-completion t)
+   helm-recentf-fuzzy-match t
+   helm-semantic-fuzzy-match t)
   (add-to-list 'helm-boring-buffer-regexp-list "compile_commands.json")
   (with-eval-after-load 'projectile
     (setq projectile-completion-system 'helm)))
-
-(defun adq/helm-posframe-get-size ()
-  (let ((width (floor (* (frame-parameter nil 'width) 0.5)))
-        (height (floor (* (frame-parameter nil 'height) 0.6))))
-    (list
-     :width width
-     :height height 
-     :min-width width
-     :min-height height)))
 
 (use-package helm-posframe
   :disabled t
   :after helm
   :config
-  (setq helm-posframe-poshandler #'posframe-poshandler-frame-top-center
-        helm-posframe-size-function #'adq/helm-posframe-get-size)
+  (defun adq/helm-posframe-get-size ()
+    (let ((width (floor (* (frame-parameter nil 'width) 0.5)))
+          (height (floor (* (frame-parameter nil 'height) 0.6))))
+      (list
+       :width width
+       :height height
+       :min-width width
+       :min-height height)))
+  (setq
+   helm-echo-input-in-header-line t
+   helm-posframe-poshandler #'posframe-poshandler-frame-top-center
+   helm-posframe-size-function #'adq/helm-posframe-get-size)
   (helm-posframe-enable))
 
 (use-package helm-projectile
