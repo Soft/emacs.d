@@ -44,6 +44,11 @@
   (setq custom-file
         (concat no-littering-etc-directory "customize.el")))
 
+(defgroup adq nil
+  "Adequate Emacs configuration."
+  :prefix "adq/"
+  :link '(url-link "https://github.com/Soft/emacs.d/"))
+
 (defmacro adq/init (&rest modules)
   (let ((requires
          (mapcar (lambda (module)

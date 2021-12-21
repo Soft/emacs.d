@@ -33,6 +33,7 @@
   :diminish undo-tree-mode)
 
 (use-package tree-sitter
+  :defer 1
   :config
   (use-package tree-sitter-langs)
   (global-tree-sitter-mode)

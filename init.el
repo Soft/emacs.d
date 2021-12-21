@@ -1,12 +1,13 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (require 'init-adequate
-  (concat adq/adequate-directory "init/init-adequate"))
+         (concat adq/adequate-directory "init/init-adequate"))
 
 (adq/init
  ;; Basic configuration
  config-libraries
  config-prelude
+ config-local
  config-interface
  config-modeline
  config-fonts
@@ -21,15 +22,13 @@
  config-projects
  config-help
  config-search
- config-helm
+ config-completion
  config-git
  config-repl
  config-term
- config-completion
  config-check
  config-lsp
  config-tools
- config-local
  ;; Language specific modules
  env-lisp
  env-cc

@@ -103,10 +103,10 @@ supplied, new buffer is always created."
   (setq cider-repl-display-help-banner nil
         cider-show-error-buffer 'except-in-repl))
 
-(use-package helm-cider
-  :requires config-helm
-  :after (cider helm)
-  :config
-  (helm-cider-mode))
+(when (featurep 'config-helm)
+  (use-package helm-cider
+    :after (cider helm)
+    :config
+    (helm-cider-mode)))
 
 (provide 'env-lisp)

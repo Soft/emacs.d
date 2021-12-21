@@ -1,7 +1,9 @@
 \#*
 *~
 *.elc
-local/*
-!local/.empty
+local/early/*
+!local/early/.empty
+local/late/*
+!local/late/.empty
 resources/banners/*
 !resources/banners/.empty

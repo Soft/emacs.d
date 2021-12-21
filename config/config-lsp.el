@@ -31,13 +31,21 @@ in `adq/lsp-enabled-modes'."
   (with-eval-after-load 'which-key
     (lsp-enable-which-key-integration t)))
 
-(use-package helm-lsp
-  :after lsp-mode
-  :bind
-  (:map lsp-mode-map
-        ("<remap> <xref-find-apropos>" .
-         (lambda ()
-           (interactive) ;; Use symbol at point by default
-           (helm-lsp-workspace-symbol t)))))
+(when (featurep 'config-helm)
+  (use-package helm-lsp
+    :after lsp-mode
+    :bind
+    (:map lsp-mode-map
+          ("<remap> <xref-find-apropos>" .
+           (lambda ()
+             (interactive) ;; Use symbol at point by default
+             (helm-lsp-workspace-symbol t))))))
+
+(when (featurep 'config-vertico)
+  (use-package consult-lsp
+    :after lsp-mode
+    :bind
+    (:map lsp-mode-map
+          ("<remap> <xref-find-apropos>" . consult-lsp-symbols))))
 
 (provide 'config-lsp)
