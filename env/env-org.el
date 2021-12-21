@@ -2,15 +2,18 @@
 
 (defface adq/org-todo
   '((t :foreground "#E53935"))
-  "Face for org-mode TODO items.")
+  "Face for org-mode TODO items."
+  :group 'adequate)
 
 (defface adq/org-started
   '((t :foreground "#FDD835"))
-  "Face for org-mode STARTED items.")
+  "Face for org-mode STARTED items."
+  :group 'adequate)
 
 (defface adq/org-done
   '((t :foreground "#8BC34A"))
-  "Face for org-mode DONE items.")
+  "Face for org-mode DONE items."
+  :group 'adequate)
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)

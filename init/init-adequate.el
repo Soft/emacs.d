@@ -44,7 +44,7 @@
   (setq custom-file
         (concat no-littering-etc-directory "customize.el")))
 
-(defgroup adq nil
+(defgroup adequate nil
   "Adequate Emacs configuration."
   :prefix "adq/"
   :link '(url-link "https://github.com/Soft/emacs.d/"))

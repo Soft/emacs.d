@@ -1,23 +1,33 @@
 ;;; config-fonts.el -*- lexical-binding: t; -*-
 
-(defvar adq/monospace-font-family
+(defcustom adq/monospace-font-family
   "Iosevka"
-  "Default monospace font.")
+  "Default monospace font."
+  :type 'string
+  :group 'adequate)
 
-(defvar adq/comment-font-family
+(defcustom adq/comment-font-family
   "Victor Mono"
-  "Default comment font.")
+  "Default comment font."
+  :type 'string
+  :group 'adequate)
 
-(defvar adq/term-font-family
+(defcustom adq/term-font-family
   "Iosevka Term"
-  "Default terminal font.")
+  "Default terminal font."
+  :type 'string
+  :group 'adequate)
 
-(defvar adq/variable-width-font-family
+(defcustom adq/variable-width-font-family
   "Iosevka Aile"
-  "Default monospace font.")
+  "Default monospace font."
+  :type 'string
+  :group 'adequate)
 
-(defvar adq/font-size 11
-  "Default font size.")
+(defcustom adq/font-size 11
+  "Default font size."
+  :type 'integer
+  :group 'adequate)
 
 (defvar adq/font-customizations
   `((font-lock-keyword-face

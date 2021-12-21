@@ -8,7 +8,7 @@
 
 (use-package modus-themes :defer t)
 
-(defvar adq/favorite-themes
+(defcustom adq/favorite-themes
   '(kaolin-galaxy
     kaolin-dark
     kaolin-bubblegum
@@ -18,7 +18,10 @@
     doom-monokai-pro
     doom-dracula
     doom-xcode
-    modus-vivendi))
+    modus-vivendi)
+  "List of favorite themes."
+  :group 'adequate
+  :type '(list symbol))
 
 (load-theme
  (seq-random-elt adq/favorite-themes) t)
