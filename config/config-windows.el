@@ -55,12 +55,17 @@ The largest window is then selected."
   (delete-window)
   (balance-windows))
 
+(use-package writeroom-mode
+  :defer t
+  :config
+  (setq writeroom-restore-window-config t))
+
 (defhydra adq/hydra-manage-windows nil
   "
 ^Move^         ^^Window^                 ^Layout^            ^Control
 ^^^^^^^^^^----------------------------------------------------------------------------------------------
      ^_k_       ^_0_: Delete This         _p_: Previous       _m_: ?m? Menubar    _f_: ?f? Fullscreen
- ^^    |       ^^_1_: Delete Others       _n_: Next           _s_: ?s? Scrollbar
+ ^^    |       ^^_1_: Delete Others       _n_: Next           _s_: ?s? Scrollbar  _W_: ?W? Writeroom
  _h_ - · - _l_   _2_: Split Horizontally  _b_: Balance        _t_: ?t? Tabs
  ^^    |       ^^_3_: Split Vertically    _r_: Clockwise      _T_: ?T? Toolbar
      ^_j_       ^_w_: Swap with largest   _R_: Anticlockwise  _e_: ^^^ Theme
@@ -88,7 +93,8 @@ The largest window is then selected."
   ("T" toggle-tool-bar-mode-from-frame)
   ("e" adq/switch-theme :exit t)
 
-  ("f" toggle-frame-fullscreen))
+  ("f" toggle-frame-fullscreen)
+  ("W" writeroom-mode))
 
 (bind-keys
  ("C-c w" . adq/hydra-manage-windows/body)
