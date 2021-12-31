@@ -20,6 +20,7 @@ in `adq/lsp-enabled-modes'."
 
 (use-package lsp-mode
   :defer t
+  :diminish lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   (add-hook 'prog-mode-hook #'adq/maybe-enable-lsp)
@@ -30,6 +31,10 @@ in `adq/lsp-enabled-modes'."
    lsp-enable-snippet nil)
   (with-eval-after-load 'which-key
     (lsp-enable-which-key-integration t)))
+
+(use-package lsp-ui
+  :defer t
+  :diminish lsp-ui-mode)
 
 (when (featurep 'config-helm)
   (use-package helm-lsp
