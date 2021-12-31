@@ -54,6 +54,9 @@
                                adq/monospace-font-family
                                adq/font-size)))
 
+(set-face-attribute 'variable-pitch nil
+                    :family adq/variable-width-font-family)
+
 (use-package face-remap
   :bind
   (("<C-mouse-4>" . text-scale-increase)
