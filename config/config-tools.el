@@ -23,6 +23,11 @@
   (setq-default pdf-view-display-size 'fit-page)
   (setq pdf-view-page-resize-factor 1.1))
 
+(use-package nov
+  :mode (("\\.epub\\'" . nov-mode))
+  :config
+  (setq nov-text-width 80))
+
 (use-package exec-path-from-shell
   :defer 1
   :config
