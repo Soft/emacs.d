@@ -19,6 +19,7 @@
    ("C-w" . backward-kill-word))
   :config
   (setq
+   helm-display-header-line nil
    helm-ff-file-name-history-use-recentf t
    helm-M-x-always-save-history t
    helm-split-window-in-side-p t
