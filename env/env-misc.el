@@ -38,6 +38,9 @@
 (use-package swift-mode
   :mode (("\\.swift\\'" . swift-mode)))
 
+(use-package dart-mode
+  :mode (("\\.dart\\'" . dart-mode)))
+
 (use-package cmake-mode
   :mode (("/CMakeLists\\.txt\\'" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)))
