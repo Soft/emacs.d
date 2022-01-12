@@ -4,6 +4,8 @@
 
 (use-package py-isort :defer t)
 
+(use-package lsp-pyright :defer t)
+
 (use-package blacken
   :after python
   :bind (:map python-mode-map
@@ -132,6 +134,8 @@ found."
         ("C-c c b" . python-shell-send-buffer)
         ("C-c c d" . python-shell-send-defun))
   :config
+  (when (adq/programs-p "pyright-langserver")
+    (require 'lsp-pyright))
   (add-hook 'python-mode-hook #'adq/python-setup))
 
 (provide 'env-python)

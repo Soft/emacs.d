@@ -7,7 +7,8 @@
     ('go-mode (adq/programs-p "gopls"))
     ('rust-mode (adq/programs-p "rust-analyzer"))
     ('haskell-mode (adq/programs-p "haskell-language-server"))
-    ('python-mode (adq/programs-p "pyls"))))
+    ('python-mode (adq/programs-p "pyright-langserver"
+                                  "pyls"))))
 
 (defun adq/maybe-enable-lsp ()
   "Try to enable LSP support. Language server support will be
