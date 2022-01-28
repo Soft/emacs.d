@@ -1,6 +1,6 @@
 ;;; config-completion.el -*- lexical-binding: t; -*-
 
-(defcustom adq/completion-system 'vertico
+(defcustom adq/completion-system 'helm
   "Completion system to use."
   :group 'adequate
   :type '(choice (const :tag "Vertico" vertico)
