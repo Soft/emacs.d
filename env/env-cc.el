@@ -48,6 +48,12 @@
   :defer t
   :config
   (add-hook 'c-mode-hook #'adq/c-setup)
-  (add-hook 'c++-mode-hook #'adq/c++-setup))
+  (add-hook 'c++-mode-hook #'adq/c++-setup)
+  (with-eval-after-load 'lsp-clangd
+    (bind-keys
+     :map c-mode-map
+     ("C-c c o" . lsp-clangd-find-other-file)
+     :map c++-mode-map
+     ("C-c c o" . lsp-clangd-find-other-file))))
 
 (provide 'env-cc)
