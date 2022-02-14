@@ -56,6 +56,9 @@
    helm-posframe-size-function #'adq/helm-posframe-get-size)
   (helm-posframe-enable))
 
+(use-package helm-themes
+  :after helm)
+
 (use-package helm-projectile
   :after (helm projectile)
   :hook (projectile-mode . helm-projectile-on)
