@@ -45,6 +45,9 @@
   :mode (("/CMakeLists\\.txt\\'" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)))
 
+(use-package kotlin-mode
+  :mode (("\\.kt\\'" . kotlin-mode)))
+
 (use-package docker :defer t)
 
 (use-package dockerfile-mode
