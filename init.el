@@ -18,6 +18,7 @@
  config-windows
  config-buffers
  config-session
+ config-bookmarks
  config-backups
  config-projects
  config-help

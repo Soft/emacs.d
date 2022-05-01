@@ -12,6 +12,7 @@
    ("<remap> <execute-extended-command>" . helm-M-x)
    ("<remap> <apropos-command>" . helm-apropos)
    ("<remap> <info>" . helm-info-emacs)
+   ("<remap> <list-bookmarks>" . helm-bookmarks)
    ("C-c k" . helm-imenu)
    ("C-c y" . helm-show-kill-ring)
    :map helm-map
