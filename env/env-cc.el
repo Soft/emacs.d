@@ -1,6 +1,6 @@
 ;;; env-cc.el -*- lexical-binding: t; -*-
 
-(use-package clang-format
+(use-package clang-format+
   :after cc-mode
   :bind
   (:map
