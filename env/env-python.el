@@ -4,7 +4,10 @@
 
 (use-package py-isort :defer t)
 
-(use-package lsp-pyright :defer t)
+(use-package lsp-pyright
+  :defer t
+  :init
+  (setq lsp-pyright-multi-root nil))
 
 (use-package blacken
   :after python
