@@ -36,8 +36,8 @@
   :defer 1
   :config
   (let ((inhibit-message t))
-    (use-package tree-sitter-langs))
-  (global-tree-sitter-mode)
+    (use-package tree-sitter-langs)
+    (global-tree-sitter-mode))
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package rainbow-delimiters
