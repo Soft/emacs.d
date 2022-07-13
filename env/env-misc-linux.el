@@ -39,4 +39,9 @@
 (use-package systemtap-mode
   :mode (("\\.stp\\''" . systemtap-mode)))
 
+(use-package dpkg-dev-el
+  :mode (("/debian/control\\'" . debian-control-mode)
+         ("/debian/.*copyright\\'" . debian-copyright-mode)
+         ("/debian/\\([[:lower:][:digit:]][[:lower:][:digit:].+-]+\\.\\)?changelog\\'" . debian-changelog-mode)))
+
 (provide 'env-misc-linux)
