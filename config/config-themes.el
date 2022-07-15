@@ -18,6 +18,7 @@
     doom-monokai-pro
     doom-dracula
     doom-xcode
+    doom-material-dark
     modus-vivendi)
   "List of favorite themes."
   :group 'adequate
