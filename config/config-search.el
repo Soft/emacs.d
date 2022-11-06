@@ -4,6 +4,6 @@
   :defer t)
 
 (use-package google-this
-  :bind (("C-c f" . google-this)))
+  :defer t)
 
 (provide 'config-search)

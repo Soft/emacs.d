@@ -40,6 +40,27 @@
     (global-tree-sitter-mode))
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+(use-package ts-fold-indicators
+  :straight (ts-fold-indicators
+             :type git
+             :host github
+             :repo "emacs-tree-sitter/ts-fold")
+  :defer t
+  :init
+  (setq ts-fold-indicators-face-function
+        (lambda (&rest _)
+          'line-number-current-line))
+  (add-hook 'tree-sitter-after-on-hook #'ts-fold-indicators-mode)
+  :config
+  (defhydra adq/hydra-fold nil
+    "
+_f_: Toggle Fold  _o_: Open All Folds  _c_: Close All Folds
+"
+    ("f" ts-fold-toggle)
+    ("o" ts-fold-open-all)
+    ("c" ts-fold-close-all))
+  (bind-key "C-c f" #'adq/hydra-fold/body))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode)
   :diminish rainbow-delimiters-mode)
