@@ -40,6 +40,7 @@
 
 (defun adq/c++-setup ()
   "Defaults for C++."
+  (c-set-offset 'innamespace [0]) ; Do not indent namespaces
   (setq-local prettify-symbols-alist
               adq/c++-prettify-symbols-alist))
 
