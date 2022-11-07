@@ -16,6 +16,7 @@
     kaolin-ocean
     doom-one
     doom-monokai-pro
+    doom-monokai-machine
     doom-dracula
     doom-xcode
     doom-material-dark
