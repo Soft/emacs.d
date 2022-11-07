@@ -45,7 +45,7 @@
 
 (use-package cc-mode
   :straight nil
-  :defer t
+  :mode (("\\.mm\\'" . objc-mode))
   :config
   (add-hook 'c-mode-hook #'adq/c-setup)
   (add-hook 'c++-mode-hook #'adq/c++-setup)
