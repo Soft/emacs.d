@@ -1,11 +1,12 @@
 ;;; config-term.el -*- lexical-binding: t; -*-
 
 (defvar adq/vterm-face-overrides
-  `(
-    :background "#000000"
-    :foreground "#ffffff"
-    :family ,adq/term-font-family
-    )
+  `(:background
+    "#000000"
+    :foreground
+    "#ffffff"
+    :family
+    ,adq/term-font-family)
   "Face overrides for `vterm-mode' buffers.")
 
 (defun adq/vterm-setup ()
@@ -34,7 +35,8 @@
 (use-package vterm
   :defer t
   :config
-  (add-hook 'vterm-mode-hook #'adq/vterm-setup))
+  (add-hook 'vterm-mode-hook #'adq/vterm-setup)
+  (setq vterm-max-scrollback 5000))
 
 (bind-key "C-c <RET>" #'adq/toggle-vterm)
 
