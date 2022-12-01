@@ -38,6 +38,8 @@
   (let ((inhibit-message t))
     (use-package tree-sitter-langs)
     (global-tree-sitter-mode))
+  (setq tree-sitter-debug-jump-buttons t
+        tree-sitter-debug-highlight-jump-region t)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package ts-fold-indicators
