@@ -27,6 +27,9 @@
   :config
   (setq dtrt-indent-verbosity 0))
 
+(use-package apheleia
+  :defer t)
+
 (use-package undo-tree
   :init
   (global-undo-tree-mode)

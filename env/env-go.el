@@ -13,8 +13,7 @@
 
 (defun adq/go-setup ()
   "Defaults for Go programming language."
-  (setq-local prettify-symbols-alist adq/go-prettify-symbols-alist)
-  (add-hook 'before-save-hook #'gofmt-before-save nil t))
+  (setq-local prettify-symbols-alist adq/go-prettify-symbols-alist))
 
 (define-derived-mode conf-go-mod-mode conf-mode "Go Module"
   "Mode for editing go.mod files."
@@ -27,8 +26,6 @@
 (use-package go-mode
   :mode (("\\.go\\'" . go-mode))
   :config
-  (add-hook 'go-mode-hook #'adq/go-setup)
-  (when (adq/programs-p "goimports")
-    (setq gofmt-command "goimports")))
+  (add-hook 'go-mode-hook #'adq/go-setup))
 
 (provide 'env-go)

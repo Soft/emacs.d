@@ -9,11 +9,6 @@
   :init
   (setq lsp-pyright-multi-root nil))
 
-(use-package blacken
-  :after python
-  :bind (:map python-mode-map
-              ("C-c c f" . blacken-buffer)))
-
 (defvar adq/python-prettify-symbols-alist
   '(("lambda" . ?λ)
     ("and" . ?∧)
