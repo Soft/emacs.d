@@ -28,7 +28,9 @@
   (setq dtrt-indent-verbosity 0))
 
 (use-package apheleia
-  :defer t)
+  :defer t
+  :init
+  (defalias 'autoformat-mode 'apheleia-mode))
 
 (use-package undo-tree
   :init
