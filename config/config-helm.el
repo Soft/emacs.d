@@ -3,8 +3,6 @@
 (use-package helm
   :hook (after-init . helm-mode)
   :diminish helm-mode
-  :init
-  (require 'helm-config)
   :bind
   (("<remap> <find-file>" . helm-find-files)
    ("<remap> <list-buffers>" . helm-buffers-list)
