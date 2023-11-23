@@ -9,17 +9,21 @@
 (use-package modus-themes :defer t)
 
 (defcustom adq/favorite-themes
-  '(kaolin-galaxy
-    kaolin-dark
-    kaolin-bubblegum
-    kaolin-aurora
-    kaolin-ocean
-    doom-one
-    doom-monokai-pro
-    doom-monokai-machine
-    doom-dracula
-    doom-xcode
+  '(doom-dracula
+    doom-flatwhite
     doom-material-dark
+    doom-monokai-machine
+    doom-monokai-pro
+    doom-one
+    doom-xcode
+    kaolin-aurora
+    kaolin-breeze
+    kaolin-bubblegum
+    kaolin-dark
+    kaolin-galaxy
+    kaolin-ocean
+    kaolin-temple
+    kaolin-valley-light
     modus-vivendi)
   "List of favorite themes."
   :group 'adequate
