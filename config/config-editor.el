@@ -30,7 +30,10 @@
 (use-package apheleia
   :defer t
   :init
-  (defalias 'autoformat-mode 'apheleia-mode))
+  (defalias 'autoformat-mode 'apheleia-mode)
+  :config
+  (when (adq/programs-p "ruff")
+    (add-to-list 'apheleia-mode-alist '(python-mode . ruff))))
 
 (use-package undo-tree
   :init
