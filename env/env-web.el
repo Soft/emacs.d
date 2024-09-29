@@ -4,7 +4,8 @@
   :hook ((css-mode scss-mode) . css-eldoc-enable))
 
 (use-package typescript-mode
-  :mode (("\\.ts\\'" . typescript-mode)))
+  :mode (("\\.ts\\'" . typescript-mode)
+         ("\\.tsx\\'" . typescript-mode)))
 
 (use-package css-mode
   :straight nil
@@ -40,7 +41,6 @@
   :mode (("\\.p?html?\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode)
          ("\\.vue\\'" . web-mode)
          ("\\.j2\\'" . web-mode)
          ("\\.jinja2\\'" . web-mode))
