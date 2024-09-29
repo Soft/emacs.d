@@ -13,7 +13,8 @@
 
 (defun adq/go-setup ()
   "Defaults for Go programming language."
-  (setq-local prettify-symbols-alist adq/go-prettify-symbols-alist))
+  (setq-local prettify-symbols-alist adq/go-prettify-symbols-alist)
+  (apheleia-mode))
 
 (define-derived-mode conf-go-mod-mode conf-mode "Go Module"
   "Mode for editing go.mod files."
@@ -27,5 +28,11 @@
   :mode (("\\.go\\'" . go-mode))
   :config
   (add-hook 'go-mode-hook #'adq/go-setup))
+
+;; (use-package go-ts-mode
+;;   :straight nil
+;;   :mode (("\\.go\\'" . go-ts-mode))
+;;   :config
+;;   (add-hook 'go-ts-mode-hook #'adq/go-setup))
 
 (provide 'env-go)
