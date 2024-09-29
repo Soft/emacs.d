@@ -42,6 +42,7 @@
   (evil-collection-init))
 
 (use-package evil-textobj-tree-sitter
+  :disabled t
   :after (tree-sitter evil)
   :config
   (bind-key "f"
