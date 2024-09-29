@@ -16,4 +16,8 @@
   (setq-default
    flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
 
+(use-package jinx
+  :if (version<= "29.0" emacs-version)
+  :hook (text-mode . jinx-mode))
+
 (provide 'config-check)
