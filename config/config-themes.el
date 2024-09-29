@@ -8,6 +8,8 @@
 
 (use-package modus-themes :defer t)
 
+(use-package ef-themes :defer t)
+
 (defcustom adq/favorite-themes
   '(doom-dracula
     doom-flatwhite
@@ -25,7 +27,9 @@
     kaolin-ocean
     kaolin-temple
     kaolin-valley-light
-    modus-vivendi)
+    modus-vivendi
+    ef-bio
+    ef-cyprus)
   "List of favorite themes."
   :group 'adequate
   :type '(list symbol))
