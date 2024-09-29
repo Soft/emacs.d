@@ -28,7 +28,8 @@
  config-repl
  config-term
  config-check
- config-lsp
+ ;; config-lsp
+ config-eglot
  config-tools
  ;; Language specific modules
  env-lisp
