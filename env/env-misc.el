@@ -60,4 +60,7 @@
   :mode (("\\.tw\\'" . twee-mode)
          ("\\.twee\\'" . twee-mode)))
 
+(use-package protobuf-mode
+  :mode (("\\.proto\\'" . protobuf-mode)))
+
 (provide 'env-misc)
