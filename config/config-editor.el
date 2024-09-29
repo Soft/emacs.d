@@ -41,6 +41,7 @@
   :diminish undo-tree-mode)
 
 (use-package tree-sitter
+  :disabled t
   :defer 1
   :config
   (let ((inhibit-message t))
