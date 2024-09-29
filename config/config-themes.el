@@ -16,6 +16,7 @@
     doom-monokai-pro
     doom-one
     doom-xcode
+    doom-zenburn
     kaolin-aurora
     kaolin-breeze
     kaolin-bubblegum
