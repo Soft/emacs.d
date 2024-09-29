@@ -44,4 +44,7 @@
          ("/debian/.*copyright\\'" . debian-copyright-mode)
          ("/debian/\\([[:lower:][:digit:]][[:lower:][:digit:].+-]+\\.\\)?changelog\\'" . debian-changelog-mode)))
 
+(use-package elf-mode
+  :magic ("\x7FELF" . elf-mode))
+
 (provide 'env-misc-linux)
