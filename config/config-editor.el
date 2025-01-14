@@ -38,7 +38,9 @@
 (use-package undo-tree
   :init
   (global-undo-tree-mode)
-  :diminish undo-tree-mode)
+  :diminish undo-tree-mode
+  :config
+  (setq undo-tree-history-directory-alist `(("." . ,(concat no-littering-var-directory "undo-tree")))))
 
 (use-package tree-sitter
   :disabled t
