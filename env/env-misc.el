@@ -31,6 +31,11 @@
   :mode (("\\.groovy\\'" . groovy-mode)
          ("/Jenkinsfile\\'" . groovy-mode)))
 
+(use-package jinja2-mode
+  :mode (("\\.jinja\\'" . jinja2-mode)
+         ("\\.jinja2\\'" . jinja2-mode)
+         ("\\.j2\\'" . jinja2-mode)))
+
 (use-package qml-mode
   :mode (("\\.qml\\'" . qml-mode))
   :interpreter ("qml" . qml-mode))

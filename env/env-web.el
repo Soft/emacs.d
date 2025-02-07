@@ -41,9 +41,7 @@
   :mode (("\\.p?html?\\'" . web-mode)
          ("\\.mustache\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
-         ("\\.vue\\'" . web-mode)
-         ("\\.j2\\'" . web-mode)
-         ("\\.jinja2\\'" . web-mode))
+         ("\\.vue\\'" . web-mode))
   :config
   (setq
    web-mode-enable-css-colorization t
