@@ -22,7 +22,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :config
-  (add-hook 'markdown-mode-hook #'adq/markdown-setup)
   (setq markdown-bold-underscore t
         markdown-enable-math t
         markdown-command "pandoc")
