@@ -14,7 +14,7 @@
     "...XX..."
     "...XX...") 
   (setq-default
-   flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc)))
+   flycheck-disabled-checkers '(emacs-lisp emacs-lisp-checkdoc rust rust-cargo)))
 
 (use-package jinx
   :if (version<= "29.0" emacs-version)
