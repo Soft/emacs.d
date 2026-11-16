@@ -14,7 +14,8 @@
 
 (defun adq/rust-setup ()
   "Defaults for Rust."
-  (setq-local prettify-symbols-alist adq/rust-prettify-symbols-alist))
+  (setq-local prettify-symbols-alist adq/rust-prettify-symbols-alist)
+  (apheleia-mode))
 
 (use-package toml-mode
   :mode (("\\.toml\\'" . toml-mode)))
