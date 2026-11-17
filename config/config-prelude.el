@@ -7,6 +7,12 @@
      (eq mode (buffer-local-value 'major-mode buffer)))
    (buffer-list)))
 
+(defun adq/re-search-forward-replace (regexp replacement)
+  "Search forward for REGEXP and replace each match with REPLACEMENT."
+  (let ((case-fold-search nil))
+    (while (re-search-forward regexp nil t)
+      (replace-match replacement t t))))
+
 (defun adq/add-many-to-list (list elements &optional append compare-fn)
   "Add ELEMENTS to LIST using add-to-list."
   (dolist (item elements)

@@ -87,7 +87,7 @@ supplied, new buffer is always created."
 
 (use-package cider
   :after clojure-mode
-  :hook (clojure-mod . cider-mode)
+  :hook (clojure-mode . cider-mode)
   :bind (:map
          clojure-mode-map
          ("C-c c j" . cider-jack-in)

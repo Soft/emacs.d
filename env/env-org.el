@@ -1,4 +1,4 @@
-;;; env-markdown.el -*- lexical-binding: t; -*-
+;;; env-org.el -*- lexical-binding: t; -*-
 
 (defface adq/org-todo
   '((t :foreground "#E53935"))

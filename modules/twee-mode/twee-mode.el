@@ -315,7 +315,6 @@
   (let ((table (make-syntax-table)))
     (modify-syntax-entry ?/ ". 14" table)
     (modify-syntax-entry ?* ". 23b" table)
-    (modify-syntax-entry ?/ ". 14" table)
     (modify-syntax-entry ?% ". 23b" table)
     table)
   "Syntax table for twee-mode.")

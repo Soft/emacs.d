@@ -55,7 +55,8 @@
     (if (yes-or-no-p
          (format "Are you sure you want to revert %d buffers(s) for '%s'? "
                  (length buffers) name))
-        (mapc (lambda (buffer) (with-current-buffer buffer) (revert-buffer nil t t))
+        (mapc (lambda (buffer)
+                (with-current-buffer buffer (revert-buffer nil t t)))
               (cl-remove-if 'buffer-base-buffer buffers)))))
 
 (provide 'config-projects)

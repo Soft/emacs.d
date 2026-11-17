@@ -12,7 +12,7 @@
   :mode (("\\.css\\'" . css-mode)))
 
 (use-package scss-mode
-  :mode (("\\.scss\''" . scss-mode)))
+  :mode (("\\.scss\\'" . scss-mode)))
 
 (defvar adq/js-prettify-symbols-alist
   '(("==" . ?≈)

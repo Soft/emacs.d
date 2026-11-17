@@ -37,7 +37,7 @@
          ("/nginx/.+\\.conf\\'" . nginx-mode)))
 
 (use-package systemtap-mode
-  :mode (("\\.stp\\''" . systemtap-mode)))
+  :mode (("\\.stp\\'" . systemtap-mode)))
 
 (use-package dpkg-dev-el
   :mode (("/debian/control\\'" . debian-control-mode)

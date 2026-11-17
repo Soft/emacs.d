@@ -1,5 +1,7 @@
 ;;; config-fonts.el -*- lexical-binding: t; -*-
 
+(require 'map)
+
 (defcustom adq/monospace-font-family
   "Iosevka"
   "Default monospace font."
@@ -20,7 +22,7 @@
 
 (defcustom adq/variable-width-font-family
   "Iosevka Aile"
-  "Default monospace font."
+  "Default variable-width font."
   :type 'string
   :group 'adequate)
 
@@ -29,7 +31,10 @@
   :type 'integer
   :group 'adequate)
 
-(defvar adq/font-customizations
+(defun adq/font-customizations ()
+  "Return font customizations as an alist of faces and properties.
+The current values of the font family variables are used, so that
+customizing them after startup takes effect."
   `((font-lock-keyword-face
      . (:slant
         italic))
@@ -46,8 +51,7 @@
         :weight
         normal
         :family
-        ,adq/comment-font-family)))
-  "Font customizations.")
+        ,adq/comment-font-family))))
 
 (add-to-list 'default-frame-alist
              `(font . ,(format "%s-%d"
@@ -68,7 +72,7 @@
    (lambda (face properties)
      (apply #'set-face-attribute
             (append (list face nil) properties)))
-   adq/font-customizations))
+   (adq/font-customizations)))
 
 ;; TODO: Think of a better way to connect these.
 (add-hook 'adq/switch-theme-hook #'adq/apply-font-customizations)

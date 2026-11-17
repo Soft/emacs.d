@@ -52,14 +52,15 @@
 (defmacro adq/init (&rest modules)
   (let ((requires
          (mapcar (lambda (module)
-                   (if (or adq/emacs-debug
-                           adq/emacs-use-package-collect-statistics)
-                       `(let ((start-time (current-time)))
-                          (require (quote ,module) nil t)
-                          (message "Loaded %s in %.02fms"
-                                   ,(symbol-name module)
-                                   (* (float-time (time-since start-time)) 1000)))
-                     `(require (quote ,module) nil t)))
+                   (let ((missing-ok (not adq/emacs-debug)))
+                     (if (or adq/emacs-debug
+                             adq/emacs-use-package-collect-statistics)
+                         `(let ((start-time (current-time)))
+                            (require (quote ,module) nil ,missing-ok)
+                            (message "Loaded %s in %.02fms"
+                                     ,(symbol-name module)
+                                     (* (float-time (time-since start-time)) 1000)))
+                       `(require (quote ,module) nil ,missing-ok))))
                  modules)))
     `(let ((gc-cons-threshold most-positive-fixnum)
            (file-name-handler-alist nil))

@@ -21,7 +21,7 @@
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :config
   (setq-default pdf-view-display-size 'fit-page)
-  (setq pdf-view-page-resize-factor 1.1))
+  (setq pdf-view-resize-factor 1.1))
 
 (use-package nov
   :mode (("\\.epub\\'" . nov-mode))
